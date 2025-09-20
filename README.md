@@ -1,2 +1,50 @@
 # JobMate
 A Django-based job management system for property maintenance. Built with Django, PostgreSQL, HTML, and Bootstrap. Includes user registration, engineer job tracking, and full CRUD functionality for managing bookings and job records in a clean, responsive interface.
+
+## What This Project Is
+
+This application lets property managers:
+- **Book maintenance jobs** such as boiler servicing, repairs, and inspections  
+- **View and manage job history** with status updates and filtering  
+- **Add new properties and tenants** to assign jobs more efficiently  
+- **Track job statuses** (Pending, In Progress, Completed) via a dashboard  
+- **Assign engineers** to individual jobs 
+
+---
+
+## Property Manager User Story
+
+As a **Property Manager**, I want to:
+
+- **Log in securely** to access my dashboard and manage job-related data.
+- **Create, view, edit, and delete jobs** by filling out forms with details like:
+  - Job title
+  - Description
+  - Assigned engineer
+  - Associated property
+- **Assign engineers to jobs** so the right person is notified and responsible.
+- **Manage engineers**:
+  - Create new engineer profiles
+  - View a list of engineers
+  - Edit engineer details
+  - Delete engineers when no longer needed
+- **Manage properties**:
+  - Add new properties
+  - View a list of properties
+  - Edit property details
+  - Delete properties when no longer relevant
+- **Assign properties to jobs** to ensure correct job-location linkage.
+- **Track submitted jobs** via a list or dashboard to monitor status and progress.
+- **Update my user profile and password** to maintain account security and accuracy.
+
+---
+
+## Tech Stack
+
+- Django (Python Web Framework)  
+- PostgreSQL (Relational Database)  
+- HTML5 + Bootstrap 5 (Frontend UI)  
+- Django Templating Engine (Jinja-like)  
+- Django Admin (for quick management)  
+
+---
