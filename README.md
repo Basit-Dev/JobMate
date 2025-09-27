@@ -3,7 +3,7 @@ A Django-based job management system for property maintenance. Built with Django
 
 ## What This Project Is
 
-This application lets property managers:
+This application lets property managers and engineers:
 - **Book maintenance jobs** such as boiler servicing, repairs, and inspections  
 - **View and manage job history** with status updates and filtering  
 - **Add new properties and tenants** to assign jobs more efficiently  
@@ -36,6 +36,11 @@ As a **Property Manager**, I want to:
 - **Assign properties to jobs** to ensure correct job-location linkage.
 - **Track submitted jobs** via a list or dashboard to monitor status and progress.
 - **Update my user profile and password** to maintain account security and accuracy.
+
+As a **Engineer**, I want to:
+- View my **own jobs**  
+- Update job status (e.g., mark completed)  
+- Maintain their own **profile and security settings**
 
 ---
 
