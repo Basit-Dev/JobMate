@@ -1,5 +1,5 @@
 # JobMate
-A Django-based job management system for property maintenance. Built with Django, PostgreSQL, HTML, and Bootstrap. Includes user registration, engineer job tracking, and full CRUD functionality for managing bookings and job records in a clean, responsive interface.
+A Django-based job management system for property maintenance. Built with Django, PostgreSQL, HTML, and Bootstrap. Includes user registration, engineer job tracking, shopping cart and full CRUD functionality for managing bookings and job records in a clean, responsive interface.
 
 ## What This Project Is
 
@@ -9,6 +9,9 @@ This application lets property managers and engineers:
 - **Add new properties and tenants** to assign jobs more efficiently  
 - **Track job statuses** (Pending, In Progress, Completed) via a dashboard  
 - **Assign engineers** to individual jobs 
+- **Invoice jobs** add jobs to shopping cart
+- **Update cart** update the actual hours worked per job 
+- **Pay for completed jobs** using Stripe payment gateway
 
 ---
 
@@ -33,14 +36,17 @@ As a **Property Manager**, I want to:
   - View a list of properties
   - Edit property details
   - Delete properties when no longer relevant
-- **Assign properties to jobs** to ensure correct job-location linkage.
-- **Track submitted jobs** via a list or dashboard to monitor status and progress.
+- **Manage payments**:
+  - Use stripe gateway to pay engineers for completed jobs
+  - Track submitted jobs via a list or dashboard to monitor status and progress
 - **Update my user profile and password** to maintain account security and accuracy.
 
 As a **Engineer**, I want to:
 - View my **own jobs**  
 - Update job status (e.g., mark completed)  
-- Maintain their own **profile and security settings**
+- **Add jobs for payment** Once the job has been completed add it to the cart.
+- **Adjust jobs costs** Update the actual hours or other incured costs worked on the job.
+- **Maintain my own** profile and security settings.
 
 ---
 
