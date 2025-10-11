@@ -6,7 +6,6 @@ A Django-based job management system for property maintenance. Built with Django
 This application lets property managers and engineers:
 - **Book maintenance jobs** such as boiler servicing, repairs, and inspections  
 - **View and manage job history** with status updates and filtering  
-- **Add new properties and tenants** to assign jobs more efficiently  
 - **Track job statuses** (Pending, In Progress, Completed) via a dashboard  
 - **Assign engineers** to individual jobs 
 - **Invoice jobs** add jobs to shopping cart
@@ -24,24 +23,18 @@ As a **Property Manager**, I want to:
   - Job title
   - Description
   - Assigned engineer
-  - Associated property
 - **Assign engineers to jobs** so the right person is notified and responsible.
 - **Manage engineers**:
-  - Create new engineer profiles
   - View a list of engineers
   - Edit engineer details
   - Delete engineers when no longer needed
-- **Manage properties**:
-  - Add new properties
-  - View a list of properties
-  - Edit property details
-  - Delete properties when no longer relevant
 - **Manage payments**:
   - Use stripe gateway to pay engineers for completed jobs
   - Track submitted jobs via a list or dashboard to monitor status and progress
 - **Update my user profile and password** to maintain account security and accuracy.
 
 As a **Engineer**, I want to:
+- **Log in securely** to access my dashboard and manage job-related data.
 - View my **own jobs**  
 - Update job status (e.g., mark completed)  
 - **Add jobs for payment** Once the job has been completed add it to the cart.
