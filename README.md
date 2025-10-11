@@ -60,6 +60,10 @@ As a **Engineer**, I want to:
   <img src="documentation/figma/hi-fi/colour-pallette.png" alt="Colour Pallette" width="300" />
 </p>
 
+<h1 align="left">
+   <strong>Wireframe</strong><br>
+</h1>
+
 <p align="center">
   <strong>Welcome</strong><br>
   <img src="documentation/figma/wireframe/welcome.png" alt="Welcome" width="300" />
@@ -77,7 +81,7 @@ As a **Engineer**, I want to:
 
 <p align="center">
   <strong>Logged Out</strong><br>
-  <img src="documentation/figma/wireframe/logged-out.png" alt="Logged Out" width="300" />
+  <img src="documentation/figma/wireframe/logout.png" alt="Logged Out" width="300" />
 </p>
 
 <p align="center">
@@ -144,6 +148,10 @@ As a **Engineer**, I want to:
   <strong>Pricing Adjustment</strong><br>
   <img src="documentation/figma/wireframe/pricing-adjustment.png" alt="Pricing Adjustment" width="300" />
 </p>
+
+<h1 align="left">
+   <strong>Hi-Fi</strong><br>
+</h1>
 
 <p align="center">
   <strong>Welcome</strong><br>
@@ -229,6 +237,10 @@ As a **Engineer**, I want to:
   <strong>Pricing Adjustment</strong><br>
   <img src="documentation/figma/hi-fi/pricing-adjutsment-hi-fi.png" alt="Pricing Adjustment" width="300" />
 </p>
+
+<h1 align="left">
+   <strong>Mobile Hi-fi</strong><br>
+</h1>
 
 <p align="center">
   <strong>Welcome</strong><br>
