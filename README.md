@@ -52,3 +52,230 @@ As a **Engineer**, I want to:
 - Django Admin (for quick management)  
 
 ---
+
+## Figma Files
+
+<p align="center">
+  <strong>Colour Pallette</strong><br>
+  <img src="documentation/figma/hi-fi/colour-pallette.png" alt="Colour Pallette" width="300" />
+</p>
+
+<p align="center">
+  <strong>Welcome</strong><br>
+  <img src="documentation/figma/wireframe/welcome.png" alt="Welcome" width="300" />
+</p>
+
+<p align="center">
+  <strong>Create Account</strong><br>
+  <img src="documentation/figma/wireframe/create-account.png" alt="Create Account" width="300" />
+</p>
+
+<p align="center">
+  <strong>Login</strong><br>
+  <img src="documentation/figma/wireframe/login.png" alt="Login" width="300" />
+</p>
+
+<p align="center">
+  <strong>Logged Out</strong><br>
+  <img src="documentation/figma/wireframe/logged-out.png" alt="Logged Out" width="300" />
+</p>
+
+<p align="center">
+  <strong>Reset Password</strong><br>
+  <img src="documentation/figma/wireframe/reset-password.png" alt="Reset Password" width="300" />
+</p>
+
+<p align="center">
+  <strong>Profile Settings</strong><br>
+  <img src="documentation/figma/wireframe/profile-settings.png" alt="Profile Settings" width="300" />
+</p>
+
+<p align="center">
+  <strong>Admin Dashboard</strong><br>
+  <img src="documentation/figma/wireframe/admin-dashboard.png" alt="Admin Dashboard" width="300" />
+</p>
+
+<p align="center">
+  <strong>Create a Job</strong><br>
+  <img src="documentation/figma/wireframe/create-job.png" alt="Creat a Job" width="300" />
+</p>
+
+<p align="center">
+  <strong>Edit a Job</strong><br>
+  <img src="documentation/figma/wireframe/edit-job.png" alt="Edit a Job" width="300" />
+</p>
+
+<p align="center">
+  <strong>Delete a Job</strong><br>
+  <img src="documentation/figma/wireframe/delete-job.png" alt="Delete a Job" width="300" />
+</p>
+
+<p align="center">
+  <strong>Job Details</strong><br>
+  <img src="documentation/figma/wireframe/job-details.png" alt="Job Details" width="300" />
+</p>
+
+<p align="center">
+  <strong>Engineer Dashboard</strong><br>
+  <img src="documentation/figma/wireframe/engineer-dashboard.png" alt="Engineer Dashboard" width="300" />
+</p>
+
+<p align="center">
+  <strong>Engineers List</strong><br>
+  <img src="documentation/figma/wireframe/engineers-list.png" alt="Engineers List" width="300" />
+</p>
+
+<p align="center">
+  <strong>Engineer Payments Summary</strong><br>
+  <img src="documentation/figma/wireframe/engineer-payments-summary.png" alt="Engineer Payments Summary" width="300" />
+</p>
+
+<p align="center">
+  <strong>Admin Payments Summary</strong><br>
+  <img src="documentation/figma/wireframe/admin-payments-summary.png" alt="Admin Payments Summary" width="300" />
+</p>
+
+<p align="center">
+  <strong>Cart</strong><br>
+  <img src="documentation/figma/wireframe/cart.png" alt="Cart" width="300" />
+</p>
+
+<p align="center">
+  <strong>Pricing Adjustment</strong><br>
+  <img src="documentation/figma/wireframe/pricing-adjustment.png" alt="Pricing Adjustment" width="300" />
+</p>
+
+<p align="center">
+  <strong>Welcome</strong><br>
+  <img src="documentation/figma/hi-fi/welcome-hi-hi.png" alt="Welcome" width="300" />
+</p>
+
+<p align="center">
+  <strong>Create Account</strong><br>
+  <img src="documentation/figma/hi-fi/create-account-hi-fi.png" alt="Create Account" width="300" />
+</p>
+
+<p align="center">
+  <strong>Login</strong><br>
+  <img src="documentation/figma/hi-fi/login-hi-fi.png" alt="Login" width="300" />
+</p>
+
+<p align="center">
+  <strong>Logged Out</strong><br>
+  <img src="documentation/figma/hi-fi/logout-hifi.png" alt="Logged Out" width="300" />
+</p>
+
+<p align="center">
+  <strong>Reset Password</strong><br>
+  <img src="documentation/figma/hi-fi/reset-password-hifi.png" alt="Reset Password" width="300" />
+</p>
+
+<p align="center">
+  <strong>Profile Settings</strong><br>
+  <img src="documentation/figma/hi-fi/profile-settings-hifi.png" alt="Profile Settings" width="300" />
+</p>
+
+<p align="center">
+  <strong>Admin Dashboard</strong><br>
+  <img src="documentation/figma/hi-fi/admin-dashboard-hifi.png" alt="Admin Dashboard" width="300" />
+</p>
+
+<p align="center">
+  <strong>Create a Job</strong><br>
+  <img src="documentation/figma/hi-fi/create-job-hifi.png" alt="Creat a Job" width="300" />
+</p>
+
+<p align="center">
+  <strong>Edit a Job</strong><br>
+  <img src="documentation/figma/hi-fi/edit-job-hifi.png" alt="Edit a Job" width="300" />
+</p>
+
+<p align="center">
+  <strong>Delete a Job</strong><br>
+  <img src="documentation/figma/hi-fi/delete-job-hifi.png" alt="Delete a Job" width="300" />
+</p>
+
+<p align="center">
+  <strong>Job Details</strong><br>
+  <img src="documentation/figma/hi-fi/job-details-hifi.png" alt="Job Details" width="300" />
+</p>
+
+<p align="center">
+  <strong>Engineer Dashboard</strong><br>
+  <img src="documentation/figma/hi-fi/engineer-dashboard-hifi.png" alt="Engineer Dashboard" width="300" />
+</p>
+
+<p align="center">
+  <strong>Engineers List</strong><br>
+  <img src="documentation/figma/hi-fi/engineers-list.png" alt="Engineers List" width="300" />
+</p>
+
+<p align="center">
+  <strong>Engineer Payments Summary</strong><br>
+  <img src="documentation/figma/hi-fi/engineer-payments-summary-hi-fi.png" alt="Engineer Payments Summary" width="300" />
+</p>
+
+<p align="center">
+  <strong>Admin Payments Summary</strong><br>
+  <img src="documentation/figma/hi-fi/admin-dashboard-hifi.png" alt="Admin Payments Summary" width="300" />
+</p>
+
+<p align="center">
+  <strong>Cart</strong><br>
+  <img src="documentation/figma/hi-fi/cart-hi-fi.png" alt="Cart" width="300" />
+</p>
+
+<p align="center">
+  <strong>Pricing Adjustment</strong><br>
+  <img src="documentation/figma/hi-fi/pricing-adjutsment-hi-fi.png" alt="Pricing Adjustment" width="300" />
+</p>
+
+<p align="center">
+  <strong>Welcome</strong><br>
+  <img src="documentation/figma/mobile/welcome-mobile.png" alt="Welcome" width="300" />
+</p>
+
+<p align="center">
+  <strong>Create Account</strong><br>
+  <img src="documentation/figma/mobile/create-account-mobile.png" alt="Create Account" width="300" />
+</p>
+
+<p align="center">
+  <strong>Login</strong><br>
+  <img src="documentation/figma/mobile/login-mobile.png" alt="Login" width="300" />
+</p>
+
+<p align="center">
+  <strong>Logged Out</strong><br>
+  <img src="documentation/figma/hi-fi/logout-hifi.png" alt="Logged Out" width="300" />
+</p>
+
+<p align="center">
+  <strong>Reset Password</strong><br>
+  <img src="documentation/figma/mobile/reset-password-mobile.png" alt="Reset Password" width="300" />
+</p>
+
+<p align="center">
+  <strong>Profile Settings</strong><br>
+  <img src="documentation/figma/mobile/profile-settings-mobile.png" alt="Profile Settings" width="300" />
+</p>
+
+<p align="center">
+  <strong>Admin Dashboard</strong><br>
+  <img src="documentation/figma/mobile/admin-dashboard-mobile.png" alt="Admin Dashboard" width="300" />
+</p>
+
+<p align="center">
+  <strong>Create a Job</strong><br>
+  <img src="documentation/figma/mobile/create-job-mobile.png" alt="Creat a Job" width="300" />
+</p>
+
+<p align="center">
+  <strong>Delete a Job</strong><br>
+  <img src="documentation/figma/mobile/delete-job-mobile.png" alt="Delete a Job" width="300" />
+</p>
+
+<p align="center">
+  <strong>Job Details</strong><br>
+  <img src="documentation/figma/mobile/job-details-mobile.png" alt="Job Details" width="300" />
+</p>
