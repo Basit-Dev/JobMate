@@ -155,7 +155,7 @@ As a **Engineer**, I want to:
 
 <p align="center">
   <strong>Welcome</strong><br>
-  <img src="documentation/figma/hi-fi/welcome-hi-hi.png" alt="Welcome" width="300" />
+  <img src="documentation/figma/hi-fi/welcome-hi-fi.png" alt="Welcome" width="300" />
 </p>
 
 <p align="center">

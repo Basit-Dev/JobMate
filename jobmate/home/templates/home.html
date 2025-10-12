@@ -1,17 +1,165 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Welcome · JobMate</title>
-</head>
-<body>
-    <header>
-      <strong>JobMate</strong>
-    </header>
-    <main>
-      <h1>Welcome to JobMate</h1>
-      <p>Your lightweight portal to assign jobs and pay engineers.</p>
-    </main>
-</body>
-</html>
+{% extends "base.html" %}
+{% block title %}Welcome | JobMate{% endblock %}
+
+{% block body %}
+
+<!-- HERO BANNER -->
+<header class="hero">
+  <div class="container text-center">
+    <div class="hero-icon shadow-tile">
+      <i class="bi bi-tools"></i>
+    </div>
+    <h1 class="hero-title">JobMate</h1>
+    <p class="hero-subtitle">Property Maintenance Management System</p>
+    <a class="btn btn-primary btn-lg hero-cta shadow-cta" style="width: 30%" href="#">Get Started</a>
+  </div>
+</header>
+
+<!-- KEY FEATURES SECTION -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title text-center">Key Features</h2>
+    <p class="section-subtitle text-center">Everything you need to manage property maintenance</p>
+
+    <div class="row g-4 mt-3">
+      <!-- Card 1 -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="feature-card shadow-soft">
+          <div class="fc-icon bg-soft-primary text-primary"><i class="bi bi-person-fill"></i></div>
+          <h5 class="mb-1 fw-semibold">User Registration</h5>
+          <p class="text-muted small mb-0">Easy registration system for engineers and property managers</p>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="feature-card shadow-soft">
+          <div class="fc-icon bg-soft-success text-success"><i class="bi bi-list-task"></i></div>
+          <h5 class="mb-1 fw-semibold">Job Tracking</h5>
+          <p class="text-muted small mb-0">Track engineer assignments and job progress in real-time</p>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="feature-card shadow-soft">
+          <div class="fc-icon bg-soft-purple text-purple"><i class="bi bi-cart-fill"></i></div>
+          <h5 class="mb-1 fw-semibold">Shopping Cart</h5>
+          <p class="text-muted small mb-0">Integrated shopping system for maintenance supplies</p>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="feature-card shadow-soft">
+          <div class="fc-icon bg-soft-warning text-warning"><i class="bi bi-database-fill"></i></div>
+          <h5 class="mb-1 fw-semibold">CRUD Operations</h5>
+          <p class="text-muted small mb-0">Create, read, update and delete for all records</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- BUILT WITH SECTION -->
+<section class="section section-background">
+  <div class="container text-center">
+    <h2 class="section-title">Built With</h2>
+    <p class="section-subtitle">Modern technologies for reliability and performance</p>
+
+    <div class="d-flex flex-wrap justify-content-center gap-3 mt-3">
+      <!-- Card 1 -->
+      <div class="tech-title shadow-soft"><i class="bi bi-gear-fill text-success me-2"></i> Django <span
+          class="tech-sub-title">Backend Framework</span>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="tech-title shadow-soft"><i class="bi bi-database-fill text-primary me-2"></i> PostgreSQL <span
+          class="tech-sub-title">Database</span>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="tech-title shadow-soft"><i class="bi bi-code-slash text-danger me-2"></i> HTML5 <span
+          class="tech-sub-title">Frontend</span>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="tech-title shadow-soft"><i class="bi bi-bootstrap-fill text-purple me-2"></i> Bootstrap <span
+          class="tech-sub-title">CSS Framework</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHOOSE SECTION -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title text-center">Why Choose JobMate?</h2>
+    <p class="section-subtitle text-center">Streamline your property maintenance operations</p>
+
+    <div class="row justify-content-center g-4 mt-2">
+      <div class="col-12 col-md-10">
+        <div class="benefit-card shadow-soft">
+
+          <!-- Benefit Item 1 -->
+          <div class="benefit-item">
+            <div class="benefit-icon bg-soft-success text-success"><i class="bi bi-display"></i></div>
+            <div>
+              <h6 class="mb-0 fw-semibold">Clean Interface</h6>
+              <p class="text-muted small mb-0">Responsive design that works on all devices</p>
+            </div>
+          </div>
+
+          <!-- Benefit Item 2 -->
+          <div class="benefit-item">
+            <div class="benefit-icon bg-soft-primary text-primary"><i class="bi bi-shield-lock"></i></div>
+            <div>
+              <h6 class="mb-0 fw-semibold">Secure &amp; Reliable</h6>
+              <p class="text-muted small mb-0">Built with Django’s robust security features</p>
+            </div>
+          </div>
+
+          <!-- Benefit Item 3 -->
+          <div class="benefit-item">
+            <div class="benefit-icon bg-soft-purple text-purple"><i class="bi bi-heart"></i></div>
+            <div>
+              <h6 class="mb-0 fw-semibold">Easy to Use</h6>
+              <p class="text-muted small mb-0">Intuitive interface for all user levels</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CALL TO ACTION SECTION -->
+<section class="cta-background text-white text-center">
+  <div class="container">
+    <h2 class="cta-title">Ready to Get Started?</h2>
+    <p class="mb-4">Join thousands of property managers using JobMate</p>
+    <a class="btn btn-light btn-lg fw-sm cta-btn" style="font-size: small; width: 35%;" href="#">Lets Get Started</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer text-white">
+  <div class="container text-center">
+    <div class="footer-logo shadow-tile-sm">
+      <i class="bi bi-tools"></i>
+    </div>
+    <h6 class="mb-1 fw-semibold">JobMate</h6>
+    <p class="text-muted-2 small mb-3">Property Maintenance Management System</p>
+    <div class="mb-3">
+      <a href="#" class="text-white-50 me-3"><i class="bi bi-facebook"></i></a>
+      <a href="#" class="text-white-50 me-3"><i class="bi bi-twitter-x"></i></a>
+      <a href="#" class="text-white-50"><i class="bi bi-linkedin"></i></a>
+    </div>
+    <p class="text-white-50 small mb-0">&copy; 2025 JobMate. All rights reserved.</p>
+  </div>
+</footer>
+
+{% endblock %}

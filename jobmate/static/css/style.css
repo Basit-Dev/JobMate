@@ -1,0 +1,261 @@
+/* Base */
+html {
+  font-size: 15px; /* default browser = 16px → makes everything ~6% smaller */
+}
+
+:root {
+  /* Blues */
+  --jm-blue-600: #2563eb; /* Primary / Links */
+  --jm-blue-700: #1e40af; /* Secondary / Darker hover */
+
+  /* Theme */
+  --jm-default: #ffffff; /* Main background / default surface */
+  --jm-main: #e5e7eb; /* Main background / neutral surface */
+  --jm-secondary: #1e40af; /* Deep brand blue */
+  --jm-accent: #dbeafe; /* Light darkish blue accent background */
+  --jm-accent-light: #f9fafb; /* Light blue accent background */
+  --jm-links: #2563eb; /* Action or link color */
+  --jm-other: #fecaca; /* Soft red highlight / warning / error */
+
+  /* Grays / Neutrals */
+  --ink: #111827; /* Main text color */
+  --muted: #6b7280; /* Secondary text */
+  --muted-2: #9aa3af; /* Subtle text */
+  --footer-bg: #0f172a; /* Footer background */
+
+  /* UI */
+  --card-radius: 14px;
+  --tile-radius: 18px;
+  --shadow-soft: 0 8px 16px rgba(15, 23, 42, 0.06);
+  --shadow-tile: 0 14px 30px rgba(37, 99, 235, 0.25);
+  --shadow-cta: 0 10px 22px rgba(29, 78, 216, 0.25);
+  --purple: #7e22ce;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", system-ui, -apple-system, Segoe UI, Roboto, Helvetica,
+    Arial, sans-serif;
+  font-size: 0.95rem;
+  color: var(--ink);
+  background: var(--page-bg);
+}
+
+/* Overidden BootStrap styles */
+.btn-primary {
+  background-color: var(--jm-blue-700) !important; /* new base color */
+  border-color: var(--jm-blue-700) !important;
+  font-size: 1rem;
+  transition: all 0.25s ease;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+  background-color: var(--jm-blue-600) !important; /* lighter on hover */
+}
+
+.bi::before {
+  font-weight: bold !important; /* make bootstrap icons bold */
+}
+
+/* All sections */
+.section {
+  padding: 64px 0;
+}
+
+.section-background {
+  background: var(--jm-accent-light);
+}
+
+.section-title {
+  font-weight: 700;
+  font-size: 1.75rem;
+  color: var(--ink);
+  margin-bottom: 0.25rem;
+}
+
+.section-subtitle {
+  color: var(--muted);
+}
+
+.feature-card:hover,
+.tech-title:hover {
+  animation: card-bounce 0.6s ease;
+  transform: scale(1.03);
+  box-shadow: 0 14px 28px rgba(37, 99, 235, 0.18);
+}
+
+/* Hero */
+.hero {
+  padding: 80px 0 64px;
+  background: linear-gradient(180deg, #eff6ff 0%, #e0e7ff 100%);
+}
+
+.hero-icon {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 18px;
+  border-radius: 20px;
+  background: var(--jm-blue-700);
+  color: var(--jm-default);
+  display: grid;
+  place-items: center;
+  font-size: 30px;
+}
+
+.shadow-tile {
+  box-shadow: var(--shadow-tile);
+}
+
+.hero-title {
+  font-weight: 700;
+  font-size: 2.25rem;
+  letter-spacing: -0.3px;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+
+.hero-subtitle {
+  color: var(--ink);
+  margin-bottom: 18px;
+}
+
+.hero-cta {
+  padding: 0.65rem 1.25rem;
+  border-radius: 12px;
+}
+
+.shadow-cta {
+  box-shadow: var(--shadow-cta);
+}
+
+/* Feature cards */
+.feature-card {
+  background: var(--jm-default);
+  border-radius: var(--card-radius);
+  padding: 22px;
+  height: 100%;
+}
+
+.shadow-soft {
+  box-shadow: var(--shadow-soft);
+}
+
+.fc-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.bg-soft-primary {
+  background: rgba(37, 99, 235, 0.12);
+}
+
+.bg-soft-success {
+  background: rgba(16, 185, 129, 0.12);
+}
+
+.bg-soft-warning {
+  background: rgba(245, 158, 11, 0.14);
+}
+
+.bg-soft-purple {
+  background: rgba(126, 34, 206, 0.12);
+}
+
+.text-purple {
+  color: var(--purple);
+}
+
+/* Built-with section */
+.tech-title {
+  background: var(--jm-default);
+  border-radius: 16px;
+  padding: 14px 18px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tech-title .tech-sub-title {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-left: 8px;
+}
+
+/* Why choose section */
+.benefit-card {
+  background: var(--jm-default);
+  border-radius: 18px;
+  padding: 18px;
+}
+
+.benefit-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  background: var(--jm-accent-light);
+  border-radius: 12px;
+  margin: 10px;
+}
+
+.benefit-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+}
+
+/* CTA background */
+.cta-background {
+  background: linear-gradient(
+    135deg,
+    var(--jm-blue-700) 0%,
+    var(--jm-blue-600) 100%
+  );
+  padding: 64px 0;
+}
+
+.cta-title {
+  font-weight: 500;
+  font-size: 1.4rem;
+  margin-bottom: 6px;
+}
+
+.cta-btn {
+  border-radius: 12px;
+  padding: 0.7rem 1.4rem;
+}
+
+/* Footer */
+.site-footer {
+  background: var(--footer-bg);
+  padding: 40px 0 26px;
+}
+
+.footer-logo {
+  width: 40px;
+  height: 40px;
+  margin: 0 auto 10px;
+  border-radius: 12px;
+  background: var(--jm-blue-700);
+  color: var(--jm-default);
+  display: grid;
+  place-items: center;
+}
+
+.text-muted-2 {
+  color: var(--muted-2);
+}
