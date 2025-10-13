@@ -82,6 +82,19 @@ body {
   color: var(--muted);
 }
 
+.main-title {
+  font-weight: 700;
+  font-size: 2.25rem;
+  letter-spacing: -0.3px;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+
+.main-subtitle {
+  color: var(--ink);
+  margin-bottom: 18px;
+}
+
 .feature-card:hover,
 .tech-title:hover {
   animation: card-bounce 0.6s ease;
@@ -109,19 +122,6 @@ body {
 
 .shadow-tile {
   box-shadow: var(--shadow-tile);
-}
-
-.hero-title {
-  font-weight: 700;
-  font-size: 2.25rem;
-  letter-spacing: -0.3px;
-  color: var(--ink);
-  margin-bottom: 6px;
-}
-
-.hero-subtitle {
-  color: var(--ink);
-  margin-bottom: 18px;
 }
 
 .hero-cta {
@@ -225,7 +225,8 @@ body {
     var(--jm-blue-700) 0%,
     var(--jm-blue-600) 100%
   );
-  padding: 64px 0;
+  padding: 80px 0;
+  margin-bottom: 0;
 }
 
 .cta-title {
@@ -241,6 +242,15 @@ body {
 
 /* Footer */
 .site-footer {
+  padding: 20px 0 26px;
+  margin-top: auto;
+  text-align: center;
+  color: var(--muted-2);
+  border-top: var(--jm-main) 1px solid;
+  font-size: small;
+}
+
+.site-footer-home {
   background: var(--footer-bg);
   padding: 40px 0 26px;
 }

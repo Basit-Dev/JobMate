@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Create Account | JobMate{% endblock %}
+
+{% block body %}
+<div class="auth-wrapper">
+  <div class="container signup-card shadow-soft border-0">
+
+    <!-- SIGNUP HEADER -->
+    <div class="signup-header">
+      <div class="hero-icon shadow-tile">
+        <i class="bi bi-person-plus-fill fs-3"></i>
+      </div>
+      <h1 class="main-title">Create Account</h1>
+      <p class="section-subtitle">Join our platform to get started</p>
+    </div>
+
+    <!-- SIGNUP FORM -->
+    <form>
+      <div class="row g-3">
+
+        <!-- NAME -->
+        <div class="col-md-6">
+          <label for="firstName" class="form-label">First Name</label>
+          <input type="text" class="form-control" id="firstName" placeholder="John" required>
+        </div>
+        <div class="col-md-6">
+          <label for="lastName" class="form-label">Last Name</label>
+          <input type="text" class="form-control" id="lastName" placeholder="Doe" required>
+        </div>
+
+        <!-- EMAIL -->
+        <div class="col-12">
+          <label for="email" class="form-label">Email Address</label>
+          <input type="email" class="form-control" id="email" placeholder="john.doe@example.com" required>
+        </div>
+
+        <!-- ROLE -->
+        <div class="col-12">
+          <label for="role" class="form-label">Role</label>
+          <select class="form-select" id="role" required>
+            <option value="">Select your role</option>
+            <option value="manager">Property Manager</option>
+            <option value="engineer">Engineer</option>
+            <option value="admin">Administrator</option>
+          </select>
+        </div>
+
+        <!-- PASSWORD -->
+        <div class="col-12">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" class="form-control" id="password" placeholder="••••••••" required>
+          <div class="password-hint">
+            Must be at least 8 characters with uppercase, lowercase, and number
+          </div>
+        </div>
+
+        <div class="col-12">
+          <label for="confirmPassword" class="form-label">Confirm Password</label>
+          <input type="password" class="form-control" id="confirmPassword" placeholder="••••••••" required>
+        </div>
+
+        <!-- TERMS -->
+        <div class="col-12">
+          <div class="form-check mt-1">
+            <input class="form-check-input pr-2" type="checkbox" id="terms" required>
+            <label class="form-check-label ps-2 pt-1" for="terms">
+              I agree to the <a href="#" target="_blank">Terms of Service</a> and <a href="#" target="_blank">Privacy
+                Policy</a>
+            </label>
+          </div>
+        </div>
+
+        <!-- SUBMIT BUTTON -->
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary w-100 shadow-cta">Create Account</button>
+        </div>
+      </div>
+
+      <!-- SIGNUP FOOTER -->
+      <div class="signup-footer">
+        <p>Already have an account? <a href="#">Sign in here</a></p>
+        <p class="agreement-text mt-1">By creating an account, you agree to our terms and conditions</p>
+      </div>
+    </form>
+  </div>
+</div>
+
+</main>
+
+{% endblock %}

@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Every time you create an app, you must include it here
     'home',
+    'accounts',
 ]
 
 MIDDLEWARE = [
