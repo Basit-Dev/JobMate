@@ -1,0 +1,96 @@
+/* Base */
+html {
+  font-size: 15px; /* default browser = 16px → makes everything ~6% smaller */
+}
+
+:root {
+  /* Blues */
+  --jm-blue-600: #2563eb; /* Primary / Links */
+  --jm-blue-700: #1e40af; /* Secondary / Darker hover */
+
+  /* Theme */
+  --jm-default: #ffffff; /* Main background / default surface */
+  --jm-main: #e5e7eb; /* Main background / neutral surface */
+  --jm-secondary: #1e40af; /* Deep brand blue */
+  --jm-accent: #dbeafe; /* Light darkish blue accent background */
+  --jm-accent-light: #f9fafb; /* Light blue accent background */
+  --jm-links: #2563eb; /* Action or link color */
+  --jm-other: #fecaca; /* Soft red highlight / warning / error */
+
+  /* Grays / Neutrals */
+  --ink: #111827; /* Main text color */
+  --muted: #6b7280; /* Secondary text */
+  --muted-2: #9aa3af; /* Subtle text */
+  --footer-bg: #0f172a; /* Footer background */
+
+  /* UI */
+  --card-radius: 14px;
+  --tile-radius: 18px;
+  --shadow-soft: 0 8px 16px rgba(15, 23, 42, 0.06);
+  --shadow-tile: 0 14px 30px rgba(37, 99, 235, 0.25);
+  --shadow-cta: 0 10px 22px rgba(29, 78, 216, 0.25);
+  --purple: #7e22ce;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", system-ui, -apple-system, Segoe UI, Roboto, Helvetica,
+    Arial, sans-serif;
+  font-size: 0.95rem;
+  color: var(--ink);
+  background: var(--page-bg);
+}
+
+/* Overidden BootStrap styles */
+.btn-primary {
+  background-color: var(--jm-blue-700) !important; /* new base color */
+  border-color: var(--jm-blue-700) !important;
+  font-size: 1rem;
+  transition: all 0.25s ease;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+  background-color: var(--jm-blue-600) !important; /* lighter on hover */
+}
+
+.bi::before {
+  font-weight: bold !important; /* make bootstrap icons bold */
+}
+
+/* All sections */
+.section {
+  padding: 64px 0;
+}
+
+.section-background {
+  background: var(--jm-accent-light);
+}
+
+.section-title {
+  font-weight: 700;
+  font-size: 1.75rem;
+  color: var(--ink);
+  margin-bottom: 0.25rem;
+}
+
+.section-subtitle {
+  color: var(--muted);
+}
+
+.main-title {
+  font-weight: 700;
+  font-size: 2.25rem;
+  letter-spacing: -0.3px;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+
+.main-subtitle {
+  color: var(--ink);
+  margin-bottom: 18px;
+}
