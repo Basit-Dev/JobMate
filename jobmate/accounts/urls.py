@@ -9,4 +9,5 @@ app_name = 'accounts'
 # Define the url patterns
 urlpatterns = [
     path('create_account/', views.create_account, name='create_account'),
+    path('sign_in/', views.sign_in, name='sign_in'),
 ]

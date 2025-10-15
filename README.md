@@ -155,17 +155,17 @@ As a **Engineer**, I want to:
 
 <p align="center">
   <strong>Welcome</strong><br>
-  <img src="documentation/figma/hi-fi/welcome-hi-fi.png" alt="Welcome" width="300" />
+  <img src="documentation/figma/hi-fi/welcome-hifi.png" alt="Welcome" width="300" />
 </p>
 
 <p align="center">
   <strong>Create Account</strong><br>
-  <img src="documentation/figma/hi-fi/create-account-hi-fi.png" alt="Create Account" width="300" />
+  <img src="documentation/figma/hi-fi/create-account-hifi.png" alt="Create Account" width="300" />
 </p>
 
 <p align="center">
   <strong>Login</strong><br>
-  <img src="documentation/figma/hi-fi/login-hi-fi.png" alt="Login" width="300" />
+  <img src="documentation/figma/hi-fi/login-hifi.png" alt="Login" width="300" />
 </p>
 
 <p align="center">
@@ -215,12 +215,12 @@ As a **Engineer**, I want to:
 
 <p align="center">
   <strong>Engineers List</strong><br>
-  <img src="documentation/figma/hi-fi/engineers-list.png" alt="Engineers List" width="300" />
+  <img src="documentation/figma/hi-fi/engineers-list-hifi.png" alt="Engineers List" width="300" />
 </p>
 
 <p align="center">
   <strong>Engineer Payments Summary</strong><br>
-  <img src="documentation/figma/hi-fi/engineer-payments-summary-hi-fi.png" alt="Engineer Payments Summary" width="300" />
+  <img src="documentation/figma/hi-fi/engineer-payments-summary-hifi.png" alt="Engineer Payments Summary" width="300" />
 </p>
 
 <p align="center">
@@ -230,12 +230,12 @@ As a **Engineer**, I want to:
 
 <p align="center">
   <strong>Cart</strong><br>
-  <img src="documentation/figma/hi-fi/cart-hi-fi.png" alt="Cart" width="300" />
+  <img src="documentation/figma/hi-fi/cart-hifi.png" alt="Cart" width="300" />
 </p>
 
 <p align="center">
   <strong>Pricing Adjustment</strong><br>
-  <img src="documentation/figma/hi-fi/pricing-adjutsment-hi-fi.png" alt="Pricing Adjustment" width="300" />
+  <img src="documentation/figma/hi-fi/pricing-adjutsment-hifi.png" alt="Pricing Adjustment" width="300" />
 </p>
 
 <h1 align="left">
