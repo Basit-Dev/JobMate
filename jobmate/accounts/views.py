@@ -19,3 +19,9 @@ def logged_out(request):
     This view renders the logged out page
     """
     return render(request, 'logged_out.html')
+
+def reset_password(request):
+    """
+    This view renders the reset password page
+    """
+    return render(request, 'reset_password.html')

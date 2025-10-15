@@ -5,7 +5,7 @@
 
 {% block body %}
 <div class="auth-wrapper">
-    <div class="container signup-card shadow-soft border-0">
+    <section class="container accounts-card shadow-soft border-0">
 
         <!-- ACCOUNTS HEADER -->
         <div class="accounts-header">
@@ -21,17 +21,21 @@
 
             <!-- SIGN IN BUTTON -->
             <div class="col-12">
-                <a href="{% url 'accounts:sign_in' %}" class="btn btn-primary w-100 shadow-cta d-flex align-items-center justify-content-center"><i class="bi bi-box-arrow-in-right fs-3 pe-4"></i>Sign in to JobMate</a>
+                <a href="{% url 'accounts:sign_in' %}"
+                    class="btn btn-primary w-100 shadow-cta d-flex align-items-center justify-content-center"><i
+                        class="bi bi-box-arrow-in-right fs-4 pe-4"></i>Sign in to JobMate</a>
             </div>
 
             <!-- HOME PAGE BUTTON -->
             <div class="col-12 mt-4">
-                <a href="{% url 'home:home' %}" class="btn btn-secondary w-100 shadow-sm d-flex align-items-center justify-content-center"><i class="bi bi-house-door-fill fs-3 pe-4"></i>Go to Home Page</a>
+                <a href="{% url 'home:home' %}"
+                    class="btn btn-secondary w-100 shadow-sm d-flex align-items-center justify-content-center"><i
+                        class="bi bi-house-door-fill fs-4 pe-4"></i>Go to Home Page</a>
             </div>
 
         </div>
 
-    </div>
+    </section>
 </div>
 </main>
 

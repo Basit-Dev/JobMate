@@ -4,7 +4,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 16px;               /* horizontal breathing space only */
+  padding: 0 16px;              
   background: var(--jm-accent-light);
 }
 
@@ -14,16 +14,42 @@
   align-items: center;
   justify-content: center;
   min-height: 90vh;
+  margin: 0 1.3rem 0 1.3rem;
 }
 
 /* Card */
-.signup-card {
+.accounts-card {
   background: var(--jm-default);
   border-radius: var(--card-radius);
   box-shadow: var(--shadow-soft);
   padding: 40px 32px;
   width: 100%;
-  max-width: 520px;              /* a touch narrower for focus */
+  max-width: 520px;            
+}
+
+.accounts-info{
+  background: var(--jm-accent);
+  border-radius: var(--card-radius);
+  box-shadow: var(--shadow-soft);
+  padding: 30px 24px;
+  width: 100%;
+  max-width: 520px;             
+  text-align: left;
+  p {
+  margin-bottom: 5px
+  }
+}
+
+
+/* Accent text */
+.accent-subtitle {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.accent-icon {
+  font-size: 1rem;
+  color: var(--jm-blue-700);
 }
 
 /* Header */
@@ -56,10 +82,10 @@
 .form-check-label a:hover { text-decoration: underline; }
 
 /* Footer bits */
-.signup-footer { text-align: center; margin-top: 16px; }
-.signup-footer p { color: var(--muted); margin: 0; }
-.signup-footer a { color: var(--jm-links); text-decoration: none; font-weight: 500; }
-.signup-footer a:hover { text-decoration: underline; }
+.accounts-footer { text-align: center; margin-top: 16px; }
+.accounts-footer p { color: var(--muted); margin: 0; }
+.accounts-footer a { color: var(--jm-links); text-decoration: none; font-weight: 500; }
+.accounts-footer a:hover { text-decoration: underline; }
 
 .agreement-text {
   text-align: center; font-size: .8rem; color: var(--muted);
