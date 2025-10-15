@@ -46,7 +46,7 @@ body {
 
 /* Overidden BootStrap styles */
 .btn-primary {
-  background-color: var(--jm-blue-700) !important; /* new base color */
+  background-color: var(--jm-blue-700) !important; 
   border-color: var(--jm-blue-700) !important;
   font-size: 1rem;
   transition: all 0.25s ease;
@@ -55,7 +55,23 @@ body {
 .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary:active {
-  background-color: var(--jm-blue-600) !important; /* lighter on hover */
+  background-color: var(--jm-blue-600) !important; 
+}
+
+.btn-secondary {
+  background-color: var(--jm-accent) !important; 
+  border-color: var(--jm-accent) !important;
+  font-size: 1rem;
+  transition: all 0.25s ease;
+  color: var(--ink);
+}
+
+.btn-secondary:hover {
+  background-color: var(--muted-2) !important; 
+  border-color: var(--jm-accent) !important;
+  font-size: 1rem;
+  transition: all 0.25s ease;
+  color: var(--ink);
 }
 
 .bi::before {

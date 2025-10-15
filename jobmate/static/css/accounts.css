@@ -26,16 +26,8 @@
   max-width: 520px;              /* a touch narrower for focus */
 }
 
-/* Signup Btn */
-.btn-signup,
-.signup-card .btn-primary {
-  margin: 1rem 0 1rem 0;
-  padding-top: 0.95rem;
-  padding-bottom: 0.95rem;
-}
-
 /* Header */
-.signup-header { text-align: center; margin-bottom: 28px; }
+.accounts-header { text-align: center; margin-bottom: 28px; }
 
 /* Form controls */
 .form-label { font-weight: 600; color: var(--ink); margin-bottom: 6px; }

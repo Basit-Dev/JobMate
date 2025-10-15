@@ -13,3 +13,9 @@ def sign_in(request):
     This view renders the sign in page
     """
     return render(request, 'sign_in.html')
+
+def logged_out(request):
+    """
+    This view renders the logged out page
+    """
+    return render(request, 'logged_out.html')
