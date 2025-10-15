@@ -29,6 +29,7 @@
 /* Signup Btn */
 .btn-signup,
 .signup-card .btn-primary {
+  margin: 1rem 0 1rem 0;
   padding-top: 0.95rem;
   padding-bottom: 0.95rem;
 }

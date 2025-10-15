@@ -61,17 +61,6 @@
           <input type="password" class="form-control" id="confirmPassword" placeholder="••••••••" required>
         </div>
 
-        <!-- TERMS -->
-        <div class="col-12">
-          <div class="form-check mt-1">
-            <input class="form-check-input pr-2" type="checkbox" id="terms" required>
-            <label class="form-check-label ps-2 pt-1" for="terms">
-              I agree to the <a href="#" target="_blank">Terms of Service</a> and <a href="#" target="_blank">Privacy
-                Policy</a>
-            </label>
-          </div>
-        </div>
-
         <!-- SUBMIT BUTTON -->
         <div class="col-12">
           <button type="submit" class="btn btn-primary w-100 shadow-cta">Create Account</button>
@@ -80,8 +69,7 @@
 
       <!-- SIGNUP FOOTER -->
       <div class="signup-footer">
-        <p>Already have an account? <a href="#">Sign in here</a></p>
-        <p class="agreement-text mt-1">By creating an account, you agree to our terms and conditions</p>
+        <p>Already have an account? <a href="{% url 'accounts:sign_in' %}">Sign in here</a></p>
       </div>
     </form>
   </div>
