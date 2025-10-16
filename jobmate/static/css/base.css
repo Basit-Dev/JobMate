@@ -30,6 +30,11 @@ html {
   --shadow-tile: 0 14px 30px rgba(37, 99, 235, 0.25);
   --shadow-cta: 0 10px 22px rgba(29, 78, 216, 0.25);
   --purple: #7e22ce;
+
+  /* Layout */
+  --topbar-h: 66px;
+  --footer-h: 20px;
+  --sidebar-width: 240px;  
 }
 
 * {
@@ -42,6 +47,7 @@ body {
   font-size: 0.95rem;
   color: var(--ink);
   background: var(--page-bg);
+  margin: 0 auto;
 }
 
 /* Overidden BootStrap styles */
@@ -79,6 +85,11 @@ body {
 }
 
 /* All sections */
+.main-wrapper {
+  max-width: 1800px;
+  margin: 0 auto;
+}
+
 .section {
   padding: 64px 0;
 }
@@ -109,4 +120,19 @@ body {
 .main-subtitle {
   color: var(--ink);
   margin-bottom: 18px;
+}
+
+/* Footer */
+.site-footer {
+  padding: var(--footer-h) 0 26px;
+  margin-top: auto;
+  text-align: center;
+  color: var(--muted-2);
+  border-top: var(--jm-main) 1px solid;
+  font-size: small;
+}
+
+.site-footer-home {
+  background: var(--footer-bg);
+  padding: 40px 0 26px;
 }

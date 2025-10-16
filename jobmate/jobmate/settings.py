@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     # Every time you create an app, you must include it here
     'home',
     'accounts',
+    'admin_dashboard',
 ]
 
 MIDDLEWARE = [

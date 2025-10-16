@@ -1,0 +1,109 @@
+{% extends "base.html" %} 
+{% load static %} 
+{% block body %}
+
+<!-- TOP HEADER -->
+<header class="top-header">
+  <div class="logo-section">
+    <div class="logo-icon">
+      <i class="bi bi-tools"></i>
+    </div>
+    <span class="logo-text">JobMate</span>
+  </div>
+
+  <!-- STATUS INFO -->
+  <div class="header-right">
+    <div class="user-info">
+      <span>User</span>
+    </div>
+    <a href="#" class="logout-btn">
+      <i class="bi bi-box-arrow-right"></i>
+      <span>Logout</span>
+    </a>
+    <button class="mobile-menu-btn" id="mobileMenuBtn">
+      <i class="bi bi-list"></i>
+    </button>
+  </div>
+</header>
+
+<!-- MAIN CONTENT -->
+<div class="dashboard-layout">
+  <!-- Desktop Sidebar -->
+  <aside class="sidebar">
+    <ul class="sidebar-nav">
+      <li>
+        <a href="#" class="active">
+          <i class="bi bi-speedometer2"></i>
+          <span>Dashboard</span>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <i class="bi bi-people"></i>
+          <span>Engineers</span>
+        </a>
+      </li>
+    </ul>
+  </aside>
+
+  <!-- Mobile Sidebar -->
+  <aside class="mobile-sidebar" id="mobileSidebar">
+    <div class="mobile-user-section">
+      <div class="user-name">User</div>
+      <a href="#" class="logout-link">
+        <i class="bi bi-box-arrow-right"></i>
+        <span>Logout</span>
+      </a>
+    </div>
+    <ul class="sidebar-nav">
+      <li>
+        <a href="#" class="active">
+          <i class="bi bi-speedometer2"></i>
+          <span>Dashboard</span>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <i class="bi bi-people"></i>
+          <span>Engineers</span>
+        </a>
+      </li>
+    </ul>
+  </aside>
+
+  <!-- Sidebar Overlay -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- Dashboard Table Content -->
+  <main class="main-content">
+    {% block content %} {% endblock %}
+  </main>
+
+</div>
+
+<!-- MOBILE MENU SCRIPT -->
+<script>
+  // Mobile menu toggle
+  const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+  const mobileSidebar = document.getElementById("mobileSidebar");
+  const sidebarOverlay = document.getElementById("sidebarOverlay");
+
+  function toggleMobileMenu() {
+    mobileSidebar.classList.toggle("active");
+    sidebarOverlay.classList.toggle("active");
+  }
+
+  mobileMenuBtn.addEventListener("click", toggleMobileMenu);
+  sidebarOverlay.addEventListener("click", toggleMobileMenu);
+
+  // Close mobile menu when clicking a link
+  const mobileLinks = document.querySelectorAll(".mobile-sidebar a");
+  mobileLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      mobileSidebar.classList.remove("active");
+      sidebarOverlay.classList.remove("active");
+    });
+  });
+</script>
+
+{% endblock %}

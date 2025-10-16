@@ -15,13 +15,15 @@
 
     <!-- CSS styles -->
     <link rel="stylesheet" href="{% static 'css/base.css' %}?v=20251012">
-        <link rel="stylesheet" href="{% static 'css/home.css' %}?v=20251012">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}?v=20251012">
     <link rel="stylesheet" href="{% static 'css/accounts.css' %}?v=20251012">
+    <link rel="stylesheet" href="{% static 'css/dashboard_base.css' %}?v=20251012">
+    <link rel="stylesheet" href="{% static 'css/dashboard_table.css' %}?v=20251012">
 
 </head>
 
 <body class="bg-page d-flex flex-column min-vh-100">
-    <main class="flex-grow-1">
+    <main class="flex-grow-1 d-flex flex-column">
         {% block body %}{% endblock %}
     </main>
 
