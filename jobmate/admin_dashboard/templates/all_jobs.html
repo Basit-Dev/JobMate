@@ -1,8 +1,55 @@
-{% extends "dashboard_base.html" %}
-{% load static %}
+{% extends "dashboard_base.html" %} {% load static %}
 {% block title %}All Jobs | JobMate{% endblock %}
-
 {% block content %}
-<div>All Jobs</div>
+
+<!-- Main Content -->
+<div class="container-lg flex-grow-1 d-flex flex-column">
+  <div class="heading-section d-flex flex-column justify-content-between flex-md-row">
+    <div class="row">
+      <h1 class="section-title">Admin Dashboard</h1>
+      <p class="section-subtitle">
+        Manage all property Maintenance jobs accross the system
+      </p>
+    </div>
+
+    <button class="btn btn-primary shadow-cta">
+      <i class="bi bi-plus-lg me-2"></i>Create Job
+    </button>
+  </div>
+
+  <div class="filter-container d-flex flex-grow-1 flex-column justify-content-between flex-md-row gap-3">
+    <div class="search-col col-8">
+
+      <p class="section-subtitle">Search Jobs</p>
+      <input type="text" class="form-control" placeholder="Search jobs..." />
+    </div>
+    <div class="col">
+      <p class="section-subtitle">Status</p>
+      <select class="form-select">
+        <option value="">All Status</option>
+        <option value="active">Active</option>
+        <option value="inactive">Inactive</option>
+      </select>
+    </div>
+  </div>
+  <!-- <button class="btn btn-secondary">
+      <i class="bi bi-search me-2"></i>Search
+    </button> -->
+</div>
 
 {% endblock %}
+
+
+<!-- <div class="filter-container">
+        <div class="section-subtitle d-flex gap-3 mb-3 justify-content-between">
+          <p>Search Jobs</p>
+          <p>Status</p>
+          </div>
+          <input type="text" class="form-control" placeholder="Search jobs..." />
+          <select class="form-select">
+            <option value="">All Status</option>
+            <option value="active">Active</option>
+            <option value="inactive">Inactive</option>
+          </select>
+          <button class="btn btn-primary">Search</button>
+      </div> -->

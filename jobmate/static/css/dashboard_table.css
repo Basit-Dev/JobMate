@@ -1,1 +1,29 @@
 
+.heading-section {
+    height: 50px !important;
+    margin-bottom: 3rem;
+}
+
+.filter-container {
+  background-color: var(--jm-default);
+  margin-top: 0.5rem;   
+  padding: 1rem;        
+  border-radius: 8px;  
+}
+
+@media screen and (max-width: 769px) {
+  .filter-container {
+   margin-top: 4rem;
+  }
+  .search-col {
+    width: 100%;
+  }
+    
+}
+
+@media screen and (max-width: 360px) {
+  .filter-container {
+   margin-top: 4rem;
+  }
+    
+}

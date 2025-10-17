@@ -17,6 +17,13 @@
   gap: 12px;
 }
 
+.logo-section a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
 .logo-icon {
   width: 40px;
   height: 40px;
@@ -213,7 +220,7 @@
   }
 
   .main-content {
-    padding: 20px;
+    padding: 10px;
   }
 
   .user-info {
