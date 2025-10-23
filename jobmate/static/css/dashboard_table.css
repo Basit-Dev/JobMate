@@ -1,29 +1,114 @@
-
+/* Heading Section */
 .heading-section {
-    height: 50px !important;
-    margin-bottom: 3rem;
+  height: 50px !important;
+  margin-bottom: 3rem;
 }
 
+/* Filter Container */
 .filter-container {
   background-color: var(--jm-default);
-  margin-top: 0.5rem;   
-  padding: 1rem;        
-  border-radius: 8px;  
+  margin-top: 0.5rem;
+  padding: 1rem;
+  border-radius: 8px;
 }
 
+/* Table Container */
+.table-container {
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  background: white;
+}
+.table-header {
+  background-color: var(--jm-blue-700);
+  color: var(--jm-default);
+  padding: 1rem 1.25rem;
+  font-weight: 600;
+  font-size: 1.1rem;
+  width: 100%;
+}
+.table-head th {
+  color: var(--muted);
+  font-size: small;
+}
+
+/* Badges */
+.badge-rounded {
+  border-radius: 1rem;
+  padding: 0.4em 0.8em;
+}
+.badge-high {
+  background-color: #f8d7da;
+  color: #b71c1c;
+}
+.badge-medium {
+  background-color: #ffe5b4;
+  color: #ad6800;
+}
+.badge-low {
+  background-color: #e5d0ff;
+  color: #5a189a;
+}
+.badge-progress {
+  background-color: #fff3cd;
+  color: #856404;
+}
+.badge-pending {
+  background-color: #e2e3e5;
+  color: #495057;
+}
+.badge-completed {
+  background-color: #d4edda;
+  color: #155724;
+}
+.badge-paid {
+  background-color: #d1b464;
+  color: white;
+}
+.badge-cart {
+  background-color: #b9a0d9;
+  color: white;
+}
+
+/* Responsive Styles */
 @media screen and (max-width: 769px) {
   .filter-container {
-   margin-top: 4rem;
+    margin-top: 4rem;
   }
   .search-col {
     width: 100%;
   }
-    
+  .table thead {
+    display: none;
+  }
+  .table tbody tr {
+    display: block;
+    margin-bottom: 1rem;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    padding: 0.75rem;
+  }
+  .table tbody td {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0.4rem 0;
+    border: none;
+  }
+  .table tbody td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: #6c757d;
+  }
+  .actions {
+    display: flex;
+    gap: 12px;
+  }
 }
 
 @media screen and (max-width: 360px) {
   .filter-container {
-   margin-top: 4rem;
+    margin-top: 4rem;
   }
-    
 }

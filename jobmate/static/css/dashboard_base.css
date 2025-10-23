@@ -207,8 +207,14 @@
 
 /* Responsive */
 @media (max-width: 992px) {
+  .dashboard-layout {
+    height: auto;
+  }
   .sidebar {
     display: none;
+  }
+  .section-title {
+    margin-top: 1rem;
   }
 
   .mobile-menu-btn {
