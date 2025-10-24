@@ -1,5 +1,5 @@
-{% extends "base.html" %} 
-{% load static %} 
+{% extends "base.html" %}
+{% load static %}
 {% block body %}
 
 <!-- TOP HEADER -->
@@ -34,15 +34,25 @@
   <aside class="sidebar">
     <ul class="sidebar-nav">
       <li>
-        <a href="{% url 'admin_dashboard:all_jobs' %}" class="{% if request.resolver_match.url_name == 'all_jobs' %}active{% endif %}">
+        <a href="{% url 'admin_dashboard:all_jobs' %}"
+          class="{% if request.resolver_match.url_name == 'all_jobs' %}active{% endif %}">
           <i class="bi bi-speedometer2"></i>
           <span>Dashboard</span>
         </a>
       </li>
       <li>
-        <a href="{% url 'admin_dashboard:engineers' %}" class="{% if request.resolver_match.url_name == 'engineers' %}active{% endif %}">
+        <a href="{% url 'admin_dashboard:engineers' %}"
+          class="{% if request.resolver_match.url_name == 'engineers' %}active{% endif %}">
           <i class="bi bi-people"></i>
           <span>Engineers</span>
+        </a>
+      </li>
+      <li>
+            <!-- <li class=" {% if request.resolver_match.url_name != 'create_job' %}d-none{% endif %}"></li> -->
+        <a href="{% url 'admin_dashboard:create_job' %}"
+          class="{% if request.resolver_match.url_name == 'create_job' %}active nav-link disabled{% endif %}">
+          <i class="bi bi-plus-circle-fill"></i>
+          <span>Create Job</span>
         </a>
       </li>
     </ul>
@@ -59,13 +69,15 @@
     </div>
     <ul class="sidebar-nav">
       <li>
-        <a href="{% url 'admin_dashboard:all_jobs' %}" class="{% if request.resolver_match.url_name == 'all_jobs' %}active{% endif %}">
+        <a href="{% url 'admin_dashboard:all_jobs' %}"
+          class="{% if request.resolver_match.url_name == 'all_jobs' %}active{% endif %}">
           <i class="bi bi-speedometer2"></i>
           <span>Dashboard</span>
         </a>
       </li>
       <li>
-        <a href="{% url 'admin_dashboard:engineers' %}" class="{% if request.resolver_match.url_name == 'engineers' %}active{% endif %}">
+        <a href="{% url 'admin_dashboard:engineers' %}"
+          class="{% if request.resolver_match.url_name == 'engineers' %}active{% endif %}">
           <i class="bi bi-people"></i>
           <span>Engineers</span>
         </a>
