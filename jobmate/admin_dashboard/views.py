@@ -13,3 +13,9 @@ def engineers(request):
     This view renders the engineers page
     """
     return render(request, 'engineers.html')
+
+def create_job(request):
+    """
+    This view renders the create job page
+    """
+    return render(request, 'create_job.html')   

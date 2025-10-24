@@ -1,8 +1,7 @@
-{% extends "dashboard_base_layout.html" %} {% load static %} {% block title %}All Jobs
+{% extends "dashboard_base.html" %} {% load static %} {% block title %}All Jobs
 | JobMate{% endblock %} {% block content %}
 
 <div class="container-lg flex-grow-1 d-flex flex-column">
-
   <!-- HEADER -->
   <div class="heading-section d-flex flex-column justify-content-between flex-md-row">
     <div class="row">
@@ -13,9 +12,9 @@
     </div>
 
     <!-- Create Job Button -->
-    <button class="btn btn-primary shadow-cta">
+    <a href="{% url 'admin_dashboard:create_job' %}" class="btn btn-primary shadow-cta d-flex align-items-center justify-content-center">
       <i class="bi bi-plus-lg me-2"></i>Create Job
-    </button>
+    </a>
   </div>
 
   <!-- FILTERS -->
@@ -45,7 +44,6 @@
       <div class="table-header">All Jobs (3)</div>
       <div class="table-responsive p-2">
         <table class="table align-middle mb-0">
-
           <!-- Table Head -->
           <thead class="table-head">
             <tr>
@@ -62,7 +60,6 @@
 
           <!-- Table Body -->
           <tbody>
-
             <!-- Job Row -->
             <tr>
               <td data-label="Job Title">
