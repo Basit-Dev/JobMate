@@ -1,0 +1,117 @@
+{% extends "dashboard_base.html" %} {% load static %} 
+{% block title %}All Engineers | JobMate{% endblock %} 
+{% block content %}
+
+<div class="container-lg flex-grow-1 d-flex flex-column">
+
+  <!-- HEADER -->
+  <div class="heading-section d-flex flex-column justify-content-between flex-md-row">
+    <div class="row">
+      <h1 class="section-title">Engineers</h1>
+      <p class="section-subtitle">
+        Manage all engineers across the system
+      </p>
+    </div>
+
+    <!-- Create Job Button -->
+    <button class="btn btn-primary shadow-cta">
+      <i class="bi bi-plus-lg me-2"></i>Create Job
+    </button>
+  </div>
+
+  <!-- FILTERS -->
+  <div class="filter-container d-flex flex-grow-1">
+    <div class="search-col col-12">
+      <p class="section-subtitle">Search Engineers</p>
+      <input type="text" class="form-control" placeholder="Search engineers..." />
+    </div>
+  </div>
+
+  <!-- SEARCH BUTTON -->
+  <button class="btn btn-secondary mt-3">
+    <i class="bi bi-search me-2"></i>Search
+  </button>
+
+  <!-- JOB LIST -->
+  <div class="container-lg mt-4 p-0">
+    <div class="table-container">
+      <div class="table-header">All Engineers (3)</div>
+      <div class="table-responsive p-2">
+        <table class="table align-middle mb-0">
+
+          <!-- Table Head -->
+          <thead class="table-head">
+            <tr>
+              <th>ID</th>
+              <th>Role</th>
+              <th>Engineer</th>
+              <th>Status</th>
+              <th>Created</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+
+          <!-- Table Body -->
+          <tbody>
+
+            <!-- Job Row -->
+            <tr>
+              <td data-label="ID"><P class="text-muted m-0">#ENG-001</P></td>
+              <td data-label="Role">Plumber</td>
+              <td data-label="Engineer">Mike Wilson</td>
+              <td data-label="Status">
+                <span class="badge badge-rounded badge-completed">Active</span>
+              </td>
+              <td data-label="Created">Jan 15, 2025</td>
+              <td data-label="Actions">
+                <div class="d-flex flex-row justify-content-around">
+                  <a href="#" class="text-secondary me-2"><i class="bi bi-eye"></i></a>
+                  <a href="#" class="text-primary me-2"><i class="bi bi-pencil"></i></a>
+                  <a href="#" class="text-danger"><i class="bi bi-trash"></i></a>
+                </div>
+              </td>
+            </tr>
+
+               <!-- Job Row -->
+            <tr>
+              <td data-label="ID"><P class="text-muted m-0">#ENG-002</P></td>
+              <td data-label="Role">Carpenter</td>
+              <td data-label="Engineer">Joe Bloggs</td>
+              <td data-label="Status">
+                <span class="badge badge-rounded badge-completed">Active</span>
+              </td>
+              <td data-label="Created">Jan 15, 2025</td>
+              <td data-label="Actions">
+                <div class="d-flex flex-row justify-content-around">
+                  <a href="#" class="text-secondary me-2"><i class="bi bi-eye"></i></a>
+                  <a href="#" class="text-primary me-2"><i class="bi bi-pencil"></i></a>
+                  <a href="#" class="text-danger"><i class="bi bi-trash"></i></a>
+                </div>
+              </td>
+            </tr>
+
+               <!-- Job Row -->
+            <tr>
+              <td data-label="ID"><P class="text-muted m-0">#ENG-001</P></td>
+              <td data-label="Role">Gas Engineer</td>
+              <td data-label="Engineer">Tom Jones</td>
+              <td data-label="Status">
+                <span class="badge badge-rounded badge-high">Un-Active</span>
+              </td>
+              <td data-label="Created">Jan 15, 2025</td>
+              <td data-label="Actions">
+                <div class="d-flex flex-row justify-content-around">
+                  <a href="#" class="text-secondary me-2"><i class="bi bi-eye"></i></a>
+                  <a href="#" class="text-primary me-2"><i class="bi bi-pencil"></i></a>
+                  <a href="#" class="text-danger"><i class="bi bi-trash"></i></a>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

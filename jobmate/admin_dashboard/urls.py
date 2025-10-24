@@ -9,4 +9,5 @@ app_name = 'admin_dashboard'
 # Define the url patterns
 urlpatterns = [
     path('all_jobs/', views.all_jobs, name='all_jobs'),
+    path('engineers/', views.engineers, name='engineers'),
 ]
