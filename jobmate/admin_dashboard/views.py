@@ -19,3 +19,9 @@ def create_job(request):
     This view renders the create job page
     """
     return render(request, 'create_job.html')   
+
+def edit_job(request):
+    """
+    This view renders the edit job page
+    """
+    return render(request, 'edit_job.html')

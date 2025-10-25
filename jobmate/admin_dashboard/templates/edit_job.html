@@ -1,0 +1,143 @@
+{% extends "dashboard_base.html" %} {% load static %} {% block title %}All
+Edit Job | JobMate{% endblock %} {% block content %}
+
+<div class="container-lg flex-grow-1 d-flex flex-column">
+
+  <!-- HEADER -->
+  <div class="heading-section">
+    <div class="d-flex align-items-center gap-3 mb-3">
+      <div class="icon">
+        <i class="bi bi-pencil-square"></i>
+      </div>
+      <div>
+        <h1 class="section-title">Edit Job #JOB-001</h1>
+        <p class="section-subtitle m-0">
+          Update job details and assignment information
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- JOB DETAILS -->
+  <div class="container-lg m-0 p-0">
+    <div class="card shadow-sm border-0 rounded-4">
+      <div class="card-header py-3 rounded-top-4">
+        <i class="bi bi-briefcase-fill me-2"></i>Job Details
+      </div>
+
+      <!-- FORM -->
+      <form class="card-body p-4">
+        <div class="row g-3">
+
+          <!-- Job Title -->
+          <div class="col-md-6">
+            <label class="form-label">Job Title<span class="text-danger">*</span></label>
+            <input type="text" class="form-control" placeholder="Enter job title" required>
+          </div>
+
+          <!-- Property Owner -->
+          <div class="col-md-6">
+            <label class="form-label">Property Owner<span class="text-danger">*</span></label>
+            <input type="text" class="form-control" placeholder="Enter property owner" required>
+          </div>
+
+          <!-- Address -->
+          <div class="col-12">
+            <label class="form-label">Address<span class="text-danger">*</span></label>
+            <input type="text" class="form-control" placeholder="Enter job address" required>
+          </div>
+
+          <!-- City -->
+          <div class="col-md-6">
+            <label class="form-label">City<span class="text-danger">*</span></label>
+            <input type="text" class="form-control" placeholder="Enter city" required>
+          </div>
+
+          <!-- Post Code -->
+          <div class="col-md-6">
+            <label class="form-label">Post Code<span class="text-danger">*</span></label>
+            <input type="text" class="form-control" placeholder="Enter postcode" required>
+          </div>
+
+          <!-- Priority -->
+          <div class="col-md-6">
+            <label class="form-label">Priority<span class="text-danger">*</span></label>
+            <select class="form-select" required>
+              <option selected disabled>Select priority</option>
+              <option>High</option>
+              <option>Medium</option>
+              <option>Low</option>
+            </select>
+          </div>
+
+          <!-- Category -->
+          <div class="col-md-6">
+            <label class="form-label">Category<span class="text-danger">*</span></label>
+            <select class="form-select" required>
+              <option selected disabled>Select category</option>
+              <option>Plumbing</option>
+              <option>Electrical</option>
+              <option>Painting</option>
+              <option>Heating</option>
+            </select>
+          </div>
+
+          <!-- Description -->
+          <div class="col-12">
+            <label class="form-label">Description<span class="text-danger">*</span></label>
+            <textarea class="form-control" rows="4"
+              placeholder="Provide detailed description of the maintenance issue..." required></textarea>
+            <small class="text-muted mt-1 d-block">
+              <i class="bi bi-info-circle-fill text-primary me-1"></i>Minimum 20 characters required
+            </small>
+          </div>
+
+          <!-- Due Date -->
+          <div class="col-md-6">
+            <label class="form-label">Due Date<span class="text-danger">*</span></label>
+            <input type="date" class="form-control" required>
+          </div>
+
+          <!-- Estimated Hours -->
+          <div class="col-md-6">
+            <label class="form-label">Estimated Hours</label>
+            <input type="number" class="form-control" placeholder="e.g., 2.5" step="0.1">
+          </div>
+
+          <!-- Assign Engineer -->
+          <div class="col-md-6">
+            <label class="form-label">Assign Engineer</label>
+            <select class="form-select">
+              <option selected disabled>Assign</option>
+              <option>Mike Wilson</option>
+              <option>Tom Rodriguez</option>
+              <option>Joe Bloggs</option>
+            </select>
+          </div>
+
+          <!-- Job Cost -->
+          <div class="col-md-6">
+            <label class="form-label">Job Cost £</label>
+            <input type="number" class="form-control" placeholder="e.g., 150">
+          </div>
+
+        </div>
+
+        <!-- BUTTONS -->
+        <div class="d-flex justify-content-end align-items-center mt-5 gap-3">
+          <a href="{% url 'admin_dashboard:all_jobs' %}" class="btn btn-light p-2 px-3">
+            <i class="bi bi-x-lg me-2"></i>Cancel
+          </a>
+          <button type="submit" class="btn btn-primary p-2">
+            <span>
+              <i class="bi bi-check-lg"></i>
+            </span>
+            <span>Update Job</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

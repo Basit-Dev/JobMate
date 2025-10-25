@@ -33,6 +33,8 @@
   <!-- Desktop Sidebar -->
   <aside class="sidebar">
     <ul class="sidebar-nav">
+
+      <!-- Dashboard -->
       <li>
         <a href="{% url 'admin_dashboard:all_jobs' %}"
           class="{% if request.resolver_match.url_name == 'all_jobs' %}active{% endif %}">
@@ -40,6 +42,8 @@
           <span>Dashboard</span>
         </a>
       </li>
+
+      <!-- Engineers -->
       <li>
         <a href="{% url 'admin_dashboard:engineers' %}"
           class="{% if request.resolver_match.url_name == 'engineers' %}active{% endif %}">
@@ -47,12 +51,22 @@
           <span>Engineers</span>
         </a>
       </li>
+
+      <!-- Create Job -->
       <li>
-            <!-- <li class=" {% if request.resolver_match.url_name != 'create_job' %}d-none{% endif %}"></li> -->
         <a href="{% url 'admin_dashboard:create_job' %}"
-          class="{% if request.resolver_match.url_name == 'create_job' %}active nav-link disabled{% endif %}">
+          class="{% if request.resolver_match.url_name == 'create_job' %}active nav-link disabled{% endif %} {% if request.resolver_match.url_name == 'edit_job' %}d-none{% endif %}">
           <i class="bi bi-plus-circle-fill"></i>
           <span>Create Job</span>
+        </a>
+      </li>
+
+      <!-- Edit Job -->
+      <li>
+        <a href="#"
+          class="{% if request.resolver_match.url_name == 'edit_job' %}active nav-link disabled {% else %}d-none {% endif %}">
+          <i class="bi bi-plus-circle-fill"></i>
+          <span>Edit Job</span>
         </a>
       </li>
     </ul>
@@ -68,6 +82,8 @@
       </a>
     </div>
     <ul class="sidebar-nav">
+
+      <!-- Mobile Dashboard -->
       <li>
         <a href="{% url 'admin_dashboard:all_jobs' %}"
           class="{% if request.resolver_match.url_name == 'all_jobs' %}active{% endif %}">
@@ -75,11 +91,31 @@
           <span>Dashboard</span>
         </a>
       </li>
+
+      <!-- Mobile Engineers -->
       <li>
         <a href="{% url 'admin_dashboard:engineers' %}"
           class="{% if request.resolver_match.url_name == 'engineers' %}active{% endif %}">
           <i class="bi bi-people"></i>
           <span>Engineers</span>
+        </a>
+      </li>
+
+      <!-- Mobile Create Job -->
+      <li>
+        <a href="{% url 'admin_dashboard:create_job' %}"
+          class="{% if request.resolver_match.url_name == 'create_job' %}active nav-link disabled{% endif %} {% if request.resolver_match.url_name == 'edit_job' %}d-none{% endif %}">
+          <i class="bi bi-plus-circle-fill"></i>
+          <span>Create Job</span>
+        </a>
+      </li>
+
+      <!-- Mobile Edit Job -->
+      <li>
+        <a href="#"
+          class="{% if request.resolver_match.url_name == 'edit_job' %}active nav-link disabled {% else %}d-none {% endif %}">
+          <i class="bi bi-plus-circle-fill"></i>
+          <span>Edit Job</span>
         </a>
       </li>
     </ul>
