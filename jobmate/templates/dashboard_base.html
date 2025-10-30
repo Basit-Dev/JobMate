@@ -69,6 +69,15 @@
           <span>Edit Job</span>
         </a>
       </li>
+
+      <!-- Job Details -->
+      <li>
+        <a href="#"
+          class="{% if request.resolver_match.url_name == 'job_details' %}active nav-link disabled {% else %}d-none {% endif %}">
+          <i class="bi bi-plus-circle-fill"></i>
+          <span>Job Details</span>
+        </a>
+      </li>
     </ul>
   </aside>
 
@@ -118,6 +127,16 @@
           <span>Edit Job</span>
         </a>
       </li>
+
+      <!-- Mobile Job Details -->
+      <li>
+        <a href="#"
+          class="{% if request.resolver_match.url_name == 'job_details' %}active nav-link disabled {% else %}d-none {% endif %}">
+          <i class="bi bi-plus-circle-fill"></i>
+          <span>Job Details</span>
+        </a>
+      </li>
+
     </ul>
   </aside>
 

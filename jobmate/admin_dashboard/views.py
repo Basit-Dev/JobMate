@@ -25,3 +25,9 @@ def edit_job(request):
     This view renders the edit job page
     """
     return render(request, 'edit_job.html')
+
+def job_details(request):
+    """
+    This view renders the job details page
+    """
+    return render(request, 'job_details.html')

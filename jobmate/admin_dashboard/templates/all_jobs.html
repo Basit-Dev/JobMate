@@ -1,5 +1,7 @@
-{% extends "dashboard_base.html" %} {% load static %} {% block title %}All Jobs
-| JobMate{% endblock %} {% block content %}
+{% extends "dashboard_base.html" %} 
+{% load static %} 
+{% block title %}All Jobs | JobMate {% endblock %} 
+{% block content %}
 
 <div class="container-lg flex-grow-1 d-flex flex-column">
   <!-- HEADER -->
@@ -79,7 +81,7 @@
               <td data-label="Created">Jan 15, 2025</td>
               <td data-label="Actions">
                 <div class="d-flex flex-row justify-content-around">
-                  <a href="#" class="text-secondary me-2"><i class="bi bi-eye"></i></a>
+                  <a href="{% url 'admin_dashboard:job_details' %}" class="text-secondary me-2"><i class="bi bi-eye"></i></a>
                   <a href="{% url 'admin_dashboard:edit_job' %}" class="text-primary me-2"><i class="bi bi-pencil"></i></a>
                   <a href="#" class="text-danger"><i class="bi bi-trash"></i></a>
                 </div>
