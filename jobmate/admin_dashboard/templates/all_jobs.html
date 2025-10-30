@@ -1,173 +1,179 @@
-{% extends "dashboard_base.html" %} 
-{% load static %} 
-{% block title %}All Jobs | JobMate {% endblock %} 
+{% extends "dashboard_base.html" %}
+{% load static %}
+{% block title %}All Jobs | JobMate {% endblock %}
 {% block content %}
 
-<div class="container-lg flex-grow-1 d-flex flex-column">
-  <!-- HEADER -->
-  <div class="heading-section d-flex flex-column justify-content-between flex-md-row">
-    <div class="row">
-      <h1 class="section-title">Admin Dashboard</h1>
-      <p class="section-subtitle">
-        Manage all property Maintenance jobs accross the system
-      </p>
-    </div>
-
-    <!-- Create Job Button -->
-    <a href="{% url 'admin_dashboard:create_job' %}" class="btn btn-primary shadow-cta d-flex align-items-center justify-content-center">
-      <i class="bi bi-plus-lg me-2"></i>Create Job
-    </a>
+<!-- HEADER -->
+<div class="heading-section d-flex flex-column justify-content-between flex-md-row">
+  <div class="row">
+    <h1 class="section-title">Admin Dashboard</h1>
+    <p class="section-subtitle">
+      Manage all property Maintenance jobs accross the system
+    </p>
   </div>
 
-  <!-- FILTERS -->
-  <div class="filter-container d-flex flex-grow-1 flex-column justify-content-between flex-md-row gap-3">
-    <div class="search-col col-8">
-      <p class="section-subtitle">Search Jobs</p>
+  <!-- Create Job Button -->
+  <a href="{% url 'admin_dashboard:create_job' %}"
+    class="btn btn-primary shadow-cta d-flex align-items-center justify-content-center">
+    <i class="bi bi-plus-lg me-2"></i>Create Job
+  </a>
+</div>
+
+<!-- FILTERS -->
+<div class="filter-container d-flex flex-grow-1 flex-column justify-content-between flex-md-row gap-3 mb-4">
+
+  <!-- Search bar -->
+  <div class="search-col col-8">
+    <p class="section-subtitle">Search Jobs</p>
+    <div class="input-group">
       <input type="text" class="form-control" placeholder="Search jobs..." />
-    </div>
-    <div class="col">
-      <p class="section-subtitle">Status</p>
-      <select class="form-select">
-        <option value="">All Status</option>
-        <option value="active">Active</option>
-        <option value="inactive">Inactive</option>
-      </select>
+      <!-- Search Button -->
+      <button class="btn btn-secondary text-muted">
+        <i class="bi bi-search me-1"></i>Search
+      </button>
     </div>
   </div>
 
-  <!-- SEARCH BUTTON -->
-  <button class="btn btn-secondary mt-3">
-    <i class="bi bi-search me-2"></i>Search
-  </button>
+  <!-- Status Dropdown -->
+  <div class="col">
+    <p class="section-subtitle">Status</p>
+    <select class="form-select">
+      <option value="">All Status</option>
+      <option value="active">Active</option> 
+      <option value="inactive">Inactive</option>
+    </select>
+  </div>
+</div>
 
-  <!-- JOB LIST -->
-  <div class="container-lg mt-4 p-0">
-    <div class="table-container">
-      <div class="table-header">All Jobs (3)</div>
-      <div class="table-responsive p-2">
-        <table class="table align-middle mb-0">
-          <!-- Table Head -->
-          <thead class="table-head">
-            <tr>
-              <th>Job Title</th>
-              <th>Property</th>
-              <th>Engineer</th>
-              <th>Priority</th>
-              <th>Status</th>
-              <th>Payment</th>
-              <th>Created</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
+<!-- JOB LIST -->
+<div>
+  <div class="table-container">
+    <div class="table-header">All Jobs (3)</div>
+    <div class="table-responsive p-2">
+      <table class="table align-middle mb-0">
+        <!-- Table Head -->
+        <thead class="table-head">
+          <tr>
+            <th>Job Title</th>
+            <th>Property</th>
+            <th>Engineer</th>
+            <th>Priority</th>
+            <th>Status</th>
+            <th>Payment</th>
+            <th>Created</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
 
-          <!-- Table Body -->
-          <tbody>
-            <!-- Job Row -->
-            <tr>
-              <td data-label="Job Title">
-                <strong>Fix Broken Faucet</strong><small class="text-muted">#JOB-001</small>
-              </td>
-              <td data-label="Property">Sunset Apartments - Unit 4B</td>
-              <td data-label="Engineer">Mike Wilson</td>
-              <td data-label="Priority">
-                <span class="badge badge-rounded badge-high">High</span>
-              </td>
-              <td data-label="Status">
-                <span class="badge badge-rounded badge-progress">In Progress</span>
-              </td>
-              <td data-label="Payment">
-                <span class="badge badge-rounded bg-light text-secondary">—</span>
-              </td>
-              <td data-label="Created">Jan 15, 2025</td>
-              <td data-label="Actions">
-                <div class="d-flex flex-row justify-content-around">
-                  <a href="{% url 'admin_dashboard:job_details' %}" class="text-secondary me-2"><i class="bi bi-eye"></i></a>
-                  <a href="{% url 'admin_dashboard:edit_job' %}" class="text-primary me-2"><i class="bi bi-pencil"></i></a>
-                  <a href="#" class="text-danger"><i class="bi bi-trash"></i></a>
-                </div>
-              </td>
-            </tr>
+        <!-- Table Body -->
+        <tbody>
+          <!-- Job Row -->
+          <tr>
+            <td data-label="Job Title">
+              <strong>Fix Broken Faucet</strong><small class="text-muted">#JOB-001</small>
+            </td>
+            <td data-label="Property">Sunset Apartments - Unit 4B</td>
+            <td data-label="Engineer">Mike Wilson</td>
+            <td data-label="Priority">
+              <span class="badge badge-rounded badge-high">High</span>
+            </td>
+            <td data-label="Status">
+              <span class="badge badge-rounded badge-progress">In Progress</span>
+            </td>
+            <td data-label="Payment">
+              <span class="badge badge-rounded bg-light text-secondary">—</span>
+            </td>
+            <td data-label="Created">Jan 15, 2025</td>
+            <td data-label="Actions">
+              <div class="d-flex flex-row justify-content-around">
+                <a href="{% url 'admin_dashboard:job_details' %}" class="text-secondary me-2"><i
+                    class="bi bi-eye"></i></a>
+                <a href="{% url 'admin_dashboard:edit_job' %}" class="text-primary me-2"><i
+                    class="bi bi-pencil"></i></a>
+                <a href="#" class="text-danger"><i class="bi bi-trash"></i></a>
+              </div>
+            </td>
+          </tr>
 
-            <!-- Job Row -->
-            <tr>
-              <td data-label="Job Title">
-                <strong>Electrical Inspection</strong><br /><small class="text-muted">#JOB-002</small>
-              </td>
-              <td data-label="Property">Downtown Plaza - Lobby</td>
-              <td data-label="Engineer" class="text-muted">Unassigned</td>
-              <td data-label="Priority">
-                <span class="badge badge-rounded badge-medium">Medium</span>
-              </td>
-              <td data-label="Status">
-                <span class="badge badge-rounded badge-pending">Pending</span>
-              </td>
-              <td data-label="Payment">
-                <span class="badge badge-rounded badge-cart">In Cart</span>
-              </td>
-              <td data-label="Created">Jan 14, 2025</td>
-              <td data-label="Actions">
-                <div class="d-flex flex-row justify-content-around">
-                  <a href="#" class="text-secondary me-2"><i class="bi bi-eye"></i></a>
-                  <a href="#" class="text-primary me-2"><i class="bi bi-pencil"></i></a>
-                  <a href="#" class="text-danger"><i class="bi bi-trash"></i></a>
-                </div>
-              </td>
-            </tr>
+          <!-- Job Row -->
+          <tr>
+            <td data-label="Job Title">
+              <strong>Electrical Inspection</strong><br /><small class="text-muted">#JOB-002</small>
+            </td>
+            <td data-label="Property">Downtown Plaza - Lobby</td>
+            <td data-label="Engineer" class="text-muted">Unassigned</td>
+            <td data-label="Priority">
+              <span class="badge badge-rounded badge-medium">Medium</span>
+            </td>
+            <td data-label="Status">
+              <span class="badge badge-rounded badge-pending">Pending</span>
+            </td>
+            <td data-label="Payment">
+              <span class="badge badge-rounded badge-cart">In Cart</span>
+            </td>
+            <td data-label="Created">Jan 14, 2025</td>
+            <td data-label="Actions">
+              <div class="d-flex flex-row justify-content-around">
+                <a href="#" class="text-secondary me-2"><i class="bi bi-eye"></i></a>
+                <a href="#" class="text-primary me-2"><i class="bi bi-pencil"></i></a>
+                <a href="#" class="text-danger"><i class="bi bi-trash"></i></a>
+              </div>
+            </td>
+          </tr>
 
-            <!-- Job Row -->
-            <tr>
-              <td data-label="Job Title">
-                <strong>Hallway Painting</strong><br /><small class="text-muted">#JOB-003</small>
-              </td>
-              <td data-label="Property">Garden View Complex - 2nd Floor</td>
-              <td data-label="Engineer">Tom Rodriguez</td>
-              <td data-label="Priority">
-                <span class="badge badge-rounded badge-low">Low</span>
-              </td>
-              <td data-label="Status">
-                <span class="badge badge-rounded badge-completed">Completed</span>
-              </td>
-              <td data-label="Payment">
-                <span class="badge badge-rounded badge-paid">Paid</span>
-              </td>
-              <td data-label="Created">Jan 10, 2025</td>
-              <td data-label="Actions">
-                <div class="d-flex flex-row justify-content-around">
-                  <a href="#" class="text-secondary me-2"><i class="bi bi-eye"></i></a>
-                  <a href="#" class="text-primary me-2"><i class="bi bi-pencil"></i></a>
-                  <a href="#" class="text-danger"><i class="bi bi-trash"></i></a>
-                </div>
-              </td>
-            </tr>
+          <!-- Job Row -->
+          <tr>
+            <td data-label="Job Title">
+              <strong>Hallway Painting</strong><br /><small class="text-muted">#JOB-003</small>
+            </td>
+            <td data-label="Property">Garden View Complex - 2nd Floor</td>
+            <td data-label="Engineer">Tom Rodriguez</td>
+            <td data-label="Priority">
+              <span class="badge badge-rounded badge-low">Low</span>
+            </td>
+            <td data-label="Status">
+              <span class="badge badge-rounded badge-completed">Completed</span>
+            </td>
+            <td data-label="Payment">
+              <span class="badge badge-rounded badge-paid">Paid</span>
+            </td>
+            <td data-label="Created">Jan 10, 2025</td>
+            <td data-label="Actions">
+              <div class="d-flex flex-row justify-content-around">
+                <a href="#" class="text-secondary me-2"><i class="bi bi-eye"></i></a>
+                <a href="#" class="text-primary me-2"><i class="bi bi-pencil"></i></a>
+                <a href="#" class="text-danger"><i class="bi bi-trash"></i></a>
+              </div>
+            </td>
+          </tr>
 
-            <!-- Job Row -->
-            <tr>
-              <td data-label="Job Title">
-                <strong>Hallway Painting</strong><br /><small class="text-muted">#JOB-003</small>
-              </td>
-              <td data-label="Property">Garden View Complex - 2nd Floor</td>
-              <td data-label="Engineer">Tom Rodriguez</td>
-              <td data-label="Priority">
-                <span class="badge badge-rounded badge-low">Low</span>
-              </td>
-              <td data-label="Status">
-                <span class="badge badge-rounded badge-completed">Completed</span>
-              </td>
-              <td data-label="Payment">
-                <span class="badge badge-rounded badge-paid">Paid</span>
-              </td>
-              <td data-label="Created">Jan 10, 2025</td>
-              <td data-label="Actions">
-                <div class="d-flex flex-row justify-content-around">
-                  <a href="#" class="text-secondary me-2"><i class="bi bi-eye"></i></a>
-                  <a href="#" class="text-primary me-2"><i class="bi bi-pencil"></i></a>
-                  <a href="#" class="text-danger"><i class="bi bi-trash"></i></a>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+          <!-- Job Row -->
+          <tr>
+            <td data-label="Job Title">
+              <strong>Hallway Painting</strong><br /><small class="text-muted">#JOB-003</small>
+            </td>
+            <td data-label="Property">Garden View Complex - 2nd Floor</td>
+            <td data-label="Engineer">Tom Rodriguez</td>
+            <td data-label="Priority">
+              <span class="badge badge-rounded badge-low">Low</span>
+            </td>
+            <td data-label="Status">
+              <span class="badge badge-rounded badge-completed">Completed</span>
+            </td>
+            <td data-label="Payment">
+              <span class="badge badge-rounded badge-paid">Paid</span>
+            </td>
+            <td data-label="Created">Jan 10, 2025</td>
+            <td data-label="Actions">
+              <div class="d-flex flex-row justify-content-around">
+                <a href="#" class="text-secondary me-2"><i class="bi bi-eye"></i></a>
+                <a href="#" class="text-primary me-2"><i class="bi bi-pencil"></i></a>
+                <a href="#" class="text-danger"><i class="bi bi-trash"></i></a>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

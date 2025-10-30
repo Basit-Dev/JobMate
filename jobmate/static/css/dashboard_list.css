@@ -1,13 +1,12 @@
 /* Heading Section */
 .heading-section {
-  height: 50px !important;
-  margin-bottom: 3rem;
+  margin-bottom: 1rem;
 }
 
 /* Filter Container */
 .filter-container {
   background-color: var(--jm-default);
-  margin-top: 0.5rem;
+  margin-top: 2rem;
   padding: 1rem;
   border-radius: 8px;
 }
@@ -72,9 +71,6 @@
 
 /* Responsive Styles */
 @media screen and (max-width: 769px) {
-  .filter-container {
-    margin-top: 4rem;
-  }
   .search-col {
     width: 100%;
   }
@@ -104,11 +100,5 @@
   .actions {
     display: flex;
     gap: 12px;
-  }
-}
-
-@media screen and (max-width: 360px) {
-  .filter-container {
-    margin-top: 4rem;
   }
 }

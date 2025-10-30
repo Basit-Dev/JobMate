@@ -1,8 +1,6 @@
 {% extends "dashboard_base.html" %} {% load static %} {% block title %}All
 Edit Job | JobMate{% endblock %} {% block content %}
 
-<div class="container-lg flex-grow-1 d-flex flex-column">
-
   <!-- HEADER -->
   <div class="heading-section">
     <div class="d-flex align-items-center gap-3 mb-3">
@@ -19,7 +17,7 @@ Edit Job | JobMate{% endblock %} {% block content %}
   </div>
 
   <!-- JOB DETAILS -->
-  <div class="container-lg m-0 p-0">
+  <div>
     <div class="card shadow-sm border-0 rounded-4">
       <div class="card-header py-3 rounded-top-4">
         <i class="bi bi-briefcase-fill me-2"></i>Job Details
@@ -138,6 +136,5 @@ Edit Job | JobMate{% endblock %} {% block content %}
       </form>
     </div>
   </div>
-</div>
 
 {% endblock %}
