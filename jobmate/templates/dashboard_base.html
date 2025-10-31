@@ -36,25 +36,25 @@
 
       <!-- Dashboard -->
       <li>
-        <a href="{% url 'admin_dashboard:all_jobs' %}"
+        <a href="{% url 'jobs:all_jobs' %}"
           class="{% if request.resolver_match.url_name == 'all_jobs' %}active{% endif %}">
-          <i class="bi bi-speedometer2"></i>
-          <span>Dashboard</span>
+          <i class="bi bi-wrench-adjustable"></i>
+          <span>All Jobs</span>
         </a>
       </li>
 
       <!-- Engineers -->
       <li>
-        <a href="{% url 'admin_dashboard:engineers' %}"
-          class="{% if request.resolver_match.url_name == 'engineers' %}active{% endif %}">
+        <a href="{% url 'accounts:all_engineers' %}"
+          class="{% if request.resolver_match.url_name == 'all_engineers' %}active{% endif %}">
           <i class="bi bi-people"></i>
-          <span>Engineers</span>
+          <span>All Engineers</span>
         </a>
       </li>
 
       <!-- Create Job -->
       <li>
-        <a href="{% url 'admin_dashboard:create_job' %}"
+        <a href="{% url 'jobs:create_job' %}"
           class="{% if request.resolver_match.url_name == 'create_job' %}active nav-link disabled{% endif %} {% if request.resolver_match.url_name == 'edit_job' %}d-none{% endif %}">
           <i class="bi bi-plus-circle-fill"></i>
           <span>Create Job</span>
@@ -73,7 +73,7 @@
       <!-- Job Details -->
       <li>
         <a href="#"
-          class="{% if request.resolver_match.url_name == 'job_details' %}active nav-link disabled {% else %}d-none {% endif %}">
+          class="{% if request.resolver_match.url_name == 'job_detail' %}active nav-link disabled {% else %}d-none {% endif %}">
           <i class="bi bi-plus-circle-fill"></i>
           <span>Job Details</span>
         </a>
@@ -94,7 +94,7 @@
 
       <!-- Mobile Dashboard -->
       <li>
-        <a href="{% url 'admin_dashboard:all_jobs' %}"
+        <a href="{% url 'jobs:all_jobs' %}"
           class="{% if request.resolver_match.url_name == 'all_jobs' %}active{% endif %}">
           <i class="bi bi-speedometer2"></i>
           <span>Dashboard</span>
@@ -103,8 +103,8 @@
 
       <!-- Mobile Engineers -->
       <li>
-        <a href="{% url 'admin_dashboard:engineers' %}"
-          class="{% if request.resolver_match.url_name == 'engineers' %}active{% endif %}">
+        <a href="{% url 'accounts:all_engineers' %}"
+          class="{% if request.resolver_match.url_name == 'all_engineers' %}active{% endif %}">
           <i class="bi bi-people"></i>
           <span>Engineers</span>
         </a>
@@ -112,7 +112,7 @@
 
       <!-- Mobile Create Job -->
       <li>
-        <a href="{% url 'admin_dashboard:create_job' %}"
+        <a href="{% url 'jobs:create_job' %}"
           class="{% if request.resolver_match.url_name == 'create_job' %}active nav-link disabled{% endif %} {% if request.resolver_match.url_name == 'edit_job' %}d-none{% endif %}">
           <i class="bi bi-plus-circle-fill"></i>
           <span>Create Job</span>
@@ -131,7 +131,7 @@
       <!-- Mobile Job Details -->
       <li>
         <a href="#"
-          class="{% if request.resolver_match.url_name == 'job_details' %}active nav-link disabled {% else %}d-none {% endif %}">
+          class="{% if request.resolver_match.url_name == 'job_detail' %}active nav-link disabled {% else %}d-none {% endif %}">
           <i class="bi bi-plus-circle-fill"></i>
           <span>Job Details</span>
         </a>

@@ -25,3 +25,9 @@ def reset_password(request):
     This view renders the reset password page
     """
     return render(request, 'reset_password.html')
+
+def all_engineers(request):
+    """
+    This view renders the all engineers page
+    """
+    return render(request, 'all_engineers.html')

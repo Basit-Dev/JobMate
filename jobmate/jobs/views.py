@@ -8,12 +8,6 @@ def all_jobs(request):
     """
     return render(request, 'all_jobs.html')  
 
-def engineers(request):
-    """
-    This view renders the engineers page
-    """
-    return render(request, 'engineers.html')
-
 def create_job(request):
     """
     This view renders the create job page
@@ -26,8 +20,8 @@ def edit_job(request):
     """
     return render(request, 'edit_job.html')
 
-def job_details(request):
+def job_detail(request):
     """
-    This view renders the job details page
+    This view renders the job detail page
     """
-    return render(request, 'job_details.html')
+    return render(request, 'job_detail.html')
