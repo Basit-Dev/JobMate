@@ -1,4 +1,5 @@
-{% extends "dashboard_base.html" %} {% load static %}
+{% extends "dashboard_base.html" %} 
+{% load static %}
 {% block title %}All Engineers | JobMate{% endblock %}
 {% block content %}
 
@@ -24,7 +25,7 @@
   <div class="search-col col-12">
     <p class="section-subtitle">Search Engineers</p>
     <div class="input-group">
-      <input type="text" class="form-control" placeholder="Search jobs..." />
+      <input type="text" class="form-control" placeholder="Search engineers..." />
       <!-- Search Button -->
       <button class="btn btn-secondary text-muted">
         <i class="bi bi-search me-1"></i>Search
@@ -43,7 +44,7 @@
         <!-- Table Head -->
         <thead class="table-head">
           <tr>
-            <th>ID</th>
+            <th>Engineer #</th>
             <th>Role</th>
             <th>Engineer</th>
             <th>Status</th>
@@ -57,7 +58,7 @@
 
           <!-- Engineer Row -->
           <tr>
-            <td data-label="ID">
+            <td data-label="Engineer ID">
               <P class="text-muted m-0">#ENG-001</P>
             </td>
             <td data-label="Role">Plumber</td>
@@ -77,7 +78,7 @@
 
           <!-- Engineer Row -->
           <tr>
-            <td data-label="ID">
+            <td data-label="Engineer ID">
               <P class="text-muted m-0">#ENG-002</P>
             </td>
             <td data-label="Role">Carpenter</td>
@@ -97,7 +98,7 @@
 
           <!-- Engineer Row -->
           <tr>
-            <td data-label="ID">
+            <td data-label="EngineerID">
               <P class="text-muted m-0">#ENG-001</P>
             </td>
             <td data-label="Role">Gas Engineer</td>
