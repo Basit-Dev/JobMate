@@ -78,6 +78,16 @@
           <span>Job Details</span>
         </a>
       </li>
+
+      <!-- Payment Details -->
+      <li>
+        <a href="#"
+          class="{% if request.resolver_match.url_name == 'payments' %}active nav-link disabled {% else %}d-none {% endif %}">
+          <i class="bi bi-plus-circle-fill"></i>
+          <span>Payments</span>
+        </a>
+      </li>
+
     </ul>
   </aside>
 
