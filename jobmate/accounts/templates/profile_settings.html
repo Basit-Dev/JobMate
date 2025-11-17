@@ -1,0 +1,124 @@
+{% extends "dashboard_base.html" %}
+{% load static %}
+{% block title %}Profile Settings | JobMate {% endblock %}
+{% block content %}
+
+<!-- HEADER -->
+<div class="heading-section">
+    <div class="d-flex align-items-center gap-3 mb-3">
+        <div class="icon">
+            <i class="bi bi-person-lines-fill"></i>
+        </div>
+        <div>
+            <h1 class="section-title">Profile Settings</h1>
+            <p class="section-subtitle m-0">
+                Update your profile information and settings
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- PERSONAL INFORMATION -->
+<div class="card shadow-sm border-0 rounded-4 mb-5">
+    <div class="card-header py-3 rounded-top-4">Personal Information</div>
+
+    <!-- FORM -->
+    <form class="card-body p-4">
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label class="form-label">First Name*</label>
+                <input type="text" class="form-control" value="John">
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Last Name*</label>
+                <input type="text" class="form-control" value="Smith">
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Email Address*</label>
+            <input type="email" class="form-control" value="john.smith@company.com">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Phone Number*</label>
+            <input type="text" class="form-control" value="12345678">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Role*</label>
+            <select class="form-select">
+                <option selected>Admin</option>
+                <option>Engineer</option>
+            </select>
+        </div>
+
+        <div class="d-flex justify-content-end gap-3">
+            <button type="button" class="btn btn-outline-secondary">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+        </div>
+    </form>
+</div>
+
+<!-- CHANGE PASSWORD -->
+<div class="card shadow-sm border-0 rounded-4 mb-5">
+    <div class="card-header py-3 rounded-top-4">Change Password</div>
+
+    <!-- FORM -->
+    <form class="card-body p-4">
+        <div class="mb-3">
+            <label class="form-label">Current Password*</label>
+            <input type="password" class="form-control" placeholder="Enter current password">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">New Password*</label>
+            <input type="password" class="form-control" placeholder="Enter new password">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Confirm New Password*</label>
+            <input type="password" class="form-control" placeholder="Confirm new password">
+        </div>
+
+        <div class="d-flex justify-content-end gap-3">
+            <button type="button" class="btn btn-outline-secondary">Cancel</button>
+            <button type="submit" class="btn btn-primary">Update Password</button>
+        </div>
+    </form>
+</div>
+
+<!-- BANK DETAILS -->
+<div class="card shadow-sm border-0 rounded-4">
+    <div class="card-header py-3 rounded-top-4">Bank Details</div>
+
+    <!-- FORM -->
+    <form class="card-body p-4">
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label class="form-label">Bank Name</label>
+                <input type="text" class="form-control" value="John">
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Account Holder</label>
+                <input type="text" class="form-control" value="Smith">
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label class="form-label">Account Number</label>
+                <input type="text" class="form-control" value="12345678">
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Sort Code</label>
+                <input type="text" class="form-control" value="20-18-17">
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-end gap-3">
+            <button type="button" class="btn btn-outline-secondary">Cancel</button>
+            <button type="submit" class="btn btn-primary">Update Bank Details</button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}
