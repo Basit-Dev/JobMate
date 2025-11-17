@@ -1,0 +1,22 @@
+.delete-wrapper { 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 85vh;
+}
+
+.delete-container {
+  max-width: 700px; 
+  width: 100%;
+}
+
+/* .mobile-menu-btn {
+  display: none;
+} */
+
+@media screen and (max-width: 768px) {
+  .delete-wrapper {
+    margin: 30px;
+  }
+    
+}

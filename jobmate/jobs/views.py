@@ -25,3 +25,9 @@ def job_detail(request):
     This view renders the job detail page
     """
     return render(request, 'job_detail.html')
+
+def delete_job(request):
+    """
+    This view renders the delete job page
+    """
+    return render(request, 'delete_job.html')

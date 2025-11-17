@@ -1,0 +1,98 @@
+{% extends "base.html" %} {% load static %} {% block title %} Delete Job |
+JobMate {% endblock %} {% block body %}
+
+<!-- TOP HEADER -->
+<header class="top-header">
+    <div class="logo-section">
+        <a href="{% url 'home:home' %}">
+            <div class="logo-icon">
+                <i class="bi bi-tools"></i>
+            </div>
+            <span class="logo-text">JobMate</span>
+        </a>
+    </div>
+</header>
+
+<!-- CONTAINER WRAPPER -->
+<div class="delete-wrapper">
+
+    <!-- DELETE CONTAINER -->
+    <div class="delete-container card shadow border-0">
+
+        <!-- Header -->
+        <div class="card-header bg-danger-subtle text-center py-4 rounded-top">
+            <i class="bi bi-exclamation-triangle-fill text-danger fs-3"></i>
+            <h4 class="fw-semibold mt-2 text-danger">Delete Job</h4>
+            <p class="text-muted small mb-0">This action cannot be undone</p>
+        </div>
+
+        <!-- Job Details -->
+        <div class="card-body m-2">
+            <div class="p-3 border rounded bg-primary-subtle">
+                <div>
+                    <i class="bi bi-info-circle-fill me-2"></i><span class="d-inline">Job Information</span>
+                </div>
+                <div>
+                    <div class="d-flex justify-content-between flex-wrap mt-3">
+                        <small class="text-muted d-block">Job Title</small>
+                        <span class="fw-semibold">Kitchen Sink Repair - Apartment 3B</span>
+                    </div>
+                    <div class="d-flex justify-content-between flex-wrap mt-3">
+                        <small class="text-muted d-block">Job ID</small>
+                        <span class="fw-semibold">#JM-2025-0142</span>
+                    </div>
+                    <div class="d-flex justify-content-between flex-wrap mt-3">
+                        <small class="text-muted d-block">Assigned Engineer</small>
+                        <span class="fw-semibold">John Doe</span>
+                    </div>
+                    <div class="d-flex justify-content-between flex-wrap mt-3">
+                        <small class="text-muted d-block">Property</small>
+                        <span class="fw-semibold">Riverside Apartments</span>
+                    </div>
+                    <div class="d-flex justify-content-between flex-wrap mt-3">
+                        <small class="text-muted d-block">Status</small>
+                        <span class="badge bg-warning text-dark">In Progress</span>
+                    </div>
+                    <div class="d-flex justify-content-between flex-wrap mt-3">
+                        <small class="text-muted d-block">Created</small>
+                        <span class="fw-semibold">Jan 15, 2025</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Warning Message -->
+            <div class="alert alert-danger mt-4 mb-0" role="alert">
+                <div class="mb-2">
+                    <i class="bi bi-info-circle-fill text-danger me-2"></i><span
+                        class="d-inline fw-semibold text-danger">Warning</span>
+                </div>
+                <ul class="mb-0 small">
+                    <li>
+                        Deleting this job will permanently remove all associated data.
+                    </li>
+                    <li>Job history and progress updates will be lost.</li>
+                    <li>Engineer assignment records will be deleted.</li>
+                    <li>Any related attachments or notes will be removed.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Sidebar Overlay -->
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+        <!-- Buttons -->
+        <div class="d-flex justify-content-center gap-3 m-4">
+            <!-- CANCEL BUTTON -->
+            <button
+                class="btn btn-outline-secondary border-0 bg-light w-100 py-2 mt-2 d-flex align-items-center justify-content-center gap-2">
+                <a href="{% url 'jobs:all_jobs' %}" class="text-decoration-none text-muted"><i class="bi bi-x-lg fs-5"></i> Cancel</a>
+            </button>
+            <!-- DELETE JOB BUTTON -->
+            <button class="btn btn-danger w-100 py-2 mt-2 d-flex align-items-center justify-content-center gap-2">
+                <i class="bi bi-trash fs-5"></i>Delete Job
+            </button>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
