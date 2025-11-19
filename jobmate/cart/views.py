@@ -8,3 +8,9 @@ def payments(request):
     This view renders the all payments page
     """
     return render(request, 'payments.html')
+
+def basket(request):
+    """
+    This view renders the basket page
+    """
+    return render(request, 'basket.html')   

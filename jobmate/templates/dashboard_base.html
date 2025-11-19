@@ -98,6 +98,15 @@
         </a>
       </li>
 
+      <!-- Cart -->
+      <li>
+        <a href="{% url 'cart:basket' %}"
+          class="{% if request.resolver_match.url_name == 'basket' %}active nav-link disabled {% else %}d-none {% endif %}">
+          <i class="bi bi-cart-fill"></i>
+          <span>Cart</span>
+        </a>
+      </li>
+
     </ul>
   </aside>
 
@@ -172,6 +181,15 @@
           class="{% if request.resolver_match.url_name == 'profile_settings' %}active nav-link disabled {% else %}d-none {% endif %}">
           <i class="bi bi-person-check"></i>
           <span>Profile Settings</span>
+        </a>
+      </li>
+
+      <!-- Cart -->
+      <li>
+        <a href="{% url 'cart:basket' %}"
+          class="{% if request.resolver_match.url_name == 'basket' %}active nav-link disabled {% else %}d-none {% endif %}">
+          <i class="bi bi-cart-fill"></i>
+          <span>Cart</span>
         </a>
       </li>
 
