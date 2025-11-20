@@ -101,7 +101,7 @@
       <!-- Cart -->
       <li>
         <a href="{% url 'cart:basket' %}"
-          class="{% if request.resolver_match.url_name == 'basket' %}active nav-link disabled {% else %}d-none {% endif %}">
+          class="{% if request.resolver_match.url_name == 'basket' %}active nav-link disabled{% endif %}">
           <i class="bi bi-cart-fill"></i>
           <span>Cart</span>
         </a>
@@ -196,7 +196,7 @@
       <!-- Mobile Cart -->
       <li>
         <a href="{% url 'cart:basket' %}"
-          class="{% if request.resolver_match.url_name == 'basket' %}active nav-link disabled {% else %}d-none {% endif %}">
+          class="{% if request.resolver_match.url_name == 'basket' %}active nav-link disabled{% endif %}">
           <i class="bi bi-cart-fill"></i>
           <span>Cart</span>
         </a>
