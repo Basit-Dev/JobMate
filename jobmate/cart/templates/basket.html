@@ -1,7 +1,7 @@
-{% extends "dashboard_base.html" %} 
-{% load static %} 
-{% block title %} 
-Basket | JobMate {% endblock %} 
+{% extends "dashboard_base.html" %}
+{% load static %}
+{% block title %}
+Basket | JobMate {% endblock %}
 {% block content %}
 
 <!-- HEADER -->
@@ -13,70 +13,74 @@ Basket | JobMate {% endblock %}
 </div>
 
 <!-- CART LIST -->
-<div class="d-flex gap-4 flex-column flex-lg-row">
-    <div class="col-lg-8 table-container">
-        <table class="table table-hover align-middle mb-0">
+<div class="row g-4">
+    <div class="col-lg-8">
+        <div class="table-container h-100">
+            <table class="table table-hover align-middle mb-0">
 
-            <!-- Table Head -->
-            <thead class="table-header-custom">
-                <tr>
-                    <th scope="col">Job ID #</th>
-                    <th scope="col">Job Details</th>
-                    <th scope="col">Hours</th>
-                    <th scope="col">Rate</th>
-                    <th scope="col">Cost</th>
-                </tr>
-            </thead>
+                <!-- Table Head -->
+                <thead class="table-header-custom">
+                    <tr>
+                        <th scope="col">Job ID #</th>
+                        <th scope="col">Job Details</th>
+                        <th scope="col">Hours</th>
+                        <th scope="col">Rate</th>
+                        <th scope="col">Cost</th>
+                    </tr>
+                </thead>
 
-            <!-- Job 1 -->
-            <tbody class="table-body-custom">
-                <tr>
-                    <td>001</td>
-                    <td>
-                        <strong>HVAC Unit Maintenance</strong><br />
-                        <small class="text-muted">Property: 123 Maple St, Apt 4B</small>
-                    </td>
-                    <td>2.5</td>
-                    <td>£75.00/hr</td>
-                    <td>
-                        <strong>£187.50</strong>
-                        <div>
-                            <button class="btn btn-primary custom-button ms-5 mb-1">
-                                Adjustment
-                            </button>
-                            <button class="delete-btn">
-                                <i class="bi bi-trash text-danger fs-5 mb-1"></i>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
+                <!-- Job 1 -->
+                <tbody class="table-body-custom">
+                    <tr>
+                        <td>001</td>
+                        <td>
+                            <strong>HVAC Unit Maintenance</strong><br />
+                            <small class="text-muted">Property: 123 Maple St, Apt 4B</small>
+                        </td>
+                        <td>2.5</td>
+                        <td>£75.00/hr</td>
+                        <td>
+                            <strong>£187.50</strong>
+                            <div>
+                                <button class="btn btn-primary custom-button ms-5 mb-1"
+                                    onclick="window.location.href='{% url 'cart:job_adjustment' %}';">
+                                    Adjustment
+                                </button>
+                                <button class="delete-btn">
+                                    <i class="bi bi-trash text-danger fs-5 mb-1"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
 
-            <!-- Job 2 -->
-            <tbody class="table-body-custom">
-                <tr>
-                    <td>001</td>
-                    <td>
-                        <strong>HVAC Unit Maintenance</strong><br />
-                        <small class="text-muted">Property: 123 Maple St, Apt 4B</small>
-                    </td>
-                    <td>2.5</td>
-                    <td>£75.00/hr</td>
-                    <td>
-                        <strong>£187.50</strong>
-                        <div>
-                            <button class="btn btn-primary custom-button ms-5 mb-1">
-                                Adjustment
-                            </button>
-                            <button class="delete-btn">
-                                <i class="bi bi-trash text-danger fs-5 mb-1"></i>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                <!-- Job 2 -->
+                <tbody class="table-body-custom">
+                    <tr>
+                        <td>001</td>
+                        <td>
+                            <strong>HVAC Unit Maintenance</strong><br />
+                            <small class="text-muted">Property: 123 Maple St, Apt 4B</small>
+                        </td>
+                        <td>2.5</td>
+                        <td>£75.00/hr</td>
+                        <td>
+                            <strong>£187.50</strong>
+                            <div>
+                                <button class="btn btn-primary custom-button ms-5 mb-1">
+                                    Adjustment
+                                </button>
+                                <button class="delete-btn">
+                                    <i class="bi bi-trash text-danger fs-5 mb-1"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
+
 
     <!-- ORDER SUMMARY -->
 

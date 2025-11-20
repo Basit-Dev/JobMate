@@ -107,6 +107,15 @@
         </a>
       </li>
 
+      <!-- Job Adjustment -->
+      <li>
+        <a href="{% url 'cart:job_adjustment' %}"
+          class="{% if request.resolver_match.url_name == 'job_adjustment' %}active nav-link disabled {% else %}d-none {% endif %}">
+          <i class="bi bi-wallet-fill"></i>
+          <span>Job Adjustment</span>
+        </a>
+      </li>
+
     </ul>
   </aside>
 
@@ -184,7 +193,7 @@
         </a>
       </li>
 
-      <!-- Cart -->
+      <!-- Mobile Cart -->
       <li>
         <a href="{% url 'cart:basket' %}"
           class="{% if request.resolver_match.url_name == 'basket' %}active nav-link disabled {% else %}d-none {% endif %}">
@@ -193,6 +202,14 @@
         </a>
       </li>
 
+      <!-- Mobile Job Adjustment -->
+      <li>
+        <a href="{% url 'cart:job_adjustment' %}"
+          class="{% if request.resolver_match.url_name == 'job_adjustment' %}active nav-link disabled {% else %}d-none {% endif %}">
+          <i class="bi bi-wallet-fill"></i>
+          <span>Job Adjustment</span>
+        </a>
+      </li>
     </ul>
   </aside>
 

@@ -4,7 +4,7 @@
   max-width: 1800px;
   margin: 0 auto;
   width: 100%;
-  height: calc(100vh - 55px - var(--topbar-h) - var(--footer-h));
+  /* height: calc(100vh - 55px - var(--topbar-h) - var(--footer-h)); */
 }
 
 /* Main Content */
@@ -12,6 +12,8 @@
   flex: 1;
   padding: 32px;
   background-color: var(--jm-accent-light);
+  overflow-y: auto;
+  height: calc(100vh - 55px - var(--topbar-h) - var(--footer-h));
 }
 
 /* Header */
