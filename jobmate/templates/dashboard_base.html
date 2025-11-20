@@ -82,8 +82,8 @@
 
       <!-- Payment Details -->
       <li>
-        <a href="#"
-          class="{% if request.resolver_match.url_name == 'payments' %}active nav-link disabled {% else %}d-none {% endif %}">
+        <a href="{% url 'cart:payments' %}"
+          class="{% if request.resolver_match.url_name == 'payments' %}active nav-link disabled{% endif %}">
           <i class="bi bi-plus-circle-fill"></i>
           <span>Payments</span>
         </a>
@@ -176,9 +176,9 @@
       </li>
 
       <!-- Mobile Payment Details -->
-      <li>
-        <a href="#"
-          class="{% if request.resolver_match.url_name == 'payments' %}active nav-link disabled {% else %}d-none {% endif %}">
+    <li>
+        <a href="{% url 'cart:payments' %}"
+          class="{% if request.resolver_match.url_name == 'payments' %}active nav-link disabled{% endif %}">
           <i class="bi bi-plus-circle-fill"></i>
           <span>Payments</span>
         </a>
