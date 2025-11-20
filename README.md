@@ -43,6 +43,43 @@ As a **Engineer**, I want to:
 
 ---
 
+## User Flow
+
+As a **Property Manager**:
+
+- **Sign up** if already not registered
+- **Log in** with credentials
+- **All jobs** will display
+  - Can search, create, view, edit or delete jobs 
+- **View all engineers**   
+  - Can search, view, edit or delete engineers 
+- **View all payments**
+  - Can search, view, edit or delete payments 
+- **View all jobs to be paid in cart**
+  - Can adjust pay and make payments for jobs via stripe
+    - When modifying or viewing adjustments, items can be added or removed from cart
+  - Completed payments will then show on payments view
+- **Can update** profile settings  
+
+---
+
+As a **Engineer**:
+
+- **Sign up** if already not registered
+- **Log in** with credentials
+- **All jobs** allocated to me will display
+  - Can search, view and complete my jobs 
+    - When job has been completed, job gets added to the cart  
+- **View all my jobs** to be paid in cart
+  - Can adjust pay for indivisual jobs
+    - When modifying or viewing adjustments, items can be added or removed from cart
+      - Once manager has made payment it will show on my payments view
+- **View all payments** made to me
+  - Can search and view payments made to me  
+- **Can update** profile settings    
+
+---
+
 ## Tech Stack
 
 - Django (Python Web Framework)  
