@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -19,3 +20,13 @@ def profile_settings(request):
     This view renders the profile settings page
     """
     return render(request, 'profile_settings.html')
+
+
+# Login required to view pages
+@login_required
+def all_engineers(request):
+    return render(request, "users/all_engineers.html")
+
+@login_required
+def profile_settings(request):
+    return render(request, "users/profile_settings.html")
