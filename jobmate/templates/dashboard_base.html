@@ -16,7 +16,7 @@
   <!-- STATUS INFO -->
   <div class="header-right">
     <div class="user-info">
-      <a href="{% url 'users:profile_settings' %}" class="text-decoration-none text-muted"><span>{% if request.user.is_authenticated %}
+      <a href="{% url 'users:profile_settings' %}" class="text-decoration-none text-muted"><span>Hi {% if request.user.is_authenticated %}
           {{ request.user.first_name }}
           {% endif %} </span></a>
     </div>

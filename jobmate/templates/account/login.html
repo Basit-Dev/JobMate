@@ -17,19 +17,22 @@
     </div>
 
     <!-- SIGNIN FORM -->
-    <form>
+    <form method="POST" action="{% url 'account_login' %}">
+      <!-- <p>DEBUG FIELDS: {{ form.fields }}</p> -->
+        {% csrf_token %}
+        {{ form.non_field_errors }}
       <div class="row g-3">
 
         <!-- EMAIL -->
         <div class="col-12">
-          <label for="email" class="form-label">Email Address</label>
-          <input type="email" class="form-control" id="email" placeholder="john.doe@example.com" required>
+          <label class="form-label">Email Address</label>
+          {{ form.login }}
         </div>
 
         <!-- PASSWORD -->
         <div class="col-12">
-          <label for="password" class="form-label">Password</label>
-          <input type="password" class="form-control" id="password" placeholder="••••••••" required>
+          <label class="form-label">Password</label>
+          {{ form.password }}
         </div>
 
         <!-- FORGOT PASSWORD -->

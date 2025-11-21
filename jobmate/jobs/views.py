@@ -2,54 +2,37 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
-
+@login_required
 def all_jobs(request):
     """
     This view renders the all jobs page
     """
     return render(request, 'all_jobs.html')  
 
+@login_required
 def create_job(request):
     """
     This view renders the create job page
     """
     return render(request, 'create_job.html')   
 
+@login_required
 def edit_job(request):
     """
     This view renders the edit job page
     """
     return render(request, 'edit_job.html')
 
+@login_required
 def job_detail(request):
     """
     This view renders the job detail page
     """
     return render(request, 'job_detail.html')
 
+@login_required
 def delete_job(request):
     """
     This view renders the delete job page
     """
     return render(request, 'delete_job.html')
-
-# Login required to view pages
-@login_required
-def all_jobs(request):
-    return render(request, "jobs/all_jobs.html")
-
-@login_required
-def create_job(request):
-    return render(request, "jobs/create_job.html")
-
-@login_required
-def delete_job(request):
-    return render(request, "jobs/delete_job.html")
-
-@login_required
-def edit_job(request):
-    return render(request, "jobs/edit_job.html")
-
-@login_required
-def job_detail(request):
-    return render(request, "jobs/job_detail.html")

@@ -76,16 +76,18 @@ AUTHENTICATION_BACKENDS = [
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_LOGOUT_ON_GET = True
 LOGIN_URL = 'account_login'
 LOGIN_REDIRECT_URL = '/jobs/all_jobs'
-LOGOUT_REDIRECT_URL = 'account_login'
+LOGOUT_REDIRECT_URL = '/users/logged_out'
 
 
 # Custom form
 ACCOUNT_FORMS = {
     'signup': 'users.forms.CustomSignupForm',
+    "login": "users.forms.CustomLoginForm",
 }
 
 ROOT_URLCONF = 'jobmate.urls'
