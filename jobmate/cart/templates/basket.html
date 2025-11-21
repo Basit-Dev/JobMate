@@ -42,10 +42,10 @@ Basket | JobMate {% endblock %}
                         <td>
                             <strong>£187.50</strong>
                             <div>
-                                <button class="btn btn-primary custom-button ms-5 mb-1"
-                                    onclick="window.location.href='{% url 'cart:job_adjustment' %}';">
+                                <a href="{% url 'cart:job_adjustment' %}"
+                                    class="btn btn-primary custom-button ms-5 mb-1">
                                     Adjustment
-                                </button>
+                                </a>
                                 <button class="delete-btn">
                                     <i class="bi bi-trash text-danger fs-5 mb-1"></i>
                                 </button>
