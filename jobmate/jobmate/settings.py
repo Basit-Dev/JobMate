@@ -41,12 +41,19 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "django_browser_reload",
+    'django.contrib.sites',
+    # Allauth Apps
+    'allauth',
+    'allauth.account',
+    # if you installed social accounts => allauth.socialaccounts
     # Every time you create an app, you must include it here
     'home',
-    'accounts',
+    'users',
     'jobs',
     'cart',
 ]
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -57,7 +64,28 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
      "django_browser_reload.middleware.BrowserReloadMiddleware",
+    # Add the account middleware:
+    "allauth.account.middleware.AccountMiddleware",
 ]
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_LOGOUT_ON_GET = True
+LOGIN_REDIRECT_URL = '/jobs/all_jobs'
+LOGOUT_REDIRECT_URL = '/users/logged_out'
+
+
+# Custom form
+ACCOUNT_FORMS = {
+    'signup': 'users.forms.CustomSignupForm',
+}
 
 ROOT_URLCONF = 'jobmate.urls'
 

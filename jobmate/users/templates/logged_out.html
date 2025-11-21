@@ -12,16 +12,19 @@
             <div class="hero-icon shadow-tile">
                 <i class="bi bi-box-arrow-right"></i>
             </div>
+            
+            {% if not request.user.is_authenticated %}
             <h1 class="main-title fs-3">You've Been Logged Out</h1>
             <p class="section-subtitle">Thank you for using JobMate. Your session has ended securely</p>
         </div>
+        {% endif %}
 
         <!-- ACTION BUTTONS -->
         <div class="row g-3">
 
             <!-- SIGN IN BUTTON -->
             <div class="col-12">
-                <a href="{% url 'accounts:sign_in' %}"
+                <a href="{% url 'account_login' %}"
                     class="btn btn-primary w-100 shadow-cta d-flex align-items-center justify-content-center"><i
                         class="bi bi-box-arrow-in-right fs-4 pe-4"></i>Sign in to JobMate</a>
             </div>

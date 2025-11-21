@@ -17,48 +17,44 @@
     </div>
 
     <!-- SIGNUP FORM -->
-    <form>
+    <form method="POST" action="">
+      {% csrf_token %}
       <div class="row g-3">
 
         <!-- NAME -->
         <div class="col-md-6">
-          <label for="firstName" class="form-label">First Name</label>
-          <input type="text" class="form-control" id="firstName" placeholder="John" required>
+          <label class="form-label">First Name</label>
+          {{ form.first_name }}
         </div>
         <div class="col-md-6">
-          <label for="lastName" class="form-label">Last Name</label>
-          <input type="text" class="form-control" id="lastName" placeholder="Doe" required>
+          <label class="form-label">Last Name</label>
+          {{ form.last_name }}
         </div>
 
         <!-- EMAIL -->
         <div class="col-12">
-          <label for="email" class="form-label">Email Address</label>
-          <input type="email" class="form-control" id="email" placeholder="john.doe@example.com" required>
+          <label class="form-label">Email Address</label>
+          {{ form.email }}
         </div>
 
         <!-- ROLE -->
         <div class="col-12">
-          <label for="role" class="form-label">Role</label>
-          <select class="form-select" id="role" required>
-            <option value="">Select your role</option>
-            <option value="manager">Property Manager</option>
-            <option value="engineer">Engineer</option>
-            <option value="admin">Administrator</option>
-          </select>
+          <label class="form-label">Role</label>
+          {{ form.role }}
         </div>
 
         <!-- PASSWORD -->
         <div class="col-12">
-          <label for="password" class="form-label">Password</label>
-          <input type="password" class="form-control" id="password" placeholder="••••••••" required>
+          <label class="form-label">Password</label>
+          {{ form.password1 }}
           <div class="password-hint">
             Must be at least 8 characters with uppercase, lowercase, and number
           </div>
         </div>
 
         <div class="col-12">
-          <label for="confirmPassword" class="form-label">Confirm Password</label>
-          <input type="password" class="form-control" id="confirmPassword" placeholder="••••••••" required>
+          <label class="form-label">Confirm Password</label>
+          {{ form.password2 }}
         </div>
 
         <!-- SUBMIT BUTTON -->
@@ -69,12 +65,26 @@
 
       <!-- ACCOUNTS FOOTER -->
       <div class="accounts-footer">
-        <p>Already have an account? <a href="{% url 'accounts:sign_in' %}">Sign in here</a></p>
+        <p>Already have an account? <a href="{% url 'account_login' %}">Sign in here</a></p>
       </div>
     </form>
   </section>
 </div>
-
+<!-- CHECK ERRORS ON FORM AND DISPLAY MESSAGE -->
+{% if form.errors %}
+<div class="alert alert-danger">
+  <ul>
+    {% for field in form %}
+    {% for error in field.errors %}
+    <li>{{ error }}</li>
+    {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+    <li>{{ error }}</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endif %}
 </main>
 
 {% endblock %}
