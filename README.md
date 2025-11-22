@@ -328,3 +328,29 @@ As a **Engineer**:
   <strong>Job Details</strong><br>
   <img src="documentation/figma/mobile/job-details-mobile.png" alt="Job Details" width="300" />
 </p>
+
+----
+
+## Automated Tests Outcome
+
+| Test File            | Description                                                                                   | Status |
+|----------------------|-----------------------------------------------------------------------------------------------|--------|
+| `test_signup.py`     | Tests signup page load, successful signup, and password mismatch validation                   | Passed |
+
+
+---
+
+## Automated Tests Outcome Results
+
+<p align="center">
+  <strong>test_signup</strong><br>
+  <img src="documentation/test_logs/test_signup.png" alt="Job Details" width="300" />
+</p>
+
+
+## Credits and Acknowledge
+
+- Design ideas to Dribble amd Mobbin
+- Colour pallette to coolors.co
+- CSS style for input tags to StackOverflow
+- Testing to NetNinja

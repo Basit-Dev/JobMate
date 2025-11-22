@@ -13,6 +13,7 @@ class CustomSignupForm(SignupForm):
   last_name = forms.CharField(
         max_length=50,
         widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Last Name'})
+,       required=True
     )
   email = forms.EmailField(
         widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email Address'}),
