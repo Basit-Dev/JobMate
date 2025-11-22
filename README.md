@@ -335,7 +335,8 @@ As a **Engineer**:
 
 | Test File            | Description                                                                                   | Status |
 |----------------------|-----------------------------------------------------------------------------------------------|--------|
-| `test_signup.py`     | Tests signup page load, successful signup, and password mismatch validation                   | Passed |
+| `test_signup.py`     | Tests signup page load, successful signup and password mismatch validation                    | Passed |
+| `test_login.py`      | Tests login page load, successful login and password mismatch validation                      | Passed |
 
 
 ---
@@ -345,6 +346,11 @@ As a **Engineer**:
 <p align="center">
   <strong>test_signup</strong><br>
   <img src="documentation/test_logs/test_signup.png" alt="Job Details" width="300" />
+</p>
+
+<p align="center">
+  <strong>test_login</strong><br>
+  <img src="documentation/test_logs/test_login.png" alt="Job Details" width="300" />
 </p>
 
 
