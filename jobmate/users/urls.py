@@ -11,4 +11,4 @@ urlpatterns = [
     path('logged_out/', views.logged_out, name='logged_out'),
     path('all_engineers/', views.all_engineers, name='all_engineers'),
     path('profile_settings/', views.profile_settings, name='profile_settings'),
-]
+]    
