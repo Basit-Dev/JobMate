@@ -333,11 +333,11 @@ As a **Engineer**:
 
 ## Automated Tests Outcome
 
-| Test File            | Description                                                                                   | Status |
-|----------------------|-----------------------------------------------------------------------------------------------|--------|
-| `test_signup.py`     | Tests signup page load, successful signup and password mismatch validation                    | Passed |
-| `test_login.py`      | Tests login page load, successful login and password mismatch validation                      | Passed |
-
+| Test File                     | Description                                                                                   | Status |
+|-------------------------------|-----------------------------------------------------------------------------------------------|--------|
+| `test_signup.py`              | Tests signup page load, successful signup and password mismatch validation                    | Passed |
+| `test_login.py`               | Tests login page load, successful login and password mismatch validation                      | Passed |
+| `test_password_reset.py`      | Tests reset page load, successful reset and signin with new password                          | Passed |
 
 ---
 
@@ -345,12 +345,17 @@ As a **Engineer**:
 
 <p align="center">
   <strong>test_signup</strong><br>
-  <img src="documentation/test_logs/test_signup.png" alt="Job Details" width="300" />
+  <img src="documentation/test_logs/test_signup.png" alt="Test signup" width="300" />
 </p>
 
 <p align="center">
   <strong>test_login</strong><br>
-  <img src="documentation/test_logs/test_login.png" alt="Job Details" width="300" />
+  <img src="documentation/test_logs/test_login.png" alt="Test login" width="300" />
+</p>
+
+<p align="center">
+  <strong>test_password_reset</strong><br>
+  <img src="documentation/test_logs/test_password_reset.png.png.png" alt="Test password reset" width="300" />
 </p>
 
 
@@ -360,3 +365,4 @@ As a **Engineer**:
 - Colour pallette to coolors.co
 - CSS style for input tags to StackOverflow
 - Testing to NetNinja
+- Password reset to https://pypi.org

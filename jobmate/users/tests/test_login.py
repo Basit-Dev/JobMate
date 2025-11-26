@@ -9,7 +9,7 @@ User = get_user_model()
 # LOGIN TESTS
 class LoginTest(TestCase):
 
-    #   SETUP USER FOR LOGIN TESTS
+    # SETUP USER FOR LOGIN TESTS
     def setUp(self):
         self.user = User.objects.create_user(
         username="testuser",
@@ -29,7 +29,7 @@ class LoginTest(TestCase):
         self.assertContains(response, "login")
         self.assertContains(response, "password")
 
-    #   TEST LOGIN WITH DATA
+    #  TEST LOGIN WITH DATA
     def test_successful_login(self):
         """
         If we send correct details, User should be able to log in.
