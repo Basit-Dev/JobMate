@@ -9,7 +9,7 @@ from django.urls import reverse
 # python manage.py test home.test_home --verbosity 2
 
 # TEST THAT HOME PAGE LAODS
-class PageAccessTest(TestCase): 
+class HomePageAccessTest(TestCase): 
     def test_home_page_loads(self):
         """
         The home page should open normally.

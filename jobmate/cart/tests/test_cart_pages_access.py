@@ -11,7 +11,7 @@ from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
-class PageAccessTest(TestCase):
+class CartPagesAccessTest(TestCase):
 
     # SETUP USER FOR TO TEST ACCESS
     def setUp(self):
