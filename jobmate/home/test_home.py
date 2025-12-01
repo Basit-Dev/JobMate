@@ -5,6 +5,9 @@ from django.urls import reverse
 
 # This test ensures that all users can access the home page.
 
+# Command to test
+# python manage.py test home.test_home --verbosity 2
+
 # TEST THAT HOME PAGE LAODS
 class PageAccessTest(TestCase): 
     def test_home_page_loads(self):

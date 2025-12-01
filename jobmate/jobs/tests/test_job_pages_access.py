@@ -6,9 +6,12 @@ from django.contrib.auth import get_user_model
 
 # This test ensures that only registered users can access certain pages, and that public pages are accessible to all users.
 
+# Command to test
+# python manage.py test jobs.tests.test_job_pages_access --verbosity 2
+
 User = get_user_model()
 
-class PageAccessTest(TestCase):
+class JobPageAccessTest(TestCase):
 
     # SETUP USER FOR TO TEST ACCESS
     def setUp(self):

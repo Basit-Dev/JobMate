@@ -6,6 +6,9 @@ from django.contrib.auth import get_user_model
 
 # This test checks for user signup
 
+# Command to test
+# python manage.py test users.tests.test_signup --verbosity 2
+
 User = get_user_model()
 
 # SIGNUP TESTS

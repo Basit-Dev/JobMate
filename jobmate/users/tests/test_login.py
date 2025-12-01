@@ -6,6 +6,9 @@ from django.contrib.auth import get_user_model
 
 # This test checks users can login with correct credentials
 
+# Command to test
+# python manage.py test users.tests.test_login --verbosity 2
+
 User = get_user_model()
 
 # LOGIN TESTS

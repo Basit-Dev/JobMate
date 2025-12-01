@@ -376,6 +376,8 @@ As a **Engineer**:
   <img src="documentation/test_logs/test_cart_pages_access.png" alt="Test cart pages access" width="300" />
 </p>
 
+---
+
 ## Credits and Acknowledge
 
 - Design ideas to Dribble amd Mobbin

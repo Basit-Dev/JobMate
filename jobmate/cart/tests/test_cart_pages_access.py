@@ -6,6 +6,9 @@ from django.contrib.auth import get_user_model
 
 # This test ensures that only registered users can access shopping cart pages.
 
+# Command to test
+# python manage.py test cart.tests.test_cart_pages_access --verbosity 2
+
 User = get_user_model()
 
 class PageAccessTest(TestCase):

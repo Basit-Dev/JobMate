@@ -7,6 +7,9 @@ from django.core import mail
 
 # This test checks for password reset
 
+# Command to test
+# python manage.py test users.tests.test_password_reset --verbosity 2
+
 # CREATE USER MODEL INSTANCE
 User = get_user_model()
 
