@@ -340,6 +340,7 @@ As a **Engineer**:
 | `test_password_reset.py`      | Tests reset page load, successful reset and signin with new password                          | Passed |
 | `test_page_access.py`         | Registered users can access certain pages, and that public pages are accessible to all users  | Passed |
 | `test_home.py`                | Tests home page loads                                                                         | Passed |
+| `test_cart_pages_access.py`   | Registered users can only access cart pages                                                   | Passed |
 
 ---
 
@@ -368,6 +369,11 @@ As a **Engineer**:
 <p align="center">
   <strong>test_home</strong><br>
   <img src="documentation/test_logs/test_home.png" alt="Test home page loads" width="300" />
+</p>
+
+<p align="center">
+  <strong>test_cart_pages_access</strong><br>
+  <img src="documentation/test_logs/test_cart_pages_access.png" alt="Test cart pages access" width="300" />
 </p>
 
 ## Credits and Acknowledge
