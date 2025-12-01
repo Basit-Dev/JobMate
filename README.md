@@ -338,6 +338,7 @@ As a **Engineer**:
 | `test_signup.py`              | Tests signup page load, successful signup and password mismatch validation                    | Passed |
 | `test_login.py`               | Tests login page load, successful login and password mismatch validation                      | Passed |
 | `test_password_reset.py`      | Tests reset page load, successful reset and signin with new password                          | Passed |
+| `test_page_access.py`         | Registered users can access certain pages, and that public pages are accessible to all users  | Passed |
 
 ---
 
@@ -355,7 +356,12 @@ As a **Engineer**:
 
 <p align="center">
   <strong>test_password_reset</strong><br>
-  <img src="documentation/test_logs/test_password_reset.png.png.png" alt="Test password reset" width="300" />
+  <img src="documentation/test_logs/test_password_reset.png" alt="Test password reset" width="300" />
+</p>
+
+<p align="center">
+  <strong>test_page_access</strong><br>
+  <img src="documentation/test_logs/test_page_access.png" alt="Test password access" width="300" />
 </p>
 
 
