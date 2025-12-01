@@ -4,3 +4,8 @@ from django.apps import AppConfig
 class UsersConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'users'
+
+    # This method runs when Django starts
+    def ready(self):
+        # Import signals so Django knows they exist
+        import users.signals

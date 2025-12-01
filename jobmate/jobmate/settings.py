@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     # if you installed social accounts => allauth.socialaccounts
     # Every time you create an app, you must include it here
     'home',
-    'users',
+    'users.apps.UsersConfig',
     'jobs',
     'cart',
 ]
