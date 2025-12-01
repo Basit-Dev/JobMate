@@ -4,6 +4,8 @@ from django.contrib.auth import get_user_model
 
 # Create your tests here.
 
+# This test checks users can login with correct credentials
+
 User = get_user_model()
 
 # LOGIN TESTS
@@ -46,10 +48,27 @@ class LoginTest(TestCase):
         # After login redirect after success
         self.assertEqual(response.status_code, 302)
 
+    # TEST WRONG EMAIL ENTERED
+    def test_wrong_email(self):
+        """
+        If wrong email entered, login should fail.
+        """
+        url = reverse("account_login")
+        data = {
+            "login": "test@wrong_email.com",
+            "password": "WrongPass",
+        }
+
+         # Submit login form
+        response = self.client.post(url, data)
+
+        # Should stay on same page (no redirect)
+        self.assertEqual(response.status_code, 200)
+        
   #   TEST PASSWORD MISMATCH
     def test_password_mismatch(self):
         """
-        If passwords do not match, signup should fail.
+        If passwords do not match, login should fail.
         """
         url = reverse("account_login")
         data = {
