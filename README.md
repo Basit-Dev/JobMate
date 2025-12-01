@@ -336,7 +336,7 @@ As a **Engineer**:
 | Test File                     | Description                                                                                   | Status |
 |-------------------------------|-----------------------------------------------------------------------------------------------|--------|
 | `test_signup.py`              | Tests signup page load, successful signup and password mismatch validation                    | Passed |
-| `test_login.py`               | Tests login page load, successful login and password mismatch validation                      | Passed |
+| `test_login.py`               | Tests login page load, successful login email and password mismatch validation                | Passed |
 | `test_password_reset.py`      | Tests reset page load, successful reset and signin with new password                          | Passed |
 | `test_page_access.py`         | Registered users can access certain pages, and that public pages are accessible to all users  | Passed |
 | `test_home.py`                | Tests home page loads                                                                         | Passed |
