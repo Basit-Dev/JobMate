@@ -4,6 +4,8 @@ from django.contrib.auth import get_user_model
 
 # Create your tests here.
 
+# This test checks for user signup
+
 User = get_user_model()
 
 # SIGNUP TESTS

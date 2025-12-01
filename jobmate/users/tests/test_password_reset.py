@@ -5,6 +5,8 @@ from django.core import mail
 
 # Create your tests here.
 
+# This test checks for password reset
+
 # CREATE USER MODEL INSTANCE
 User = get_user_model()
 
