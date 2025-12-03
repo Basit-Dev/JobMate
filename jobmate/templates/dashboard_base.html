@@ -16,8 +16,10 @@
   <!-- STATUS INFO -->
   <div class="header-right">
     <div class="user-info">
-      <a href="{% url 'users:profile_settings' %}" class="text-decoration-none text-muted"><span>Hi {% if request.user.is_authenticated %}
-          {{ request.user.first_name }}
+      <a href="{% url 'users:profile_settings' %}" class="text-decoration-none text-muted"><span>Hi {% if request.user.is_authenticated and request.user.first_name == "" %}
+        {{ request.user.username }}
+        {% else %}
+         {{request.user.first_name}}
           {% endif %} </span></a>
     </div>
     <a href="{% url 'account_logout' %}" class="logout-btn text-danger">

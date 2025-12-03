@@ -47,10 +47,14 @@ class CustomSignupForm(SignupForm):
   def save(self, request):
         user = super().save(request)
 
+        # Save user fields
         user.first_name = self.cleaned_data['first_name']
         user.last_name = self.cleaned_data['last_name']
         user.email = self.cleaned_data['email']
-        user.role = self.cleaned_data['role'] 
         user.save()
+
+        # Save role fields into profile settings
+        user.profile.role = self.cleaned_data['role'] 
+        user.profile.save()
 
         return user
