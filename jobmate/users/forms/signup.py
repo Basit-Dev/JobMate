@@ -21,8 +21,8 @@ class CustomSignupForm(SignupForm):
     )
   
   ROLE_CHOICES = [
-        ('admin', 'Admin'),
-        ('engineer', 'Engineer'),
+        ('Admin', 'Admin'),
+        ('Engineer', 'Engineer'),
     ]
   
   role = forms.ChoiceField(
