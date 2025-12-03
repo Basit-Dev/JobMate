@@ -50,7 +50,7 @@
 
         <div class="mb-3">
             <label class="form-label">Phone Number*</label>
-            <input type="text" class="form-control" value="{{ user.phone_number }}">
+            <input type="text" class="form-control" value="{{ user.profile.phone_number }}">
         </div>
 
         <div class="mb-3">
@@ -100,22 +100,22 @@
         <div class="row mb-3">
             <div class="col-md-6">
                 <label class="form-label">Bank Name*</label>
-                <input type="text" class="form-control" value="{{ user.bank_name }}">
+                <input type="text" class="form-control" value="{{ user.profile.bank_name }}">
             </div>
             <div class="col-md-6">
                 <label class="form-label">Account Holder*</label>
-                <input type="text" class="form-control" value="{{ user.account_holder }}">
+                <input type="text" class="form-control" value="{{ user.profile.account_holder }}">
             </div>
         </div>
 
         <div class="row mb-3">
             <div class="col-md-6">
                 <label class="form-label">Account Number*</label>
-                <input type="text" class="form-control" value="{{ user.account_number }}">
+                <input type="text" class="form-control" value="{{ user.profile.account_number }}">
             </div>
             <div class="col-md-6">
                 <label class="form-label">Sort Code*</label>
-                <input type="text" class="form-control" value="{{ user.sort_code }}">
+                <input type="text" class="form-control" value="{{ user.profile.sort_code }}">
             </div>
         </div>
 
