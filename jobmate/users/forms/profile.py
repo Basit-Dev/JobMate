@@ -23,5 +23,5 @@ class ProfileForm(forms.ModelForm):
             'account_holder': forms.TextInput(attrs={'class': 'form-control'}),
             'account_number': forms.TextInput(attrs={'class': 'form-control'}),
             'sort_code': forms.TextInput(attrs={'class': 'form-control'}),
-            'role': forms.Select(attrs={'class': 'form-select'}),
+            'role': forms.TextInput(attrs={'class': 'form-control',  'readonly': 'readonly'}), 
         }
