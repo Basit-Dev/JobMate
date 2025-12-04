@@ -17,23 +17,20 @@ def all_engineers(request):
     """
     return render(request, 'all_engineers.html')
 
-# @login_required
-# def profile_settings(request):
-#     """
-#     This view renders the profile settings page
-#     """
-#     return render(request, 'profile_settings.html')
-
 @login_required
 def profile_settings(request):
+    # Get looged in user profile
     profile = request.user.profile
 
+    # When form sent validate and save and redirect to profile page
     if request.method == 'POST':
         form = ProfileForm(request.POST, instance=profile)
         if form.is_valid():
             form.save()
-            return redirect('profile_settings')
+            return redirect('users:profile_settings')
+        # If not POST data use the existing data
     else:
         form = ProfileForm(instance=profile)
-
+    print(request.POST) 
+    # Render the page
     return render(request, 'profile_settings.html', {'form': form})

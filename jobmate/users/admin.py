@@ -13,12 +13,12 @@ class ExtraProfileFields(admin.StackedInline):
 
 
 # Extend django UserAdmin so we can attach our ExtraProfileFields to it.
-class Profile(UserAdmin):
+class CustomUserProfile(UserAdmin):
     inlines = [ExtraProfileFields]    # Add Profile fields under each User in the admin panel
 
 
 # Remove django default user admin
 admin.site.unregister(User)
 
-# Register the user with our extra prfile fields
-admin.site.register(User, Profile)
+# Register the user with our extra profile fields
+admin.site.register(User, CustomUserProfile)
