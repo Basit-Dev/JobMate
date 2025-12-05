@@ -341,6 +341,7 @@ As a **Engineer**:
 | `test_page_access.py`         | Registered users can access certain pages, and that public pages are accessible to all users  | Passed |
 | `test_home.py`                | Tests home page loads                                                                         | Passed |
 | `test_cart_pages_access.py`   | Registered users can only access cart pages                                                   | Passed |
+| `test_profile.py`             | Test profile data loads, update the data successfully                                         | Passed |
 
 ---
 
@@ -376,6 +377,11 @@ As a **Engineer**:
   <img src="documentation/test_logs/test_cart_pages_access.png" alt="Test cart pages access" width="300" />
 </p>
 
+<p align="center">
+  <strong>test_profile</strong><br>
+  <img src="documentation/test_logs/test_profile.png" alt="Test profile page" width="300" />
+</p>
+
 ---
 
 ## Credits and Acknowledge
@@ -383,5 +389,5 @@ As a **Engineer**:
 - Design ideas to Dribble amd Mobbin
 - Colour pallette to coolors.co
 - CSS style for input tags to StackOverflow
-- Testing to NetNinja
+- Testing to NetNinja, Legion Script from YouTube
 - Password reset to https://pypi.org
