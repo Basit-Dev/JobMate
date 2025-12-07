@@ -70,12 +70,47 @@ class SignupTest(TestCase):
             "password2": "WrongPass",
         }
 
-         # Submit signup form
+        # Submit signup form
         response = self.client.post(url, data)
+        # Error message appears
+        self.assertContains(response, "You must type the same password each time.")
 
         # Should stay on same page (no redirect)
         self.assertEqual(response.status_code, 200)
 
         # No user should be created
-        user_exists = User.objects.filter(email="test2@example.com").exists()
+        user_exists = User.objects.filter(email="test@example.com").exists()
         self.assertFalse(user_exists)    
+     
+
+    
+    # SETUP DUPLICATE EMAIL
+    def test_profile_duplicate_email(self):
+        """
+        If we send duplicate email, a new user should not be be created.
+        """
+        # Create a test user note Django auto-creates a Profile via signals
+        self.user = User.objects.create_user(
+                username="testuser",
+                email="test@example.com",
+                password="Testpass123!",
+                first_name="John",
+                last_name="Doe",
+            )
+        url = reverse("account_signup")
+        data = {
+            "first_name": "Test",
+            "last_name": "User",
+            "role": "Engineer",
+            "email": "test@example.com",
+            "password1": "Testpass123!",
+            "password2": "Testpass123!",
+        }
+
+        # Submit signup form
+        response = self.client.post(url, data)
+        # Error message appears
+        self.assertContains(response, "A user is already registered with this email address.")
+
+        # Should stay on same page (no redirect)
+        self.assertEqual(response.status_code, 200)   
