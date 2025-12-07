@@ -34,7 +34,7 @@ html {
   /* Layout */
   --topbar-h: 66px;
   --footer-h: 20px;
-  --sidebar-width: 240px;  
+  --sidebar-width: 240px;
 }
 
 * {
@@ -52,14 +52,14 @@ body {
 
 /* Overidden BootStrap styles */
 .btn-primary {
-  background-color: var(--jm-blue-700) !important; 
+  background-color: var(--jm-blue-700) !important;
   border-color: var(--jm-blue-700) !important;
   font-size: 1rem;
   transition: all 0.25s ease;
 }
 
 .btn-light {
-  background-color: var(--jm-default) !important; 
+  background-color: var(--jm-default) !important;
   border-color: var(--muted-2) !important;
   font-size: 1rem;
   transition: all 0.25s ease;
@@ -67,11 +67,11 @@ body {
 .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary:active {
-  background-color: var(--jm-blue-600) !important; 
+  background-color: var(--jm-blue-600) !important;
 }
 
 .btn-secondary {
-  background-color: var(--jm-accent) !important; 
+  background-color: var(--jm-accent) !important;
   border-color: var(--jm-accent) !important;
   font-size: 1rem;
   transition: all 0.25s ease;
@@ -84,7 +84,7 @@ body {
 .btn-light:hover,
 .btn-light:focus,
 .btn-light:active {
-  background-color: var(--muted-2) !important; 
+  background-color: var(--muted-2) !important;
 }
 
 .bi::before {
@@ -142,4 +142,22 @@ body {
 .site-footer-home {
   background: var(--footer-bg);
   padding: 40px 0 26px;
+}
+
+/* Style Django default error lists */
+.errorlist {
+    display: block ;
+    width: 100% ;
+    background-color: #ffebee ;
+    color: #c62828 ;
+    padding: 12px 16px ;
+    border-radius: 6px;
+    margin: 8px 0 16px;
+    border: 1px solid #c62828 ;
+}
+
+.errorlist li {
+    list-style: none;
+    margin: 3px 0 ;
+    padding: 0 ;
 }

@@ -56,7 +56,7 @@ def profile_settings(request):
         # Keep bootstrap styling for the password input fields the same when POST data then redirects
         for field in password_form.fields.values():
             field.widget.attrs["class"] = "form-control"
-            field.widget.attrs["placeholder"] = "************"
+            field.widget.attrs["placeholder"] = ""
 
         if password_form.is_valid():
             user = password_form.save()
@@ -72,7 +72,7 @@ def profile_settings(request):
         # Bootstrap styling for the password input fields
         for field in password_form.fields.values():
             field.widget.attrs["class"] = "form-control"
-            field.widget.attrs["placeholder"] = "************"
+            field.widget.attrs["placeholder"] = ""
             field.widget.attrs.pop("autofocus", None) # Remove focus when the profile page loads
 
     # Load the profile page on request and pass the data to the forms on render
