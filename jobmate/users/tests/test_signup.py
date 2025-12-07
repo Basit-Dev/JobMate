@@ -39,7 +39,7 @@ class SignupTest(TestCase):
         data = {
             "first_name": "Test",
             "last_name": "User",
-            "role": "engineer",
+            "role": "Engineer",
             "email": "test@example.com",
             "password1": "Testpass123!",
             "password2": "Testpass123!",

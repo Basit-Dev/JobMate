@@ -11,17 +11,29 @@ class ProfileForm(forms.ModelForm):
         fields = [
             'phone_number',
             'role',
-            'bank_name',
-            'account_holder',
-            'account_number',
-            'sort_code',
         ]
+
         # Displays the input styles to match bootstrap
         widgets = {
-            'phone_number': forms.TextInput(attrs={'class': 'form-control'}),
+            "phone_number": forms.TextInput(attrs={"class": "form-control"}),
+            'role': forms.TextInput(attrs={'class': 'form-control',  'readonly': 'readonly'}), 
+        }
+   
+
+class BankDetailsForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = [
+            "bank_name", 
+            "account_holder", 
+            "account_number", 
+            "sort_code"
+        ]
+
+        # Displays the input styles to match bootstrap
+        widgets = {
             'bank_name': forms.TextInput(attrs={'class': 'form-control'}),
             'account_holder': forms.TextInput(attrs={'class': 'form-control'}),
             'account_number': forms.TextInput(attrs={'class': 'form-control'}),
             'sort_code': forms.TextInput(attrs={'class': 'form-control'}),
-            'role': forms.TextInput(attrs={'class': 'form-control',  'readonly': 'readonly'}), 
-        }
+        }    

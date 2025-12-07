@@ -341,7 +341,8 @@ As a **Engineer**:
 | `test_page_access.py`         | Registered users can access certain pages, and that public pages are accessible to all users  | Passed |
 | `test_home.py`                | Tests home page loads                                                                         | Passed |
 | `test_cart_pages_access.py`   | Registered users can only access cart pages                                                   | Passed |
-| `test_profile.py`             | Test profile data loads, update the data successfully                                         | Passed |
+| `test_profile.py`             | Test user, profile, bank info loads when logged in and updates and saves data successfully,   | Passed |    
+|                               | Password change updates and user can log in with new password                                 | Passed |
 
 ---
 

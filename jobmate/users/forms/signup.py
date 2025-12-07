@@ -21,7 +21,7 @@ class CustomSignupForm(SignupForm):
     )
   
   ROLE_CHOICES = [
-        ('Admin', 'Admin'),
+        # ('Admin', 'Admin'),
         ('Engineer', 'Engineer'),
     ]
   

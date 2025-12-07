@@ -2,7 +2,23 @@
 {% load static %}
 {% block title %}Profile Settings | JobMate {% endblock %}
 {% block content %}
+<style>
+    .errorlist {
+        background-color: #ffebee;
+        color: #c62828;
+        padding: 10px;
+        border-radius: 4px;
+        margin-bottom: 20px;
+    }
 
+    .errors {
+  background-color: #ffebee;
+  color: #c62828;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+</style>
 <!-- HEADER -->
 <div class="heading-section">
     <div class="d-flex align-items-center gap-3 mb-3">
@@ -17,6 +33,18 @@
         </div>
     </div>
 </div>
+
+<!--ERROR MESSAGES TO DISPLAY WHEN CHANGING PASSWORD -->
+{% for message in messages %}
+    {% if message.tags == "error" %}
+        <div class="alert alert-danger alert-dismissible fade show my-2" role="alert">
+    {% else %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show my-2" role="alert">
+    {% endif %}
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+{% endfor %}
 
 <!-- PERSONAL INFORMATION -->
 <div class="card shadow-sm border-0 rounded-4 mb-5">
@@ -49,44 +77,58 @@
 
         <div class="mb-3">
             <label class="form-label">Phone Number*</label>
-            {{form.phone_number}}
+            {{ personal_form.phone_number }}
         </div>
 
         <div class="mb-3">
             <label class="form-label">Role*</label>
-            {{ form.role }}
+            {{ personal_form.role }}
         </div>
 
         <div class="d-flex justify-content-end gap-3">
             <button type="button" class="btn btn-outline-secondary">Cancel</button>
             <button type="submit" name="submit_personal" class="btn btn-primary">Save Changes</button>
         </div>
+    </form>
 </div>
 
 <!-- CHANGE PASSWORD -->
 <div class="card shadow-sm border-0 rounded-4 mb-5">
     <div class="card-header py-3 rounded-top-4">Change Password</div>
-
+   
     <!-- FORM -->
-    <div class="card-body p-4">
+    <form class="card-body p-4" method="POST">
+        {% csrf_token %}
         <div class="mb-3">
-            <label class="form-label">Current Password*</label>
-            <input type="password" class="form-control" placeholder="Enter current password">
+            <label class="form-label" for="{{ form.old_password.id_for_label }}">Current Password*</label>
+            <!-- <input type="password" class="form-control" placeholder="Enter current password" value="{{ password_form.old_password }}"> -->
+            {{ password_form.old_password }}
+            {% if password_form.old_password.errors %}
+            <span>{{ password_form.old_password.errors }}</span>
+            {% endif %}
         </div>
         <div class="mb-3">
-            <label class="form-label">New Password*</label>
-            <input type="password" class="form-control" placeholder="Enter new password">
+            <label class="form-label" for="{{ form.new_password1.id_for_label }}">New Password*</label>
+            <!-- <input type="password" class="form-control" placeholder="Enter new password" value="{{ password_form.new_password1 }}"> -->
+            {{ password_form.new_password1 }}
+            {% if password_form.new_password1.errors %}
+            <span>{{ password_form.new_password1.errors }}</span>
+            {% endif %}
         </div>
         <div class="mb-3">
-            <label class="form-label">Confirm New Password*</label>
-            <input type="password" class="form-control" placeholder="Confirm new password">
+            <label class="form-label" for="{{ form.new_password2.id_for_label }}">Confirm New Password*</label>
+            <!-- <input type="password" class="form-control" placeholder="Confirm new password" value="{{ password_form.new_password2 }}"> -->
+            {{ password_form.new_password2 }}
+            {% if password_form.new_password2.errors %}
+            <span>{{ password_form.new_password2.errors }}</span>
+            {% endif %}
         </div>
 
         <div class="d-flex justify-content-end gap-3">
             <button type="button" class="btn btn-outline-secondary">Cancel</button>
             <button type="submit" name="submit_password" class="btn btn-primary">Update Password</button>
         </div>
-    </div>
+    </form>
 </div>
 
 <!-- BANK DETAILS -->
@@ -94,27 +136,27 @@
     <div class="card-header py-3 rounded-top-4">Bank Details</div>
 
     <!-- FORM -->
-    <div class="card-body p-4">
+    <form class="card-body p-4" method="POST">
         {% csrf_token %}
         <div class="row mb-3">
             <div class="col-md-6">
                 <label class="form-label">Bank Name*</label>
-                {{ form.bank_name }}
+                {{ bank_form.bank_name }}
             </div>
             <div class="col-md-6">
                 <label class="form-label">Account Holder*</label>
-                {{ form.account_holder }}
+                {{ bank_form.account_holder }}
             </div>
         </div>
 
         <div class="row mb-3">
             <div class="col-md-6">
                 <label class="form-label">Account Number*</label>
-                {{ form.account_number }}
+                {{ bank_form.account_number }}
             </div>
             <div class="col-md-6">
                 <label class="form-label">Sort Code*</label>
-                {{ form.sort_code }}
+                {{ bank_form.sort_code }}
             </div>
         </div>
 
@@ -123,7 +165,7 @@
             <button type="submit" name="submit_bank" class="btn btn-primary">Update Bank Details</button>
         </div>
 
-    </div>
+    </form>
 </div>
 
 {% endblock %}
