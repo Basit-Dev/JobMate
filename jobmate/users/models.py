@@ -18,13 +18,13 @@ class Profile(models.Model):
     # Profile fields
     phone_number = models.CharField(
         max_length=20,
-        blank=False,   
+        blank=False,
     )
 
     role = models.CharField(
         max_length=20,
         # choices=ROLE_CHOICES,  To be added later
-        default='Engineer'     
+        default='Engineer'
     )
 
     # Bank details
