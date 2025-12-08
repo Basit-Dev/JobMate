@@ -6,7 +6,7 @@ from jobs.models import Job
 class JobForm(forms.ModelForm):
 
     class Meta:
-        # Profile fields
+        # Job fields
         model = Job
         fields = [
             'job_title',

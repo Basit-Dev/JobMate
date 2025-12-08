@@ -65,7 +65,7 @@ def create_job(request):
             # Show error messages
             messages.error(request, "Please correct the errors below.")
         
-    # If NOT posting data then load the value from the instance
+    # If NOT posting data then load the value from the JobForm
     else:
         create_job_form = JobForm()
 
