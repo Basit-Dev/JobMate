@@ -92,10 +92,23 @@
               <td data-label="Engineer">{{ job.assigned_engineer.first_name }} {{ job.assigned_engineer.last_name }}
               </td>
               <td data-label="Priority">
-                <span class="badge badge-rounded badge-high">{{ job.get_priority_display }}</span>
+                <span class="badge badge-rounded
+                {% if job.priority == 'high' %} badge-high
+                {% elif job.priority == 'medium' %}badge-medium
+                {% elif job.priority == 'low' %}badge-low
+                {% endif %}">
+                {{ job.get_priority_display }}
+                </span>
               </td>
               <td data-label="Status">
-                <span class="badge badge-rounded badge-progress">{{ job.get_status_display }}</span>
+                <span class="badge badge-rounded 
+                {% if job.status == 'pending' %}badge-pending
+                {% elif job.status == 'in_progress' %}badge-progress
+                {% elif job.status == 'completed' %}badge-completed
+                {% elif job.status == 'cancelled' %}bg-danger
+                {% endif %} ">
+                {{ job.get_status_display }}
+              </span>
               </td>
               <td data-label="Payment">
                 <span class="badge badge-rounded bg-light text-secondary">—</span>
