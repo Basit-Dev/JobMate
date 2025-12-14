@@ -63,7 +63,7 @@
   <!-- JOB LIST -->
   <div>
     <div class="table-container">
-      <div class="table-header">All Jobs (3)</div>
+      <div class="table-header">All Jobs ({{ job_list.count }})</div>
       <div class="table-responsive p-2">
         <table class="table align-middle mb-0">
           <!-- Table Head -->
@@ -83,7 +83,7 @@
           <!-- Table Body -->
           <tbody>
             <!-- Job Row -->
-            {% for job in all_jobs %}
+            {% for job in job_list %}
             <tr>
               <td data-label="Job Title">
                 <strong>{{ job.job_title}}</strong><br /><small class="text-muted">#JOB-{{ job.id }}</small>
@@ -111,6 +111,11 @@
                   {% endif %}
                 </div>
               </td>
+            </tr>
+            <!-- If empty rows ie no jobs display message -->
+            {% empty %}
+            <tr>
+              <td colspan="8" class="text-danger">No jobs found!</td>
             </tr>
             {% endfor %}
           </tbody>

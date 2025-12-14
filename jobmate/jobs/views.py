@@ -6,16 +6,20 @@ from django.contrib import messages
 
 # Create your views here.
 
-
 @login_required
 def all_jobs(request):
     """
     This view renders the all jobs page
     """
+    # Get current logged in User
+    user = request.user
     
-    all_jobs = Job.objects.all()
-    print(all_jobs[1].job_title)
-    return render(request, 'all_jobs.html', {"all_jobs": all_jobs})
+    # If user is Admin display all jobs else display the jobs related to assigned user
+    if user.profile.role == "Admin":
+        job_list = Job.objects.all()
+    else:
+        job_list = Job.objects.filter(assigned_engineer = user)    
+    return render(request, 'all_jobs.html', {"job_list": job_list})
 
 @login_required
 def edit_job(request):
