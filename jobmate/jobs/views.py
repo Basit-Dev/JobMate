@@ -1,5 +1,6 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
+from jobs.models import Job
 from jobs.forms.jobs import JobForm
 from django.contrib import messages
 
@@ -11,15 +12,10 @@ def all_jobs(request):
     """
     This view renders the all jobs page
     """
-    return render(request, 'all_jobs.html')
-
-# @login_required
-# def create_job(request):
-#     """
-#     This view renders the create job page
-#     """
-#     return render(request, 'create_job.html')
-
+    
+    all_jobs = Job.objects.all()
+    print(all_jobs[1].job_title)
+    return render(request, 'all_jobs.html', {"all_jobs": all_jobs})
 
 @login_required
 def edit_job(request):
