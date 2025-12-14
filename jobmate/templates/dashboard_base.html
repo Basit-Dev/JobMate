@@ -48,6 +48,8 @@
       </li>
 
       <!-- Engineers -->
+      <!-- Only show All Engineers, Create Job, edit jobs buttons if logged in as Admin -->
+      {% if request.user.is_authenticated and request.user.profile.role == "Admin" %}
       <li>
         <a href="{% url 'users:all_engineers' %}"
           class="{% if request.resolver_match.url_name == 'all_engineers' %}active{% endif %}">
@@ -64,7 +66,7 @@
           <span>Create Job</span>
         </a>
       </li>
-
+      
       <!-- Edit Job -->
       <li>
         <a href="#"
@@ -73,6 +75,7 @@
           <span>Edit Job</span>
         </a>
       </li>
+      {% endif %}
 
       <!-- Job Details -->
       <li>
@@ -143,6 +146,8 @@
       </li>
 
       <!-- Mobile Engineers -->
+       <!-- Only show All Engineers, Create Job, edit job buttons if logged in as Admin -->
+      {% if request.user.is_authenticated and request.user.profile.role == "Admin" %}
       <li>
         <a href="{% url 'users:all_engineers' %}"
           class="{% if request.resolver_match.url_name == 'all_engineers' %}active{% endif %}">
@@ -168,6 +173,7 @@
           <span>Edit Job</span>
         </a>
       </li>
+      {% endif %}
 
       <!-- Mobile Job Details -->
       <li>
