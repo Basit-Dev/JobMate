@@ -28,13 +28,15 @@
   <!-- Search bar -->
   <div class="search-col col-8">
     <p class="section-subtitle">Search Jobs</p>
-    <div class="input-group">
-      <input type="text" class="form-control" placeholder="Search jobs..." />
+    <form class="input-group" method="GET">
+      {% csrf_token %}
+      <input type="text" name="search_term" class="form-control" placeholder="Search jobs..."/>
+
       <!-- Search Button -->
-      <button class="btn btn-secondary text-muted">
+      <button type="submit" class="btn btn-secondary text-muted">
         <i class="bi bi-search me-1"></i>Search
       </button>
-    </div>
+    </form>
   </div>
 
   <!-- Status Dropdown -->
