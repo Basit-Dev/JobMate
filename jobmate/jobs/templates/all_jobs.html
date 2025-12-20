@@ -30,7 +30,7 @@
     <p class="section-subtitle">Search Jobs</p>
     <form class="input-group" method="GET">
       {% csrf_token %}
-      <input type="text" name="search_term" class="form-control" placeholder="Search jobs..."/>
+      <input type="text" name="search_term" class="form-control" placeholder="Search jobs..." />
 
       <!-- Search Button -->
       <button type="submit" class="btn btn-secondary text-muted">
@@ -40,14 +40,17 @@
   </div>
 
   <!-- Status Dropdown -->
-  <div class="col">
+<form class="col" method="GET">
     <p class="section-subtitle">Status</p>
-    <select class="form-select">
-      <option value="">All Status</option>
-      <option value="active">Active</option>
-      <option value="inactive">Inactive</option>
+    <select class="form-select" name="status_filter" onchange="this.form.submit()">
+      <!-- Add selected when user updates status -->
+        <option value="">All Status</option>
+        <option value="pending" {% if status_filter == "pending" %}selected{% endif %}>Pending</option>
+        <option value="in_progress" {% if status_filter == "in_progress" %}selected{% endif %}>In Progress</option>
+        <option value="completed" {% if status_filter == "completed" %}selected{% endif %}>Completed</option>
+        <option value="cancelled" {% if status_filter == "cancelled" %}selected{% endif %}>Cancelled</option>
     </select>
-  </div>
+</form>
 </div>
 
 <!--MESSAGES TO DISPLAY -->
@@ -99,7 +102,7 @@
                 {% elif job.priority == 'medium' %}badge-medium
                 {% elif job.priority == 'low' %}badge-low
                 {% endif %}">
-                {{ job.get_priority_display }}
+                  {{ job.get_priority_display }}
                 </span>
               </td>
               <td data-label="Status">
@@ -109,8 +112,8 @@
                 {% elif job.status == 'completed' %}badge-completed
                 {% elif job.status == 'cancelled' %}bg-danger
                 {% endif %} ">
-                {{ job.get_status_display }}
-              </span>
+                  {{ job.get_status_display }}
+                </span>
               </td>
               <td data-label="Payment">
                 <span class="badge badge-rounded bg-light text-secondary">—</span>

@@ -7,7 +7,6 @@ from django.db.models import Q
 
 # Create your views here.
 
-
 @login_required
 def all_jobs(request):
     """
@@ -16,31 +15,31 @@ def all_jobs(request):
     # Get current logged in User
     user = request.user
 
-    # Get the search term from all_jobs search box when user presses search button
-    user_query = request.GET.get("search_term")
+    # Get the search term from search box or status filter
+    search_query = request.GET.get("search_term")
+    status_filter = request.GET.get("status_filter")
 
-    # If user is engineer display related to assigned user jobs else display all the jobs
+    # If user is engineer display assigned engineer jobs else display all the jobs in job_list variable
     if user.profile.role == "Engineer":
 
-        # If user entered a query render filtered jobs else get user assigned jobs
-        if user_query:
-            filtered_job_list = Job.objects.filter(assigned_engineer=user).filter(Q(job_title__icontains=user_query) | Q(
-                address__icontains=user_query) | Q(city__icontains=user_query) | Q(post_code__icontains=user_query))
-            return render(request, 'all_jobs.html', {"job_list": filtered_job_list})
-        else:
-            job_list = Job.objects.filter(assigned_engineer=user)
-
-    # If admin entered a query render filtered jobs else get all jobs
+        job_list = Job.objects.filter(assigned_engineer=user)
     else:
-        if user_query:
-            filtered_job_list = Job.objects.filter(Q(job_title__icontains=user_query) | Q(
-                address__icontains=user_query) | Q(city__icontains=user_query) | Q(post_code__icontains=user_query))
-            return render(request, 'all_jobs.html', {"job_list": filtered_job_list})
-        else:
-            job_list = Job.objects.all()
-    # If no search query entered render jobs based on role
-    return render(request, 'all_jobs.html', {"job_list": job_list})
+        job_list = Job.objects.all()
 
+    # If search query then filter the existing job_list variable mutate it and give the results
+    if search_query:
+        job_list = job_list.filter(
+            Q(job_title__icontains=search_query) | 
+            Q(address__icontains=search_query) | 
+            Q(city__icontains=search_query) | 
+            Q(post_code__icontains=search_query))
+        
+    # If status query then filter the existing job_list variable mutate it and give the results
+    if status_filter:
+        job_list = job_list.filter(status=status_filter)
+        
+    # Finally render job list based on above conditions
+    return render(request, 'all_jobs.html', {"job_list": job_list})
 
 @login_required
 def edit_job(request):

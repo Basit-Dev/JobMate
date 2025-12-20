@@ -34,7 +34,7 @@ class JobForm(forms.ModelForm):
 
             'priority': forms.Select(attrs={'class': 'form-select'}),
             'category': forms.Select(attrs={'class': 'form-select'}),
-            'status': forms.Select(attrs={'class': 'form-select'}),
+            'status': forms.Select(attrs={'class': 'form-select', 'name': 'status_term'}),
 
             'description': forms.Textarea(attrs={'class': 'form-control', 'rows': 4, 'placeholder': 'Job description (min 20 characters)'}),
 
