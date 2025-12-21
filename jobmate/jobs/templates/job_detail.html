@@ -16,22 +16,34 @@
 <!-- JOB DETAILS -->
 <div>
   <strong class="fs-2 fw-bold">Job Details</strong>
-  <p class="fs-6 text-muted"># JM-2025-0142 • Created: Jan 15, 2025</p>
+  <p class="fs-6 text-muted">#JOB-{{ job.id }} • Created: {{ job.created_at }}</p>
 </div>
 
 <!-- STATUS -->
 <div class="status-header">
 
-  <!-- Status Badge -->
+  <!-- Priority Badge -->
   <div class="d-flex align-items-center gap-3">
+    <p class="m-0">Priority:</p>
+    <span class="badge rounded-pill px-3 py-2     
+    {% if job.priority == 'high' %} badge-high
+      {% elif job.priority == 'medium' %}badge-medium
+      {% elif job.priority == 'low' %}badge-low
+    {% endif %}">{{ job.priority }}</span>
+
+    <!-- Status Badge -->
     <p class="m-0">Status:</p>
-    <span class="badge rounded-pill bg-warning text-dark px-3 py-2">In Progress</span>
-    <span class="badge rounded-pill bg-danger px-3 py-2">Priority: High</span>
+    <span class="badge rounded-pill px-3 py-2
+    {% if job.status == 'pending' %}badge-pending
+      {% elif job.status == 'in_progress' %}badge-progress
+      {% elif job.status == 'completed' %}badge-completed
+      {% elif job.status == 'cancelled' %}bg-danger
+    {% endif %}">{{ job.status }}</span>
   </div>
 
   <!-- Last Updated -->
   <div>
-    <i class="bi bi-clock me-1"></i> Last Updated: Jan 18, 2025 at 2:30 PM
+    <i class="bi bi-clock me-1"></i> Last Updated: {{ job.updated_at }}
   </div>
 </div>
 
@@ -48,27 +60,34 @@
         <div class="row g-3">
           <div class="col-md-6">
             <p class="mb-1 text-muted small">Title</p>
-            <p class="fw-semibold">Kitchen Sink Repair - Apartment 3B</p>
+            <p class="fw-semibold">{{ job.job_title }}</p>
           </div>
           <div class="col-md-6">
             <p class="mb-1 text-muted small">Category</p>
-            <p><span class="badge bg-light text-primary border">Plumbing</span></p>
+            <p><span class="badge bg-light text-primary border">{{ job.get_category_display }}</span></p>
           </div>
           <div class="col-md-6">
-            <p class="mb-1 text-muted small">Property</p>
-            <p class="fw-semibold">Riverside Apartments</p>
+            <p class="mb-1 text-muted small">Address</p>
+            <p class="fw-semibold">{{ job.address }}</p>
           </div>
-          <div class="col-md-6">
-            <p class="mb-1 text-muted small">Unit</p>
-            <p>Apartment 3B</p>
+          <div class="col-md-6 d-flex gap-5">
+            <div>
+              <p class="mb-1 text-muted small">City</p>
+              <p class="fw-semibold">{{ job.city }}</p>
+            </div>
+            <div>
+              <p class="mb-1 text-muted small">Post Code</p>
+              <p class="fw-semibold">{{ job.post_code }}</p>
+            </div>
+
           </div>
           <div class="col-md-6">
             <p class="mb-1 text-muted small">Requested By</p>
-            <p>Sarah Johnson (Property Manager)</p>
+            <p>{{ user.first_name }} {{ user.last_name }}</p>
           </div>
           <div class="col-md-6">
             <p class="mb-1 text-muted small">Assigned Engineer</p>
-            <p>Mike Wilson</p>
+            <p>{{ job.assigned_engineer.first_name }} {{ job.assigned_engineer.last_name }}</p>
           </div>
         </div>
       </div>
@@ -81,21 +100,17 @@
       </div>
       <div class="card-body">
         <p>
-          The kitchen sink in apartment 3B has developed a persistent leak from the main faucet.
-          The tenant reported water dripping continuously, which is causing water damage to the cabinet below.
+          {{ job.description }}
         </p>
-        <p>
-          Initial assessment suggests the issue may be with the faucet cartridge or O-ring seals.
-          The leak appears to worsen when the hot water tap is used.
-        </p>
+        <!-- Will add a filed to the model later -->
         <p class="text-danger fw-semibold">
           Urgent repair needed to prevent further water damage and tenant inconvenience.
         </p>
       </div>
     </div>
 
-    <!-- Job Updates -->
-    <div class="card border-0 shadow-sm">
+    <!-- Job Updates To be added later -->
+    <!-- <div class="card border-0 shadow-sm">
       <div class="card-header">
         <i class="bi bi-chat-dots-fill me-2"></i>Job Updates
       </div>
@@ -126,7 +141,7 @@
             damage risk.</p>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 
   <!-- RIGHT SECTION -->
@@ -140,27 +155,38 @@
       <div class="card-body small">
         <div class="d-flex justify-content-between mb-2">
           <span>Status:</span>
-          <span class="badge bg-warning text-dark">In Progress</span>
+          <span class="badge rounded-pill px-3 py-2
+          {% if job.status == 'pending' %}badge-pending
+            {% elif job.status == 'in_progress' %}badge-progress
+            {% elif job.status == 'completed' %}badge-completed
+            {% elif job.status == 'cancelled' %}bg-danger
+          {% endif %}">{{ job.status }}</span>
         </div>
         <div class="d-flex justify-content-between mb-2">
           <span>Priority:</span>
-          <span class="badge bg-danger">High</span>
+          <span class="badge rounded-pill px-3 py-2     
+          {% if job.priority == 'high' %} badge-high
+            {% elif job.priority == 'medium' %}badge-medium
+            {% elif job.priority == 'low' %}badge-low
+          {% endif %}">{{ job.priority }}</span>
         </div>
         <hr>
         <div class="d-flex justify-content-between mb-2">
-          <span>Due Date:</span><strong>Jan 20, 2025</strong>
+          <span>Due Date:</span><strong>{{ job.due_date }}</strong>
         </div>
         <div class="d-flex justify-content-between mb-2">
-          <span>Estimated Hrs:</span><strong>4</strong>
+          <span>Estimated Hrs:</span><strong>{{ job.estimated_hours}}</strong>
         </div>
         <div class="d-flex justify-content-between mb-2">
-          <span>Estimated Cost:</span><strong class="text-primary">£85.00</strong>
+          <span>Estimated Cost:</span><strong class="text-primary">£{{ job.job_cost}}</strong>
         </div>
         <div class="d-flex justify-content-between mb-2">
-          <span>Actual Hrs:</span><strong>24</strong>
+           <!-- To be added when cart is implented -->
+          <span>Actual Hrs:</span><strong></strong>
         </div>
         <div class="d-flex justify-content-between">
-          <span>Actual Cost:</span><strong class="text-success">£285.00</strong>
+          <!-- To be added when cart is implented -->
+          <span>Actual Cost:</span><strong class="text-success"></strong>
         </div>
       </div>
     </div>
@@ -172,21 +198,20 @@
       </div>
       <div class="card-body small">
         <p class="fw-semibold mb-1">Tenant</p>
-        <p class="mb-2">Emily Davis<br>
-          <a href="mailto:emily.davis@email.com">emily.davis@email.com</a><br>
-          (555) 123-4567
+        <p class="mb-2">{{ job.tenant_name }}<br>
+          {{ job.tenant_phone }}<br>
+          <a href="mailto:{{ job.tenant_email }}">{{ job.tenant_email }}</a><br>
         </p>
-
         <p class="fw-semibold mb-1">Property Manager</p>
-        <p>Sarah Johnson<br>
-          <a href="mailto:sarah.j@riverside.com">sarah.j@riverside.com</a><br>
-          (555) 987-6543
+        <p>{{ user.first_name }} {{user.last_name}}<br>
+          <a href="mailto:sarah.j@riverside.com">{{ user.email }}</a><br>
+          {{ user.profile.phone_number }}
         </p>
       </div>
     </div>
 
-    <!-- Attachments -->
-    <div class="card border-0 shadow-sm">
+    <!-- Attachments To be added later -->
+    <!-- <div class="card border-0 shadow-sm">
       <div class="card-header">
         <i class="bi bi-paperclip me-2"></i>Attachments
       </div>
@@ -206,12 +231,12 @@
           <a href="#" class="text-decoration-none"><i class="bi bi-download"></i></a>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <!-- COMPLETE JOB BUTTON -->
     <a href="{% url 'cart:basket' %}" class="text-decoration-none text-white">
       <button class="btn btn-primary w-100 py-2 mt-2 d-flex align-items-center justify-content-center gap-2">
-      <i class="bi bi-check2-circle fs-5"></i> Complete Job
+        <i class="bi bi-check2-circle fs-5"></i> Complete Job
       </button>
     </a>
 

@@ -14,6 +14,9 @@ class JobForm(forms.ModelForm):
             'address',
             'city',
             'post_code',
+            'tenant_name',
+            'tenant_phone',
+            'tenant_email',
             'priority',
             'category',
             'status',
@@ -31,6 +34,10 @@ class JobForm(forms.ModelForm):
             'address': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter full address'}),
             'city': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'City'}),
             'post_code': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Postcode'}),
+            
+            'tenant_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Name'}),
+            'tenant_phone': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Phone'}),
+            'tenant_email': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Email'}),
 
             'priority': forms.Select(attrs={'class': 'form-select'}),
             'category': forms.Select(attrs={'class': 'form-select'}),

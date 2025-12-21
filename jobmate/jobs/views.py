@@ -21,7 +21,6 @@ def all_jobs(request):
 
     # If user is engineer display assigned engineer jobs else display all the jobs in job_list variable
     if user.profile.role == "Engineer":
-
         job_list = Job.objects.filter(assigned_engineer=user)
     else:
         job_list = Job.objects.all()
@@ -50,11 +49,26 @@ def edit_job(request):
 
 
 @login_required
-def job_detail(request):
+def job_detail(request, job_id):
     """
     This view renders the job detail page
     """
-    return render(request, 'job_detail.html')
+    # Get current logged in User
+    user = request.user
+    
+    # Get the job ID
+    job = Job.objects.get(pk=job_id)
+    
+     # Admins can view all jobs
+    if user.profile.role == "Admin":
+        return render(request, "job_detail.html", {"job": job})
+    
+    # Only assigned engineer can view their job
+    if job.assigned_engineer == user:
+        return render(request, "job_detail.html", {"job": job})
+    
+    # Else render the all jobs page showing the no jobs found message
+    return render(request, 'all_jobs.html')
 
 
 @login_required

@@ -44,21 +44,39 @@ Create New Job | JobMate{% endblock %} {% block content %}
           </div>
 
           <!-- Address -->
-          <div class="col-12">
+          <div class="col-4">
             <label class="form-label">Address<span class="text-danger">*</span></label>
             {{ create_job_form.address}}
           </div>
 
           <!-- City -->
-          <div class="col-md-6">
+          <div class="col-md-4">
             <label class="form-label">City<span class="text-danger">*</span></label>
             {{ create_job_form.city}}
           </div>
 
           <!-- Post Code -->
-          <div class="col-md-6">
+          <div class="col-md-4">
             <label class="form-label">Post Code<span class="text-danger">*</span></label>
             {{ create_job_form.post_code}}
+          </div>
+
+           <!-- Tenant Name -->
+          <div class="col-md-4">
+            <label class="form-label">Tenant Name<span class="text-danger">*</span></label>
+            {{ create_job_form.tenant_name}}
+          </div>
+
+           <!-- Tenant Phone -->
+          <div class="col-md-4">
+            <label class="form-label">Tenant Phone<span class="text-danger">*</span></label>
+            {{ create_job_form.tenant_phone}}
+          </div>
+
+           <!-- Tenant email -->
+          <div class="col-md-4">
+            <label class="form-label">Tenant Email<span class="text-danger">*</span></label>
+            {{ create_job_form.tenant_email}}
           </div>
 
           <!-- Priority -->

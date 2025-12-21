@@ -34,6 +34,25 @@ class Job(models.Model):
     address = models.CharField(max_length=200)
     city = models.CharField(max_length=100)
     post_code = models.CharField(max_length=20)
+    
+    # Tenant details
+    tenant_name = models.CharField(
+        max_length=100,
+        null=True,
+        blank=True
+    )
+
+    tenant_phone = models.CharField(
+        max_length=20,
+        null=True,
+        blank=True
+    )
+
+    tenant_email = models.EmailField(
+        max_length=254,
+        null=True,
+        blank=True
+    )
 
     # Priority and category
     priority = models.CharField(
