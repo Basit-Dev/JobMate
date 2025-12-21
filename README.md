@@ -391,6 +391,21 @@ As a **Engineer**:
 
 ---
 
+## Manual Tests Outcome Results
+
+| Test View             | Description                                                                                             | Status |
+|-----------------------|---------------------------------------------------------------------------------------------------------|--------|
+| `signup`              | Signup page load, successful signup, duplicate email handling, and password mismatch validation         | Passed |
+| `login`               | Login page load, successful login, and invalid email/password validation                                | Passed |
+| `password_reset`      | Password reset page loads, successful reset, and sign-in with new password                              | Passed |
+| `page_access`         | Registered users can access protected pages and public pages are accessible to all users                | Passed |
+| `home`                | Home page loads successfully                                                                            | Passed |
+| `cart_pages_access`   | Verifies that only registered users can access cart-related pages                                       | Passed |
+| `profile`             | User profile and bank information load when logged in and that updates are saved successfully           | Passed |   
+| `create_job`          | Page loads correctly, all fields submitted, job data saved (verified in admin) - redirects to all jobs  | Passed |
+
+---
+
 ## Credits and Acknowledge
 
 - Design ideas to Dribble amd Mobbin
