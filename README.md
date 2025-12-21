@@ -343,6 +343,7 @@ As a **Engineer**:
 | `test_cart_pages_access.py`   | Registered users can only access cart pages                                                   | Passed |
 | `test_profile.py`             | Test user, profile, bank info loads when logged in and updates and saves data successfully,   | Passed |    
 |                               | Password change updates and user can log in with new password                                 | Passed |
+| `test_create_job.py`          | Test a job can be created                                                                     | Passed |
 
 ---
 
@@ -381,6 +382,11 @@ As a **Engineer**:
 <p align="center">
   <strong>test_profile</strong><br>
   <img src="documentation/test_logs/test_profile.png" alt="Test profile page" width="300" />
+</p>
+
+<p align="center">
+  <strong>test_create_job</strong><br>
+  <img src="documentation/test_logs/test_create_job.png" alt="Test create job" width="300" />
 </p>
 
 ---
