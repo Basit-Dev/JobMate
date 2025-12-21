@@ -7,6 +7,7 @@ from django.db.models import Q
 
 # Create your views here.
 
+
 @login_required
 def all_jobs(request):
     """
@@ -28,24 +29,49 @@ def all_jobs(request):
     # If search query then filter the existing job_list variable mutate it and give the results
     if search_query:
         job_list = job_list.filter(
-            Q(job_title__icontains=search_query) | 
-            Q(address__icontains=search_query) | 
-            Q(city__icontains=search_query) | 
+            Q(job_title__icontains=search_query) |
+            Q(address__icontains=search_query) |
+            Q(city__icontains=search_query) |
             Q(post_code__icontains=search_query))
-        
+
     # If status query then filter the existing job_list variable mutate it and give the results
     if status_filter:
         job_list = job_list.filter(status=status_filter)
-        
+
     # Finally render job list based on above conditions
     return render(request, 'all_jobs.html', {"job_list": job_list})
 
+
 @login_required
-def edit_job(request):
+def edit_job(request, job_id):
     """
     This view renders the edit job page
     """
-    return render(request, 'edit_job.html')
+
+    # Get current logged in User
+    user = request.user
+
+    # Get the job ID
+    job = Job.objects.get(pk=job_id)
+
+    # If post request save the new data using the job instance else GET the job instace as a form with existing data
+    if request.method == "POST":
+        job_edit_form = JobForm(request.POST, instance=job)
+        if job_edit_form.is_valid():
+            job_edit_form.save()
+            messages.success(request, 'Job details was successfully updated!')
+            return redirect("jobs:all_jobs")
+    else:
+        job_edit_form = JobForm(instance=job)
+
+    # Admins can only have access to editing job
+    if user.profile.role == "Admin":
+        return render(request, "edit_job.html", {"job_edit_form": job_edit_form})
+
+    # Anyone other than admin cant view urls or the jobs to edit and get redirected to all_jobs page
+    return render(request, 'all_jobs.html')
+
+
 
 
 @login_required
@@ -55,18 +81,18 @@ def job_detail(request, job_id):
     """
     # Get current logged in User
     user = request.user
-    
+
     # Get the job ID
     job = Job.objects.get(pk=job_id)
-    
-     # Admins can view all jobs
+
+    # Admins can view all jobs
     if user.profile.role == "Admin":
         return render(request, "job_detail.html", {"job": job})
-    
+
     # Only assigned engineer can view their job
     if job.assigned_engineer == user:
         return render(request, "job_detail.html", {"job": job})
-    
+
     # Else render the all jobs page showing the no jobs found message
     return render(request, 'all_jobs.html')
 

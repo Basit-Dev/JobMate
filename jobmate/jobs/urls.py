@@ -10,7 +10,7 @@ app_name = 'jobs'
 urlpatterns = [
     path('all_jobs/', views.all_jobs, name='all_jobs'),
     path('create_job/', views.create_job, name='create_job'),
-    path('edit_job/', views.edit_job, name='edit_job'),
+    path('edit_job/<int:job_id>', views.edit_job, name='edit_job'),
     path('job_detail/<int:job_id>/', views.job_detail, name='job_detail'),
     path('delete_job/', views.delete_job, name='delete_job'),
 ]
