@@ -345,6 +345,7 @@ As a **Engineer**:
 |                               | Password change updates and user can log in with new password                                 | Passed |
 | `test_create_job.py`          | Test a job can be created                                                                     | Passed |
 | `test_display_all_jobs.py`    | Tests creates jobs and checks if it has been created                                          | Passed |
+| `test_edit_job.py`            | Creates a new job and tests if it can be updated                                              | Passed |
 
 ---
 
@@ -395,6 +396,11 @@ As a **Engineer**:
   <img src="documentation/test_logs/test_display_all_jobs.png" alt="Test display all jobs" width="300" />
 </p>
 
+<p align="center">
+  <strong>test_edit_job</strong><br>
+  <img src="documentation/test_logs/test_edit_job.png" alt="Test edit job" width="300" />
+</p>
+
 ---
 
 ## Manual Tests Outcome Results
@@ -411,6 +417,7 @@ As a **Engineer**:
 | `create_job`          | Page loads correctly, all fields submitted, job data saved (verified in admin) - redirects to all jobs  | Passed |
 | `all_jobs`            | Jobs are displayed with. all submitted data                                                             | Passed |
 | `engineer_job_access` | Verifies that engineers can only view jobs assigned to them, while administrators can view all jobs     | Passed |
+| `edit_job`            | Verified that a job loads correctly by ID, all job fields are rendered, job sumbits and redirects       | Passed |
 
 ---
 
