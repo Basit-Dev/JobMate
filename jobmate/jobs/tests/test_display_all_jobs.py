@@ -13,7 +13,7 @@ from jobs.models import Job
 
 User = get_user_model()
 
-class JobDisplayAllTest(TestCase):
+class TestDisplayAllJobs(TestCase):
 
     # SETUP ENGINEER 
     def setUp(self):

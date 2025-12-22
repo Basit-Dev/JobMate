@@ -401,6 +401,7 @@ As a **Engineer**:
   <img src="documentation/test_logs/test_edit_job.png" alt="Test edit job" width="300" />
 </p>
 
+
 ---
 
 ## Manual Tests Outcome Results
@@ -415,7 +416,7 @@ As a **Engineer**:
 | `cart_pages_access`   | Verifies that only registered users can access cart-related pages                                       | Passed |
 | `profile`             | User profile and bank information load when logged in and that updates are saved successfully           | Passed |   
 | `create_job`          | Page loads correctly, all fields submitted, job data saved (verified in admin) - redirects to all jobs  | Passed |
-| `all_jobs`            | Jobs are displayed with. all submitted data                                                             | Passed |
+| `all_jobs`            | Jobs are displayed with all submitted data, engineers can view their own jobs only                      | Passed |
 | `engineer_job_access` | Verifies that engineers can only view jobs assigned to them, while administrators can view all jobs     | Passed |
 | `edit_job`            | Verified that a job loads correctly by ID, all job fields are rendered, job sumbits and redirects       | Passed |
 
