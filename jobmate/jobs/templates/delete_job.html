@@ -17,7 +17,8 @@ JobMate {% endblock %} {% block body %}
 <div class="delete-wrapper">
 
     <!-- DELETE CONTAINER -->
-    <div class="delete-container card shadow border-0">
+    <form class="delete-container card shadow border-0" method="POST">
+    {% csrf_token %}
 
         <!-- Header -->
         <div class="card-header bg-danger-subtle text-center py-4 rounded-top">
@@ -35,27 +36,32 @@ JobMate {% endblock %} {% block body %}
                 <div>
                     <div class="d-flex justify-content-between flex-wrap mt-3">
                         <small class="text-muted d-block">Job Title</small>
-                        <span class="fw-semibold">Kitchen Sink Repair - Apartment 3B</span>
+                        <span class="fw-semibold">{{ job.job_title }}</span>
                     </div>
                     <div class="d-flex justify-content-between flex-wrap mt-3">
                         <small class="text-muted d-block">Job ID</small>
-                        <span class="fw-semibold">#JM-2025-0142</span>
+                        <span class="fw-semibold">#{{ job.id }}</span>
                     </div>
                     <div class="d-flex justify-content-between flex-wrap mt-3">
                         <small class="text-muted d-block">Assigned Engineer</small>
-                        <span class="fw-semibold">John Doe</span>
+                        <span class="fw-semibold">{{ job.assigned_engineer.first_name }} {{ job.assigned_engineer.last_name }}</span>
                     </div>
                     <div class="d-flex justify-content-between flex-wrap mt-3">
-                        <small class="text-muted d-block">Property</small>
-                        <span class="fw-semibold">Riverside Apartments</span>
+                        <small class="text-muted d-block">Address</small>
+                        <span class="fw-semibold">{{ job.address }}, {{ job.post_code }}</span>
                     </div>
                     <div class="d-flex justify-content-between flex-wrap mt-3">
                         <small class="text-muted d-block">Status</small>
-                        <span class="badge bg-warning text-dark">In Progress</span>
+                        <span class="Badge badge-rounded
+                        {% if job.status == 'pending' %}badge-pending
+                            {% elif job.status == 'in_progress' %}badge-progress
+                            {% elif job.status == 'completed' %}badge-completed
+                            {% elif job.status == 'cancelled' %}bg-danger text-white
+                        {% endif %}">{{ job.get_status_display }}</span>
                     </div>
                     <div class="d-flex justify-content-between flex-wrap mt-3">
                         <small class="text-muted d-block">Created</small>
-                        <span class="fw-semibold">Jan 15, 2025</span>
+                        <span class="fw-semibold">{{ job.created_at }}</span>
                     </div>
                 </div>
             </div>
@@ -85,14 +91,15 @@ JobMate {% endblock %} {% block body %}
             <!-- CANCEL BUTTON -->
             <button
                 class="btn btn-outline-secondary border-0 bg-light w-100 py-2 mt-2 d-flex align-items-center justify-content-center gap-2">
-                <a href="{% url 'jobs:all_jobs' %}" class="text-decoration-none text-muted"><i class="bi bi-x-lg fs-5"></i> Cancel</a>
+                <a href="{% url 'jobs:all_jobs' %}" class="text-decoration-none text-muted"><i
+                        class="bi bi-x-lg fs-5"></i> Cancel</a>
             </button>
             <!-- DELETE JOB BUTTON -->
-            <button class="btn btn-danger w-100 py-2 mt-2 d-flex align-items-center justify-content-center gap-2">
+            <button type="submit" class="btn btn-danger w-100 py-2 mt-2 d-flex align-items-center justify-content-center gap-2">
                 <i class="bi bi-trash fs-5"></i>Delete Job
             </button>
         </div>
-    </div>
+    </form>
 </div>
 
 {% endblock %}

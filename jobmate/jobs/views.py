@@ -72,8 +72,6 @@ def edit_job(request, job_id):
     return render(request, 'all_jobs.html')
 
 
-
-
 @login_required
 def job_detail(request, job_id):
     """
@@ -98,13 +96,30 @@ def job_detail(request, job_id):
 
 
 @login_required
-def delete_job(request):
+def delete_job(request, job_id):
     """
     This view renders the delete job page
     """
-    return render(request, 'delete_job.html')
+    # Get current logged in User
+    user = request.user
 
-# CREATE NEW JOB
+    # If admin tsends a post request, form is submitted, get the job id, delete job, show message, redirect to all jobs
+    # Otherwise if job does not exit then redirect to all jobs and show message
+    if user.profile.role == "Admin":
+        try:
+            job = Job.objects.get(pk=job_id)
+            if request.method == "POST":
+                job.delete()
+                messages.success(request, 'Job details was successfully deleted!')
+                return redirect("jobs:all_jobs")
+            return render(request, "delete_job.html", {"job": job})
+        except Job.DoesNotExist:
+            messages.success(request, 'Does Not Exist!')
+            return redirect("jobs:all_jobs")
+        # If NOT admin then show message and redirect to all jobs
+    else: 
+        messages.success(request, 'Does Not Exist!')
+        return redirect("jobs:all_jobs")
 
 
 @login_required
