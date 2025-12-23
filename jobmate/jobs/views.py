@@ -20,7 +20,7 @@ def all_jobs(request):
     status_filter = request.GET.get("status_filter")
 
     # If user is engineer display assigned engineer jobs else display all the jobs in job_list variable
-    if user.profile.role == "Engineer":
+    if user.profile.role != "Admin":
         job_list = Job.objects.filter(assigned_engineer=user)
     else:
         job_list = Job.objects.all()
