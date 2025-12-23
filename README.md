@@ -418,7 +418,10 @@ As a **Engineer**:
 | `create_job`          | Page loads correctly, all fields submitted, job data saved (verified in admin) - redirects to all jobs  | Passed |
 | `all_jobs`            | Jobs are displayed with all submitted data, engineers can view their own jobs only                      | Passed |
 | `engineer_job_access` | Verifies that engineers can only view jobs assigned to them, while administrators can view all jobs     | Passed |
-| `edit_job`            | Verified that a job loads correctly by ID, all job fields are rendered, job sumbits and redirects       | Passed |
+| `edit_job`            | Job loads correctly by ID, all job fields are rendered, omly admin can view, job submits and redirects  | Passed |
+| `delete_job`          | Admin can only view & delete job, checked in UI and admin panel and record removed from DB              | Passed |
+| `any job id in url`   | If a ID is entered manually in url, then no jobs found loads                                            | Passed |
+| `404`                 | Unknown urls displays a 404.html page                                                                   | Passed |
 
 ---
 
