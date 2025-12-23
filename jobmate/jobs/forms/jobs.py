@@ -29,26 +29,26 @@ class JobForm(forms.ModelForm):
 
         # Displays the input styles to match bootstrap
         widgets = {
-            'job_title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter job title'}),
-            'property_owner': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Property owner name'}),
-            'address': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter full address'}),
-            'city': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'City'}),
-            'post_code': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Postcode'}),
+            'job_title': forms.TextInput(attrs={'class': 'form-control input', 'placeholder': 'Enter job title'}),
+            'property_owner': forms.TextInput(attrs={'class': 'form-control input', 'placeholder': 'Property owner name'}),
+            'address': forms.TextInput(attrs={'class': 'form-control input', 'placeholder': 'Enter full address'}),
+            'city': forms.TextInput(attrs={'class': 'form-control input', 'placeholder': 'City'}),
+            'post_code': forms.TextInput(attrs={'class': 'form-control input', 'placeholder': 'Postcode'}),
             
-            'tenant_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Name'}),
-            'tenant_phone': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Phone'}),
-            'tenant_email': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Email'}),
+            'tenant_name': forms.TextInput(attrs={'class': 'form-control input', 'placeholder': 'Name'}),
+            'tenant_phone': forms.TextInput(attrs={'class': 'form-control input', 'placeholder': 'Phone'}),
+            'tenant_email': forms.TextInput(attrs={'class': 'form-control input', 'placeholder': 'Email'}),
 
-            'priority': forms.Select(attrs={'class': 'form-select'}),
-            'category': forms.Select(attrs={'class': 'form-select'}),
-            'status': forms.Select(attrs={'class': 'form-select', 'name': 'status_term'}),
+            'priority': forms.Select(attrs={'class': 'form-select input'}),
+            'category': forms.Select(attrs={'class': 'form-select input'}),
+            'status': forms.Select(attrs={'class': 'form-select input', 'name': 'status_term'}),
 
-            'description': forms.Textarea(attrs={'class': 'form-control', 'rows': 4, 'placeholder': 'Job description (min 20 characters)'}),
+            'description': forms.Textarea(attrs={'class': 'form-control input', 'rows': 4, 'placeholder': 'Job description (min 20 characters)'}),
 
-            'due_date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+            'due_date': forms.DateInput(attrs={'class': 'form-control input', 'type': 'date'}),
 
-            'estimated_hours': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Estimated hours'}),
-            'job_cost': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Job cost (£)'}),
+            'estimated_hours': forms.NumberInput(attrs={'class': 'form-control input', 'placeholder': 'Estimated hours'}),
+            'job_cost': forms.NumberInput(attrs={'class': 'form-control input', 'placeholder': 'Job cost (£)'}),
 
-            'assigned_engineer': forms.Select(attrs={'class': 'form-select'}),
+            'assigned_engineer': forms.Select(attrs={'class': 'form-select input'}),
         }

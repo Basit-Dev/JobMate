@@ -37,20 +37,31 @@ Adjustment | JobMate{% endblock %} {% block content %}
 
       <!-- PRICING INFORMATION -->
       <p class="fw-normal mb-3 fs-5">Pricing Information</p>
-      <label class="form-label">Job Cost</label>
+
 
       <!-- Job Cost -->
       <div class="row g-2 mb-3">
-        <div class="col-12 col-md-6">
+
+        <div class="col-12 col-md-4">
+          <label class="form-label">Job Cost</label>
           <div class="input-group">
             <span class="input-group-text">£</span>
             <pro class="form-control mb-0">2,500.00</pro>
           </div>
         </div>
 
+        <!-- Job Hours -->
+        <div class="col-12 col-md-4">
+          <label class="form-label">Job Hours</label>
+          <div class="input-group">
+            <span class="input-group-text">&#x23F2</span>
+            <pro class="form-control mb-0">2.5</pro>
+          </div>
+        </div>
+
         <!-- Add Adjustment Button: On btn click it will add a new section -->
-        <div class="col-12 col-md-auto">
-          <button type="button" class="btn btn-primary w-100 w-md-auto h-100">
+        <div class="col-12 col-md-auto d-flex align-items-end">
+          <button type="button" class="btn btn-primary px-4 py-2 w-100" style="line-height: 1.7;">
             <i class="bi bi-plus-lg me-1"></i> Add Adjustment
           </button>
         </div>
@@ -87,7 +98,7 @@ Adjustment | JobMate{% endblock %} {% block content %}
 
         <!-- Reason -->
         <label class="form-label">Reason</label>
-        <input type="text" class="form-control" name="adjustment_reason"/>
+        <input type="text" class="form-control" name="adjustment_reason" />
       </div>
 
       <!-- Adjustment 2 -->
@@ -116,7 +127,7 @@ Adjustment | JobMate{% endblock %} {% block content %}
 
         <!-- Reason -->
         <label class="form-label">Reason</label>
-        <input type="text" class="form-control" name="adjustment_reason"/>
+        <input type="text" class="form-control" name="adjustment_reason" />
       </div>
 
       <!-- JOB DESCRIPTION -->

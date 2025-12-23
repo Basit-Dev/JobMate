@@ -22,6 +22,7 @@ html {
   --muted: #6b7280; /* Secondary text */
   --muted-2: #9aa3af; /* Subtle text */
   --footer-bg: #0f172a; /* Footer background */
+  --input: #f3f3f6; /* Input field background */
 
   /* UI */
   --card-radius: 14px;
@@ -30,6 +31,7 @@ html {
   --shadow-tile: 0 14px 30px rgba(37, 99, 235, 0.25);
   --shadow-cta: 0 10px 22px rgba(29, 78, 216, 0.25);
   --purple: #7e22ce;
+  --input-border: #D1D5DB;
 
   /* Layout */
   --topbar-h: 66px;
