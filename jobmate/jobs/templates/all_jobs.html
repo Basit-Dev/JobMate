@@ -69,7 +69,7 @@
   <div>
     <div class="table-container">
       <div class="table-header">All Jobs ({{ job_list.count }})</div>
-      <div class="table-responsive p-2">
+      <div class="table-responsive p-3">
         <table class="table align-middle mb-0">
           <!-- Table Head -->
           <thead class="table-head">
@@ -89,7 +89,7 @@
           <tbody>
             <!-- Job Row -->
             {% for job in job_list %}
-            <tr>
+            <tr class="test">
               <td data-label="Job Title">
                 <strong>{{ job.job_title}}</strong><br /><small class="text-muted">#JOB-{{ job.id }}</small>
               </td>
@@ -128,6 +128,7 @@
                   <a href="{% url 'jobs:delete_job' job_id=job.id %}" class="text-danger"><i class="bi bi-trash"></i></a>
                   {% endif %}
                 </div>
+                <hr class="table-hr">
               </td>
             </tr>
             <!-- If empty rows ie no jobs display message -->

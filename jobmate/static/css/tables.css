@@ -69,6 +69,11 @@
   color: white;
 }
 
+/* HR line for TR */
+.table-hr {
+  display: none;
+}
+
 /* Responsive Styles */
 @media screen and (max-width: 769px) {
   .search-col {
@@ -77,14 +82,14 @@
   .table thead {
     display: none;
   }
-  .table tbody tr {
+  /* .table tbody tr {
     display: block;
     margin-bottom: 1rem;
     background: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
     padding: 0.75rem;
-  }
+  } */
   .table tbody td {
     display: flex;
     flex-direction: column;
@@ -100,5 +105,11 @@
   .actions {
     display: flex;
     gap: 12px;
+  }
+
+  /* Job tr row shadow */
+  .table-hr {
+    display: block;
+    border: dashed 0.2px;
   }
 }
