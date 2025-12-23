@@ -78,7 +78,7 @@ def profile_settings(request):
 
         # Bootstrap styling for the password input fields
         for field in password_form.fields.values():
-            field.widget.attrs["class"] = "form-control"
+            field.widget.attrs["class"] = "form-control input"
             field.widget.attrs["placeholder"] = ""
             field.widget.attrs.pop("autofocus", None) # Remove focus when the profile page loads
 

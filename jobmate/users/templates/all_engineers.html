@@ -78,9 +78,16 @@
               <td data-label="Role">{{ engineer.profile.role }}</td>
               <td data-label="Engineer">{{ engineer.first_name }} {{ engineer.last_name }}</td>
               <td data-label="Status">
-                <span class="badge badge-rounded badge-completed">Active</span>
+                <span class="badge badge-rounded 
+                {% if engineer.profile.status == 'pending' %}badge-pending
+                  {% elif engineer.profile.status == 'in_active' %}badge-progress
+                  {% elif engineer.profile.status == 'active' %}badge-completed
+                  {% elif engineer.profile.status == 'left' %}bg-danger
+                {% endif %} ">
+                  {{ engineer.profile.get_status_display }}
+                </span>
               </td>
-              <td data-label="Created">Jan 15, 2025</td>
+              <td data-label="Created">{{ engineer.profile.created_at }}</td>
               <td data-label="Actions">
                 <div class="d-flex flex-row justify-content-around">
                   <a href="#" class="text-secondary me-2"><i class="bi bi-eye"></i></a>

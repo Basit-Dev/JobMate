@@ -12,6 +12,14 @@ class Profile(models.Model):
     #     ('engineer', 'Engineer'),
     # ]
 
+   # Status options
+    STATUS_CHOICES = [
+        ("pending", "Pending"),
+        ("active", "Active"),
+        ("in_active", "In-Active"),
+        ("left", "Left"),
+    ]
+    
     # 1 to 1 relationship link to extend Djangos user model: each User gets exactly one Profile that links with Django allauth User.
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
@@ -25,6 +33,13 @@ class Profile(models.Model):
         max_length=20,
         # choices=ROLE_CHOICES,  To be added later
         default='Engineer'
+    )
+    
+    # User status
+    status = models.CharField(
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default="active"
     )
 
     # Bank details
@@ -51,6 +66,9 @@ class Profile(models.Model):
         blank=True,
         null=True
     )
+       
+    # Dates
+    created_at = models.DateTimeField(auto_now_add=True)
 
     # This displays the profile name in the admin and shell
     def __str__(self):

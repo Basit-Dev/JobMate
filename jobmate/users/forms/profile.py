@@ -11,12 +11,14 @@ class ProfileForm(forms.ModelForm):
         fields = [
             'phone_number',
             'role',
+            'status',
         ]
 
         # Displays the input styles to match bootstrap
         widgets = {
-            "phone_number": forms.TextInput(attrs={"class": "form-control"}),
-            'role': forms.TextInput(attrs={'class': 'form-control',  'readonly': 'readonly'}), 
+            "phone_number": forms.TextInput(attrs={"class": "form-control input"}),
+            'role': forms.TextInput(attrs={'class': 'form-control input',  'readonly': 'readonly'}), 
+            'status': forms.Select(attrs={'class': 'form-select input', 'name': 'status_term'}),
         }
    
 
@@ -32,8 +34,8 @@ class BankDetailsForm(forms.ModelForm):
 
         # Displays the input styles to match bootstrap
         widgets = {
-            'bank_name': forms.TextInput(attrs={'class': 'form-control'}),
-            'account_holder': forms.TextInput(attrs={'class': 'form-control'}),
-            'account_number': forms.TextInput(attrs={'class': 'form-control'}),
-            'sort_code': forms.TextInput(attrs={'class': 'form-control'}),
+            'bank_name': forms.TextInput(attrs={'class': 'form-control input'}),
+            'account_holder': forms.TextInput(attrs={'class': 'form-control input'}),
+            'account_number': forms.TextInput(attrs={'class': 'form-control input'}),
+            'sort_code': forms.TextInput(attrs={'class': 'form-control input'}),
         }    
