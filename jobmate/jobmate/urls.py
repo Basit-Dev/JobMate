@@ -26,3 +26,6 @@ urlpatterns = [
     path('jobs/', include('jobs.urls')),
     path('cart/', include('cart.urls')),
 ]
+
+# 404 page handler
+handler404 = 'jobmate.views.custom_404'

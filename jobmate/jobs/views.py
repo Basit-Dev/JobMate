@@ -7,7 +7,6 @@ from django.db.models import Q
 
 # Create your views here.
 
-
 @login_required
 def all_jobs(request):
     """
