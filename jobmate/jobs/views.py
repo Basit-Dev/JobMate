@@ -1,11 +1,13 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from jobs.models import Job
 from jobs.forms.jobs import JobForm
 from django.contrib import messages
 from django.db.models import Q
+from helpers.permission_check import admin_required
 
 # Create your views here.
+
 
 @login_required
 def all_jobs(request):
@@ -42,16 +44,14 @@ def all_jobs(request):
 
 
 @login_required
+@admin_required
 def edit_job(request, job_id):
     """
     This view renders the edit job page
     """
 
-    # Get current logged in User
-    user = request.user
-
-    # Get the job ID
-    job = Job.objects.get(pk=job_id)
+    # Get the job ID if it doesnt exist return 404
+    job = get_object_or_404(Job, pk=job_id)
 
     # If post request save the new data using the job instance else GET the job instace as a form with existing data
     if request.method == "POST":
@@ -62,13 +62,7 @@ def edit_job(request, job_id):
             return redirect("jobs:all_jobs")
     else:
         job_edit_form = JobForm(instance=job)
-
-    # Admins can only have access to editing job
-    if user.profile.role == "Admin":
-        return render(request, "edit_job.html", {"job_edit_form": job_edit_form})
-
-    # Anyone other than admin cant view urls or the jobs to edit and get redirected to all_jobs page
-    return render(request, 'all_jobs.html')
+    return render(request, "edit_job.html", {"job_edit_form": job_edit_form})
 
 
 @login_required
@@ -79,49 +73,43 @@ def job_detail(request, job_id):
     # Get current logged in User
     user = request.user
 
-    # Get the job ID
-    job = Job.objects.get(pk=job_id)
+    # Get the job ID if it doesnt exist return 404
+    job = get_object_or_404(Job, pk=job_id)
 
-    # Admins can view all jobs
+    # # Admins can view all jobs
     if user.profile.role == "Admin":
         return render(request, "job_detail.html", {"job": job})
 
-    # Only assigned engineer can view their job
+    # # Only assigned engineer can view their job
     if job.assigned_engineer == user:
         return render(request, "job_detail.html", {"job": job})
 
-    # Else render the all jobs page showing the no jobs found message
-    return render(request, 'all_jobs.html')
+    # Everyone else → denied
+    messages.error(request, "You do not have permission to view this job.")
+    return redirect("jobs:all_jobs")
 
 
 @login_required
+@admin_required
 def delete_job(request, job_id):
     """
     This view renders the delete job page
     """
-    # Get current logged in User
-    user = request.user
 
-    # If admin tsends a post request, form is submitted, get the job id, delete job, show message, redirect to all jobs
-    # Otherwise if job does not exit then redirect to all jobs and show message
-    if user.profile.role == "Admin":
-        try:
-            job = Job.objects.get(pk=job_id)
-            if request.method == "POST":
-                job.delete()
-                messages.success(request, 'Job details was successfully deleted!')
-                return redirect("jobs:all_jobs")
-            return render(request, "delete_job.html", {"job": job})
-        except Job.DoesNotExist:
-            messages.success(request, 'Does Not Exist!')
-            return redirect("jobs:all_jobs")
-        # If NOT admin then show message and redirect to all jobs
-    else: 
-        messages.success(request, 'Does Not Exist!')
+    # Get the job ID if it doesnt exist return 404
+    job = get_object_or_404(Job, pk=job_id)
+
+    # Admin sends a post request, form is submitted, get the job id, delete job, show message, redirect to all jobs
+    if request.method == "POST":
+        job.delete()
+        messages.success(request, "Job deleted successfully.")
         return redirect("jobs:all_jobs")
+
+    return render(request, "delete_job.html", {"job": job})
 
 
 @login_required
+@admin_required
 def create_job(request):
 
     # POST JOB INFO
