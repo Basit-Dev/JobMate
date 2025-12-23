@@ -1,4 +1,4 @@
-{% extends "dashboard_base.html" %} 
+{% extends "dashboard_base.html" %}
 {% load static %}
 {% block title %}All Engineers | JobMate{% endblock %}
 {% block content %}
@@ -24,101 +24,76 @@
   <!-- Search Bar -->
   <div class="search-col col-12">
     <p class="section-subtitle">Search Engineers</p>
-    <div class="input-group">
+    <form class="input-group" method="GET">
+      {% csrf_token %}
       <input type="text" class="form-control" placeholder="Search engineers..." />
       <!-- Search Button -->
-      <button class="btn btn-secondary text-muted">
+      <button type="submit" class="btn btn-secondary text-muted">
         <i class="bi bi-search me-1"></i>Search
       </button>
-    </div>
+    </form>
   </div>
 </div>
 
-<!-- ENGINEER LIST -->
-<div>
-  <div class="table-container">
-    <div class="table-header">All Engineers (3)</div>
-    <div class="table-responsive p-2">
-      <table class="table align-middle mb-0">
+<!--MESSAGES TO DISPLAY -->
+{% for message in messages %}
+{% if message.tags == "error" %}
+<div class="alert alert-danger alert-dismissible fade show my-2" role="alert">
+  {% else %}
+  <div class="alert alert-{{ message.tags }} alert-dismissible fade show my-2" role="alert">
+    {% endif %}
+    {{ message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+  </div>
+  {% endfor %}
 
-        <!-- Table Head -->
-        <thead class="table-head">
-          <tr>
-            <th>Engineer #</th>
-            <th>Role</th>
-            <th>Engineer</th>
-            <th>Status</th>
-            <th>Created</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
+  <!-- ENGINEER LIST -->
+  <div>
+    <div class="table-container">
+      <div class="table-header">All Engineers ({{ engineer_list.count }})</div>
+      <div class="table-responsive p-2">
+        <table class="table align-middle mb-0">
 
-        <!-- Table Body -->
-        <tbody>
+          <!-- Table Head -->
+          <thead class="table-head">
+            <tr>
+              <th>Engineer #</th>
+              <th>Role</th>
+              <th>Engineer</th>
+              <th>Status</th>
+              <th>Joined</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
 
-          <!-- Engineer Row -->
-          <tr>
-            <td data-label="Engineer ID">
-              <P class="text-muted m-0">#ENG-001</P>
-            </td>
-            <td data-label="Role">Plumber</td>
-            <td data-label="Engineer">Mike Wilson</td>
-            <td data-label="Status">
-              <span class="badge badge-rounded badge-completed">Active</span>
-            </td>
-            <td data-label="Created">Jan 15, 2025</td>
-            <td data-label="Actions">
-              <div class="d-flex flex-row justify-content-around">
-                <a href="#" class="text-secondary me-2"><i class="bi bi-eye"></i></a>
-                <a href="#" class="text-primary me-2"><i class="bi bi-pencil"></i></a>
-                <a href="#" class="text-danger"><i class="bi bi-trash"></i></a>
-              </div>
-            </td>
-          </tr>
+          <!-- Table Body -->
+          <tbody>
 
-          <!-- Engineer Row -->
-          <tr>
-            <td data-label="Engineer ID">
-              <P class="text-muted m-0">#ENG-002</P>
-            </td>
-            <td data-label="Role">Carpenter</td>
-            <td data-label="Engineer">Joe Bloggs</td>
-            <td data-label="Status">
-              <span class="badge badge-rounded badge-completed">Active</span>
-            </td>
-            <td data-label="Created">Jan 15, 2025</td>
-            <td data-label="Actions">
-              <div class="d-flex flex-row justify-content-around">
-                <a href="#" class="text-secondary me-2"><i class="bi bi-eye"></i></a>
-                <a href="#" class="text-primary me-2"><i class="bi bi-pencil"></i></a>
-                <a href="#" class="text-danger"><i class="bi bi-trash"></i></a>
-              </div>
-            </td>
-          </tr>
-
-          <!-- Engineer Row -->
-          <tr>
-            <td data-label="EngineerID">
-              <P class="text-muted m-0">#ENG-001</P>
-            </td>
-            <td data-label="Role">Gas Engineer</td>
-            <td data-label="Engineer">Tom Jones</td>
-            <td data-label="Status">
-              <span class="badge badge-rounded badge-high">Un-Active</span>
-            </td>
-            <td data-label="Created">Jan 15, 2025</td>
-            <td data-label="Actions">
-              <div class="d-flex flex-row justify-content-around">
-                <a href="#" class="text-secondary me-2"><i class="bi bi-eye"></i></a>
-                <a href="#" class="text-primary me-2"><i class="bi bi-pencil"></i></a>
-                <a href="#" class="text-danger"><i class="bi bi-trash"></i></a>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+            <!-- Engineer Row -->
+            {% for engineer in engineer_list %}
+            <tr>
+              <td data-label="Engineer ID">
+                <P class="text-muted m-0">#ENG-{{ engineer.id }}</P>
+              </td>
+              <td data-label="Role">{{ engineer.profile.role }}</td>
+              <td data-label="Engineer">{{ engineer.first_name }} {{ engineer.last_name }}</td>
+              <td data-label="Status">
+                <span class="badge badge-rounded badge-completed">Active</span>
+              </td>
+              <td data-label="Created">Jan 15, 2025</td>
+              <td data-label="Actions">
+                <div class="d-flex flex-row justify-content-around">
+                  <a href="#" class="text-secondary me-2"><i class="bi bi-eye"></i></a>
+                  <a href="#" class="text-primary me-2"><i class="bi bi-pencil"></i></a>
+                  <a href="#" class="text-danger"><i class="bi bi-trash"></i></a>
+                </div>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
-</div>
 
-{% endblock %}
+  {% endblock %}

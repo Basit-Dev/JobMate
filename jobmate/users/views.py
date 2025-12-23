@@ -4,6 +4,7 @@ from users.forms.profile import ProfileForm, BankDetailsForm
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib import messages
+from django.contrib.auth import get_user_model
 
 # Create your views here.
 
@@ -20,11 +21,17 @@ def all_engineers(request):
     """
     This view renders the all engineers page
     """
-    return render(request, 'all_engineers.html')
+    
+    engineer_list = get_user_model().objects.all()
+    return render(request, 'all_engineers.html', {'engineer_list': engineer_list})
 
 # PROFILE SETTINGS
 @login_required
 def profile_settings(request):
+    """
+    This view renders the profile settings page
+    """
+    
     profile = request.user.profile
 
     # POST PERSONAL INFO
