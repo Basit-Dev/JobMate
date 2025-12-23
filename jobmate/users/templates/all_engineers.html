@@ -75,7 +75,7 @@
               <td data-label="Engineer ID">
                 <P class="text-muted m-0">#ENG-{{ engineer.id }}</P>
               </td>
-              <td data-label="Role">{{ engineer.profile.role }}</td>
+              <td data-label="Role">{{ engineer.profile.get_role_display }}</td>
               <td data-label="Engineer">{{ engineer.first_name }} {{ engineer.last_name }}</td>
               <td data-label="Status">
                 <span class="badge badge-rounded 
@@ -94,7 +94,13 @@
                   <a href="#" class="text-primary me-2"><i class="bi bi-pencil"></i></a>
                   <a href="#" class="text-danger"><i class="bi bi-trash"></i></a>
                 </div>
+                <hr class="table-hr">
               </td>
+            </tr>
+            <!-- If empty rows ie no jobs display message -->
+            {% empty %}
+            <tr>
+              <td colspan="8" class="text-danger">No jobs found!</td>
             </tr>
             {% endfor %}
           </tbody>

@@ -2,49 +2,56 @@ from allauth.account.forms import SignupForm
 from django import forms
 
 # Signup form
+
+
 class CustomSignupForm(SignupForm):
-  
-#   Custom fileds with Bootstrap classes
-  first_name = forms.CharField(
+
+    #   Custom fileds with Bootstrap classes
+    first_name = forms.CharField(
         max_length=50,
         widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'First Name'}),
         required=True
     )
-  last_name = forms.CharField(
+    last_name = forms.CharField(
         max_length=50,
-        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Last Name'})
-,       required=True
+        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Last Name'}), 
+        required=True
     )
-  email = forms.EmailField(
+    email = forms.EmailField(
         widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email Address'}),
         required=True
     )
-  
-  ROLE_CHOICES = [
+
+    ROLE_CHOICES = [
         # ('Admin', 'Admin'),
-        ('Engineer', 'Engineer'),
+        ("", "Please select your role"),
+        ('gas_engineer', 'Gas Engineer'),
+        ('plumber', 'Plumber'),
+        ('electrician', 'Electrician'),
+        ('carpenter', 'Carpenter'),
+        ('handy_person', 'Handy Person'),
     ]
-  
-  role = forms.ChoiceField(
-      choices=ROLE_CHOICES, label='Role',
+
+    role = forms.ChoiceField(
+        choices=ROLE_CHOICES, label='Role',
         widget=forms.Select(attrs={'class': 'form-select'}),
-        required=True
+        required=True,
     )
-  
+
 #   Customize password fields to match Bootstrap
-  def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['password1'].widget.attrs.update({
             'class': 'form-control',
             'placeholder': 'Enter password'
-    })
+        })
         self.fields['password2'].widget.attrs.update({
             'class': 'form-control',
             'placeholder': 'Confirm password'
-    }) 
-  
+        })
+
 #   Save data on submit
-  def save(self, request):
+    def save(self, request):
         user = super().save(request)
 
         # Save user fields
@@ -54,7 +61,7 @@ class CustomSignupForm(SignupForm):
         user.save()
 
         # Save role fields into profile settings
-        user.profile.role = self.cleaned_data['role'] 
+        user.profile.role = self.cleaned_data['role']
         user.profile.save()
 
         return user

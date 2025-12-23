@@ -6,11 +6,15 @@ from django.contrib.auth.models import User
 
 class Profile(models.Model):
 
-    # User roles to be added on production version
-    # ROLE_CHOICES = [
-    #     ('admin', 'Admin'),
-    #     ('engineer', 'Engineer'),
-    # ]
+    # User roles
+    ROLE_CHOICES = [
+        ('admin', 'Admin'),
+        ('gas_engineer', 'Gas Engineer'),
+        ('plumber', 'Plumber'),
+        ('electrcian', 'Electrician'),
+        ('carpenter', 'Carpenter'),
+        ('handy_person', 'Handy Person'),
+    ]
 
    # Status options
     STATUS_CHOICES = [
@@ -19,7 +23,7 @@ class Profile(models.Model):
         ("in_active", "In-Active"),
         ("left", "Left"),
     ]
-    
+
     # 1 to 1 relationship link to extend Djangos user model: each User gets exactly one Profile that links with Django allauth User.
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
@@ -31,10 +35,10 @@ class Profile(models.Model):
 
     role = models.CharField(
         max_length=20,
-        # choices=ROLE_CHOICES,  To be added later
-        default='Engineer'
+        choices=ROLE_CHOICES,
+        default='Select Your Job Role'
     )
-    
+
     # User status
     status = models.CharField(
         max_length=20,
@@ -66,7 +70,7 @@ class Profile(models.Model):
         blank=True,
         null=True
     )
-       
+
     # Dates
     created_at = models.DateTimeField(auto_now_add=True)
 
