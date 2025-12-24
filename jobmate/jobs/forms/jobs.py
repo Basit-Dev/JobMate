@@ -1,7 +1,11 @@
 from django import forms
 from jobs.models import Job
+from django.contrib.auth import get_user_model
 
 # This form allows users to edit their Profile information using model form
+
+
+User = get_user_model()
 
 class JobForm(forms.ModelForm):
 
@@ -52,3 +56,20 @@ class JobForm(forms.ModelForm):
 
             'assigned_engineer': forms.Select(attrs={'class': 'form-select input'}),
         }
+
+    # This function displays the users as first last and role in the drop down list
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        # Get all user profiles, exclude admin and sort by username
+        self.fields['assigned_engineer'].queryset = (
+            User.objects
+            .select_related('profile')
+            .exclude(profile__role='Admin')
+            .order_by('username')
+        )
+
+        # Change the list so it displays first last names with roles except admin, if we dont use this then list will only show username
+        self.fields['assigned_engineer'].label_from_instance = (
+            lambda user: f"{user.first_name} {user.last_name} ({user.profile.get_role_display()})"
+        )
