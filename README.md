@@ -333,19 +333,19 @@ As a **Engineer**:
 
 ## Automated Tests Outcome
 
-| Test File                     | Description                                                                                   | Status |
-|-------------------------------|-----------------------------------------------------------------------------------------------|--------|
-| `test_signup.py`              | Tests signup page load, successful signup, duplicate email and password mismatch validation   | Passed |
-| `test_login.py`               | Tests login page load, successful login email and password mismatch validation                | Passed |
-| `test_password_reset.py`      | Tests reset page load, successful reset and signin with new password                          | Passed |
-| `test_page_access.py`         | Registered users can access certain pages, and that public pages are accessible to all users  | Passed |
-| `test_home.py`                | Tests home page loads                                                                         | Passed |
-| `test_cart_pages_access.py`   | Registered users can only access cart pages                                                   | Passed |
-| `test_profile.py`             | Test user, profile, bank info loads when logged in and updates and saves data successfully,   | Passed |    
-|                               | Password change updates and user can log in with new password                                 | Passed |
-| `test_create_job.py`          | Test a job can be created                                                                     | Passed |
-| `test_display_all_jobs.py`    | Tests creates jobs and checks if it has been created                                          | Passed |
-| `test_edit_job.py`            | Creates a new job and tests if it can be updated                                              | Passed |
+| Test File                     | Description                                                                                            | Status |
+|-------------------------------|--------------------------------------------------------------------------------------------------------|--------|
+| `test_signup.py`              | Tests engineer signup page load, successful signup, duplicate email and password mismatch validation   | Passed |
+| `test_login.py`               | Tests login page load, successful login email and password mismatch validation                         | Passed |
+| `test_password_reset.py`      | Tests reset page load, successful reset and signin with new password                                   | Passed |
+| `test_page_access.py`         | Registered users can access certain pages, and that public pages are accessible to all users           | Passed |
+| `test_home.py`                | Tests home page loads                                                                                  | Passed |
+| `test_cart_pages_access.py`   | Registered users can only access cart pages                                                            | Passed |
+| `test_profile.py`             | Test user, profile, bank info loads when logged in and updates and saves data successfully,            | Passed |    
+|                               | Password change updates and user can log in with new password                                          | Passed |
+| `test_create_job.py`          | Test a job can be created                                                                              | Passed |
+| `test_display_all_jobs.py`    | Tests creates jobs and checks if it has been created                                                   | Passed |
+| `test_edit_job.py`            | Creates a new job and tests if it can be updated                                                       | Passed |
 
 ---
 
@@ -422,6 +422,7 @@ As a **Engineer**:
 | `delete_job`          | Admin can only view & delete job, checked in UI and admin panel and record removed from DB              | Passed |
 | `any job id in url`   | If a ID is entered manually in url, then no jobs found loads                                            | Passed |
 | `404`                 | Unknown urls displays a 404.html page                                                                   | Passed |
+| `all_engineers`       | Displays all engineers that have signed up                                                              | Passed |
 
 ---
 
