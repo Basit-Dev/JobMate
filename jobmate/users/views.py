@@ -5,6 +5,8 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib import messages
 from django.contrib.auth import get_user_model
+from django.db.models import Q
+from helpers.permission_check import admin_required
 
 # Create your views here.
 
@@ -17,12 +19,28 @@ def logged_out(request):
 
 # ALL ENGINEERS
 @login_required
+@admin_required
 def all_engineers(request):
     """
     This view renders the all engineers page
     """
-    
+    # Get the search term
+    search_query = request.GET.get("search_engineer")
+
+    # Get all engineers from user model
     engineer_list = get_user_model().objects.all()
+    
+    # If search query submits form then filter the engineers and update engineer_list  
+    if search_query:
+        # As the role list is defined by gas_engineer, this line is saying remove and replace the space from search query with _
+        full_query = search_query.replace(" ", "_") 
+        engineer_list = engineer_list.filter(
+            Q(first_name__icontains=search_query) |
+            Q(last_name__icontains=search_query) |
+            Q(profile__role__icontains=full_query) |
+            Q(profile__status__icontains=search_query))
+        
+    # Finally render engineers based on above conditions
     return render(request, 'all_engineers.html', {'engineer_list': engineer_list})
 
 # PROFILE SETTINGS

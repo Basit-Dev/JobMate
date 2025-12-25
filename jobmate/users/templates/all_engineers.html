@@ -26,7 +26,7 @@
     <p class="section-subtitle">Search Engineers</p>
     <form class="input-group" method="GET">
       {% csrf_token %}
-      <input type="text" class="form-control" placeholder="Search engineers..." />
+      <input type="text" name="search_engineer" class="form-control" placeholder="Search engineers..." />
       <!-- Search Button -->
       <button type="submit" class="btn btn-secondary text-muted">
         <i class="bi bi-search me-1"></i>Search
