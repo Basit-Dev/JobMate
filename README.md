@@ -423,6 +423,8 @@ As a **Engineer**:
 | `any job id in url`   | If a ID is entered manually in url, then no jobs found loads                                            | Passed |
 | `404`                 | Unknown urls displays a 404.html page                                                                   | Passed |
 | `all_engineers`       | Displays all engineers that have signed up                                                              | Passed |
+| `search jobs`         | Jobs can be searched by keyword using job title, address, city and postcode. Status list does filter    | Passed |
+| `search engineers`    | Engineers can be searched by keyword, using first last name, role and status                            | Passed |
 
 ---
 
