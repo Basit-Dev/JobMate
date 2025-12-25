@@ -66,7 +66,7 @@ class JobForm(forms.ModelForm):
             User.objects
             .select_related('profile')
             .exclude(profile__role='Admin')
-            .order_by('username')
+            .order_by('profile__role')
         )
 
         # Change the list so it displays first last names with roles except admin, if we dont use this then list will only show username
