@@ -151,10 +151,10 @@ def delete_operative(request, profile_id=None):
     This view renders the delete engineer page
     """
 
-    # Get the job ID if it doesnt exist return 404
+    # Get the profile id if it doesnt exist return 404
     operative = get_object_or_404(User, pk=profile_id)
 
-    # Admin sends a post request, form is submitted, get the job id, delete job, show message, redirect to all jobs
+    # Admin sends a post request, form is submitted, get the profile id, delete job, show message, redirect to all engineers
     if request.method == "POST":
         operative.delete()
         messages.success(request, "Engineer deleted successfully.")
