@@ -36,6 +36,9 @@ def all_engineers(request):
     # Get all engineers from user model
     engineer_list = get_user_model().objects.all()
     
+    # Remove admins from the list
+    engineer_list = engineer_list.exclude(profile__role="Admin")
+    
     # If search query submits form then filter the engineers and update engineer_list  
     if search_query:
         # As the role list is defined by gas_engineer, this line is saying remove and replace the space from search query with _
