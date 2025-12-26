@@ -72,7 +72,6 @@
 
                 <div class="col-md-6">
                     <label class="form-label">Status*</label>
-                     <!-- {{ personal_form.get_status_display }} -->
                      {{ personal_form.status }}
                 </div>
             </div>
@@ -87,6 +86,8 @@
     </div>
 
     <!-- CHANGE PASSWORD -->
+     <!-- If the profile owner is equal to the logged in user then show password fields ie: ADMIN CANT SEE PASSWORD FIELDS WHEN VIEWING OTHER USERS PRFOILE -->
+    {% if profile_owner == request.user %}
     <div class="card shadow-sm border-0 rounded-4 mb-5">
         <div class="card-header py-3 rounded-top-4">Change Password</div>
 
@@ -117,6 +118,7 @@
             </div>
         </form>
     </div>
+    {% endif %}
 
     <!-- BANK DETAILS -->
     <div class="card shadow-sm border-0 rounded-4">

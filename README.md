@@ -406,25 +406,26 @@ As a **Engineer**:
 
 ## Manual Tests Outcome Results
 
-| Test View             | Description                                                                                             | Status |
-|-----------------------|---------------------------------------------------------------------------------------------------------|--------|
-| `signup`              | Signup page load, successful signup, duplicate email handling, and password mismatch validation         | Passed |
-| `login`               | Login page load, successful login, and invalid email/password validation                                | Passed |
-| `password_reset`      | Password reset page loads, successful reset, and sign-in with new password                              | Passed |
-| `page_access`         | Registered users can access protected pages and public pages are accessible to all users                | Passed |
-| `home`                | Home page loads successfully                                                                            | Passed |
-| `cart_pages_access`   | Verifies that only registered users can access cart-related pages                                       | Passed |
-| `profile`             | User profile and bank information load when logged in and that updates are saved successfully           | Passed |   
-| `create_job`          | Page loads correctly, all fields submitted, job data saved (verified in admin) - redirects to all jobs  | Passed |
-| `all_jobs`            | Jobs are displayed with all submitted data, engineers can view their own jobs only                      | Passed |
-| `engineer_job_access` | Verifies that engineers can only view jobs assigned to them, while administrators can view all jobs     | Passed |
-| `edit_job`            | Job loads correctly by ID, all job fields are rendered, omly admin can view, job submits and redirects  | Passed |
-| `delete_job`          | Admin can only view & delete job, checked in UI and admin panel and record removed from DB              | Passed |
-| `any job id in url`   | If a ID is entered manually in url, then no jobs found loads                                            | Passed |
-| `404`                 | Unknown urls displays a 404.html page                                                                   | Passed |
-| `all_engineers`       | Displays all engineers that have signed up                                                              | Passed |
-| `search jobs`         | Jobs can be searched by keyword using job title, address, city and postcode. Status list does filter    | Passed |
-| `search engineers`    | Engineers can be searched by keyword, using first last name, role and status                            | Passed |
+| Test View             | Description                                                                                                                      | Status |
+|-----------------------|----------------------------------------------------------------------------------------------------------------------------------|--------|
+| `signup`              | Signup page load, successful signup, duplicate email handling, and password mismatch validation                                  | Passed |
+| `login`               | Login page load, successful login, and invalid email/password validation                                                         | Passed |
+| `password_reset`      | Password reset page loads, successful reset, and sign-in with new password                                                       | Passed |
+| `page_access`         | Registered users can access protected pages and public pages are accessible to all users                                         | Passed |
+| `home`                | Home page loads successfully                                                                                                     | Passed |
+| `cart_pages_access`   | Verifies that only registered users can access cart-related pages                                                                | Passed |
+| `profile`             | User profile and bank information load when logged in and that updates are saved successfully                                    | Passed |   
+| `create_job`          | Page loads correctly, all fields submitted, job data saved (verified in admin) - redirects to all jobs                           | Passed |
+| `all_jobs`            | Jobs are displayed with all submitted data, engineers can view their own jobs only                                               | Passed |
+| `engineer_job_access` | Verifies that engineers can only view jobs assigned to them, while administrators can view all jobs                              | Passed |
+| `edit_job`            | Job loads correctly by ID, all job fields are rendered, omly admin can view, job submits and redirects                           | Passed |
+| `delete_job`          | Admin can only view & delete job, checked in UI and admin panel and record removed from DB                                       | Passed |
+| `any job id in url`   | If a ID is entered manually in url, then no jobs found loads                                                                     | Passed |
+| `404`                 | Unknown urls displays a 404.html page                                                                                            | Passed |
+| `all_engineers`       | Displays all engineers that have signed up                                                                                       | Passed |
+| `search jobs`         | Jobs can be searched by keyword using job title, address, city and postcode. Status list does filter                             | Passed |
+| `search engineers`    | Engineers can be searched by keyword, using first last name, role and status                                                     | Passed |
+| `view_engineers`      | Admin can view, edit engineers phone, role, status and bank details. For admin password fields hidden when viewing other users   | Passed |
 
 ---
 
