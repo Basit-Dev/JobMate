@@ -1,14 +1,20 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from users.forms.profile import ProfileForm, BankDetailsForm
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib import messages
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model 
 from django.db.models import Q
 from helpers.permission_check import admin_required
 
 # Create your views here.
+
+# NOTE: The PERSONAL_FORM is in two parts 1 is the User and the other is the Profile
+# USER FIELDS: first_name, last_name, email_address and user_name. To get a value use profile_owner.first_name etc
+# PROFILE FIELDS: phone_number, role, and status. To get a value use personal_form.role etc
+
+User = get_user_model()
 
 # LOGGED OUT
 def logged_out(request):
@@ -45,12 +51,24 @@ def all_engineers(request):
 
 # PROFILE SETTINGS
 @login_required
-def profile_settings(request):
+def profile_settings(request, profile_id=None):
     """
     This view renders the profile settings page
-    """
+    """  
+     # Get logged-in user's profile
+    profile_owner = request.user
     
-    profile = request.user.profile
+    # If admin is trying to view another user get the id if it exists else show error 404, message and redirect to user profile
+    if profile_id is not None:
+        if request.user.profile.role != "Admin":
+            messages.error(request, "You do not have permission to view this profile.")
+            return redirect("users:profile_settings")
+
+        # Get Profile for give profile_id
+        profile_owner = get_object_or_404(User, id=profile_id)
+
+    # If the user is the logged in and clicks profile then their profile will be shown as no ID has been passed
+    profile = profile_owner.profile
 
     # POST PERSONAL INFO
     if request.method == "POST" and "submit_personal" in request.POST:
@@ -61,7 +79,10 @@ def profile_settings(request):
         if personal_form.is_valid():
             personal_form.save()
             messages.success(request, 'Your profile was successfully updated!')
-            return redirect("users:profile_settings")
+            if request.user.profile.role != "Admin":
+                return redirect("users:profile_settings")
+            else:
+                return redirect("users:profile_settings", profile_id=profile_owner.id) # If admin updates profile then stay on the same profile id page
 
     # POST BANK DETAILS
     elif request.method == "POST" and "submit_bank" in request.POST:
@@ -70,7 +91,11 @@ def profile_settings(request):
         if bank_form.is_valid():
             bank_form.save()
             messages.success(request, 'Your bank details was successfully updated!')
-            return redirect("users:profile_settings")
+            # profile_settings_to_display(id=profile_id)
+            if request.user.profile.role != "Admin":
+                return redirect("users:profile_settings")
+            else: 
+                return redirect("users:profile_settings", profile_id=profile_owner.id) # If admin updates profile then stay on the same profile id page
 
     # POST PASSWORD
     elif request.method == "POST" and "submit_password" in request.POST:
@@ -87,7 +112,11 @@ def profile_settings(request):
             user = password_form.save()
             update_session_auth_hash(request, user)
             messages.success(request, 'Your password was successfully updated!')
-            return redirect("users:profile_settings")
+            if request.user.profile.role != "Admin":
+                return redirect("users:profile_settings")
+            else:
+                return redirect("users:profile_settings", profile_id=profile_owner.id) # If admin updates profile then stay on the same profile id page
+            
     # If NOT posting data then load the value from the instance
     else:
         personal_form = ProfileForm(instance=profile)
@@ -108,5 +137,6 @@ def profile_settings(request):
             "personal_form": personal_form,
             "bank_form": bank_form,
             "password_form": password_form,
+            "profile_owner": profile_owner, # We need profile_owner for the admin to access the USER FIELDS
         },
     )

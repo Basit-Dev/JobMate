@@ -40,22 +40,22 @@
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label class="form-label">First Name*</label>
-                    <input type="text" class="form-control input" value="{{ user.first_name }}" readonly>
+                    <input type="text" class="form-control input" value="{{ profile_owner.first_name }}" readonly>
                 </div>
                 <div class="col-md-6">
                     <label class="form-label">Last Name*</label>
-                    <input type="text" class="form-control input" value="{{ user.last_name }}" readonly>
+                    <input type="text" class="form-control input" value="{{ profile_owner.last_name }}" readonly>
                 </div>
             </div>
 
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label class="form-label">Email Address*</label>
-                    <input type="email" class="form-control input" value="{{ user.email }}" readonly>
+                    <input type="email" class="form-control input" value="{{ profile_owner.email }}" readonly>
                 </div>
                 <div class="col-md-6">
                     <label class="form-label">Username</label>
-                    <input type="email" class="form-control input" value="{{ user.username }}" readonly>
+                    <input type="email" class="form-control input" value="{{ profile_owner.username }}" readonly>
                 </div>
             </div>
 
@@ -67,7 +67,7 @@
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label class="form-label">Role*</label>
-                    <input type="text" class="form-control input" value="{{ user.profile.get_role_display }}" readonly>
+                    <input type="text" class="form-control input" value="{{ profile_owner.profile.get_role_display }}" readonly>
                 </div>
 
                 <div class="col-md-6">
