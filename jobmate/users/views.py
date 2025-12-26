@@ -75,14 +75,17 @@ def profile_settings(request, profile_id=None):
         personal_form = ProfileForm(request.POST, instance=profile)
         bank_form = BankDetailsForm(instance=profile)
         password_form = PasswordChangeForm(request.user)
+        print(profile.status)
 
         if personal_form.is_valid():
+            print(personal_form.cleaned_data["status"])
             personal_form.save()
+            print("saved")
             messages.success(request, 'Your profile was successfully updated!')
             if request.user.profile.role != "Admin":
                 return redirect("users:profile_settings")
             else:
-                return redirect("users:profile_settings", profile_id=profile_owner.id) # If admin updates profile then stay on the same profile id page
+                return redirect("users:all_engineers") # If admin updates profile then stay on the same profile id page
 
     # POST BANK DETAILS
     elif request.method == "POST" and "submit_bank" in request.POST:
@@ -91,7 +94,6 @@ def profile_settings(request, profile_id=None):
         if bank_form.is_valid():
             bank_form.save()
             messages.success(request, 'Your bank details was successfully updated!')
-            # profile_settings_to_display(id=profile_id)
             if request.user.profile.role != "Admin":
                 return redirect("users:profile_settings")
             else: 
