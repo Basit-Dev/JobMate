@@ -26,31 +26,31 @@ def logged_out(request):
 # ALL ENGINEERS
 @login_required
 @admin_required
-def all_engineers(request):
+def all_operatives(request):
     """
     This view renders the all engineers page
     """
     # Get the search term
-    search_query = request.GET.get("search_engineer")
+    search_query = request.GET.get("search_operatives")
 
     # Get all engineers from user model
-    engineer_list = get_user_model().objects.all()
+    operative_list = get_user_model().objects.all()
     
     # Remove admins from the list
-    engineer_list = engineer_list.exclude(profile__role="Admin")
+    operative_list = operative_list.exclude(profile__role="Admin")
     
-    # If search query submits form then filter the engineers and update engineer_list  
+    # If search query submits form then filter the engineers and update operative_list  
     if search_query:
         # As the role list is defined by gas_engineer, this line is saying remove and replace the space from search query with _
         full_query = search_query.replace(" ", "_") 
-        engineer_list = engineer_list.filter(
+        operative_list = operative_list.filter(
             Q(first_name__icontains=search_query) |
             Q(last_name__icontains=search_query) |
             Q(profile__role__icontains=full_query) |
             Q(profile__status__icontains=search_query))
         
     # Finally render engineers based on above conditions
-    return render(request, 'all_engineers.html', {'engineer_list': engineer_list})
+    return render(request, 'all_operatives.html', {'operative_list': operative_list})
 
 # PROFILE SETTINGS
 @login_required

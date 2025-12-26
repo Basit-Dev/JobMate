@@ -18,7 +18,7 @@ JobMate {% endblock %} {% block body %}
 
     <!-- DELETE CONTAINER -->
     <form class="delete-container card shadow border-0" method="POST">
-    {% csrf_token %}
+        {% csrf_token %}
 
         <!-- Header -->
         <div class="card-header bg-danger-subtle text-center py-4 rounded-top">
@@ -43,8 +43,9 @@ JobMate {% endblock %} {% block body %}
                         <span class="fw-semibold">#{{ job.id }}</span>
                     </div>
                     <div class="d-flex justify-content-between flex-wrap mt-3">
-                        <small class="text-muted d-block">Assigned Engineer</small>
-                        <span class="fw-semibold">{{ job.assigned_engineer.first_name }} {{ job.assigned_engineer.last_name }}</span>
+                        <small class="text-muted d-block">Assigned Operative</small>
+                        <span class="fw-semibold">{{ job.assigned_operative.first_name }} {{
+                            job.assigned_operative.last_name }}</span>
                     </div>
                     <div class="d-flex justify-content-between flex-wrap mt-3">
                         <small class="text-muted d-block">Address</small>
@@ -89,13 +90,13 @@ JobMate {% endblock %} {% block body %}
         <!-- Buttons -->
         <div class="d-flex justify-content-center gap-3 m-4">
             <!-- CANCEL BUTTON -->
-            <button
-                class="btn btn-outline-secondary border-0 bg-light w-100 py-2 mt-2 d-flex align-items-center justify-content-center gap-2">
-                <a href="{% url 'jobs:all_jobs' %}" class="text-decoration-none text-muted"><i
-                        class="bi bi-x-lg fs-5"></i> Cancel</a>
-            </button>
+            <a href="{% url 'jobs:all_jobs' %}"
+                class="btn btn-outline-secondary border-0 bg-light w-100 py-2 mt-2 d-flex align-items-center justify-content-center gap-2 text-muted text-decoration-none">
+                <i class="bi bi-x-lg fs-5"></i> Cancel
+            </a>
             <!-- DELETE JOB BUTTON -->
-            <button type="submit" class="btn btn-danger w-100 py-2 mt-2 d-flex align-items-center justify-content-center gap-2">
+            <button type="submit"
+                class="btn btn-danger w-100 py-2 mt-2 d-flex align-items-center justify-content-center gap-2">
                 <i class="bi bi-trash fs-5"></i>Delete Job
             </button>
         </div>

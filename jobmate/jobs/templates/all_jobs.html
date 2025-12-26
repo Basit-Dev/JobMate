@@ -76,7 +76,7 @@
             <tr>
               <th>Job Title #</th>
               <th>Address</th>
-              <th>Engineer</th>
+              <th>Operative</th>
               <th>Priority</th>
               <th>Status</th>
               <th>Payment</th>
@@ -94,7 +94,7 @@
                 <strong>{{ job.job_title}}</strong><br /><small class="text-muted">#JOB-{{ job.id }}</small>
               </td>
               <td data-label="Address">{{ job.address }}, {{ job.city }}, {{ job.post_code }}</td>
-              <td data-label="Engineer">{{ job.assigned_engineer.first_name }} {{ job.assigned_engineer.last_name }}
+              <td data-label="Operative">{{ job.assigned_operative.first_name }} {{ job.assigned_operative.last_name }}
               </td>
               <td data-label="Priority">
                 <span class="badge badge-rounded

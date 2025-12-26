@@ -47,14 +47,14 @@
         </a>
       </li>
 
-      <!-- Engineers -->
-      <!-- Only show All Engineers, Create Job, edit jobs buttons if logged in as Admin -->
+      <!-- Oeratives -->
+      <!-- Only show All Operatives, Create Job, edit jobs buttons if logged in as Admin -->
       {% if request.user.is_authenticated and request.user.profile.role == "Admin" %}
       <li>
-        <a href="{% url 'users:all_engineers' %}"
-          class="{% if request.resolver_match.url_name == 'all_engineers' %}active{% endif %}">
+        <a href="{% url 'users:all_operatives' %}"
+          class="{% if request.resolver_match.url_name == 'all_operatives' %}active{% endif %}">
           <i class="bi bi-people"></i>
-          <span>All Engineers</span>
+          <span>All Operatives</span>
         </a>
       </li>
 
@@ -145,14 +145,14 @@
         </a>
       </li>
 
-      <!-- Mobile Engineers -->
-       <!-- Only show All Engineers, Create Job, edit job buttons if logged in as Admin -->
+      <!-- Mobile Operatives -->
+       <!-- Only show All Operatives, Create Job, edit job buttons if logged in as Admin -->
       {% if request.user.is_authenticated and request.user.profile.role == "Admin" %}
       <li>
-        <a href="{% url 'users:all_engineers' %}"
-          class="{% if request.resolver_match.url_name == 'all_engineers' %}active{% endif %}">
+        <a href="{% url 'users:all_operatives' %}"
+          class="{% if request.resolver_match.url_name == 'all_operatives' %}active{% endif %}">
           <i class="bi bi-people"></i>
-          <span>Engineers</span>
+          <span>Operatives</span>
         </a>
       </li>
 

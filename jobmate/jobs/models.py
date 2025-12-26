@@ -97,7 +97,7 @@ class Job(models.Model):
     )
 
     # Engineer assignment
-    assigned_engineer = models.ForeignKey(
+    assigned_operative = models.ForeignKey(
         User,
         on_delete=models.SET_NULL,
         null=True,

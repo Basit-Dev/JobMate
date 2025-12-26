@@ -21,9 +21,9 @@ def all_jobs(request):
     search_query = request.GET.get("search_term")
     status_filter = request.GET.get("status_filter")
 
-    # If user is engineer display assigned engineer jobs else display all the jobs in job_list variable
+    # If user is operative display assigned operative jobs else display all the jobs in job_list variable
     if user.profile.role != "Admin":
-        job_list = Job.objects.filter(assigned_engineer=user)
+        job_list = Job.objects.filter(assigned_operative=user)
     else:
         job_list = Job.objects.all()
 
@@ -80,8 +80,8 @@ def job_detail(request, job_id):
     if user.profile.role == "Admin":
         return render(request, "job_detail.html", {"job": job})
 
-    # # Only assigned engineer can view their job
-    if job.assigned_engineer == user:
+    # # Only assigned operative can view their job
+    if job.assigned_operative == user:
         return render(request, "job_detail.html", {"job": job})
 
     # Everyone else → denied
