@@ -142,3 +142,22 @@ def profile_settings(request, profile_id=None):
             "profile_owner": profile_owner, # We need profile_owner for the admin to access the USER FIELDS
         },
     )
+    
+    
+@login_required
+@admin_required
+def delete_operative(request, profile_id=None):
+    """
+    This view renders the delete engineer page
+    """
+
+    # Get the job ID if it doesnt exist return 404
+    operative = get_object_or_404(User, pk=profile_id)
+
+    # Admin sends a post request, form is submitted, get the job id, delete job, show message, redirect to all jobs
+    if request.method == "POST":
+        operative.delete()
+        messages.success(request, "Engineer deleted successfully.")
+        return redirect("users:all_engineers")
+
+    return render(request, "delete_operative.html", {"operative": operative})

@@ -1,0 +1,101 @@
+{% extends "base.html" %} {% load static %} {% block title %} Delete Operative |
+JobMate {% endblock %} {% block body %}
+
+<!-- TOP HEADER -->
+<header class="top-header">
+    <div class="logo-section">
+        <a href="{% url 'home:home' %}">
+            <div class="logo-icon">
+                <i class="bi bi-tools"></i>
+            </div>
+            <span class="logo-text">JobMate</span>
+        </a>
+    </div>
+</header>
+
+<!-- CONTAINER WRAPPER -->
+<div class="delete-wrapper">
+
+    <!-- DELETE CONTAINER -->
+    <form class="delete-container card shadow border-0" method="POST">
+    {% csrf_token %}
+
+        <!-- Header -->
+        <div class="card-header bg-danger-subtle text-center py-4 rounded-top">
+            <i class="bi bi-exclamation-triangle-fill text-danger fs-3"></i>
+            <h4 class="fw-semibold mt-2 text-danger">Delete Operative</h4>
+            <p class="text-muted small mb-0">This action cannot be undone</p>
+        </div>
+
+        <!-- Job Details -->
+        <div class="card-body m-2">
+            <div class="p-3 border rounded bg-primary-subtle">
+                <div>
+                    <i class="bi bi-info-circle-fill me-2"></i><span class="d-inline"> Information</span>
+                </div>
+                <div>
+                    <div class="d-flex justify-content-between flex-wrap mt-3">
+                        <small class="text-muted d-block">Operative ID</small>
+                        <span class="fw-semibold">#{{ operative.id }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between flex-wrap mt-3">
+                        <small class="text-muted d-block">Name</small>
+                        <span class="fw-semibold">{{ operative.first_name }} {{ operative.last_name }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between flex-wrap mt-3">
+                        <small class="text-muted d-block">Role</small>
+                        <span class="fw-semibold">{{ operative.profile.get_role_display }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between flex-wrap mt-3">
+                        <small class="text-muted d-block">Status</small>
+                        <span class="Badge badge-rounded
+                        {% if job.status == 'pending' %}badge-pending
+                            {% elif job.status == 'in_progress' %}badge-progress
+                            {% elif job.status == 'completed' %}badge-completed
+                            {% elif job.status == 'cancelled' %}bg-danger text-white
+                        {% endif %}">{{ operative.profile.get_status_display }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between flex-wrap mt-3">
+                        <small class="text-muted d-block">Created</small>
+                        <span class="fw-semibold">{{ operative.profile.created_at }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Warning Message -->
+            <div class="alert alert-danger mt-4 mb-0" role="alert">
+                <div class="mb-2">
+                    <i class="bi bi-info-circle-fill text-danger me-2"></i><span
+                        class="d-inline fw-semibold text-danger">Warning</span>
+                </div>
+                <ul class="mb-0 small">
+                    <li>
+                        Deleting this job will permanently remove all associated data.
+                    </li>
+                    <li>Job history and progress updates will be lost.</li>
+                    <li>Engineer assignment records will be deleted.</li>
+                    <li>Any related attachments or notes will be removed.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Sidebar Overlay -->
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+        <!-- Buttons -->
+        <div class="d-flex justify-content-center gap-3 m-4">
+            <!-- CANCEL BUTTON -->
+            <button
+                class="btn btn-outline-secondary border-0 bg-light w-100 py-2 mt-2 d-flex align-items-center justify-content-center gap-2">
+                <a href="{% url 'users:all_engineers' %}" class="text-decoration-none text-muted"><i
+                        class="bi bi-x-lg fs-5"></i> Cancel</a>
+            </button>
+            <!-- DELETE JOB BUTTON -->
+            <button type="submit" class="btn btn-danger w-100 py-2 mt-2 d-flex align-items-center justify-content-center gap-2">
+                <i class="bi bi-trash fs-5"></i>Delete Job
+            </button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

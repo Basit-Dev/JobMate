@@ -90,9 +90,8 @@
               <td data-label="Created">{{ engineer.profile.created_at }}</td>
               <td data-label="Actions">
                 <div class="d-flex flex-row justify-content-around">
-                  <a href="{% url 'users:profile_settings' engineer.id %}" class="text-secondary me-2"><i class="bi bi-eye"></i></a>
-                  <a href="#" class="text-primary me-2"><i class="bi bi-pencil"></i></a>
-                  <a href="#" class="text-danger"><i class="bi bi-trash"></i></a>
+                  <a href="{% url 'users:profile_settings' engineer.id %}" class="text-primary me-2"><i class="bi bi-pencil"></i></a>
+                  <a href="{% url 'users:delete_operative' engineer.id%}" class="text-danger"><i class="bi bi-trash"></i></a>
                 </div>
                 <hr class="table-hr">
               </td>
