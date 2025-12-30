@@ -19,8 +19,10 @@
       <a href="{% url 'users:profile_settings' %}" class="text-decoration-none text-muted"><span>Hi {% if request.user.is_authenticated and request.user.first_name == "" %}
         {{ request.user.username }}
         {% else %}
-         {{request.user.first_name}}
-          {% endif %} </span></a>
+        {{request.user.first_name}}
+        {% endif %} 
+      </span>
+    </a>
     </div>
     <a href="{% url 'account_logout' %}" class="logout-btn text-danger">
       <i class="bi bi-box-arrow-right"></i>
@@ -109,7 +111,10 @@
         <a href="{% url 'cart:basket' %}"
           class="{% if request.resolver_match.url_name == 'basket' %}active nav-link disabled{% endif %}">
           <i class="bi bi-cart-fill"></i>
-          <span>Cart</span>
+          <span> Cart{% if basket_count %}
+            ({{ basket_count }})
+            {% endif %}
+          </span>
         </a>
       </li>
 

@@ -21,6 +21,9 @@ def basket(request):
     """
     Basket grouped by user so each user paid separately
     """
+    
+    # Get the current user
+    user = request.user
 
     # Admin sees all open transactions, users see only theirs
     if request.user.profile.role == "Admin":
@@ -28,7 +31,36 @@ def basket(request):
     else:
         transactions = Transaction.objects.filter(
             user=request.user, status="open")
+        
+    # If delete btn is pressed delete the line and recalculate totals
+    if request.method == "POST" and "delete_btn" in request.POST:
 
+        # Get the id from the input field when delete btn pressed
+        transaction_id = request.POST.get("basket_item_id")
+            
+        # Save the basket_item_id in Transaction.id so we know which line item to delete, keep the delete item related to this transaction only
+        transaction = get_object_or_404(
+            Transaction,
+            id=transaction_id,
+            status="open",
+        )
+        # Delete items permission check
+        if user.profile.role != "Admin" and transaction.user != user:
+            messages.error(request, "You do not have permission to delete this item.")
+            return redirect("jobs:all_jobs")
+        
+        # Update the job status only if the job exists to in progress and save then delete transaction from basket
+        if transaction.job:
+            transaction.job.status = "in_progress"
+            transaction.job.save(update_fields=["status"])
+            
+        # Delete the transaction from basket
+        transaction.delete()
+        # Display message
+        messages.success(request, "Job removed from the basket!")
+        return redirect("cart:basket")  
+
+    # RUN BASKET DISPLAY
     # This will hold transactions by user
     user_basket = {}
 
@@ -45,7 +77,7 @@ def basket(request):
                 "vat": Decimal("0.00"),
                 "total": Decimal("0.00"),
                 "status": "open",
-            }
+            }   
 
         # Ensure actual_cost is always correct
         job_transaction.recalculate_totals()
@@ -113,6 +145,7 @@ def job_adjustment(request, transaction_id):
             transaction.recalculate_totals()
             messages.success(request, "Adjustment dded!")
             return redirect("cart:job_adjustment", transaction_id=transaction.id)
+        
     # If delete btn is pressed delete the line and recalculate totals
     elif request.method == "POST" and "delete_btn" in request.POST:
 

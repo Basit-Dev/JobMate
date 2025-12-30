@@ -145,6 +145,7 @@ This project is structured around **three core model groups**:
 - Cart (Transactions)
 
 ### Model Relationships
+```text
 Job
 ├─ id
 ├─ job_title
@@ -167,7 +168,7 @@ TransactionLineItem
 ├─ quantity
 ├─ unit_price
 └─ line_total
-
+```
 ---
 
 ### Design Rules
