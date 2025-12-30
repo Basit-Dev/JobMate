@@ -15,7 +15,7 @@ html {
   --jm-accent: #dbeafe; /* Light darkish blue accent background */
   --jm-accent-light: #f6f7f8; /* Light blue accent background */
   --jm-links: #2563eb; /* Action or link color */
-  --jm-other: #fecaca; /* Soft red highlight / warning / error */
+  --jm-other: #fd5454; /* Soft red highlight / warning / error */
 
   /* Grays / Neutrals */
   --ink: #111827; /* Main text color */

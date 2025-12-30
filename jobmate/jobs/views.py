@@ -39,9 +39,21 @@ def all_jobs(request):
     # If status query then filter the existing job_list variable mutate it and give the results
     if status_filter:
         job_list = job_list.filter(status=status_filter)
+        
+    # Get payment status 
+    for job in job_list:
+        transaction = (
+            Transaction.objects
+            .filter(job=job)
+            .order_by("-created_at")
+            .first()
+        )
+        job.payment_status = transaction.status if transaction else None
+    
+    print(job.payment_status)
 
     # Finally render job list based on above conditions
-    return render(request, 'all_jobs.html', {"job_list": job_list})
+    return render(request, 'all_jobs.html', {"job_list": job_list, "status_filter": status_filter, "search_query": search_query, "job.payment_staus": job.payment_status})
 
 
 @login_required
@@ -55,31 +67,44 @@ def job_detail(request, job_id):
     # Get the job ID if it doesnt exist return 404
     job = get_object_or_404(Job, pk=job_id)
     
+    # Permission check FIRST
+    if not (
+        user.profile.role == "Admin" or
+        job.assigned_operative == user
+    ):
+        messages.error(request, "You do not have permission to view this job.")
+        return redirect("jobs:all_jobs")
+    
     # When job completed btn pressed change the status to completed, create a transaction, save the user who created the transaction and go to basket.html
     if request.method == "POST":
+         # Prevent double completion
+        if job.status == "completed":
+            messages.info(request, "Job is already completed.")
+            return redirect("cart:basket")
+
+        # Mark job as completed
         job.status = "completed"
-        job.save()
-        transaction = Transaction()
-        transaction.user = request.user
-        transaction.job = job
-        transaction.save()
-        print(transaction.job.job_title)
-        
-        
-        # messages.success(request, 'Job has been successfully completed!')
+        job.save(update_fields=["status"])
+
+        # Create OR reuse ONE open transaction
+        transaction, created = Transaction.objects.get_or_create(
+            job=job,
+            status="open",
+            defaults={
+                "user": job.assigned_operative
+            }
+        )
+
+        messages.success(
+            request,
+            "Job completed and added to basket."
+            if created else
+            "Job already exists in basket."
+        )
+
         return redirect("cart:basket")
-        
-    # # Admins can view all jobs
-    if user.profile.role == "Admin":
-        return render(request, "job_detail.html", {"job": job})
-
-    # # Only assigned operative can view their job
-    if job.assigned_operative == user:
-        return render(request, "job_detail.html", {"job": job})
-
-    # Everyone else → denied
-    messages.error(request, "You do not have permission to view this job.")
-    return redirect("jobs:all_jobs")
+    return render(request, "job_detail.html", {"job": job})
+    
 
 
 @login_required

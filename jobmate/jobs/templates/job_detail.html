@@ -9,9 +9,10 @@
     <i class="bi bi-arrow-left me-2"></i>Back to Jobs
   </a>
   {% if request.user.is_authenticated and request.user.profile.role == "Admin" %}
+    {% if job.status != "completed" %}
   <a href="{% url 'jobs:edit_job' job_id=job.id %}" class="btn btn-primary d-flex align-items-center gap-2">
     <i class="bi bi-pencil-square"></i> Edit Job
-  </a>
+  </a>{% endif %}
   {% endif %}
 </div>
 
@@ -20,6 +21,15 @@
   <strong class="fs-2 fw-bold">Job Details</strong>
   <p class="fs-6 text-muted">#JOB-{{ job.id }} • Created: {{ job.created_at }}</p>
 </div>
+
+<!-- MESSAGES -->
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-{{ message.tags }}">
+    {{ message }}
+</div>
+{% endfor %}
+{% endif %}
 
 <!-- STATUS -->
 <div class="status-header border">
@@ -236,15 +246,18 @@
     </div> -->
 
     <!-- COMPLETE JOB BUTTON -->
-     <form method="POST">
+  {% if job.status != "completed" %}
+    <form method="POST">
       {% csrf_token %}
-    <!-- <a href="#" class="text-decoration-none text-white"> -->
+
       <button type="submit" class="btn btn-primary w-100 py-2 mt-2 d-flex align-items-center justify-content-center gap-2 shadow-cta">
         <i class="bi bi-check2-circle fs-5"></i> Complete Job
       </button>
-    <!-- </a> -->
-     </form>
 
+    </form>
+  {% else %}
+  <button class="btn btn-success" disabled="true">Completed</button>
+  {% endif %}
   </div>
 </div>
 

@@ -73,15 +73,21 @@ def job_adjustment(request, transaction_id):
     """
     This view renders the job adjustment page
     """
-    # Get pen transactions only
-    open_transactions = Transaction.objects.filter(status="open")
-
-    # Non-admin users can only access their own transactions, admin can view all transactions
-    if request.user.profile.role != "Admin":
-        open_transactions = open_transactions.filter(user=request.user)
+    
+    # Get the current user
+    user = request.user
 
     # Fetch the transaction or 404
-    transaction = get_object_or_404(open_transactions, pk=transaction_id)
+    transaction = get_object_or_404(
+        Transaction,
+        pk=transaction_id,
+        status="open"
+    )
+    
+    # Permission check
+    if user.profile.role != "Admin" and transaction.user != user:
+        messages.error(request, "You do not have permission to access this job.")
+        return redirect("jobs:all_jobs")
 
     # Form
     adjustment_form = AdjustmentForm()

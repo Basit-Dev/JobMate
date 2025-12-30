@@ -40,17 +40,17 @@
   </div>
 
   <!-- Status Dropdown -->
-<form class="col" method="GET">
+  <form class="col" method="GET">
     <p class="section-subtitle">Status</p>
     <select class="form-select" name="status_filter" onchange="this.form.submit()">
       <!-- Add selected when user updates status -->
-        <option value="">All Status</option>
-        <option value="pending" {% if status_filter == "pending" %}selected{% endif %}>Pending</option>
-        <option value="in_progress" {% if status_filter == "in_progress" %}selected{% endif %}>In Progress</option>
-        <option value="completed" {% if status_filter == "completed" %}selected{% endif %}>Completed</option>
-        <option value="cancelled" {% if status_filter == "cancelled" %}selected{% endif %}>Cancelled</option>
+      <option value="">All Status</option>
+      <option value="pending" {% if status_filter == "pending" %}selected{% endif %}>Pending</option>
+      <option value="in_progress" {% if status_filter == "in_progress" %}selected{% endif %}>In Progress</option>
+      <option value="completed" {% if status_filter == "completed" %}selected{% endif %}>Completed</option>
+      <option value="cancelled" {% if status_filter == "cancelled" %}selected{% endif %}>Cancelled</option>
     </select>
-</form>
+  </form>
 </div>
 
 <!--MESSAGES TO DISPLAY -->
@@ -116,16 +116,26 @@
                 </span>
               </td>
               <td data-label="Payment">
-                <span class="badge badge-rounded bg-light text-secondary">—</span>
+                <span class="badge badge-rounded
+                {% if job.payment_status == 'paid' %}badge-success
+                {% elif job.payment_status == 'open' %}badge-warning
+                {% elif job.payment_status == 'failed' %}badge-danger
+                {% else %}badge-muted
+                {% endif %}">
+                  {{ job.payment_status }}
+                </span>
               </td>
               <td data-label="Created">{{ job.created_at}}</td>
               <td data-label="Actions">
                 <div class="d-flex flex-row justify-content-around">
-                  <a href="{% url 'jobs:job_detail' job_id=job.id %}" class="text-secondary me-2"><i class="bi bi-eye"></i></a>
+                  <a href="{% url 'jobs:job_detail' job_id=job.id %}" class="text-secondary me-2"><i
+                      class="bi bi-eye"></i></a>
                   <!-- Only show edit and delete buttons if logged in as Admin -->
                   {% if request.user.is_authenticated and request.user.profile.role == "Admin" %}
-                  <a href="{% url 'jobs:edit_job' job_id=job.id %}" class="text-primary me-2"><i class="bi bi-pencil"></i></a>
-                  <a href="{% url 'jobs:delete_job' job_id=job.id %}" class="text-danger"><i class="bi bi-trash"></i></a>
+                  <a href="{% url 'jobs:edit_job' job_id=job.id %}" class="text-primary me-2"><i
+                      class="bi bi-pencil"></i></a>
+                  <a href="{% url 'jobs:delete_job' job_id=job.id %}" class="text-danger"><i
+                      class="bi bi-trash"></i></a>
                   {% endif %}
                 </div>
                 <hr class="table-hr">

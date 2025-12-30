@@ -22,8 +22,9 @@ Cart | JobMate {% endblock %}
 {% endif %}
 
 <!-- LOOP THROUGH USER, ITEMS AND CRATE SEPERATE BASKET ITEMS FOR EACH USER -->
+{% if user_basket %}
 {% for user, data in user_basket.items %}
-<p class="card-header p-2 mb-3 rounded-3">Payments for {{ user.first_name }} {{ user.last_name }}</p>
+<p class="card-header p-2 mb-3 rounded-3">Payments for {{ user.first_name }} {{ user.last_name }} ({{data.transactions|length }})</p>
 
 <!-- CART LIST -->
 <div class="row g-4 mb-4">
@@ -45,6 +46,7 @@ Cart | JobMate {% endblock %}
 
                 <!-- Job 1 -->
                 <tbody class="table-body-custom">
+                    {% if data.transactions %}
                     {% for transaction in data.transactions %}
                     <tr>
                         <td>{{ transaction.job.id}}</td>
@@ -53,7 +55,8 @@ Cart | JobMate {% endblock %}
                             <small class="text-muted">{{ transaction.job.address }} {{ transaction.job.city }} {{transaction.job.post_code }}</small>
                         </td>
                         <!-- <td>{{ transaction.job.estimated_hours }}</td> -->
-                        <td>{{ transaction.job.assigned_operative.first_name }} {{transaction.job.assigned_operative.last_name }}</td>
+                        <td>{{ transaction.job.assigned_operative.first_name }}
+                            {{transaction.job.assigned_operative.last_name }}</td>
                         <td>£{{ transaction.job.job_cost|floatformat:2 }}</td>
                         <td>£{{ transaction.adjustment|floatformat:2 }}</td>
                         <td>
@@ -69,12 +72,15 @@ Cart | JobMate {% endblock %}
                             </div>
                         </td>
                     </tr>
-                    <!-- If empty rows ie no items display message -->
-                    {% empty %}
-                    <tr>
-                        <td colspan="8" class="text-danger">No items found!</td>
-                    </tr>
                     {% endfor %}
+                    {% else %}
+                    <!-- If empty rows ie no items display message -->
+                    <tr>
+                        <td colspan="6" class="text-center text-muted py-4">
+                            No items found for this user.
+                        </td>
+                    </tr>
+                    {% endif %}
                 </tbody>
             </table>
         </div>
@@ -87,7 +93,7 @@ Cart | JobMate {% endblock %}
         <div class="card shadow-sm">
 
             <div class="card-header">
-                 <h5 class="mb-0 fs-6 fw-lighter d-flex justify-content-between align-items-center">
+                <h5 class="mb-0 fs-6 fw-lighter d-flex justify-content-between align-items-center">
                     <span>Order Summary</span>
                     <span class="badge bg-success">{{ data.transactions.0.get_status_display }}</span>
                 </h5>
@@ -123,6 +129,19 @@ Cart | JobMate {% endblock %}
         </div>
     </div>
 </div>
+<hr class="bg-danger">
+<br>
 {% endfor %}
+
+{% else %}
+    <!-- GLOBAL EMPTY STATE -->
+    <div class="alert alert-light text-center py-5">
+        <i class="bi bi-cart-x fs-1 text-muted mb-3 d-block"></i>
+        <h5 class="text-muted mb-1">Your basket is empty</h5>
+        <p class="small text-muted mb-0">
+            Completed jobs will appear here for payment.
+        </p>
+    </div>
+{% endif %}    
 
 {% endblock %}
