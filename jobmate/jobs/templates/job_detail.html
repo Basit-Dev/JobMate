@@ -162,7 +162,7 @@
             {% elif job.status == 'in_progress' %}badge-progress
             {% elif job.status == 'completed' %}badge-completed
             {% elif job.status == 'cancelled' %}bg-danger
-          {% endif %}">{{ job.status }}</span>
+          {% endif %}">{{ job.get_status_display }}</span>
         </div>
         <div class="d-flex justify-content-between mb-2">
           <span>Priority:</span>
@@ -236,11 +236,14 @@
     </div> -->
 
     <!-- COMPLETE JOB BUTTON -->
-    <a href="{% url 'cart:basket' %}" class="text-decoration-none text-white">
-      <button class="btn btn-primary w-100 py-2 mt-2 d-flex align-items-center justify-content-center gap-2 shadow-cta">
+     <form method="POST">
+      {% csrf_token %}
+    <!-- <a href="#" class="text-decoration-none text-white"> -->
+      <button type="submit" class="btn btn-primary w-100 py-2 mt-2 d-flex align-items-center justify-content-center gap-2 shadow-cta">
         <i class="bi bi-check2-circle fs-5"></i> Complete Job
       </button>
-    </a>
+    <!-- </a> -->
+     </form>
 
   </div>
 </div>
