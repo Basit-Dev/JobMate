@@ -5,6 +5,7 @@ from jobs.forms.jobs import JobForm
 from django.contrib import messages
 from django.db.models import Q
 from helpers.permission_check import admin_required
+from cart.models import Transaction
 
 # Create your views here.
 
@@ -44,28 +45,6 @@ def all_jobs(request):
 
 
 @login_required
-@admin_required
-def edit_job(request, job_id):
-    """
-    This view renders the edit job page
-    """
-
-    # Get the job ID if it doesnt exist return 404
-    job = get_object_or_404(Job, pk=job_id)
-
-    # If post request save the new data using the job instance else GET the job instace as a form with existing data
-    if request.method == "POST":
-        job_edit_form = JobForm(request.POST, instance=job)
-        if job_edit_form.is_valid():
-            job_edit_form.save()
-            messages.success(request, 'Job details was successfully updated!')
-            return redirect("jobs:all_jobs")
-    else:
-        job_edit_form = JobForm(instance=job)
-    return render(request, "edit_job.html", {"job_edit_form": job_edit_form})
-
-
-@login_required
 def job_detail(request, job_id):
     """
     This view renders the job detail page
@@ -75,7 +54,21 @@ def job_detail(request, job_id):
 
     # Get the job ID if it doesnt exist return 404
     job = get_object_or_404(Job, pk=job_id)
-
+    
+    # When job completed btn pressed change the status to completed, create a transaction, save the user who created the transaction and go to basket.html
+    if request.method == "POST":
+        job.status = "completed"
+        job.save()
+        transaction = Transaction()
+        transaction.user = request.user
+        transaction.job = job
+        transaction.save()
+        print(transaction.job.job_title)
+        
+        
+        # messages.success(request, 'Job has been successfully completed!')
+        return redirect("cart:basket")
+        
     # # Admins can view all jobs
     if user.profile.role == "Admin":
         return render(request, "job_detail.html", {"job": job})
@@ -87,25 +80,6 @@ def job_detail(request, job_id):
     # Everyone else → denied
     messages.error(request, "You do not have permission to view this job.")
     return redirect("jobs:all_jobs")
-
-
-@login_required
-@admin_required
-def delete_job(request, job_id):
-    """
-    This view renders the delete job page
-    """
-
-    # Get the job ID if it doesnt exist return 404
-    job = get_object_or_404(Job, pk=job_id)
-
-    # Admin sends a post request, form is submitted, get the job id, delete job, show message, redirect to all jobs
-    if request.method == "POST":
-        job.delete()
-        messages.success(request, "Job deleted successfully.")
-        return redirect("jobs:all_jobs")
-
-    return render(request, "delete_job.html", {"job": job})
 
 
 @login_required
@@ -133,3 +107,44 @@ def create_job(request):
 
     # Load the profile page on request and pass the data to the forms on render
     return render(request, "create_job.html", {"create_job_form": create_job_form})
+
+
+@login_required
+@admin_required
+def edit_job(request, job_id):
+    """
+    This view renders the edit job page
+    """
+
+    # Get the job ID if it doesnt exist return 404
+    job = get_object_or_404(Job, pk=job_id)
+
+    # If post request save the new data using the job instance else GET the job instace as a form with existing data
+    if request.method == "POST":
+        job_edit_form = JobForm(request.POST, instance=job)
+        if job_edit_form.is_valid():
+            job_edit_form.save()
+            messages.success(request, 'Job details was successfully updated!')
+            return redirect("jobs:all_jobs")
+    else:
+        job_edit_form = JobForm(instance=job)
+    return render(request, "edit_job.html", {"job_edit_form": job_edit_form})
+
+
+@login_required
+@admin_required
+def delete_job(request, job_id):
+    """
+    This view renders the delete job page
+    """
+
+    # Get the job ID if it doesnt exist return 404
+    job = get_object_or_404(Job, pk=job_id)
+
+    # Admin sends a post request, form is submitted, get the job id, delete job, show message, redirect to all jobs
+    if request.method == "POST":
+        job.delete()
+        messages.success(request, "Job deleted successfully.")
+        return redirect("jobs:all_jobs")
+
+    return render(request, "delete_job.html", {"job": job})

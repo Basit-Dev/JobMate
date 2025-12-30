@@ -8,6 +8,15 @@ Adjustment | JobMate{% endblock %} {% block content %}
   </a>
 </div>
 
+<!-- MESSAGES -->
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">
+      {{ message }}
+    </div>
+  {% endfor %}
+{% endif %}
+
 <!-- JOB DETAILS HEADER -->
 <div class="card shadow-sm border-0 rounded-4">
   <div class="card-header rounded-top-4">
@@ -16,163 +25,171 @@ Adjustment | JobMate{% endblock %} {% block content %}
   </div>
 
   <!-- FORM -->
-  <form class="card-body p-4">
+  <div class="card-body p-4">
     <div class="row g-3">
 
       <!-- Job Title -->
       <div class="row g-3 mb-3">
         <div class="col-md-6">
           <label class="form-label">Job Title</label>
-          <input type="text" class="form-control" name="job_title" value="Plumbing Leak" />
+          <input type="text" class="form-control input" name="job_title" value="{{ transaction.job.job_title }}"
+            disabled />
         </div>
 
         <!-- Property -->
         <div class="col-md-6">
           <label class="form-label">Property</label>
-          <input type="text" class="form-control" name="property" value="123 John St" />
+          <input type="text" class="form-control input" name="property"
+            value="{{ transaction.job.address }} {{ transaction.job.city }} {{ transaction.job.post_code }}" disabled />
+        </div>
+
+        <!-- Job Description -->
+        <div class="mb-4">
+          <label class="form-label">Job Description</label>
+          <input class="form-control input" name="job_description" rows="4" value="{{ transaction.job.description }}"
+            disabled></input>
+        </div>
+      </div>
+
+      <!-- Job Cost -->
+      <div class="col-12 col-md-4">
+        <label class="form-label" aria-readonly="true">Job Cost</label>
+        <div class="input-group" disabled>
+          <span class="input-group-text">£</span>
+          <pro class="form-control mb-0">{{ transaction.job.job_cost }}</pro>
+        </div>
+      </div>
+
+      <!-- Job Hours -->
+      <div class="col-12 col-md-4">
+        <label class="form-label" aria-readonly="true">Job Hours</label>
+        <div class="input-group" disabled>
+          <span class="input-group-text">&#x23F2</span>
+          <pro class="form-control mb-0">{{ transaction.job.estimated_hours }}</pro>
         </div>
       </div>
 
       <hr class="my-4" />
 
       <!-- PRICING INFORMATION -->
-      <p class="fw-normal mb-3 fs-5">Pricing Information</p>
+      <p class="fw-normal mb-3 fs-5">Adjustment Information</p>
 
 
-      <!-- Job Cost -->
+      <!-- Adjustment Information -->
       <div class="row g-2 mb-3">
 
-        <div class="col-12 col-md-4">
-          <label class="form-label">Job Cost</label>
-          <div class="input-group">
-            <span class="input-group-text">£</span>
-            <pro class="form-control mb-0">2,500.00</pro>
-          </div>
-        </div>
-
-        <!-- Job Hours -->
-        <div class="col-12 col-md-4">
-          <label class="form-label">Job Hours</label>
-          <div class="input-group">
-            <span class="input-group-text">&#x23F2</span>
-            <pro class="form-control mb-0">2.5</pro>
-          </div>
-        </div>
-
         <!-- Add Adjustment Button: On btn click it will add a new section -->
-        <div class="col-12 col-md-auto d-flex align-items-end">
-          <button type="button" class="btn btn-primary px-4 py-2 w-100" style="line-height: 1.7;">
-            <i class="bi bi-plus-lg me-1"></i> Add Adjustment
-          </button>
-        </div>
-      </div>
+        <form method="POST" action="{% url 'cart:job_adjustment' transaction.id %}">
+          {% csrf_token %}
 
-      <hr class="my-4" />
+          <!-- Adjustment Description -->
+          <div class="row g-3 mb-3">
+            <div class="col-md-6">
+              <label class="form-label">Description</label>
+              {{ adjustment_form.description }}
+            </div>
 
-      <!-- ADJUSTMENTS -->
-      <p class="fw-normal fs-5 mb-3">Adjustments</p>
+            <!-- Adjustment Qty -->
+            <div class="col-md-3">
+              <label class="form-label">Qty</label>
+              {{ adjustment_form.quantity }}
+            </div>
 
-      <!-- Adjustment 1 -->
-      <div class="p-4 rounded-3 border bg-light mb-4">
-        <div class="row g-3 mb-3">
-          <div class="col-md-8">
-            <label class="form-label">Description</label>
-            <input type="text" class="form-control" name="adjustment_description" />
-          </div>
-
-          <!-- Cost -->
-          <div class="col-md-3">
-            <label class="form-label">Cost</label>
-            <div class="input-group">
-              <span class="input-group-text">£</span>
-              <input type="number" class="form-control" name="adjustment_cost" />
+            <!-- Adjustment Unit Price -->
+            <div class="col-md-3">
+              <label class="form-label">Unit Price</label>
+              {{ adjustment_form.unit_price }}
             </div>
           </div>
 
-          <!-- Delete Button -->
-          <div class="col-md-1 d-flex align-items-center justify-content-center pt-4">
-            <span class="fw-normal me-2 ps-2">Delete</span>
-            <i class="bi bi-trash text-danger fs-5" style="cursor: pointer"></i>
-          </div>
-        </div>
+          <button type="submit" name="add_adjustment" class="btn btn-primary mt-2">
+            Add Adjustment
+          </button>
+        </form>
 
-        <!-- Reason -->
-        <label class="form-label">Reason</label>
-        <input type="text" class="form-control" name="adjustment_reason" />
-      </div>
+        <!-- ADJUSTMENTS ROWS -->
+        <p class="fw-bold fs-5 my-4">Adjustments</p>
+        {% for item in transaction.items.all %}
+        <!-- Adjustment row 1 -->
+        <div>
 
-      <!-- Adjustment 2 -->
-      <div class="p-4 rounded-3 border bg-light mb-4">
-        <div class="row g-3 mb-3">
-          <div class="col-md-8">
-            <label class="form-label">Description</label>
-            <input type="text" class="form-control" name="adjustment_description" />
-          </div>
+          <!-- Description -->
+          <div class="row g-3 mb-3">
+            <div class="col-md-4">
+              <label class="form-label">Description</label>
+              <p>{{ item.description }}</p>
+            </div>
 
-          <!-- Cost -->
-          <div class="col-md-3">
-            <label class="form-label">Cost</label>
-            <div class="input-group">
-              <span class="input-group-text">£</span>
-              <input type="number" class="form-control" name="adjustment_cost" />
+            <!-- Qty -->
+            <div class="col-md-2">
+              <label class="form-label">Qty</label>
+              <p>{{ item.quantity }}</p>
+            </div>
+
+            <!-- Cost -->
+            <div class="col-md-2">
+              <label class="form-label">Cost</label>
+              <p>£{{ item.unit_price }}</p>
+            </div>
+
+            <!-- Total -->
+            <div class="col-md-2">
+              <label class="form-label">Total</label>
+              <p>£{{ item.line_total }}</p>
+            </div>
+
+            <!-- Delete Button -->
+            <div class="col-md-1 d-flex align-items-center justify-content-center">
+              <span class="fw-normal me-2 ps-2">Delete</span>
+              <i class="bi bi-trash text-danger fs-5" style="cursor: pointer"></i>
             </div>
           </div>
+        </div>
 
-          <!-- Delete Button -->
-          <div class="col-md-1 d-flex align-items-center justify-content-center pt-4">
-            <span class="fw-normal me-2 ps-2">Delete</span>
-            <i class="bi bi-trash text-danger fs-5" style="cursor: pointer"></i>
+        <hr />
+
+        {% empty %}
+        <tr>
+          <td colspan="4" class="text-danger">No adjustments yet</td>
+        </tr>
+        {% endfor %}
+
+
+        <!-- TOTALS -->
+        <div>
+          <div class="p-4 rounded-3 border bg-light mb-4">
+            <div class="d-flex justify-content-between">
+              <span class="fw-bold">Total Additional Amount:</span>
+              <span class="fw-bold">£{{ transaction.adjustment }}</span>
+            </div>
+
+            <!-- Update Button -->
+            <!-- <div class="d-flex justify-content-end">
+              <button type="submit" class="btn btn-success mt-3 px-4">
+                <span>
+                  <i class="bi bi-arrow-clockwise"></i>
+                </span>
+                <span>Update</span>
+              </button>
+            </div> -->
           </div>
-        </div>
 
-        <!-- Reason -->
-        <label class="form-label">Reason</label>
-        <input type="text" class="form-control" name="adjustment_reason" />
-      </div>
 
-      <!-- JOB DESCRIPTION -->
-      <div class="mb-4">
-        <label class="form-label">Job Description</label>
-        <textarea class="form-control" name="job_description" rows="4">Regular maintenance and inspection of HVAC system including filter replacement and system diagnostics. Additional work included emergency repairs and extended troubleshooting due to unexpected complications.
-        </textarea>
-      </div>
-
-      <!-- TOTALS -->
-      <div class="p-4 rounded-3 border bg-light mb-4">
-        <div class="d-flex justify-content-between">
-          <span>Total Additional Amount:</span>
-          <span class="fw-normal">£575.00</span>
-        </div>
-        <div class="d-flex justify-content-between">
-          <span>Final Price:</span>
-          <span>£3,075.00</span>
-        </div>
-
-        <!-- Update Button -->
-        <div class="d-flex justify-content-end">
-          <button type="submit" class="btn btn-success mt-3 px-4">
-            <span>
-              <i class="bi bi-arrow-clockwise"></i>
-            </span>
-            <span>Update</span>
-          </button>
+          <!-- BUTTONS -->
+          <div class="d-flex justify-content-end align-items-center mt-4 gap-3">
+            <a href="{% url 'cart:basket' %}" class="btn btn-light p-2 px-3">
+              <i class="bi bi-x-lg me-2"></i>Cancel
+            </a>
+            <a href="{% url 'cart:basket' %}" class="btn btn-primary p-2">
+              <span>
+                <i class="bi bi-check-lg"></i>
+              </span>
+              <span>Save Changes</span>
+            </a>
+            
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- BUTTONS -->
-    <div class="d-flex justify-content-end align-items-center mt-4 gap-3">
-      <a href="{% url 'cart:basket' %}" class="btn btn-light p-2 px-3">
-        <i class="bi bi-x-lg me-2"></i>Cancel
-      </a>
-      <button type="submit" class="btn btn-primary p-2">
-        <span>
-          <i class="bi bi-check-lg"></i>
-        </span>
-        <span>Save Changes</span>
-      </button>
-    </div>
-  </form>
-</div>
-
-{% endblock %}
+    {% endblock %}
