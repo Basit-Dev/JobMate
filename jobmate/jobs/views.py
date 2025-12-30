@@ -86,7 +86,7 @@ def job_detail(request, job_id):
         job.save(update_fields=["status"])
 
         # Create OR reuse ONE open transaction
-        transaction, created = Transaction.objects.get_or_create(
+        created = Transaction.objects.get_or_create(
             job=job,
             status="open",
             defaults={
@@ -102,7 +102,16 @@ def job_detail(request, job_id):
         )
 
         return redirect("cart:basket")
-    return render(request, "job_detail.html", {"job": job})
+    
+    # Filter and get teh transaction for the current job, order by creation date, and first
+    transaction = (
+        Transaction.objects
+        .filter(job_id=job_id)
+        .order_by("-created_at")
+        .first()
+    )
+      
+    return render(request, "job_detail.html", {"job": job,  "transaction": transaction })
     
 
 

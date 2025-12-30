@@ -426,6 +426,9 @@ As a **Engineer**:
 | `search jobs`         | Jobs can be searched by keyword using job title, address, city and postcode. Status list does filter                             | Passed |
 | `search engineers`    | Engineers can be searched by keyword, using first last name, role and status                                                     | Passed |
 | `view_engineers`      | Admin can view, edit engineers phone, role, status and bank details. For admin password fields hidden when viewing other users   | Passed |
+| `complete_job`        | Admin, users complete jobs and gets passed to basket                                                                             | Passed |
+| `add_adjustment`      | Admin, users complete adjustments if required, adjustment totals all line items, and updates the basket with all totals          | Passed |
+| `basket`              | Displays jobs, adjustments, subtotal, service fee, vat, totals per user, so they cab be paid seperatly                           | Passed |
 
 ---
 
