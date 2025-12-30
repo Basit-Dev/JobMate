@@ -151,8 +151,7 @@ Job
 ├─ job_cost
 ├─ status
 └─ assigned_operative
-│
-▼
+
 Transaction
 ├─ id
 ├─ job (ForeignKey → Job)
@@ -160,8 +159,7 @@ Transaction
 ├─ status
 ├─ actual_cost
 └─ adjustment_total
-│
-▼
+
 TransactionLineItem
 ├─ id
 ├─ transaction (ForeignKey → Transaction)
