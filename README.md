@@ -1,92 +1,216 @@
-# JobMate
-A Django-based job management system for property maintenance. Built with Django, PostgreSQL, HTML, and Bootstrap. Includes user registration, engineer job tracking, shopping cart and full CRUD functionality for managing bookings and job records in a clean, responsive interface.
+# JobMate – Job & Payment Management System
 
 ## What This Project Is
 
-This application lets property managers and engineers:
-- **Book maintenance jobs** such as boiler servicing, repairs, and inspections  
-- **View and manage job history** with status updates and filtering  
-- **Track job statuses** (Pending, In Progress, Completed) via a dashboard  
-- **Assign engineers** to individual jobs 
-- **Invoice jobs** add jobs to shopping cart
-- **Update cart** update the actual hours worked per job 
-- **Pay for completed jobs** using Stripe payment gateway
+**JobMate** is a Django-based web application designed to manage maintenance jobs, operatives, and job payments within a structured workflow.
+
+The system demonstrates:
+- job lifecycle management
+- role-based access control
+- relational database design
+- calculated values
+- real-world backend logic
 
 ---
 
-## Property Manager User Story
+## User Roles
 
-As a **Property Manager**, I want to:
+### Property Manager (Admin)
+- Manages jobs and operatives
+- Oversees job progress and payment status
+- Reviews completed jobs before payment
 
-- **Log in securely** to access my dashboard and manage job-related data.
-- **Create, view, edit, and delete jobs** by filling out forms with details like:
-  - Job title
-  - Description
-  - Assigned engineer
-- **Assign engineers to jobs** so the right person is notified and responsible.
-- **Manage engineers**:
-  - View a list of engineers
-  - Edit engineer details
-  - Delete engineers when no longer needed
-- **Manage payments**:
-  - Use stripe gateway to pay engineers for completed jobs
-  - Track submitted jobs via a list or dashboard to monitor status and progress
-- **Update my user profile and password** to maintain account security and accuracy.
-
-As a **Engineer**, I want to:
-- **Log in securely** to access my dashboard and manage job-related data.
-- View my **own jobs**  
-- Update job status (e.g., mark completed)  
-- **Add jobs for payment** Once the job has been completed add it to the cart.
-- **Adjust jobs costs** Update the actual hours or other incured costs worked on the job.
-- **Maintain my own** profile and security settings.
+### Operative
+- Views and completes assigned jobs
+- Triggers the payment workflow for completed jobs
+- Tracks payment status
 
 ---
 
-## User Flow
+## Core Features 
 
-As a **Property Manager**:
-
-- **Sign up** if already not registered
-- **Log in** with credentials
-- **All jobs** will display
-  - Can search, create, view, edit or delete jobs 
-- **View all engineers**   
-  - Can search, view, edit or delete engineers 
-- **View all payments**
-  - Can search, view, edit or delete payments 
-- **View all jobs to be paid in cart**
-  - Can adjust pay and make payments for jobs via stripe
-    - When modifying or viewing adjustments, items can be added or removed from cart
-  - Completed payments will then show on payments view
-- **Can update** profile settings  
+### Job Management
+- Create, view, edit, and delete jobs
+- Assign operatives to indivisual jobs
+- Search and filter jobs
+- Track job status:
+  - Pending
+  - In Progress
+  - Completed
+  - Cancelled
 
 ---
 
-As a **Engineer**:
+### Job Completion Workflow
+When a job is marked as **completed**:
 
-- **Sign up** if already not registered
-- **Log in** with credentials
-- **All jobs** allocated to me will display
-  - Can search, view and complete my jobs 
-    - When job has been completed, job gets added to the cart  
-- **View all my jobs** to be paid in cart
-  - Can adjust pay for indivisual jobs
-    - When modifying or viewing adjustments, items can be added or removed from cart
-      - Once manager has made payment it will show on my payments view
-- **View all payments** made to me
-  - Can search and view payments made to me  
-- **Can update** profile settings    
+1. The job status is updated
+2. A single transaction is created and linked to the job
+3. The job is added to the payment basket
+
+This design ensures:
+- one transaction per job
+- no duplicate payment records
+- a clear separation between job data and payment data
+
+---
+
+### Transactions & Payments
+- Each completed job has **one linked transaction**
+- A transaction represents the payment state of a job
+- Transaction statuses include:
+  - Open
+  - Paid
+  - Failed
+  - Cancelled
+
+Transactions store:
+- base job cost
+- adjustment totals
+- calculated totals
+- payment status
+
+---
+
+### Adjustment Line Items
+- Transactions may contain **multiple adjustment line items**
+- Adjustments allow additional costs to be added (e.g. extra labour or materials)
+- Each adjustment includes:
+  - description
+  - quantity
+  - unit price
+  - automatically calculated line total
+
+---
+
+### Basket
+- Displays all open transactions
+- Groups transactions by user so payments can be reviewed separately
+- Automatically calculates:
+  - subtotal
+  - service fee
+  - total amount
+- Access rules:
+  - Admin can view all transactions
+  - Operatives can only view their own transactions
+
+---
+
+## User Stories
+
+### As a Property Manager, I want to:
+- Log in securely
+- Manage my profile details and password
+- Create, assign, and manage jobs
+- View all operatives and their job progress
+- Review completed jobs before payment
+- Adjust job costs where required
+- Track payment status
+
+### As an Operative, I want to:
+- Log in securely
+- View only jobs assigned to me
+- Update job status when work is completed
+- Add completed jobs to the payment basket
+- Track payment status
+- Update my own profile details
+
+---
+
+## User Flow Overview
+
+### Property Manager Flow
+1. Log in
+2. Access dashboard
+3. Manage jobs and operatives
+4. Review completed jobs in the basket
+5. Confirm job costs
+6. Track payment status
+
+### Operative Flow
+1. Log in
+2. View assigned jobs
+3. Complete jobs
+4. Add jobs to the basket
+5. View payment status
+
+---
+
+## System Design 
+
+### Core Data Models
+This project is structured around **three core model groups**:
+- Users
+- Jobs
+- Cart (Transactions)
+
+### Model Relationships
+Job
+├─ id
+├─ job_title
+├─ job_cost
+├─ status
+└─ assigned_operative
+│
+▼
+Transaction
+├─ id
+├─ job (ForeignKey → Job)
+├─ user
+├─ status
+├─ actual_cost
+└─ adjustment_total
+│
+▼
+TransactionLineItem
+├─ id
+├─ transaction (ForeignKey → Transaction)
+├─ description
+├─ quantity
+├─ unit_price
+└─ line_total
+
+---
+
+### Design Rules
+- One job → one transaction
+- One transaction → many adjustment line items
+- Jobs are never duplicated in the basket
+- All relationships are enforced using Django Foreign Keys
+
+---
+
+## Permissions & Security
+- All views are protected using `@login_required`
+- Role-based permission checks ensure:
+  - Admins can manage all jobs and transactions
+  - Operatives can only access assigned jobs and related payments
+- Direct URL access is validated and restricted at view level
+
+---
+
+## Testing Strategy
+- Automated **model tests** ensure correct data creation and relationships
+- **View tests** validate permissions, redirects, and access rules
+- Manual testing verifies UI behaviour and full workflows
 
 ---
 
 ## Tech Stack
+- Django
+- PostgreSQL
+- HTML5
+- Bootstrap
+- Django Templating Engine
+- Django Admin
 
-- Django (Python Web Framework)  
-- PostgreSQL (Relational Database)  
-- HTML5 + Bootstrap 5 (Frontend UI)  
-- Django Templating Engine (Jinja-like)  
-- Django Admin (for quick management)  
+---
+
+## Future Enhancements
+- Online payment gateway integration
+- Invoice generation
+- Reporting and analytics
+- Refund handling
 
 ---
 
@@ -157,18 +281,18 @@ As a **Engineer**:
 </p>
 
 <p align="center">
-  <strong>Engineer Dashboard</strong><br>
-  <img src="documentation/figma/wireframe/engineer-dashboard.png" alt="Engineer Dashboard" width="300" />
+  <strong>Operative Dashboard</strong><br>
+  <img src="documentation/figma/wireframe/Operative-dashboard.png" alt="Operative Dashboard" width="300" />
 </p>
 
 <p align="center">
-  <strong>Engineers List</strong><br>
-  <img src="documentation/figma/wireframe/engineers-list.png" alt="Engineers List" width="300" />
+  <strong>Operatives List</strong><br>
+  <img src="documentation/figma/wireframe/Operatives-list.png" alt="Operatives List" width="300" />
 </p>
 
 <p align="center">
-  <strong>Engineer Payments Summary</strong><br>
-  <img src="documentation/figma/wireframe/engineer-payments-summary.png" alt="Engineer Payments Summary" width="300" />
+  <strong>Operative Payments Summary</strong><br>
+  <img src="documentation/figma/wireframe/Operative-payments-summary.png" alt="Operative Payments Summary" width="300" />
 </p>
 
 <p align="center">
@@ -246,18 +370,18 @@ As a **Engineer**:
 </p>
 
 <p align="center">
-  <strong>Engineer Dashboard</strong><br>
-  <img src="documentation/figma/hi-fi/engineer-dashboard-hifi.png" alt="Engineer Dashboard" width="300" />
+  <strong>Operative Dashboard</strong><br>
+  <img src="documentation/figma/hi-fi/Operative-dashboard-hifi.png" alt="Operative Dashboard" width="300" />
 </p>
 
 <p align="center">
-  <strong>Engineers List</strong><br>
-  <img src="documentation/figma/hi-fi/engineers-list-hifi.png" alt="Engineers List" width="300" />
+  <strong>Operatives List</strong><br>
+  <img src="documentation/figma/hi-fi/Operatives-list-hifi.png" alt="Operatives List" width="300" />
 </p>
 
 <p align="center">
-  <strong>Engineer Payments Summary</strong><br>
-  <img src="documentation/figma/hi-fi/engineer-payments-summary-hifi.png" alt="Engineer Payments Summary" width="300" />
+  <strong>Operative Payments Summary</strong><br>
+  <img src="documentation/figma/hi-fi/Operative-payments-summary-hifi.png" alt="Operative Payments Summary" width="300" />
 </p>
 
 <p align="center">
@@ -329,23 +453,23 @@ As a **Engineer**:
   <img src="documentation/figma/mobile/job-details-mobile.png" alt="Job Details" width="300" />
 </p>
 
-----
+---
 
 ## Automated Tests Outcome
 
-| Test File                     | Description                                                                                            | Status |
-|-------------------------------|--------------------------------------------------------------------------------------------------------|--------|
-| `test_signup.py`              | Tests engineer signup page load, successful signup, duplicate email and password mismatch validation   | Passed |
-| `test_login.py`               | Tests login page load, successful login email and password mismatch validation                         | Passed |
-| `test_password_reset.py`      | Tests reset page load, successful reset and signin with new password                                   | Passed |
-| `test_page_access.py`         | Registered users can access certain pages, and that public pages are accessible to all users           | Passed |
-| `test_home.py`                | Tests home page loads                                                                                  | Passed |
-| `test_cart_pages_access.py`   | Registered users can only access cart pages                                                            | Passed |
-| `test_profile.py`             | Test user, profile, bank info loads when logged in and updates and saves data successfully,            | Passed |    
-|                               | Password change updates and user can log in with new password                                          | Passed |
-| `test_create_job.py`          | Test a job can be created                                                                              | Passed |
-| `test_display_all_jobs.py`    | Tests creates jobs and checks if it has been created                                                   | Passed |
-| `test_edit_job.py`            | Creates a new job and tests if it can be updated                                                       | Passed |
+| Test File                   | Description                                                                                           | Status |
+| --------------------------- | ----------------------------------------------------------------------------------------------------- | ------ |
+| `test_signup.py`            | Tests Operative signup page load, successful signup, duplicate email and password mismatch validation | Passed |
+| `test_login.py`             | Tests login page load, successful login email and password mismatch validation                        | Passed |
+| `test_password_reset.py`    | Tests reset page load, successful reset and signin with new password                                  | Passed |
+| `test_page_access.py`       | Registered users can access certain pages, and that public pages are accessible to all users          | Passed |
+| `test_home.py`              | Tests home page loads                                                                                 | Passed |
+| `test_cart_pages_access.py` | Registered users can only access cart pages                                                           | Passed |
+| `test_profile.py`           | Test user, profile, bank info loads when logged in and updates and saves data successfully,           | Passed |
+|                             | Password change updates and user can log in with new password                                         | Passed |
+| `test_create_job.py`        | Test a job can be created                                                                             | Passed |
+| `test_display_all_jobs.py`  | Tests creates jobs and checks if it has been created                                                  | Passed |
+| `test_edit_job.py`          | Creates a new job and tests if it can be updated                                                      | Passed |
 
 ---
 
@@ -401,35 +525,34 @@ As a **Engineer**:
   <img src="documentation/test_logs/test_edit_job.png" alt="Test edit job" width="300" />
 </p>
 
-
 ---
 
 ## Manual Tests Outcome Results
 
-| Test View             | Description                                                                                                                      | Status |
-|-----------------------|----------------------------------------------------------------------------------------------------------------------------------|--------|
-| `signup`              | Signup page load, successful signup, duplicate email handling, and password mismatch validation                                  | Passed |
-| `login`               | Login page load, successful login, and invalid email/password validation                                                         | Passed |
-| `password_reset`      | Password reset page loads, successful reset, and sign-in with new password                                                       | Passed |
-| `page_access`         | Registered users can access protected pages and public pages are accessible to all users                                         | Passed |
-| `home`                | Home page loads successfully                                                                                                     | Passed |
-| `cart_pages_access`   | Verifies that only registered users can access cart-related pages                                                                | Passed |
-| `profile`             | User profile and bank information load when logged in and that updates are saved successfully                                    | Passed |   
-| `create_job`          | Page loads correctly, all fields submitted, job data saved (verified in admin) - redirects to all jobs                           | Passed |
-| `all_jobs`            | Jobs are displayed with all submitted data, engineers can view their own jobs only                                               | Passed |
-| `engineer_job_access` | Verifies that engineers can only view jobs assigned to them, while administrators can view all jobs                              | Passed |
-| `edit_job`            | Job loads correctly by ID, all job fields are rendered, omly admin can view, job submits and redirects                           | Passed |
-| `delete_job`          | Admin can only view & delete job, checked in UI and admin panel and record removed from DB                                       | Passed |
-| `any job id in url`   | If a ID is entered manually in url, then no jobs found loads                                                                     | Passed |
-| `404`                 | Unknown urls displays a 404.html page                                                                                            | Passed |
-| `all_engineers`       | Displays all engineers that have signed up                                                                                       | Passed |
-| `search jobs`         | Jobs can be searched by keyword using job title, address, city and postcode. Status list does filter                             | Passed |
-| `search engineers`    | Engineers can be searched by keyword, using first last name, role and status                                                     | Passed |
-| `view_engineers`      | Admin can view, edit engineers phone, role, status and bank details. For admin password fields hidden when viewing other users   | Passed |
-| `complete_job`        | Admin, users complete jobs and gets passed to basket                                                                             | Passed |
-| `add_adjustment`      | Admin, users complete adjustments if required, adjustment totals all line items, and updates the basket with all totals          | Passed |
-| `basket`              | Displays jobs, adjustments, subtotal, service fee, vat, totals per user, so they cab be paid seperatly                           | Passed |
-| `delete line item`    | Delete indivisual line items, total recalculates, admin can delete globally, users can only delete their transactions            | Passed |
+| Test View              | Description                                                                                                                     | Status |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------ |
+| `signup`               | Signup page load, successful signup, duplicate email handling, and password mismatch validation                                 | Passed |
+| `login`                | Login page load, successful login, and invalid email/password validation                                                        | Passed |
+| `password_reset`       | Password reset page loads, successful reset, and sign-in with new password                                                      | Passed |
+| `page_access`          | Registered users can access protected pages and public pages are accessible to all users                                        | Passed |
+| `home`                 | Home page loads successfully                                                                                                    | Passed |
+| `cart_pages_access`    | Verifies that only registered users can access cart-related pages                                                               | Passed |
+| `profile`              | User profile and bank information load when logged in and that updates are saved successfully                                   | Passed |
+| `create_job`           | Page loads correctly, all fields submitted, job data saved (verified in admin) - redirects to all jobs                          | Passed |
+| `all_jobs`             | Jobs are displayed with all submitted data, Operatives can view their own jobs only                                             | Passed |
+| `Operative_job_access` | Verifies that Operatives can only view jobs assigned to them, while administrators can view all jobs                            | Passed |
+| `edit_job`             | Job loads correctly by ID, all job fields are rendered, omly admin can view, job submits and redirects                          | Passed |
+| `delete_job`           | Admin can only view & delete job, checked in UI and admin panel and record removed from DB                                      | Passed |
+| `any job id in url`    | If a ID is entered manually in url, then no jobs found loads                                                                    | Passed |
+| `404`                  | Unknown urls displays a 404.html page                                                                                           | Passed |
+| `all_Operatives`       | Displays all Operatives that have signed up                                                                                     | Passed |
+| `search jobs`          | Jobs can be searched by keyword using job title, address, city and postcode. Status list does filter                            | Passed |
+| `search Operatives`    | Operatives can be searched by keyword, using first last name, role and status                                                   | Passed |
+| `view_Operatives`      | Admin can view, edit Operatives phone, role, status and bank details. For admin password fields hidden when viewing other users | Passed |
+| `complete_job`         | Admin, users complete jobs and gets passed to basket                                                                            | Passed |
+| `add_adjustment`       | Admin, users complete adjustments if required, adjustment totals all line items, and updates the basket with all totals         | Passed |
+| `basket`               | Displays jobs, adjustments, subtotal, service fee, vat, totals per user, so they cab be paid seperatly                          | Passed |
+| `delete line item`     | Delete indivisual line items, total recalculates, admin can delete globally, users can only delete their transactions           | Passed |
 
 ---
 
