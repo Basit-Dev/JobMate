@@ -78,12 +78,9 @@ def profile_settings(request, profile_id=None):
         personal_form = ProfileForm(request.POST, instance=profile)
         bank_form = BankDetailsForm(instance=profile)
         password_form = PasswordChangeForm(request.user)
-        print(profile.status)
 
         if personal_form.is_valid():
-            print(personal_form.cleaned_data["status"])
             personal_form.save()
-            print("saved")
             messages.success(request, 'Your profile was successfully updated!')
             if request.user.profile.role != "Admin":
                 return redirect("users:profile_settings")

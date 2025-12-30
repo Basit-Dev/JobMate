@@ -1,11 +1,12 @@
 from django.shortcuts import redirect, render,  get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from cart.models import Transaction
+from cart.models import Transaction, TransactionLineItem
 from cart.forms.adjustments import AdjustmentForm
 from decimal import Decimal
 
 # Create your views here.
+
 
 @login_required
 def payments(request):
@@ -25,7 +26,8 @@ def basket(request):
     if request.user.profile.role == "Admin":
         transactions = Transaction.objects.filter(status="open")
     else:
-        transactions = Transaction.objects.filter(user=request.user,status="open")
+        transactions = Transaction.objects.filter(
+            user=request.user, status="open")
 
     # This will hold transactions by user
     user_basket = {}
@@ -55,7 +57,7 @@ def basket(request):
     # Loop through user basket items and calculate totals for service fee and total per user
     for user, data in user_basket.items():
         data["service_fee"] = data["subtotal"] * Decimal("0.15")  # 15%
-        data["vat"] = data["subtotal"] * Decimal("0.20") # 20%
+        data["vat"] = data["subtotal"] * Decimal("0.20")  # 20%
         data["total"] = data["subtotal"] + data["vat"] - data["service_fee"]
 
 # Render the user basket
@@ -73,35 +75,68 @@ def job_adjustment(request, transaction_id):
     """
     This view renders the job adjustment page
     """
-    
+
     # Get the current user
     user = request.user
 
-    # Fetch the transaction or 404
+    # Fetch the transaction model or 404
     transaction = get_object_or_404(
         Transaction,
         pk=transaction_id,
         status="open"
     )
-    
-    # Permission check
+
+    # Page permission check
     if user.profile.role != "Admin" and transaction.user != user:
-        messages.error(request, "You do not have permission to access this job.")
+        messages.error(
+            request, "You do not have permission to access this job.")
         return redirect("jobs:all_jobs")
 
     # Form
     adjustment_form = AdjustmentForm()
 
     # If post request save the new data using the TransactionLineItem instance else GET the TransactionLineItem instance as a form with existing data
-    if request.method == "POST":
+    if request.method == "POST" and "add_adjustment" in request.POST:
         adjustment_form = AdjustmentForm(request.POST)
+
+        # Add line items permission check
+        if user.profile.role != "Admin" and transaction.user != user:
+            messages.error(
+                request, "You do not have permission to add this item.")
+            return redirect("jobs:all_jobs")
+        
+        # Save item if form is valid
         if adjustment_form.is_valid():
             line_item = adjustment_form.save(commit=False)
             line_item.transaction = transaction
             line_item.save()
             transaction.recalculate_totals()
-            messages.success(request, "Adjustment added!")
+            messages.success(request, "Adjustment dded!")
             return redirect("cart:job_adjustment", transaction_id=transaction.id)
+    # If delete btn is pressed delete the line and recalculate totals
+    elif request.method == "POST" and "delete_btn" in request.POST:
+
+        # Get the id from the input field when delete btn pressed
+        line_item_id = request.POST.get("line_item_id")
+
+        # Delete items permission check
+        if user.profile.role != "Admin" and transaction.user != user:
+            messages.error(
+                request, "You do not have permission to delete this item.")
+            return redirect("jobs:all_jobs")
+        # Save the line_item_id in TransactionLineItem.id so we know which line item to delte, keep the delete item related to this transaction only
+        item = get_object_or_404(
+            TransactionLineItem,
+            id=line_item_id,
+            transaction=transaction
+        )
+        # Delete line ie: item = 15, so delete item 15, recalculate totals, send message, redirect
+        item.delete()
+        transaction.recalculate_totals()
+        messages.success(request, "Adjustment deleted!")
+        return redirect("cart:job_adjustment", transaction_id=transaction.id)
     else:
+        # If NOT posting or getting data then load the value from the instance
         adjustment_form = AdjustmentForm()
+    # Render page and context
     return render(request, 'job_adjustment.html', {"transaction": transaction, "adjustment_form": adjustment_form})

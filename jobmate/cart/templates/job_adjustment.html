@@ -10,11 +10,11 @@ Adjustment | JobMate{% endblock %} {% block content %}
 
 <!-- MESSAGES -->
 {% if messages %}
-  {% for message in messages %}
-    <div class="alert alert-{{ message.tags }}">
-      {{ message }}
-    </div>
-  {% endfor %}
+{% for message in messages %}
+<div class="alert alert-{{ message.tags }}">
+  {{ message }}
+</div>
+{% endfor %}
 {% endif %}
 
 <!-- JOB DETAILS HEADER -->
@@ -73,13 +73,11 @@ Adjustment | JobMate{% endblock %} {% block content %}
 
       <!-- PRICING INFORMATION -->
       <p class="fw-normal mb-3 fs-5">Adjustment Information</p>
-
-
       <!-- Adjustment Information -->
       <div class="row g-2 mb-3">
 
         <!-- Add Adjustment Button: On btn click it will add a new section -->
-        <form method="POST" action="{% url 'cart:job_adjustment' transaction.id %}">
+        <form method="POST">
           {% csrf_token %}
 
           <!-- Adjustment Description -->
@@ -102,17 +100,19 @@ Adjustment | JobMate{% endblock %} {% block content %}
             </div>
           </div>
 
-          <button type="submit" name="add_adjustment" class="btn btn-primary mt-2">
-            Add Adjustment
-          </button>
-        </form>
+          <!-- ADD ADJUSTMENT BUTTON -->
+          <div class="text-end"> 
+            <button type="submit" name="add_adjustment" class="btn btn-primary mt-2 text-end">
+              Add Adjustment
+            </button>
+          </div>
 
         <!-- ADJUSTMENTS ROWS -->
+        </form>
         <p class="fw-bold fs-5 my-4">Adjustments</p>
         {% for item in transaction.items.all %}
-        <!-- Adjustment row 1 -->
+        <!-- Adjustment row -->
         <div>
-
           <!-- Description -->
           <div class="row g-3 mb-3">
             <div class="col-md-4">
@@ -138,19 +138,25 @@ Adjustment | JobMate{% endblock %} {% block content %}
               <p>£{{ item.line_total }}</p>
             </div>
 
-            <!-- Delete Button -->
-            <div class="col-md-1 d-flex align-items-center justify-content-center">
-              <span class="fw-normal me-2 ps-2">Delete</span>
-              <i class="bi bi-trash text-danger fs-5" style="cursor: pointer"></i>
-            </div>
+            <!-- DELETE LINE ITEM BUTTON-->
+            <form class="col-md-1 d-flex align-items-center justify-content-center" method="POST">
+              {% csrf_token %}
+              <!-- Get the item.id but hide it -->
+              <input type="hidden" name="line_item_id" value="{{ item.id }}">
+              <button type="submit" name="delete_btn" class="btn p-0 text-decoration-none">
+                <span class="fw-normal me-2 ps-2">Delete</span>
+                <i class="bi bi-trash text-danger fs-5=="></i>
+              </button>
+            </form>
           </div>
         </div>
 
         <hr />
 
+        <!-- DISPLAYED WHEN NO ADJUSTMENTS -->
         {% empty %}
         <tr>
-          <td colspan="4" class="text-danger">No adjustments yet</td>
+          <p class=" fw-semibold text-danger">No adjustments yet</p>
         </tr>
         {% endfor %}
 
@@ -184,9 +190,9 @@ Adjustment | JobMate{% endblock %} {% block content %}
               <span>
                 <i class="bi bi-check-lg"></i>
               </span>
-              <span>Save Changes</span>
+              <span>Exit to Cart</span>
             </a>
-            
+
           </div>
         </div>
       </div>
