@@ -50,11 +50,9 @@ def all_jobs(request):
             .first()
         )
         job.payment_status = transaction.status if transaction else None
-    
-    print(job.payment_status)
 
     # Finally render job list based on above conditions
-    return render(request, 'all_jobs.html', {"job_list": job_list, "status_filter": status_filter, "search_query": search_query, "job.payment_staus": job.payment_status})
+    return render(request, 'all_jobs.html', {"job_list": job_list, "status_filter": status_filter, "search_query": search_query})
 
 
 @login_required
