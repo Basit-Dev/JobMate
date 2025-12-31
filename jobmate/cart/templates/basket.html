@@ -124,7 +124,7 @@ Cart | JobMate {% endblock %}
                             <p>£{{ data.vat|floatformat:2 }}</p>
                         </div>
 
-                        <div class="d-flex justify-content-end gap-2 pt-3 fs-5">
+                        <div class="d-flex justify-content-end gap-2 pt-3 mb-3">
                             <span class="fw-bold">Total:</span>
                             <strong class="">£{{ data.total|floatformat:2 }}</strong>
                         </div>
@@ -133,13 +133,12 @@ Cart | JobMate {% endblock %}
                         <div class="text-end pt-4">
                             <button class="checkout-btn btn btn-success mb-2">Proceed to Checkout</button>
                         </div>
-                        <p class="text-end text-muted small mb-4">
+                        <p class="text-end text-muted small mb-4 pb-3">
                             Secure payment processing.
                         </p>
+                        {% endif %}
                     </div>
-                    {% endif %}
                 </div>
-
             </div>
         </div>
 
@@ -185,7 +184,7 @@ Cart | JobMate {% endblock %}
                                 <strong>£{{ transaction.adjustment|floatformat:2 }}</strong>
                             </div>
                         </div>
-                        <div>
+                        <div class="text-end">
                             <div>
                                 <small class="text-muted d-block">Estimated Cost</small>
                                 <strong>£{{ transaction.job.job_cost|floatformat:2 }}</strong>
@@ -223,7 +222,7 @@ Cart | JobMate {% endblock %}
                         <p>£{{ data.vat|floatformat:2 }}</p>
                     </div>
 
-                    <div class="d-flex justify-content-between fs-5 mb-3">
+                    <div class="d-flex justify-content-between mb-3">
                         <span class="fw-bold">Total</span>
                         <strong>£{{ data.total|floatformat:2 }}</strong>
                     </div>
