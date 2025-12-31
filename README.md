@@ -552,6 +552,7 @@ TransactionLineItem
 | `add_adjustment`       | Admin, users complete adjustments if required, adjustment totals all line items, and updates the basket with all totals         | Passed |
 | `basket`               | Displays jobs, adjustments, subtotal, service fee, vat, totals per user, so they cab be paid seperatly                          | Passed |
 | `delete line item`     | Delete indivisual line items, total recalculates, admin can delete globally, users can only delete their transactions           | Passed |
+| `delete job from cart` | Delete user grouped jobs from basket, job status changes to in progress                                                         | Passed |
 
 ---
 
