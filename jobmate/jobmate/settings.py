@@ -34,7 +34,6 @@ ALLOWED_HOSTS = [
     "127.0.0.1",
 ]
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -84,8 +83,8 @@ ACCOUNT_SIGNUP_FIELDS = ["first_name*", "last_name*", "role*", "email*", "passwo
 ACCOUNT_EMAIL_VERIFICATION ="none" # using none for testing purpose
 ACCOUNT_LOGOUT_ON_GET = True
 LOGIN_URL = 'account_login'
-LOGIN_REDIRECT_URL = '/jobs/all_jobs'
-LOGOUT_REDIRECT_URL = '/users/logged_out'
+LOGIN_REDIRECT_URL = '/jobs/all_jobs/'
+LOGOUT_REDIRECT_URL = '/users/logged_out/'
 
 # Custom form
 ACCOUNT_FORMS = {
@@ -167,6 +166,8 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR/"static"
 ]
+
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
