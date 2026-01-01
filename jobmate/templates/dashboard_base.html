@@ -17,12 +17,12 @@
   <div class="header-right">
     <div class="user-info">
       <a href="{% url 'users:profile_settings' %}" class="text-decoration-none text-muted"><span>Hi {% if request.user.is_authenticated and request.user.first_name == "" %}
-        {{ request.user.username }}
-        {% else %}
-        {{request.user.first_name}}
-        {% endif %} 
-      </span>
-    </a>
+          {{ request.user.username }}
+          {% else %}
+          {{request.user.first_name}}
+          {% endif %}
+        </span>
+      </a>
     </div>
     <a href="{% url 'account_logout' %}" class="logout-btn text-danger">
       <i class="bi bi-box-arrow-right"></i>
@@ -60,15 +60,6 @@
         </a>
       </li>
 
-      <!-- Create Job -->
-      <!-- <li>
-        <a href="{% url 'jobs:create_job' %}"
-          class="{% if request.resolver_match.url_name == 'create_job' %}active nav-link disabled{% endif %} {% if request.resolver_match.url_name == 'edit_job' %}d-none{% endif %}">
-          <i class="bi bi-plus-circle-fill"></i>
-          <span>Create Job</span>
-        </a>
-      </li> -->
-      
       <!-- Edit Job -->
       <li>
         <a href="#"
@@ -133,8 +124,14 @@
   <!-- Mobile Sidebar -->
   <aside class="mobile-sidebar" id="mobileSidebar">
     <div class="mobile-user-section">
-      <div class="user-name">User</div>
-      <a href="#" class="logout-link">
+      <a href="{% url 'users:profile_settings' %}" class="text-decoration-none fw-bold text-muted"><span>Hi {% if request.user.is_authenticated and request.user.first_name == "" %} 
+        {{ request.user.username }}
+          {% else %}
+          {{request.user.first_name}}
+          {% endif %}
+        </span>
+      </a>
+      <a href="{% url 'account_logout' %}" class="logout-link pt-3 text-danger">
         <i class="bi bi-box-arrow-right"></i>
         <span>Logout</span>
       </a>
@@ -151,7 +148,7 @@
       </li>
 
       <!-- Mobile Operatives -->
-       <!-- Only show All Operatives, Create Job, edit job buttons if logged in as Admin -->
+      <!-- Only show All Operatives, Create Job, edit job buttons if logged in as Admin -->
       {% if request.user.is_authenticated and request.user.profile.role == "Admin" %}
       <li>
         <a href="{% url 'users:all_operatives' %}"
@@ -160,15 +157,6 @@
           <span>Operatives</span>
         </a>
       </li>
-
-      <!-- Mobile Create Job -->
-      <!-- <li>
-        <a href="{% url 'jobs:create_job' %}"
-          class="{% if request.resolver_match.url_name == 'create_job' %}active nav-link disabled{% endif %} {% if request.resolver_match.url_name == 'edit_job' %}d-none{% endif %}">
-          <i class="bi bi-plus-circle-fill"></i>
-          <span>Create Job</span>
-        </a>
-      </li> -->
 
       <!-- Mobile Edit Job -->
       <li>
@@ -212,7 +200,10 @@
         <a href="{% url 'cart:basket' %}"
           class="{% if request.resolver_match.url_name == 'basket' %}active nav-link disabled{% endif %}">
           <i class="bi bi-cart-fill"></i>
-          <span>Cart</span>
+            <span> Cart{% if basket_count %}
+            ({{ basket_count }})
+            {% endif %}
+          </span>
         </a>
       </li>
 
