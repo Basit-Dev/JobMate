@@ -28,4 +28,4 @@ urlpatterns = [
 ]
 
 # 404 page handler
-handler404 = 'jobmate.views.custom_404'
+handler404 = 'views.custom_404'
