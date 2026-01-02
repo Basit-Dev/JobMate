@@ -57,7 +57,7 @@ class JobForm(forms.ModelForm):
             'assigned_operative': forms.Select(attrs={'class': 'form-select input'}),
         }
 
-    # This function displays the users as first last and role in the drop down list
+    # This function displays the users as first last names and role in the drop down list
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
