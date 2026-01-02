@@ -563,3 +563,93 @@ TransactionLineItem
 - CSS style for input tags to StackOverflow
 - Testing to NetNinja, Legion Script from YouTube
 - Password reset to https://pypi.org
+
+---
+
+## Deployment to AWS (Production)
+
+This section explains how the JobMate project is deployed to an AWS server and how updates are applied. I have created two git branches. Th main branch will hold the production code and the develop branch is for development.
+
+---
+
+### Overview
+
+- The project is hosted on an AWS EC2 Ubuntu server
+- Django runs using Gunicorn
+- Nginx is used as the web server
+- Code is stored on GitHub
+- The `main` branch represents production
+- The `develop` branch is used for development
+- The database file (`db.sqlite3`) is not tracked by Git
+
+---
+
+### Important Rule
+
+The SQLite database file (`db.sqlite3`) is ignored because:
+- The database changes whenever the app runs
+- Local and production data will be different
+
+---
+
+### Server Directory Structure
+
+The project is located at: /var/www/jobmate/JobMate
+The SQLite database is located at: /var/www/jobmate/JobMate/jobmate/db.sqlite3
+
+---
+
+### Setup server AWS EC2
+```bash
+ssh -i ~/.ssh/job_mate.pem ubuntu@13.48.56.234/
+```
+
+## Navigate to the project directory and deploy
+```bash
+cd /var/www/jobmate/JobMate
+git pull origin main
+source .venv/bin/activate
+cd jobmate
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py collectstatic --noinput
+sudo systemctl restart gunicorn
+sudo systemctl reload nginx
+```
+
+---
+
+### Updating the Server After Code Changes
+
+## Local Machine - Work in develop branch
+```bash
+git checkout develop
+# make changes
+git commit -m "Description of change"
+```
+
+## Local Machine - Merge cahnges into main
+```bash
+git checkout main
+git pull origin main
+git merge develop
+git push origin main
+```
+
+### Production Server AWS EC2
+
+## Connect to the server and pull the latest production code
+```bash
+ssh -i ~/.ssh/job_mate.pem ubuntu@13.48.56.234
+cd /var/www/jobmate/JobMate
+git pull origin main
+```
+## Apply updates and restart the application
+```bash
+cd jobmate
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py collectstatic --noinput
+sudo systemctl restart gunicorn
+
+```
