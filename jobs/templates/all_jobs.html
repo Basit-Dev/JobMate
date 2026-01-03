@@ -117,7 +117,7 @@
               </td>
               <td data-label="Payment">
                 <span class="badge badge-rounded
-                {% if job.payment_status == 'paid' %}bd-success
+                {% if job.payment_status == 'paid' %}bg-success
                 {% elif job.payment_status == 'open' %}bg-primary
                 {% elif job.payment_status == 'failed' %}bg-danger
                 {% elif job.payment_status == 'cancelled' %}bg-info

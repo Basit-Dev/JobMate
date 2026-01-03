@@ -11,11 +11,11 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 from dotenv import load_dotenv
 from pathlib import Path
-
+load_dotenv()
 # import packages
 import os
 
-load_dotenv()
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -42,6 +42,8 @@ ALLOWED_HOSTS = [
     "127.0.0.1",
 ]
 
+SITE_URL = "http://127.0.0.1:8000"
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -62,6 +64,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'jobs',
     'cart',
+    'orders'
 ]
 
 SITE_ID = 1

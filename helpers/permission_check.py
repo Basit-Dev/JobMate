@@ -19,6 +19,12 @@ def admin_required(view_func):
         #    (prevents app from crashing if profile is missing)
         # 2. Check if the user's role is NOT admin
         #
+        
+        # Block anonymous users immediately
+        if not user.is_authenticated:
+            messages.error(request, "Please log in first.")
+            return redirect("login")
+        
         # If either condition is true → deny access
         if not hasattr(user, "profile") or user.profile.role != "Admin":
             # Show an error message to the user

@@ -25,6 +25,7 @@ urlpatterns = [
     path('users/', include('users.urls')),
     path('jobs/', include('jobs.urls')),
     path('cart/', include('cart.urls')),
+    path("orders/", include("orders.urls")), 
 ]
 
 # 404 page handler
