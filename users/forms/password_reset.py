@@ -6,6 +6,6 @@ class CustomResetForm(ResetForm):
     def __init__(self, *args, **kwargs):
       super().__init__(*args, **kwargs)
       self.fields['email'].widget.attrs.update({
-        "class": "form-control",
+        "class": "form-control input",
         "placeholder": "Enter your email",
       })    

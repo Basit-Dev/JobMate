@@ -9,16 +9,16 @@ class CustomSignupForm(SignupForm):
     #   Custom fileds with Bootstrap classes
     first_name = forms.CharField(
         max_length=50,
-        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'First Name'}),
+        widget=forms.TextInput(attrs={'class': 'form-control input', 'placeholder': 'First Name'}),
         required=True
     )
     last_name = forms.CharField(
         max_length=50,
-        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Last Name'}), 
+        widget=forms.TextInput(attrs={'class': 'form-control input', 'placeholder': 'Last Name'}), 
         required=True
     )
     email = forms.EmailField(
-        widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email Address'}),
+        widget=forms.EmailInput(attrs={'class': 'form-control input', 'placeholder': 'Email Address'}),
         required=True
     )
 
@@ -34,7 +34,7 @@ class CustomSignupForm(SignupForm):
 
     role = forms.ChoiceField(
         choices=ROLE_CHOICES, label='Role',
-        widget=forms.Select(attrs={'class': 'form-select'}),
+        widget=forms.Select(attrs={'class': 'form-select input'}),
         required=True,
     )
 
@@ -42,11 +42,11 @@ class CustomSignupForm(SignupForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['password1'].widget.attrs.update({
-            'class': 'form-control',
+            'class': 'form-control input',
             'placeholder': 'Enter password'
         })
         self.fields['password2'].widget.attrs.update({
-            'class': 'form-control',
+            'class': 'form-control input',
             'placeholder': 'Confirm password'
         })
 

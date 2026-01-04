@@ -6,11 +6,11 @@ class CustomLoginForm(LoginForm):
     def __init__(self, *args, **kwargs):
       super().__init__(*args, **kwargs)
       self.fields['login'].widget.attrs.update({
-          "class": "form-control",
+          "class": "form-control input",
           "placeholder": "Enter your email",
           })
       self.fields['password'].widget.attrs.update({
-          "class": "form-control",
+          "class": "form-control input",
           "placeholder": "Enter your password",
           })
       
