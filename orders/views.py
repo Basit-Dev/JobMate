@@ -31,7 +31,7 @@ def create_order_from_cart(request, user_id):
         messages.error(request, "There are no trasactions to display!")
         return redirect("cart:basket")
     
-        # CHECK for existing pending order
+    # CHECK for existing pending order
     existing_order = Order.objects.filter(
         user_id=user_id,
         status=Order.Status.PENDING,

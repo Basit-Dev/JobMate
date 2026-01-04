@@ -83,6 +83,7 @@ class Transaction(models.Model):
         # Save data
         self.save(update_fields=["adjustment", "actual_cost"])
 
+    # Totals will be calculated in basket
     def calculate_totals(self):
         self.subtotal = self.actual_cost
         self.service_fee = self.subtotal * Decimal("0.15")
