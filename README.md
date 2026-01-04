@@ -553,6 +553,8 @@ TransactionLineItem
 | `basket`               | Displays jobs, adjustments, subtotal, service fee, vat, totals per user, so they cab be paid seperatly                          | Passed |
 | `delete line item`     | Delete indivisual line items, total recalculates, admin can delete globally, users can only delete their transactions           | Passed |
 | `delete job from cart` | Delete user grouped jobs from basket, job status changes to in progress                                                         | Passed |
+| `Stripe`               | Order completes, cancels, declines successfully, admin canonly pay operatives, all totals calculate as expected                 | Passed |
+| `payments_summary.html`| Displays all paid orders with accumulated totals for all transactions relating to a order                                       | Passed |
 
 ---
 
