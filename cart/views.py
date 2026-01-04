@@ -6,6 +6,8 @@ from cart.forms.adjustments import AdjustmentForm
 from decimal import Decimal
 from orders.models import Order
 from django.db.models import Sum
+from django.db.models import Q
+from datetime import datetime
 
 # Create your views here.
 
@@ -17,17 +19,18 @@ def payments(request):
     """
 
     user = request.user
+    
+     # Get the search term from search box or status filter
+    search_query = request.GET.get("search_term")
+    status_filter = request.GET.get("status_filter")
 
     # Admin sees ALL paid orders
     if user.profile.role == "Admin":
-        orders = Order.objects.filter(status=Order.Status.PAID)
+        orders = Order.objects.all()
 
     # Normal users see ONLY their paid orders
     else:
-        orders = Order.objects.filter(
-            user=user,
-            status=Order.Status.PAID
-        )
+       orders = Order.objects.filter(user=user)
         
      # Get values from Transaction
     orders = orders.annotate(
@@ -36,11 +39,42 @@ def payments(request):
         adjustment_total=Sum("transactions__adjustment"), 
         service_fee_total=Sum("transactions__service_fee"), 
         vat_total=Sum("transactions__vat"), 
-    )    
+    )  
+    
+    # If search query then filter the existing job_list variable mutate it and give the results
+    if search_query:
+            query = Q()
 
-    return render(request, "payments.html", {
-        "orders": orders
-    })
+            # Text-based search
+            query |= Q(id__icontains=search_query)
+            query |= Q(user__first_name__icontains=search_query)
+            query |= Q(user__last_name__icontains=search_query)
+            query |= Q(transactions__job__job_title__icontains=search_query)
+            query |= Q(transactions__job__address__icontains=search_query)
+
+            # Numeric search (amounts)
+            try:
+                amount = Decimal(search_query)
+                query |= Q(total=amount)
+                query |= Q(subtotal_total=amount)
+                query |= Q(vat_total=amount)
+            except:
+                pass
+
+            # Date search (Pay date)
+            try:
+                date = datetime.strptime(search_query, "%Y-%m-%d").date()
+                query |= Q(paid_at__date=date)
+            except:
+                pass
+
+            orders = orders.filter(query).distinct()
+            
+    # If status query then filter the existing job_list variable mutate it and give the results
+    if status_filter:
+        orders = orders.filter(status=status_filter)         
+
+    return render(request, "payments.html", {"orders": orders, "search_query": search_query,})
 
 
 @login_required

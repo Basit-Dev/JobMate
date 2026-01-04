@@ -151,7 +151,16 @@ def payment_cancel(request, order_id):
     # If status is equal to pending then order status = cancelled and save the status in object
     if order.status == Order.Status.PENDING:
         order.status = Order.Status.CANCELLED
-        order.save(update_fields=["status"])
+        time_now = timezone.now()
+        order.cancelled_at = time_now
+        order.save(update_fields=["status", "cancelled_at"])
+        
+    # Mark related transactions as paid in the Transaction model
+    Transaction.objects.filter(
+        user_id=order.user_id,
+        status="open",).update(status="cancelled",
+        cancelled_at=time_now)
+        
 
     # Render the cancel page
     return render(request, "payment_cancel.html", {"order": order})

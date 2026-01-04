@@ -80,6 +80,7 @@
               <th>Priority</th>
               <th>Status</th>
               <th>Payment</th>
+              <th>Order ID #</th>
               <th>Created</th>
               <th>Actions</th>
             </tr>
@@ -120,13 +121,14 @@
                 {% if job.payment_status == 'paid' %}bg-success
                 {% elif job.payment_status == 'open' %}bg-primary
                 {% elif job.payment_status == 'failed' %}bg-danger
-                {% elif job.payment_status == 'cancelled' %}bg-info
+                {% elif job.payment_status == 'cancelled' %}bg-danger
                 {% else %}bg-secondary
                 {% endif %}">
                  {{ job.payment_status|capfirst }}
                    <!-- {{ job.payment_status|default_if_none:"Not Completed"|capfirst }} -->
                 </span>
               </td>
+              <td>{{ job.order.id|default:"—" }}</td>
               <td data-label="Created">{{ job.created_at}}</td>
               <td data-label="Actions">
                 <div>

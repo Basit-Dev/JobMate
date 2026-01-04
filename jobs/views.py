@@ -6,6 +6,7 @@ from django.contrib import messages
 from django.db.models import Q
 from helpers.permission_check import admin_required
 from cart.models import Transaction
+from orders.models import Order
 
 # Create your views here.
 
@@ -49,6 +50,8 @@ def all_jobs(request):
             .first()
         )
         job.payment_status = transaction.status if transaction else None
+        job.order = transaction.order if transaction and transaction.order else None
+            
 
     # Finally render job list based on above conditions
     return render(request, 'all_jobs.html', {"job_list": job_list, "status_filter": status_filter, "search_query": search_query})

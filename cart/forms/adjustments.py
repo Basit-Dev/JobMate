@@ -12,7 +12,6 @@ class AdjustmentForm(forms.ModelForm):
             'description',
             'quantity',
             'unit_price',
-            # 'line_total',
         ]
 
         # Displays the input styles to match bootstrap
@@ -20,5 +19,4 @@ class AdjustmentForm(forms.ModelForm):
             'description': forms.Textarea(attrs={'class': 'form-control input', 'rows': 1, 'placeholder': 'Enter item description (min 20 characters)'}),
             'quantity': forms.NumberInput(attrs={'class': 'form-control input', 'placeholder': 'Qty'}),
             'unit_price': forms.NumberInput(attrs={'class': 'form-control input', 'placeholder': 'Unit Price'}),
-            # 'line_total': forms.TextInput(attrs={'class': 'form-control input' }),
         }

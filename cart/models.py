@@ -66,6 +66,7 @@ class Transaction(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     paid_at = models.DateTimeField(null=True, blank=True)
+    cancelled_at = models.DateTimeField(null=True, blank=True)
 
     # # Total Adjustments calculator brain
     def recalculate_totals(self):

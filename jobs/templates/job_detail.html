@@ -19,7 +19,10 @@
 <!-- JOB DETAILS -->
 <div>
   <strong class="fs-2 fw-bold">Job Details</strong>
-  <p class="fs-6 text-muted">#JOB-{{ job.id }} • Created: {{ job.created_at }}</p>
+    <div class="d-flex justify-content-between">
+      <p class="fs-6 text-muted">#JOB-{{ job.id }} • Created: {{ job.created_at }}</p>
+      <p class="fw-semibold">Order ID #: {{ transaction.order.id }}</p>
+    </div>
 </div>
 
 <!-- MESSAGES -->

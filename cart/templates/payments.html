@@ -13,27 +13,32 @@
 
 <!-- FILTERS -->
 <div class="filter-container d-flex flex-grow-1 flex-column justify-content-between flex-md-row gap-3 mb-4">
+
     <!-- Search bar -->
     <div class="search-col col-8">
         <p class="section-subtitle">Search Payments</p>
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search by invoice #, job, property..." />
+        <form class="input-group" method="GET">
+            {% csrf_token %}
+            <input type="text" name="search_term" class="form-control" placeholder="Search orders...." />
+
             <!-- Search Button -->
-            <button class="btn btn-secondary text-muted">
+            <button type="submit" class="btn btn-secondary text-muted">
                 <i class="bi bi-search me-1"></i>Search
             </button>
-        </div>
+        </form>
     </div>
 
     <!-- Status Dropdown -->
-    <div class="col">
+    <form class="col" method="GET">
         <p class="section-subtitle">Status</p>
-        <select class="form-select">
-            <option value="">All Status</option>
-            <option value="active">Active</option>
-            <option value="inactive">Inactive</option>
+        <select class="form-select" name="status_filter" onchange="this.form.submit()">
+        <!-- Add selected when user updates status -->
+        <option value="">All Status</option>
+        <option value="pending" {% if status_filter == "pending" %}selected{% endif %}>Pending</option>
+        <option value="paid" {% if status_filter == "paid" %}selected{% endif %}>Paid</option>
+        <option value="cancelled" {% if status_filter == "cancelled" %}selected{% endif %}>Cancelled</option>
         </select>
-    </div>
+    </form>
 </div>
 
 <!-- PAYMENT LIST -->
@@ -66,7 +71,7 @@
                 <tr>
                     <!-- Invoice -->
                     <td data-label="Invoice">
-                        <p class="text-muted m-0">#PMT-{{ payment.id }}</p>
+                        <p class="text-muted m-0">#OD-{{ payment.id }}</p>
                     </td>
 
                     <!-- Operative -->
