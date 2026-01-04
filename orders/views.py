@@ -74,6 +74,7 @@ def create_order_from_cart(request, user_id):
     return redirect("orders:checkout", order_id=order.id)
 
 
+
 # STRIPE CHECKOUT FUNCTION
 @admin_required
 @login_required

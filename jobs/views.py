@@ -78,7 +78,27 @@ def job_detail(request, job_id):
     
     # When job completed btn pressed change the status to completed, create a transaction, save the user who created the transaction and go to basket.html
     if request.method == "POST":
-         # Prevent double completion
+        
+        # Check if this job has ever been paid, cancelled, pemding before adding it to the basket
+        already_in_order = Transaction.objects.filter(
+            job=job,
+            order__status__in=[
+                Order.Status.PAID,
+                Order.Status.PENDING,
+                Order.Status.CANCELLED,
+            ]
+        ).exists()
+
+        # If true display message
+        if already_in_order:
+            messages.info(
+                request,
+                "This job has already been cannot be added to the basket."
+                
+            )
+            return redirect("jobs:all_jobs")  
+      
+         # Prevent double completion 
         if job.status == "completed":
             messages.info(request, "Job is already completed.")
             return redirect("cart:basket")
@@ -95,6 +115,10 @@ def job_detail(request, job_id):
                 "user": job.assigned_operative
             }
         )
+        # STOP if this job was already paid
+        if transaction and transaction.order and transaction.order.status == Order.Status.PAID:
+            messages.info(request, "This job has already been paid and cannot be added to the basket.")
+            return redirect("jobs:all_jobs")
         
         # Re-calculate totals
         transaction.recalculate_totals()
