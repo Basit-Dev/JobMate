@@ -42,7 +42,7 @@ ALLOWED_HOSTS = [
     "127.0.0.1",
 ]
 
-SITE_URL = os.getenv("SITE_URL", "http://localhost:8000")
+SITE_URL = "http://localhost:8000"
 
 # Application definition
 

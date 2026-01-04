@@ -38,120 +38,113 @@
 
 <!-- PAYMENT LIST -->
 
-    <div class="table-container">
-        <div class="table-header">All Payments (4)</div>
-        <div class="table-responsive p-2">
-            <table class="table align-middle mb-0">
-                <!-- Table Head -->
-                <thead class="table-head">
-                    <tr>
-                        <th>Invoice #</th>
-                        <th>Property</th>
-                        <th>Opeartive</th>
-                        <th>Amount</th>
-                        <th>Status</th>
-                        <th>Pay Date</th>
-                        <th>Due Date</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
+<div class="table-container"> 
+    <div class="table-header">All Payments ({{ orders.count }})</div>
+    <div class="table-responsive p-2">
+        <table class="table align-middle mb-0">
+            <!-- Table Head -->
+            <thead class="table-head">
+                <tr>
+                    <th>Order #</th>
+                    <th>Operative</th>
+                    <th>Estimated Cost</th>
+                    <th>Adjustment</th>
+                    <th>Sub Total</th>
+                    <th>Service Fee</th>
+                    <th>VAT</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                    <th>Pay Date</th>
+                    <!-- <th>Actions</th> -->
+                </tr>
+            </thead>
 
-                <!-- Table Body -->
-                <tbody>
-                    <!-- Invoice Row -->
-                    <tr>
-                        <td data-label="Invoice">
-                            <p class="text-muted m-0">#INV-001</p>
-                        </td>
-                        <td data-label="Property">Sunset Apartments - Unit 4B</td>
-                        <td data-label="Engineer">Mike Wilson</td>
-                        <td data-label="Amount"><span>£</span>150.45</td>
-                        <td data-label="Status">
-                            <span class="badge badge-rounded badge-completed">PAID</span>
-                        </td>
-                        <td data-label="Due Date">Jan 30, 2025</td>
-                        <td data-label="Pay Date">Jan 15, 2025</td>
-                        <td data-label="Actions">
-                            <div class="d-flex flex-row justify-content-around">
-                                <a href="" class="text-secondary me-2"><i
-                                        class="bi bi-eye"></i></a>
-                                <a href="{% url 'cart:basket' %}" class="text-primary me-2"><i class="bi bi-credit-card-2-back-fill"></i></a>
-                                <a href="#" class="text-danger"><i class="bi bi-trash"></i></a>
-                            </div>
-                        </td>
-                    </tr>
+            <!-- Table Body -->
+            <tbody>
+                {% for payment in orders %}
+                {% with first_tx=payment.transactions.first %}
+                <tr>
+                    <!-- Invoice -->
+                    <td data-label="Invoice">
+                        <p class="text-muted m-0">#PMT-{{ payment.id }}</p>
+                    </td>
 
-                    <!-- Invoice Row -->
-                    <tr>
-                        <td data-label="Invoice">
-                            <p class="text-muted m-0">#INV-001</p>
-                        </td>
-                        <td data-label="Property">Sunset Apartments - Unit 4B</td>
-                        <td data-label="Engineer">Mike Wilson</td>
-                        <td data-label="Amount"><span>£</span>150.45</td>
-                        <td data-label="Status">
-                            <span class="badge badge-rounded badge-completed">PAID</span>
-                        </td>
-                        <td data-label="Due Date">Jan 30, 2025</td>
-                        <td data-label="Pay Date">Jan 15, 2025</td>
-                        <td data-label="Actions">
-                            <div class="d-flex flex-row justify-content-around">
-                                <a href="" class="text-secondary me-2"><i
-                                        class="bi bi-eye"></i></a>
-                                <a href="{% url 'cart:basket' %}" class="text-primary me-2"><i class="bi bi-credit-card-2-back-fill"></i></a>
-                                <a href="#" class="text-danger"><i class="bi bi-trash"></i></a>
-                            </div>
-                        </td>
-                    </tr>
+                    <!-- Operative -->
+                    <td data-label="Operative">
+                        {% if first_tx %}
+                        {{ first_tx.job.assigned_operative.get_full_name }}
+                        {% else %}
+                        —
+                        {% endif %}
+                    </td>
 
-                    <!-- Invoice Row -->
-                    <tr>
-                        <td data-label="Invoice">
-                            <p class="text-muted m-0">#INV-001</p>
-                        </td>
-                        <td data-label="Property">Sunset Apartments - Unit 4B</td>
-                        <td data-label="Engineer">Mike Wilson</td>
-                        <td data-label="Amount"><span>£</span>150.45</td>
-                        <td data-label="Status">
-                            <span class="badge badge-rounded badge-completed">PAID</span>
-                        </td>
-                        <td data-label="Due Date">Jan 30, 2025</td>
-                        <td data-label="Pay Date">Jan 15, 2025</td>
-                        <td data-label="Actions">
-                            <div class="d-flex flex-row justify-content-around">
-                                <a href="" class="text-secondary me-2"><i
-                                        class="bi bi-eye"></i></a>
-                                <a href="{% url 'cart:basket' %}" class="text-primary me-2"><i class="bi bi-credit-card-2-back-fill"></i></a>
-                                <a href="#" class="text-danger"><i class="bi bi-trash"></i></a>
-                            </div>
-                        </td>
-                    </tr>
+                     <!-- Estimated cost -->
+                    <td data-label="Estimated Cost">
+                        £{{ payment.base_total|floatformat:2 }}
+                    </td>
 
-                    <!-- Invoice Row -->
-                    <tr>
-                        <td data-label="Invoice">
-                            <p class="text-muted m-0">#INV-001</p>
-                        </td>
-                        <td data-label="Property">Sunset Apartments - Unit 4B</td>
-                        <td data-label="Engineer">Mike Wilson</td>
-                        <td data-label="Amount"><span>£</span>150.45</td>
-                        <td data-label="Status">
-                            <span class="badge badge-rounded badge-completed">PAID</span>
-                        </td>
-                        <td data-label="Due Date">Jan 30, 2025</td>
-                        <td data-label="Pay Date">Jan 15, 2025</td>
-                        <td data-label="Actions">
-                            <div class="d-flex flex-row justify-content-around">
-                                <a href="" class="text-secondary me-2"><i
-                                        class="bi bi-eye"></i></a>
-                                <a href="{% url 'cart:basket' %}" class="text-primary me-2"><i class="bi bi-credit-card-2-back-fill"></i></a>
-                                <a href="#" class="text-danger"><i class="bi bi-trash"></i></a>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+                     <!-- Adjustment -->
+                    <td data-label="Adjustment">
+                        £{{ payment.adjustment_total|floatformat:2 }}
+                    </td>
+
+                    <!-- Subtotal (Actual Cost) -->
+                    <td data-label="Actual Cost">
+                        £{{ payment.subtotal_total|floatformat:2 }}
+                    </td>
+
+                    <!-- Service fee -->
+                    <td data-label="Service Fee">
+                        £{{ payment.service_fee_total|floatformat:2 }}
+                    </td>
+
+                    <!-- VAT -->
+                    <td data-label="VAT">
+                        £{{ payment.vat_total|floatformat:2 }}
+                    </td>
+
+                    <!-- Total -->
+                    <td data-label="Total">
+                        £{{ payment.total|floatformat:2 }}
+                    </td>
+
+                    <!-- Status -->
+                    <td data-label="Status">
+                        <span class="badge rounded-pill px-3 py-2
+                    {% if payment.status == 'pending' %} bg-secondary
+                    {% elif payment.status == 'paid' %} bg-success
+                    {% elif payment.status == 'cancelled' %} bg-danger
+                    {% endif %}">
+                            {{ payment.get_status_display }}
+                        </span>
+                    </td>
+
+                    <!-- Pay Date -->
+                    <td data-label="Pay Date">
+                        {{ payment.paid_at }}
+                    </td>
+
+                    <!-- Actions -->
+                    <!-- <td data-label="Actions">
+                        <div class="d-flex flex-row justify-content-around">
+                            <a href="" class="text-secondary me-2">
+                                <i class="bi bi-eye"></i>
+                            </a>
+                        </div>
+                    </td> -->
+                </tr>
+                {% endwith %}
+
+                {% empty %}
+                <tr>
+                    <td colspan="7" class="text-center text-muted">
+                        No payments found.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
+</div>
 
 {% endblock %}

@@ -9,6 +9,7 @@ from django.urls import reverse
 from django.contrib import messages
 from helpers.permission_check import admin_required
 from django.contrib.auth.decorators import login_required
+from django.utils import timezone
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -77,6 +78,7 @@ def create_order_from_cart(request, user_id):
 @admin_required
 @login_required
 def checkout(request, order_id):
+    
     # Get the order id from  create_order_from_cart
     order = get_object_or_404(Order, id=order_id)
     
@@ -124,12 +126,15 @@ def payment_success(request, order_id):
     # If status is not equal to paid then order status = paid and save the status in object
     if order.status != Order.Status.PAID:
         order.status = Order.Status.PAID
-        order.save(update_fields=["status"])
+        time_now = timezone.now()
+        order.paid_at = time_now
+        order.save(update_fields=["status", "paid_at"])
         
     # Mark related transactions as paid in the Transaction model
     Transaction.objects.filter(
         user_id=order.user_id,
-        status="open",).update(status="paid")
+        status="open",).update(status="paid",
+        paid_at=time_now)
 
     # Render the success page
     return render(request, "payment_success.html", {"order": order})

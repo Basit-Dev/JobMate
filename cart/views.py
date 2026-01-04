@@ -4,6 +4,8 @@ from django.contrib import messages
 from cart.models import Transaction, TransactionLineItem
 from cart.forms.adjustments import AdjustmentForm
 from decimal import Decimal
+from orders.models import Order
+from django.db.models import Sum
 
 # Create your views here.
 
@@ -11,9 +13,34 @@ from decimal import Decimal
 @login_required
 def payments(request):
     """
-    This view renders the all payments page
+    Displays all completed payments (Orders)
     """
-    return render(request, 'payments.html')
+
+    user = request.user
+
+    # Admin sees ALL paid orders
+    if user.profile.role == "Admin":
+        orders = Order.objects.filter(status=Order.Status.PAID)
+
+    # Normal users see ONLY their paid orders
+    else:
+        orders = Order.objects.filter(
+            user=user,
+            status=Order.Status.PAID
+        )
+        
+     # Get values from Transaction
+    orders = orders.annotate(
+        base_total=Sum("transactions__job__job_cost"),
+        subtotal_total=Sum("transactions__subtotal"),     
+        adjustment_total=Sum("transactions__adjustment"), 
+        service_fee_total=Sum("transactions__service_fee"), 
+        vat_total=Sum("transactions__vat"), 
+    )    
+
+    return render(request, "payments.html", {
+        "orders": orders
+    })
 
 
 @login_required
@@ -21,7 +48,7 @@ def basket(request):
     """
     Basket grouped by user so each user paid separately
     """
-    
+
     # Get the current user
     user = request.user
 
@@ -31,13 +58,13 @@ def basket(request):
     else:
         transactions = Transaction.objects.filter(
             user=request.user, status="open")
-        
+
     # If delete btn is pressed delete the line and recalculate totals
     if request.method == "POST" and "delete_btn" in request.POST:
 
         # Get the id from the input field when delete btn pressed
         transaction_id = request.POST.get("basket_item_id")
-            
+
         # Save the basket_item_id in Transaction.id so we know which line item to delete, keep the delete item related to this transaction only
         transaction = get_object_or_404(
             Transaction,
@@ -46,19 +73,20 @@ def basket(request):
         )
         # Delete items permission check
         if user.profile.role != "Admin" and transaction.user != user:
-            messages.error(request, "You do not have permission to delete this item.")
+            messages.error(
+                request, "You do not have permission to delete this item.")
             return redirect("jobs:all_jobs")
-        
+
         # Update the job status only if the job exists to in progress and save then delete transaction from basket
         if transaction.job:
             transaction.job.status = "in_progress"
             transaction.job.save(update_fields=["status"])
-            
+
         # Delete the transaction from basket
         transaction.delete()
         # Display message
         messages.success(request, "Job removed from the basket!")
-        return redirect("cart:basket")  
+        return redirect("cart:basket")
 
     # RUN BASKET DISPLAY
     # This will hold transactions by user
@@ -77,25 +105,20 @@ def basket(request):
                 "vat": Decimal("0.00"),
                 "total": Decimal("0.00"),
                 "status": "open",
-            }   
-        
+            }
+
         # Add transactions and subtotal to the correct users inuser_basket
         user_basket[user]["transactions"].append(job_transaction)
-        
+
         # From the job_transaction add the totals to user_basket items
         user_basket[user]["subtotal"] += job_transaction.subtotal
         user_basket[user]["service_fee"] += job_transaction.service_fee
         user_basket[user]["vat"] += job_transaction.vat
         user_basket[user]["total"] += job_transaction.total
-    
+
 # Render the user basket
     return render(
-        request,
-        "basket.html",
-        {
-            "user_basket": user_basket,
-        }
-    )
+        request, "basket.html", {"user_basket": user_basket})
 
 
 @login_required
@@ -132,7 +155,7 @@ def job_adjustment(request, transaction_id):
             messages.error(
                 request, "You do not have permission to add this item.")
             return redirect("jobs:all_jobs")
-        
+
         # Save item if form is valid
         if adjustment_form.is_valid():
             line_item = adjustment_form.save(commit=False)
@@ -141,7 +164,7 @@ def job_adjustment(request, transaction_id):
             transaction.recalculate_totals()
             messages.success(request, "Adjustment dded!")
             return redirect("cart:job_adjustment", transaction_id=transaction.id)
-        
+
     # If delete btn is pressed delete the line and recalculate totals
     elif request.method == "POST" and "delete_btn" in request.POST:
 
