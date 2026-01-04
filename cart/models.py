@@ -8,6 +8,8 @@ from decimal import Decimal
 # Create your models here.
 
 # ADD ITEMS TO BASKET
+
+
 class Transaction(models.Model):
     STATUS_CHOICES = [
         ("open", "Open"),
@@ -21,6 +23,15 @@ class Transaction(models.Model):
         default=uuid.uuid4,
         editable=False,
         unique=True
+    )
+
+    # One order has many transactions
+    order = models.ForeignKey(
+        "orders.Order",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="transactions",
     )
 
     user = models.ForeignKey(
@@ -71,6 +82,12 @@ class Transaction(models.Model):
 
         # Save data
         self.save(update_fields=["adjustment", "actual_cost"])
+
+    def calculate_totals(self):
+        self.subtotal = self.actual_cost
+        self.service_fee = self.subtotal * Decimal("0.15")
+        self.vat = self.subtotal * Decimal("0.20")
+        self.total = self.subtotal + self.vat - self.service_fee
 
     def __str__(self):
         return f"Transaction {self.transaction_id} ({self.status})"

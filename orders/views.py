@@ -2,12 +2,11 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from decimal import Decimal
 from cart.models import Transaction
-from .models import Order
+from .models import Order, OrderItem
 import stripe
 from django.conf import settings
 from django.urls import reverse
 from django.contrib import messages
-from .models import Order
 from helpers.permission_check import admin_required
 from django.contrib.auth.decorators import login_required
 
@@ -23,7 +22,7 @@ def create_order_from_cart(request, user_id):
 
     # Get the filtered values from the user id that was sent from checkout button in basket page also get only open transactions
     transactions = Transaction.objects.filter(
-        user=user_id,
+        user_id=user_id,
         status="open", 
     )
 
@@ -31,23 +30,39 @@ def create_order_from_cart(request, user_id):
     if not transactions.exists():
         messages.error(request, "There are no trasactions to display!")
         return redirect("cart:basket")
-
-    # Create one Order object with the values of the given user_id, status is pending and total = 0.00
-    order = Order.objects.create(
+    
+        # CHECK for existing pending order
+    existing_order = Order.objects.filter(
         user_id=user_id,
         status=Order.Status.PENDING,
-        total=Decimal("0.00"),
-    )
+    ).first()
+
+    if existing_order:
+    # Reuse the existing pending order
+        order = existing_order
+    else:    
+        # Create one Order object with the values of the given user_id, status is pending and total = 0.00
+        order = Order.objects.create(
+            user_id=user_id,
+            status=Order.Status.PENDING,
+            total=Decimal("0.00"),
+        )
 
     # Will use to save the calculated total at line 47
     total = Decimal("0.00")
 
 # Loop through tasactions and get totals
     for totals in transactions:
-        subtotal = totals.subtotal
-        service_fee = subtotal * Decimal("0.15")
-        vat = subtotal * Decimal("0.20")
-        total = subtotal + vat - service_fee
+        # Ensure totals are calculated & saved
+        totals.calculate_totals()
+        totals.save(update_fields=["subtotal", "service_fee", "vat", "total"])
+
+        # 🔑 SUM totals correctly
+        total += totals.total
+        
+        # Link transaction to order
+        totals.order = order
+        totals.save(update_fields=["order"])
     
     # Save total in Order object   
     order.total = total
@@ -64,6 +79,10 @@ def create_order_from_cart(request, user_id):
 def checkout(request, order_id):
     # Get the order id from  create_order_from_cart
     order = get_object_or_404(Order, id=order_id)
+    
+    if order.status == Order.Status.PAID:
+        messages.warning(request, "This order has already been paid.")
+        return redirect("cart:basket")
 
     # Create a stripe session
     checkout_session = stripe.checkout.Session.create(
