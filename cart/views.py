@@ -78,26 +78,15 @@ def basket(request):
                 "total": Decimal("0.00"),
                 "status": "open",
             }   
-
-        # Ensure actual_cost is always correct
-        job_transaction.recalculate_totals()
-
-        # Add transactions and subtotal to the correct users
-        user_basket[user]["transactions"].append(job_transaction)
-        user_basket[user]["subtotal"] += job_transaction.actual_cost  
-
-    # Loop through user basket items and calculate totals for service fee and total per user
-    for user, data in user_basket.items():
         
-        # Save the subtotal for checkout
-        for transaction in data["transactions"]:
-            transaction.subtotal = data["subtotal"]
-            transaction.save(update_fields=["subtotal"])  
-            
-        data["service_fee"] = data["subtotal"] * Decimal("0.15")  # 15%
-        data["vat"] = data["subtotal"] * Decimal("0.20")  # 20%
-        data["total"] = data["subtotal"] + data["vat"] - data["service_fee"]
-
+        # Add transactions and subtotal to the correct users inuser_basket
+        user_basket[user]["transactions"].append(job_transaction)
+        
+        # From the job_transaction add the totals to user_basket items
+        user_basket[user]["subtotal"] += job_transaction.subtotal
+        user_basket[user]["service_fee"] += job_transaction.service_fee
+        user_basket[user]["vat"] += job_transaction.vat
+        user_basket[user]["total"] += job_transaction.total
     
 # Render the user basket
     return render(

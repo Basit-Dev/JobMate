@@ -8,8 +8,6 @@ from decimal import Decimal
 # Create your models here.
 
 # ADD ITEMS TO BASKET
-
-
 class Transaction(models.Model):
     STATUS_CHOICES = [
         ("open", "Open"),
@@ -65,30 +63,39 @@ class Transaction(models.Model):
     service_fee = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     vat = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     total = models.DecimalField(max_digits=10, decimal_places=2, default=0)
-    
+
     created_at = models.DateTimeField(auto_now_add=True)
     paid_at = models.DateTimeField(null=True, blank=True)
 
-    # Total Adjustments calculator brain
+    # # Total Adjustments calculator brain
     def recalculate_totals(self):
-        # Sum all adjustment line totals
-        self.adjustment = self.items.aggregate(total=Sum("line_total"))["total"] or Decimal("0.00")
+        """
+        Single source of truth for ALL money fields
+        """
 
-        # # Job estimated cost plus adjustment cost total
-        estimated_cost = (self.job.job_cost if self.job else Decimal("0.00"))
-        
-        # Add estimated and adjustments
-        self.actual_cost = estimated_cost + self.adjustment
+        # Sum adjustment line items
+        self.adjustment = (self.items.aggregate(total=Sum("line_total"))["total"]or Decimal("0.00"))
 
-        # Save data
-        self.save(update_fields=["adjustment", "actual_cost"])
+        # Base job cost
+        base_cost = self.job.job_cost if self.job else Decimal("0.00")
+        # Actual cost
+        self.actual_cost = base_cost + self.adjustment
 
-    # Totals will be calculated in basket
-    def calculate_totals(self):
+        # Totals derived from actual cost
         self.subtotal = self.actual_cost
         self.service_fee = self.subtotal * Decimal("0.15")
         self.vat = self.subtotal * Decimal("0.20")
         self.total = self.subtotal + self.vat - self.service_fee
+
+        # Persist once
+        self.save(update_fields=[
+            "adjustment",
+            "actual_cost",
+            "subtotal",
+            "service_fee",
+            "vat",
+            "total",
+        ])
 
     def __str__(self):
         return f"Transaction {self.transaction_id} ({self.status})"
@@ -102,7 +109,7 @@ class TransactionLineItem(models.Model):
         related_name="items"
     )
 
-    # Optional link to a job 
+    # Optional link to a job
     # job = models.ForeignKey(
     #     Job,
     #     on_delete=models.SET_NULL,

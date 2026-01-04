@@ -2,7 +2,7 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from decimal import Decimal
 from cart.models import Transaction
-from .models import Order, OrderItem
+from .models import Order
 import stripe
 from django.conf import settings
 from django.urls import reverse
@@ -53,11 +53,12 @@ def create_order_from_cart(request, user_id):
 
 # Loop through tasactions and get totals
     for totals in transactions:
-        # Ensure totals are calculated & saved
-        totals.calculate_totals()
-        totals.save(update_fields=["subtotal", "service_fee", "vat", "total"])
+        
+        # Optional safety check (recommended)
+        if totals.total <= 0:
+            raise ValueError("Invalid transaction total")
 
-        # 🔑 SUM totals correctly
+        # SUM totals correctly
         total += totals.total
         
         # Link transaction to order
@@ -67,7 +68,6 @@ def create_order_from_cart(request, user_id):
     # Save total in Order object   
     order.total = total
     order.save(update_fields=["total"])
-    print("TOTAL", order.total)
 
     # The Stripe checkout function will run once the browser hits "GET /orders/checkout/99/ 
     return redirect("orders:checkout", order_id=order.id)

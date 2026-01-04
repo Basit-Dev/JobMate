@@ -6,7 +6,6 @@ from django.contrib import messages
 from django.db.models import Q
 from helpers.permission_check import admin_required
 from cart.models import Transaction
-from cart.models import Transaction
 
 # Create your views here.
 
@@ -86,13 +85,16 @@ def job_detail(request, job_id):
         job.save(update_fields=["status"])
 
         # Create OR reuse ONE open transaction
-        created = Transaction.objects.get_or_create(
+        transaction, created = Transaction.objects.get_or_create(
             job=job,
             status="open",
             defaults={
                 "user": job.assigned_operative
             }
         )
+        
+        # Re-calculate totals
+        transaction.recalculate_totals()
 
         messages.success(
             request,
