@@ -37,7 +37,7 @@ def all_operatives(request):
     operative_list = get_user_model().objects.all()
     
     # Remove admins from the list
-    operative_list = operative_list.exclude(profile__role="Admin")
+    operative_list = operative_list.exclude(profile__role="admin")
     
     # If search query submits form then filter the engineers and update operative_list  
     if search_query:

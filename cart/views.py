@@ -25,7 +25,7 @@ def payments(request):
     status_filter = request.GET.get("status_filter")
 
     # Admin sees ALL paid orders
-    if user.profile.role == "Admin":
+    if user.profile.role == "admin":
         orders = Order.objects.all()
 
     # Normal users see ONLY their paid orders
@@ -87,7 +87,7 @@ def basket(request):
     user = request.user
 
     # Admin sees all open transactions, users see only theirs
-    if request.user.profile.role == "Admin":
+    if request.user.profile.role == "admin":
         transactions = Transaction.objects.filter(status="open")
     else:
         transactions = Transaction.objects.filter(
@@ -106,7 +106,7 @@ def basket(request):
             status="open",
         )
         # Delete items permission check
-        if user.profile.role != "Admin" and transaction.user != user:
+        if user.profile.role != "admin" and transaction.user != user:
             messages.error(
                 request, "You do not have permission to delete this item.")
             return redirect("jobs:all_jobs")
@@ -172,7 +172,7 @@ def job_adjustment(request, transaction_id):
     )
 
     # Page permission check
-    if user.profile.role != "Admin" and transaction.user != user:
+    if user.profile.role != "admin" and transaction.user != user:
         messages.error(
             request, "You do not have permission to access this job.")
         return redirect("jobs:all_jobs")
@@ -185,7 +185,7 @@ def job_adjustment(request, transaction_id):
         adjustment_form = AdjustmentForm(request.POST)
 
         # Add line items permission check
-        if user.profile.role != "Admin" and transaction.user != user:
+        if user.profile.role != "admin" and transaction.user != user:
             messages.error(
                 request, "You do not have permission to add this item.")
             return redirect("jobs:all_jobs")
@@ -206,7 +206,7 @@ def job_adjustment(request, transaction_id):
         line_item_id = request.POST.get("line_item_id")
 
         # Delete items permission check
-        if user.profile.role != "Admin" and transaction.user != user:
+        if user.profile.role != "admin" and transaction.user != user:
             messages.error(
                 request, "You do not have permission to delete this item.")
             return redirect("jobs:all_jobs")

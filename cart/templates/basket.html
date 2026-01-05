@@ -127,7 +127,7 @@ Cart | JobMate {% endblock %}
                             <strong class="">£{{ data.total|floatformat:2 }}</strong>
                         </div>
                            <!-- DISPLAY THE CHECKOUT BUTTON TO ADMIN ONLY -->
-                        {% if request.user.is_authenticated and request.user.profile.role == "Admin" %}
+                        {% if request.user.is_authenticated and request.user.profile.role == "admin" %}
                         <div class="text-end pt-4">
                             <a href="{% url 'orders:create_order_from_cart' user.id %}" class="checkout-btn btn btn-success mb-2">Proceed to Checkout</a>
                         </div>
@@ -227,7 +227,7 @@ Cart | JobMate {% endblock %}
                         <strong>£{{ data.total|floatformat:2 }}</strong>
                     </div>
                     <!-- ONLY DISPLAY THE CHECKOUT BUTTON TO ADMIN -->
-                    {% if request.user.is_authenticated and request.user.profile.role == "Admin" %}
+                    {% if request.user.is_authenticated and request.user.profile.role == "admin" %}
                     <div class="d-flex justify-content-center">
                      <a href="{% url 'orders:create_order_from_cart' user.id %}" class="checkout-btn btn btn-success w-100 my-4">Proceed to Checkout</a>
                     </div>
