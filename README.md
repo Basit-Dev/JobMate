@@ -528,31 +528,34 @@ TransactionLineItem
 
 ## Manual Tests Outcome Results
 
-| Test View              | Description                                                                                                                     | Status |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------ |
-| `signup`               | Signup page load, successful signup, duplicate email handling, and password mismatch validation                                 | Passed |
-| `login`                | Login page load, successful login, and invalid email/password validation                                                        | Passed |
-| `password_reset`       | Password reset page loads, successful reset, and sign-in with new password                                                      | Passed |
-| `page_access`          | Registered users can access protected pages and public pages are accessible to all users                                        | Passed |
-| `home`                 | Home page loads successfully                                                                                                    | Passed |
-| `cart_pages_access`    | Verifies that only registered users can access cart-related pages                                                               | Passed |
-| `profile`              | User profile and bank information load when logged in and that updates are saved successfully                                   | Passed |
-| `create_job`           | Page loads correctly, all fields submitted, job data saved (verified in admin) - redirects to all jobs                          | Passed |
-| `all_jobs`             | Jobs are displayed with all submitted data, Operatives can view their own jobs only                                             | Passed |
-| `Operative_job_access` | Verifies that Operatives can only view jobs assigned to them, while administrators can view all jobs                            | Passed |
-| `edit_job`             | Job loads correctly by ID, all job fields are rendered, omly admin can view, job submits and redirects                          | Passed |
-| `delete_job`           | Admin can only view & delete job, checked in UI and admin panel and record removed from DB                                      | Passed |
-| `any job id in url`    | If a ID is entered manually in url, then no jobs found loads                                                                    | Passed |
-| `404`                  | Unknown urls displays a 404.html page                                                                                           | Passed |
-| `all_Operatives`       | Displays all Operatives that have signed up                                                                                     | Passed |
-| `search jobs`          | Jobs can be searched by keyword using job title, address, city and postcode. Status list does filter                            | Passed |
-| `search Operatives`    | Operatives can be searched by keyword, using first last name, role and status                                                   | Passed |
-| `view_Operatives`      | Admin can view, edit Operatives phone, role, status and bank details. For admin password fields hidden when viewing other users | Passed |
-| `complete_job`         | Admin, users complete jobs and gets passed to basket                                                                            | Passed |
-| `add_adjustment`       | Admin, users complete adjustments if required, adjustment totals all line items, and updates the basket with all totals         | Passed |
-| `basket`               | Displays jobs, adjustments, subtotal, service fee, vat, totals per user, so they cab be paid seperatly                          | Passed |
-| `delete line item`     | Delete indivisual line items, total recalculates, admin can delete globally, users can only delete their transactions           | Passed |
-| `delete job from cart` | Delete user grouped jobs from basket, job status changes to in progress                                                         | Passed |
+| Test View                     | Description                                                                                                                     | Status |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------ |
+| `signup`                      | Signup page load, successful signup, duplicate email handling, and password mismatch validation                                 | Passed |
+| `login`                       | Login page load, successful login, and invalid email/password validation                                                        | Passed |
+| `password_reset`              | Password reset page loads, successful reset, and sign-in with new password                                                      | Passed |
+| `page_access`                 | Registered users can access protected pages and public pages are accessible to all users                                        | Passed |
+| `home`                        | Home page loads successfully                                                                                                    | Passed |
+| `cart_pages_access`           | Verifies that only registered users can access cart-related pages                                                               | Passed |
+| `profile`                     | User profile and bank information load when logged in and that updates are saved successfully                                   | Passed |
+| `create_job`                  | Page loads correctly, all fields submitted, job data saved (verified in admin) - redirects to all jobs                          | Passed |
+| `all_jobs`                    | Jobs are displayed with all submitted data, Operatives can view their own jobs only                                             | Passed |
+| `Operative_job_access`        | Verifies that Operatives can only view jobs assigned to them, while administrators can view all jobs                            | Passed |
+| `edit_job`                    | Job loads correctly by ID, all job fields are rendered, omly admin can view, job submits and redirects                          | Passed |
+| `delete_job`                  | Admin can only view & delete job, checked in UI and admin panel and record removed from DB                                      | Passed |
+| `any job id in url`           | If a ID is entered manually in url, then no jobs found loads                                                                    | Passed |
+| `404`                         | Unknown urls displays a 404.html page                                                                                           | Passed |
+| `all_Operatives`              | Displays all Operatives that have signed up                                                                                     | Passed |
+| `search jobs`                 | Jobs can be searched by keyword using job title, address, city and postcode. Status list does filter                            | Passed |
+| `search Operatives`           | Operatives can be searched by keyword, using first last name, role and status                                                   | Passed |
+| `view_Operatives`             | Admin can view, edit Operatives phone, role, status and bank details. For admin password fields hidden when viewing other users | Passed |
+| `complete_job`                | Admin, users complete jobs and gets passed to basket                                                                            | Passed |
+| `add_adjustment`              | Admin, users complete adjustments if required, adjustment totals all line items, and updates the basket with all totals         | Passed |
+| `basket`                      | Displays jobs, adjustments, subtotal, service fee, vat, totals per user, so they cab be paid seperatly                          | Passed |
+| `delete line item`            | Delete indivisual line items, total recalculates, admin can delete globally, users can only delete their transactions           | Passed |
+| `delete job from cart`        | Delete user grouped jobs from basket, job status changes to in progress                                                         | Passed |
+| `Stripe`                      | Order completes, cancels, declines successfully, admin canonly pay operatives, all totals calculate as expected                 | Passed |
+| `payments_summary.html`       | Displays all paid orders with accumulated totals for all transactions relating to a order                                       | Passed |
+| `payment search, filter`      | Order search displays required results by keyword, status filtering displays relevent results                                   | Passed |
 
 ---
 

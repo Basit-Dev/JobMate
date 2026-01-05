@@ -1,0 +1,155 @@
+{% extends "dashboard_base.html" %}
+{% load static %}
+{% block title %} Payments | JobMate {% endblock %}
+{% block content %}
+
+<!-- HEADER -->
+<div class="heading-section d-flex flex-column justify-content-between flex-md-row">
+    <div class="row">
+        <h1 class="section-title">All Payments</h1>
+        <p class="section-subtitle">Manage all payments across the system</p>
+    </div>
+</div>
+
+<!-- FILTERS -->
+<div class="filter-container d-flex flex-grow-1 flex-column justify-content-between flex-md-row gap-3 mb-4">
+
+    <!-- Search bar -->
+    <div class="search-col col-8">
+        <p class="section-subtitle">Search Payments</p>
+        <form class="input-group" method="GET">
+            {% csrf_token %}
+            <input type="text" name="search_term" class="form-control" placeholder="Search orders...." />
+
+            <!-- Search Button -->
+            <button type="submit" class="btn btn-secondary text-muted">
+                <i class="bi bi-search me-1"></i>Search
+            </button>
+        </form>
+    </div>
+
+    <!-- Status Dropdown -->
+    <form class="col" method="GET">
+        <p class="section-subtitle">Status</p>
+        <select class="form-select" name="status_filter" onchange="this.form.submit()">
+        <!-- Add selected when user updates status -->
+        <option value="">All Status</option>
+        <option value="pending" {% if status_filter == "pending" %}selected{% endif %}>Pending</option>
+        <option value="paid" {% if status_filter == "paid" %}selected{% endif %}>Paid</option>
+        <option value="cancelled" {% if status_filter == "cancelled" %}selected{% endif %}>Cancelled</option>
+        </select>
+    </form>
+</div>
+
+<!-- PAYMENT LIST -->
+
+<div class="table-container"> 
+    <div class="table-header">All Payments ({{ orders.count }})</div>
+    <div class="table-responsive p-2">
+        <table class="table align-middle mb-0">
+            <!-- Table Head -->
+            <thead class="table-head">
+                <tr>
+                    <th>Order #</th>
+                    <th>Operative</th>
+                    <th>Estimated Cost</th>
+                    <th>Adjustment</th>
+                    <th>Sub Total</th>
+                    <th>Service Fee</th>
+                    <th>VAT</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                    <th>Pay Date</th>
+                    <!-- <th>Actions</th> -->
+                </tr>
+            </thead>
+
+            <!-- Table Body -->
+            <tbody>
+                {% for payment in orders %}
+                {% with first_tx=payment.transactions.first %}
+                <tr>
+                    <!-- Invoice -->
+                    <td data-label="Invoice">
+                        <p class="text-muted m-0">#OD-{{ payment.id }}</p>
+                    </td>
+
+                    <!-- Operative -->
+                    <td data-label="Operative">
+                        {% if first_tx %}
+                        {{ first_tx.job.assigned_operative.get_full_name }}
+                        {% else %}
+                        —
+                        {% endif %}
+                    </td>
+
+                     <!-- Estimated cost -->
+                    <td data-label="Estimated Cost">
+                        £{{ payment.base_total|floatformat:2 }}
+                    </td>
+
+                     <!-- Adjustment -->
+                    <td data-label="Adjustment">
+                        £{{ payment.adjustment_total|floatformat:2 }}
+                    </td>
+
+                    <!-- Subtotal (Actual Cost) -->
+                    <td data-label="Actual Cost">
+                        £{{ payment.subtotal_total|floatformat:2 }}
+                    </td>
+
+                    <!-- Service fee -->
+                    <td data-label="Service Fee">
+                        £{{ payment.service_fee_total|floatformat:2 }}
+                    </td>
+
+                    <!-- VAT -->
+                    <td data-label="VAT">
+                        £{{ payment.vat_total|floatformat:2 }}
+                    </td>
+
+                    <!-- Total -->
+                    <td data-label="Total">
+                        £{{ payment.total|floatformat:2 }}
+                    </td>
+
+                    <!-- Status -->
+                    <td data-label="Status">
+                        <span class="badge rounded-pill px-3 py-2
+                    {% if payment.status == 'pending' %} bg-secondary
+                    {% elif payment.status == 'paid' %} bg-success
+                    {% elif payment.status == 'cancelled' %} bg-danger
+                    {% endif %}">
+                            {{ payment.get_status_display }}
+                        </span>
+                    </td>
+
+                    <!-- Pay Date -->
+                    <td data-label="Pay Date">
+                        {{ payment.paid_at }}
+                    </td>
+
+                    <!-- Actions -->
+                    <!-- <td data-label="Actions">
+                        <div class="d-flex flex-row justify-content-around">
+                            <a href="" class="text-secondary me-2">
+                                <i class="bi bi-eye"></i>
+                            </a>
+                        </div>
+                    </td> -->
+                </tr>
+                {% endwith %}
+
+                {% empty %}
+                <tr>
+                    <td colspan="7" class="text-center text-muted">
+                        No payments found.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

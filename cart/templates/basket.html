@@ -1,0 +1,266 @@
+{% extends "dashboard_base.html" %}
+{% load static %}
+{% block title %}
+Cart | JobMate {% endblock %}
+{% block content %}
+
+<!-- HEADER -->
+<div class="heading-section d-flex flex-column justify-content-between flex-md-row">
+    <div class="row">
+        <h1 class="section-title">Cart</h1>
+        <p class="section-subtitle">Manage all payments across the system</p>
+    </div>
+</div>
+
+<!-- MESSAGES -->
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-{{ message.tags }}">
+    {{ message }}
+</div>
+{% endfor %}
+{% endif %}
+
+<!-- IF THERE ARE ITEMS IN TRANSACTIONS LOOP THROUGH USER, ITEMS AND CRATE SEPERATE BASKET ITEMS FOR EACH USER -->
+{% if user_basket %}
+{% for user, data in user_basket.items %}
+<!-- Display opeartive name and how many jobs in teh basket -->
+<p class="fw-bold fs-5">Payments for {{ user.get_full_name }} ({{data.transactions|length }})</p> 
+
+<!-- CART LIST -->
+<div class="d-flex flex-column flex-lg-row flex-wrap gap-4 mb-4">
+    <div class="flex-grow-1">
+        <div class="cart-summary table-container h-100">
+            <!-- DESKTOP TABLE VIEW -->
+            <div class="d-none d-md-block"> <!-- Hide this on small screens, show it only on medium screens and up --> 
+                <table class="table table-hover align-middle mb-0">
+
+                    <!-- TABLE HEAD -->
+                    <thead class="table-header-custom">
+                        <tr>
+                            <th scope="col">Job ID #</th>
+                            <th scope="col">Job Details</th>
+                            <th scope="col">Operative</th>
+                            <th scope="col">Estimated cost</th>
+                            <th scope="col">Adjustments</th>
+                            <th scope="col">Actual Cost</th>
+                            <th scope="col">Status</th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+
+                    <!-- JOB DETAIL -->
+                    <tbody class="table-body-custom">
+                        <!-- IF THERE ARE TRANSCTIONS DISPLAY THEM -->
+                        {% if data.transactions %}
+                        <!-- LOOP THROUGH TRANSACTION -->
+                        {% for transaction in data.transactions %}
+                        <tr>
+                            <td>{{ transaction.job.id}}</td>
+                            <td>
+                                <strong>{{ transaction.job.job_title }}</strong><br />
+                                <small class="text-muted">{{ transaction.job.address }} {{ transaction.job.city }}
+                                    {{transaction.job.post_code }}</small>
+                            </td>
+                            <td>{{ transaction.job.assigned_operative.first_name }}
+                                {{transaction.job.assigned_operative.last_name }}</td>
+                            <td>£{{ transaction.job.job_cost|floatformat:2 }}</td>
+                            <td>£{{ transaction.adjustment|floatformat:2 }}</td>
+                            <td>
+                                <strong>£{{ transaction.actual_cost }}</strong>
+                            </td>
+                            <td>
+                                <span class="badge bg-danger p-2">{{ transaction.get_status_display|upper }}</span>
+                            </td>
+                            <!-- ADJUSTMENT BUTTON -->
+                            <td>
+                                <a href="{% url 'cart:job_adjustment' transaction.id %}"
+                                    class="btn btn-primary custom-button">
+                                    + Adjustment
+                                </a>
+                            </td>
+                            <td>
+                                <!-- DELETE BASKET ITEM BUTTON-->
+                                <form method="POST">
+                                    {% csrf_token %}
+                                    <!-- Get the item.id but hide it -->
+                                    <input type="hidden" name="basket_item_id" value="{{ transaction.id }}">
+                                    <button type="submit" name="delete_btn" class="btn text-decoration-none">
+                                        <i class="bi bi-trash text-danger fs-5"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        {% else %}
+                        <!-- MESSAGE FOR NO ITEMS FOUND FOR THIS USER -->
+                        <tr>
+                            <td colspan="6" class="text-center text-muted py-4">
+                                No items found for this user.
+                            </td>
+                        </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+
+                <!-- ORDER SUMMARY -->
+                <div class="px-4">
+                    <div class="">
+                         <h6 class="py-3 fw-bold text-end">Order Summary</h6>
+                        <div class="d-flex justify-content-end gap-2 mb-1">
+                            <span>Subtotal:</span>
+                            <p>£{{ data.subtotal|floatformat:2 }}</p>
+                        </div>
+
+                        <div class="d-flex justify-content-end gap-2 mb-1">
+                            <span>Service Fee -15%:</span>
+                            <p>£{{ data.service_fee|floatformat:2 }}</p>
+                        </div>
+
+                        <div class="d-flex justify-content-end gap-2 mb-1 border-bottom">
+                            <span>VAT 20%:</span>
+                            <p>£{{ data.vat|floatformat:2 }}</p>
+                        </div>
+                        <div class="d-flex justify-content-end gap-2 pt-3 mb-3">
+                            <span class="fw-bold">Total:</span>
+                            <strong class="">£{{ data.total|floatformat:2 }}</strong>
+                        </div>
+                           <!-- DISPLAY THE CHECKOUT BUTTON TO ADMIN ONLY -->
+                        {% if request.user.is_authenticated and request.user.profile.role == "Admin" %}
+                        <div class="text-end pt-4">
+                            <a href="{% url 'orders:create_order_from_cart' user.id %}" class="checkout-btn btn btn-success mb-2">Proceed to Checkout</a>
+                        </div>
+                        <p class="text-end text-muted small mb-4 pb-3">
+                            Secure payment processing.
+                        </p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MOBILE CUSTOM VIEW -->
+        <div class="d-md-none"> <!-- Show this on small screens, hide it on medieum screens and up --> 
+            <!-- IF THERE ARE TRANSCTIONS DISPLAY THEM -->
+            {% if data.transactions %}
+
+            <div class="card mb-3 shadow-sm">
+                <!-- TRANSCTION BASKET ITEMS DETAILS -->
+                <div class="card-body">
+                    <!-- LOOP THROUGH TRANSACTION -->
+                    {% for transaction in data.transactions %}
+                    <p>
+                        <span class="badge bg-danger p-2 mt-4">{{ transaction.get_status_display|upper }}</span>
+                    </p>
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <h6 class="mb-0">Job #{{ transaction.job.id }}</h6>
+
+                        <!-- DELETE BUTTON -->
+                        <form method="POST" class="d-inline">
+                            {% csrf_token %}
+                            <input type="hidden" name="basket_item_id" value="{{ transaction.id }}">
+                            <button type="submit" name="delete_btn" class="btn p-0 text-decoration-none">
+                                <i class="bi bi-trash text-danger fs-5"></i>
+                            </button>
+                        </form>
+                    </div>
+
+                    <h5 class="card-title mb-2">{{ transaction.job.job_title }}</h5>
+                    <p class="text-muted small mb-3">
+                        {{ transaction.job.address }} {{ transaction.job.city }} {{transaction.job.post_code }}
+                    </p>
+                    <div class="d-flex justify-content-between g-2 mb-3">
+                        <div>
+                            <div>
+                                <small class="text-muted d-block">Operative</small>
+                                <strong>{{ transaction.job.assigned_operative.first_name }}
+                                    {{transaction.job.assigned_operative.last_name }}</strong>
+                            </div>
+                            <div>
+                                <small class="text-muted d-block">Adjustments</small>
+                                <strong>£{{ transaction.adjustment|floatformat:2 }}</strong>
+                            </div>
+                        </div>
+                        <div class="text-end">
+                            <div>
+                                <small class="text-muted d-block">Estimated Cost</small>
+                                <strong>£{{ transaction.job.job_cost|floatformat:2 }}</strong>
+                            </div>
+                            <div >
+                                <small class="text-muted d-block">Actual Cost</small>
+                                <strong class="text-primary">£{{ transaction.actual_cost }}</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ADD ADJUSTMENT BUTTON -->
+                     <div class="text-end">
+                        <a href="{% url 'cart:job_adjustment' transaction.id %}" class="btn btn-primary custom-button w-10">
+                        + Add Adjustment
+                    </a>
+                     </div>
+        
+                    {% endfor %}
+                </div>
+
+                <!-- MOBILE ORDER SUMMARY DETAILS -->
+                <div class="card-body">
+                    <h6 class="fw-bold mb-2">Order Summary</h6>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Subtotal</span>
+                        <p>£{{ data.subtotal|floatformat:2 }}</p>
+                    </div>
+
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Service Fee -15%</span>
+                        <p>£{{ data.service_fee|floatformat:2 }}</p>
+                    </div>
+
+                    <div class="d-flex justify-content-between mb-3 border-bottom pb-2">
+                        <span>VAT 20%</span>
+                        <p>£{{ data.vat|floatformat:2 }}</p>
+                    </div>
+
+                    <div class="d-flex justify-content-between mb-3">
+                        <span class="fw-bold">Total</span>
+                        <strong>£{{ data.total|floatformat:2 }}</strong>
+                    </div>
+                    <!-- ONLY DISPLAY THE CHECKOUT BUTTON TO ADMIN -->
+                    {% if request.user.is_authenticated and request.user.profile.role == "Admin" %}
+                    <div class="d-flex justify-content-center">
+                     <a href="{% url 'orders:create_order_from_cart' user.id %}" class="checkout-btn btn btn-success w-100 my-4">Proceed to Checkout</a>
+                    </div>
+                    <p class="text-center text-muted small mb-0">
+                        Secure payment processing.
+                    </p>
+                    {% endif %}
+                </div>
+            </div>
+            {% else %}
+
+            <!-- MESSAGE FOR NO ITEMS FOUND FOR THIS USER -->
+            <div class="text-center text-muted py-4">
+                No items found for this user.
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<hr>
+<br>
+{% endfor %}
+
+{% else %}
+
+<!-- DISPLAY IF NO TRASACTIONS IN BASKET -->
+<div class="alert alert-light text-center py-5">
+    <i class="bi bi-cart-x fs-1 text-muted mb-3 d-block"></i>
+    <h5 class="text-muted mb-1">Your basket is empty</h5>
+    <p class="small text-muted mb-0">
+        Completed jobs will appear here for payment.
+    </p>
+</div>
+{% endif %}
+
+{% endblock %}

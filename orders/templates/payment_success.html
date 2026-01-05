@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Payment Successful | JobMate{% endblock %}
+
+{% block body %}
+<div class="auth-wrapper">
+    <section class="container accounts-card shadow-soft border-0">
+
+        <!-- ACCOUNTS HEADER -->
+        <div class="accounts-header">
+            <div class="hero-icon shadow-tile">
+                <i class="bi bi-box-arrow-right"></i>
+            </div>
+
+            <h1>Payment Successful</h1>
+            <p>Your order #{{ order.id }} has been paid.</p>
+
+            <!-- ACTION BUTTONS -->
+            <div class="row g-3">
+
+                <!-- SIGN IN BUTTON -->
+                <div class="col-12">
+                    <a href="{% url 'cart:basket' %}"
+                        class="btn btn-primary w-100 shadow-cta d-flex align-items-center justify-content-center"><i
+                            class="bi bi-cart fs-4 pe-4"></i>Cart</a>
+                </div>
+
+                <!-- HOME PAGE BUTTON -->
+                <div class="col-12 mt-4">
+                    <a href="{% url 'jobs:all_jobs' %}"
+                        class="btn btn-secondary w-100 shadow-sm d-flex align-items-center justify-content-center"><i
+                            class="bi bi-speedometer fs-4 pe-4"></i>Dashboard</a>
+                </div>
+
+            </div>
+
+    </section>
+</div>
+</main>
+
+{% endblock %}

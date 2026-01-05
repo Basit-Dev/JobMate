@@ -1,0 +1,267 @@
+{% extends "dashboard_base.html" %}
+{% load static %}
+{% block title %}Job Details | JobMate {% endblock %}
+{% block content %}
+
+<!-- HEADER -->
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <a href="{% url 'jobs:all_jobs' %}" class="text-decoration-none">
+    <i class="bi bi-arrow-left me-2"></i>Back to Jobs
+  </a>
+  {% if request.user.is_authenticated and request.user.profile.role == "Admin" %}
+    {% if job.status != "completed" %}
+  <a href="{% url 'jobs:edit_job' job_id=job.id %}" class="btn btn-primary d-flex align-items-center gap-2">
+    <i class="bi bi-pencil-square"></i> Edit Job
+  </a>{% endif %}
+  {% endif %}
+</div>
+
+<!-- JOB DETAILS -->
+<div>
+  <strong class="fs-2 fw-bold">Job Details</strong>
+    <div class="d-flex justify-content-between">
+      <p class="fs-6 text-muted">#JOB-{{ job.id }} • Created: {{ job.created_at }}</p>
+      <p class="fw-semibold">Order ID #: {{ transaction.order.id }}</p>
+    </div>
+</div>
+
+<!-- MESSAGES -->
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-{{ message.tags }}">
+    {{ message }}
+</div>
+{% endfor %}
+{% endif %}
+
+<!-- STATUS -->
+<div class="status-header border">
+
+  <!-- Priority Badge -->
+  <div class="d-flex align-items-center gap-3">
+    <p class="m-0">Priority:</p>
+    <span class="badge rounded-pill px-3 py-2     
+    {% if job.priority == 'high' %} badge-high
+      {% elif job.priority == 'medium' %}badge-medium
+      {% elif job.priority == 'low' %}badge-low
+    {% endif %}">{{ job.priority }}</span>
+
+    <!-- Status Badge -->
+    <p class="m-0">Status:</p>
+    <span class="badge rounded-pill px-3 py-2
+    {% if job.status == 'pending' %}badge-pending
+      {% elif job.status == 'in_progress' %}badge-progress
+      {% elif job.status == 'completed' %}badge-completed
+      {% elif job.status == 'cancelled' %}bg-danger
+    {% endif %}">{{ job.status }}</span>
+  </div>
+
+  <!-- Last Updated -->
+  <div>
+    <i class="bi bi-clock me-1"></i> Last Updated: {{ job.updated_at }}
+  </div>
+</div>
+
+<div class="row g-4">
+  <!-- LEFT SECTION -->
+  <div class="col-lg-8 d-flex flex-column gap-4">
+
+    <!-- Job Info -->
+    <div class="card border-0 shadow-sm">
+      <div class="card-header">
+        <i class="bi bi-info-circle-fill me-2"></i>Job Information
+      </div>
+      <div class="card-body">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <p class="mb-1 text-muted small">Title</p>
+            <p class="fw-semibold">{{ job.job_title }}</p>
+          </div>
+          <div class="col-md-6">
+            <p class="mb-1 text-muted small">Category</p>
+            <p><span class="badge bg-light text-primary border">{{ job.get_category_display }}</span></p>
+          </div>
+          <div class="col-md-6">
+            <p class="mb-1 text-muted small">Address</p>
+            <p class="fw-semibold">{{ job.address }}</p>
+          </div>
+          <div class="col-md-6 d-flex gap-5">
+            <div>
+              <p class="mb-1 text-muted small">City</p>
+              <p class="fw-semibold">{{ job.city }}</p>
+            </div>
+            <div>
+              <p class="mb-1 text-muted small">Post Code</p>
+              <p class="fw-semibold">{{ job.post_code }}</p>
+            </div>
+
+          </div>
+          <div class="col-md-6">
+            <p class="mb-1 text-muted small">Requested By</p>
+            <p>{{ user.first_name }} {{ user.last_name }}</p>
+          </div>
+          <div class="col-md-6">
+            <p class="mb-1 text-muted small">Assigned Operative</p>
+            <p>{{ job.assigned_operative.first_name }} {{ job.assigned_operative.last_name }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Description -->
+    <div class="card border-0 shadow-sm">
+      <div class="card-header">
+        <i class="bi bi-file-text-fill me-2"></i>Description
+      </div>
+      <div class="card-body">
+        <p>
+          {{ job.description }}
+        </p>
+        <!-- Will add a filed to the model later -->
+        <p class="text-danger fw-semibold">
+          Urgent repair needed to prevent further water damage and tenant inconvenience.
+        </p>
+      </div>
+    </div>
+
+    <!-- Job Updates To be added later -->
+    <!-- <div class="card border-0 shadow-sm">
+      <div class="card-header">
+        <i class="bi bi-chat-dots-fill me-2"></i>Job Updates
+      </div>
+      <div class="card-body">
+        <div class="mb-3">
+          <div class="d-flex justify-content-between">
+            <div class="fw-semibold">Mike Wilson <span class="badge bg-success ms-2">Engineer</span></div>
+            <small class="text-muted">Jan 18, 2025 at 2:30 PM</small>
+          </div>
+          <p class="mt-1 mb-0">Arrived on site. Confirmed the leak is from the main faucet cartridge. Ordering
+            replacement parts. Will return tomorrow to complete repair.</p>
+        </div>
+        <hr>
+        <div class="mb-3">
+          <div class="d-flex justify-content-between">
+            <div class="fw-semibold">Sarah Johnson <span class="badge bg-secondary ms-2">Manager</span></div>
+            <small class="text-muted">Jan 17, 2025 at 10:15 AM</small>
+          </div>
+          <p class="mt-1 mb-0">Job assigned to Mike Wilson. Tenant has been notified of scheduled visit.</p>
+        </div>
+        <hr>
+        <div>
+          <div class="d-flex justify-content-between">
+            <div class="fw-semibold">Sarah Johnson <span class="badge bg-secondary ms-2">Manager</span></div>
+            <small class="text-muted">Jan 15, 2025 at 4:45 PM</small>
+          </div>
+          <p class="mt-1 mb-0">Job created based on tenant maintenance request. Marked as high priority due to water
+            damage risk.</p>
+        </div>
+      </div>
+    </div> -->
+  </div>
+
+  <!-- RIGHT SECTION -->
+  <div class="col-lg-4 d-flex flex-column gap-4">
+
+    <!-- Quick Info -->
+    <div class="card border-0 shadow-sm">
+      <div class="card-header">
+        <i class="bi bi-lightning-fill me-2"></i>Quick Info
+      </div>
+      <div class="card-body small">
+        <div class="d-flex justify-content-between mb-2">
+          <span>Status:</span>
+          <span class="badge rounded-pill px-3 py-2
+          {% if job.status == 'pending' %}badge-pending
+            {% elif job.status == 'in_progress' %}badge-progress
+            {% elif job.status == 'completed' %}badge-completed
+            {% elif job.status == 'cancelled' %}bg-danger
+          {% endif %}">{{ job.get_status_display }}</span>
+        </div>
+        <div class="d-flex justify-content-between mb-2">
+          <span>Priority:</span>
+          <span class="badge rounded-pill px-3 py-2     
+          {% if job.priority == 'high' %} badge-high
+            {% elif job.priority == 'medium' %}badge-medium
+            {% elif job.priority == 'low' %}badge-low
+          {% endif %}">{{ job.priority }}</span>
+        </div>
+        <hr>
+        <div class="d-flex justify-content-between mb-2">
+          <span>Due Date:</span><strong>{{ job.due_date }}</strong>
+        </div>
+        <div class="d-flex justify-content-between mb-2">
+          <span>Estimated Hrs:</span><strong>{{ job.estimated_hours}}</strong>
+        </div>
+        <div class="d-flex justify-content-between mb-2">
+          <span>Estimated Cost:</span><strong class="text-primary">£{{ job.job_cost}}</strong>
+        </div>
+        <div class="d-flex justify-content-between mb-2">
+          <!-- To be added when cart is implented -->
+          <span>Adjustments:</span><strong>   £{{ transaction.adjustment|default_if_none:"0.00"|floatformat:2 }}</strong>
+        </div>
+        <div class="d-flex justify-content-between">
+          <!-- To be added when cart is implented -->
+          <span>Actual Cost:</span><strong class="text-success"> £{{ transaction.actual_cost|default_if_none:job.job_cost|floatformat:2 }}</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Info -->
+    <div class="card border-0 shadow-sm">
+      <div class="card-header">
+        <i class="bi bi-person-fill me-2"></i>Contact Information
+      </div>
+      <div class="card-body small">
+        <p class="fw-semibold mb-1">Tenant</p>
+        <p class="mb-2">{{ job.tenant_name }}<br>
+          {{ job.tenant_phone }}<br>
+          <a href="mailto:{{ job.tenant_email }}">{{ job.tenant_email }}</a><br>
+        </p>
+        <p class="fw-semibold mb-1">Property Manager</p>
+        <p>{{ user.first_name }} {{user.last_name}}<br>
+          <a href="mailto:sarah.j@riverside.com">{{ user.email }}</a><br>
+          {{ user.profile.phone_number }}
+        </p>
+      </div>
+    </div>
+
+    <!-- Attachments To be added later -->
+    <!-- <div class="card border-0 shadow-sm">
+      <div class="card-header">
+        <i class="bi bi-paperclip me-2"></i>Attachments
+      </div>
+      <div class="card-body small">
+        <div class="d-flex align-items-center justify-content-between border rounded p-2 mb-2">
+          <div class="d-flex align-items-center gap-2">
+            <i class="bi bi-file-earmark-image text-primary fs-5"></i>
+            <span>sink_leak_photo.jpg</span>
+          </div>
+          <a href="#" class="text-decoration-none"><i class="bi bi-download"></i></a>
+        </div>
+        <div class="d-flex align-items-center justify-content-between border rounded p-2">
+          <div class="d-flex align-items-center gap-2">
+            <i class="bi bi-file-earmark-pdf text-danger fs-5"></i>
+            <span>maintenance_request.pdf</span>
+          </div>
+          <a href="#" class="text-decoration-none"><i class="bi bi-download"></i></a>
+        </div>
+      </div>
+    </div> -->
+
+    <!-- COMPLETE JOB BUTTON -->
+  {% if job.status != "completed" %}
+    <form method="POST">
+      {% csrf_token %}
+
+      <button type="submit" class="btn btn-primary w-100 py-2 mt-2 d-flex align-items-center justify-content-center gap-2 shadow-cta">
+        <i class="bi bi-check2-circle fs-5"></i> Complete Job
+      </button>
+
+    </form>
+  {% else %}
+  <button class="btn btn-success" disabled="true">Completed</button>
+  {% endif %}
+  </div>
+</div>
+
+{% endblock %}
