@@ -7,7 +7,7 @@ from decimal import Decimal
 
 # Create your models here.
 
-# ADD ITEMS TO BASKET
+# ITEMS TO BASKET
 class Transaction(models.Model):
     
     # Unique transaction reference (safe for payments)
