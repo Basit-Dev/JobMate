@@ -26,7 +26,7 @@ def admin_required(view_func):
             return redirect("login")
         
         # If either condition is true → deny access
-        if not hasattr(user, "profile") or user.profile.role != "Admin":
+        if not hasattr(user, "profile") or user.profile.role != "admin":
             # Show an error message to the user
             messages.error(
                 request,

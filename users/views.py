@@ -63,7 +63,7 @@ def profile_settings(request, profile_id=None):
     
     # If admin is trying to view another user get the id if it exists else show error 404, message and redirect to user profile
     if profile_id is not None:
-        if request.user.profile.role != "Admin":
+        if request.user.profile.role != "admin":
             messages.error(request, "You do not have permission to view this profile.")
             return redirect("users:profile_settings")
 
@@ -82,7 +82,7 @@ def profile_settings(request, profile_id=None):
         if personal_form.is_valid():
             personal_form.save()
             messages.success(request, 'Your profile was successfully updated!')
-            if request.user.profile.role != "Admin":
+            if request.user.profile.role != "admin":
                 return redirect("users:profile_settings")
             else:
                 return redirect("users:all_engineers") # If admin updates profile then stay on the same profile id page
@@ -94,7 +94,7 @@ def profile_settings(request, profile_id=None):
         if bank_form.is_valid():
             bank_form.save()
             messages.success(request, 'Your bank details was successfully updated!')
-            if request.user.profile.role != "Admin":
+            if request.user.profile.role != "admin":
                 return redirect("users:profile_settings")
             else: 
                 return redirect("users:profile_settings", profile_id=profile_owner.id) # If admin updates profile then stay on the same profile id page
@@ -114,7 +114,7 @@ def profile_settings(request, profile_id=None):
             user = password_form.save()
             update_session_auth_hash(request, user)
             messages.success(request, 'Your password was successfully updated!')
-            if request.user.profile.role != "Admin":
+            if request.user.profile.role != "admin":
                 return redirect("users:profile_settings")
             else:
                 return redirect("users:profile_settings", profile_id=profile_owner.id) # If admin updates profile then stay on the same profile id page

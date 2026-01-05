@@ -612,7 +612,6 @@ ssh -i ~/.ssh/job_mate.pem ubuntu@13.48.56.234/
 cd /var/www/jobmate/JobMate
 git pull origin main
 source .venv/bin/activate
-cd jobmate
 pip install -r requirements.txt
 python manage.py migrate
 python manage.py collectstatic --noinput

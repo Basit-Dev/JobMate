@@ -8,7 +8,7 @@
   <a href="{% url 'jobs:all_jobs' %}" class="text-decoration-none">
     <i class="bi bi-arrow-left me-2"></i>Back to Jobs
   </a>
-  {% if request.user.is_authenticated and request.user.profile.role == "Admin" %}
+  {% if request.user.is_authenticated and request.user.profile.role == "admin" %}
     {% if job.status != "completed" %}
   <a href="{% url 'jobs:edit_job' job_id=job.id %}" class="btn btn-primary d-flex align-items-center gap-2">
     <i class="bi bi-pencil-square"></i> Edit Job

@@ -51,7 +51,7 @@
 
       <!-- Oeratives -->
       <!-- Only show All Operatives, Create Job, edit jobs buttons if logged in as Admin -->
-      {% if request.user.is_authenticated and request.user.profile.role == "Admin" %}
+      {% if request.user.is_authenticated and request.user.profile.role == "admin" %}
       <li>
         <a href="{% url 'users:all_operatives' %}"
           class="{% if request.resolver_match.url_name == 'all_operatives' %}active{% endif %}">
@@ -145,7 +145,7 @@
 
       <!-- Mobile Operatives -->
       <!-- Only show All Operatives, Create Job, edit job buttons if logged in as Admin -->
-      {% if request.user.is_authenticated and request.user.profile.role == "Admin" %}
+      {% if request.user.is_authenticated and request.user.profile.role == "admin" %}
       <li>
         <a href="{% url 'users:all_operatives' %}"
           class="{% if request.resolver_match.url_name == 'all_operatives' %}active{% endif %}">

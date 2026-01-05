@@ -24,7 +24,7 @@ def all_jobs(request):
     status_filter = request.GET.get("status_filter")
 
     # If user is operative display assigned operative jobs else display all the jobs in job_list variable
-    if user.profile.role != "Admin":
+    if user.profile.role != "admin":
         job_list = Job.objects.filter(assigned_operative=user)
     else:
         job_list = Job.objects.all()
@@ -70,7 +70,7 @@ def job_detail(request, job_id):
     
     # Permission check FIRST
     if not (
-        user.profile.role == "Admin" or
+        user.profile.role == "admin" or
         job.assigned_operative == user
     ):
         messages.error(request, "You do not have permission to view this job.")
