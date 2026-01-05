@@ -88,10 +88,10 @@ def basket(request):
 
     # Admin sees all open transactions, users see only theirs
     if request.user.profile.role == "admin":
-        transactions = Transaction.objects.filter(status="open")
+        transactions = Transaction.objects.filter(order__paid_at__isnull=True)
     else:
         transactions = Transaction.objects.filter(
-            user=request.user, status="open")
+            user=request.user, order__paid_at__isnull=True)
 
     # If delete btn is pressed delete the line and recalculate totals
     if request.method == "POST" and "delete_btn" in request.POST:
@@ -103,7 +103,7 @@ def basket(request):
         transaction = get_object_or_404(
             Transaction,
             id=transaction_id,
-            status="open",
+            order__paid_at__isnull=True
         )
         # Delete items permission check
         if user.profile.role != "admin" and transaction.user != user:
@@ -130,15 +130,15 @@ def basket(request):
     for job_transaction in transactions:
         user = job_transaction.user
 
-        # Create the user basket with empty values
+        # Create the user basket with empty values, get the order id
         if user not in user_basket:
             user_basket[user] = {
+                "order": job_transaction.order, 
                 "transactions": [],
                 "subtotal": Decimal("0.00"),
                 "service_fee": Decimal("0.00"),
                 "vat": Decimal("0.00"),
                 "total": Decimal("0.00"),
-                "status": "open",
             }
 
         # Add transactions and subtotal to the correct users inuser_basket
@@ -151,8 +151,7 @@ def basket(request):
         user_basket[user]["total"] += job_transaction.total
 
 # Render the user basket
-    return render(
-        request, "basket.html", {"user_basket": user_basket})
+    return render(request, "basket.html", {"user_basket": user_basket})
 
 
 @login_required
@@ -168,7 +167,6 @@ def job_adjustment(request, transaction_id):
     transaction = get_object_or_404(
         Transaction,
         pk=transaction_id,
-        status="open"
     )
 
     # Page permission check

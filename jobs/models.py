@@ -80,6 +80,7 @@ class Job(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     due_date = models.DateField()
+    completed_at = models.DateTimeField(null=True, blank=True)
 
     # Hours and cost
     estimated_hours = models.DecimalField(

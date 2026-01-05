@@ -9,13 +9,7 @@ from decimal import Decimal
 
 # ADD ITEMS TO BASKET
 class Transaction(models.Model):
-    STATUS_CHOICES = [
-        ("open", "Open"),
-        ("paid", "Paid"),
-        ("failed", "Failed"),
-        ("cancelled", "Cancelled"),
-    ]
-
+    
     # Unique transaction reference (safe for payments)
     transaction_id = models.UUIDField(
         default=uuid.uuid4,
@@ -47,12 +41,6 @@ class Transaction(models.Model):
         related_name="transactions"
     )
 
-    status = models.CharField(
-        max_length=20,
-        choices=STATUS_CHOICES,
-        default="open"
-    )
-
     # Totals for adjustments
     base_cost = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     adjustment = models.DecimalField(max_digits=10, decimal_places=2, default=0)
@@ -65,8 +53,6 @@ class Transaction(models.Model):
     total = models.DecimalField(max_digits=10, decimal_places=2, default=0)
 
     created_at = models.DateTimeField(auto_now_add=True)
-    paid_at = models.DateTimeField(null=True, blank=True)
-    cancelled_at = models.DateTimeField(null=True, blank=True)
 
     # # Total Adjustments calculator brain
     def recalculate_totals(self):
@@ -99,7 +85,8 @@ class Transaction(models.Model):
         ])
 
     def __str__(self):
-        return f"Transaction {self.transaction_id} ({self.status})"
+        state = "Paid" if self.order and self.order.paid_at else "Unpaid"
+        return f"Transaction {self.transaction_id} ({state})"
 
 
 # ADD LINE ITEMS TO BASKET

@@ -35,7 +35,6 @@ class TransactionAdmin(admin.ModelAdmin):
         "service_fee",          # Platform fee
         "vat",                  # VAT amount
         "total",                # Final charge
-        "status",               # open / paid
         "created_at",           # When transaction created
     )
 
@@ -47,7 +46,6 @@ class TransactionAdmin(admin.ModelAdmin):
         "vat",                  # Calculated field
         "total",                # Calculated field
         "created_at",           # Auto timestamp
-        "paid_at",              # Set when order is paid
     )
 
     # Order & limit fields shown on the Transaction edit page
@@ -55,12 +53,10 @@ class TransactionAdmin(admin.ModelAdmin):
         "order",                # Linked Order (after checkout)
         "user",                 # Owner of transaction
         "job",                  # Job reference
-        "status",               # open / paid
         "display_base_cost",    # Read-only base cost
         "adjustment",           # Editable adjustments
         "actual_cost",          # Calculated
         "created_at",
-        "paid_at",
     )
 
     # Show adjustment line items inside the Transaction page

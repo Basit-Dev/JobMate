@@ -24,7 +24,6 @@ def create_order_from_cart(request, user_id):
     # Get the filtered values from the user id that was sent from checkout button in basket page also get only open transactions
     transactions = Transaction.objects.filter(
         user_id=user_id,
-        status="open", 
     )
 
     # If there are no transactions return to basket
@@ -124,19 +123,13 @@ def payment_success(request, order_id):
     # Get the Order object with the order_id stripe holds that came from the cart    
     order = get_object_or_404(Order, id=order_id)
 
-    # If status is not equal to paid then order status = paid and save the status in object
+    # If status is not equal to paid then order status = paid, create timestamp and save the status in object
     if order.status != Order.Status.PAID:
         order.status = Order.Status.PAID
         time_now = timezone.now()
         order.paid_at = time_now
         order.save(update_fields=["status", "paid_at"])
         
-    # Mark related transactions as paid in the Transaction model
-    Transaction.objects.filter(
-        user_id=order.user_id,
-        status="open",).update(status="paid",
-        paid_at=time_now)
-
     # Render the success page
     return render(request, "payment_success.html", {"order": order})
 
@@ -149,19 +142,11 @@ def payment_cancel(request, order_id):
     # Get the Order object with the order_id stripe holds that came from the cart    
     order = get_object_or_404(Order, id=order_id)
 
-    # If status is equal to pending then order status = cancelled and save the status in object
+    # If status is equal to pending then keep order status pending and create a cancelled date and save the status in object
     if order.status == Order.Status.PENDING:
-        # order.status = Order.Status.CANCELLED
         time_now = timezone.now()
-        # order.cancelled_at = time_now
-        order.save(update_fields=["status"])
-        
-    # Mark related transactions as paid in the Transaction model
-    # Transaction.objects.filter(
-    #     user_id=order.user_id,
-    #     status="open",).update(status="cancelled",
-    #     cancelled_at=time_now)
-        
+        order.cancelled_at = time_now
+        order.save(update_fields=["status", "cancelled_at"])
 
     # Render the cancel page
     return render(request, "payment_cancel.html", {"order": order})

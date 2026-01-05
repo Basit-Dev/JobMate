@@ -24,8 +24,6 @@ class TransactionInline(admin.TabularInline):
         "service_fee",          # Platform fee
         "vat",                  # VAT amount
         "total",                # Final transaction total
-        "status",               # open / paid
-        "paid_at",              # When payment completed
     )
 
     # Order & limit what appears in the table
@@ -37,8 +35,6 @@ class TransactionInline(admin.TabularInline):
         "service_fee",
         "vat",
         "total",
-        "status",
-        "paid_at",
     )
     
     def display_base_cost(self, obj):
@@ -71,8 +67,10 @@ class OrderAdmin(admin.ModelAdmin):
         "vat_total",            # Sum of VAT
         "total",                # Stripe total
         "status",
-        "paid_at",
         "created_at",
+        "cancelled_at",
+        "paid_at",
+
     )
 
     # Prevent manual editing of calculated financial values
@@ -81,6 +79,7 @@ class OrderAdmin(admin.ModelAdmin):
         "service_fee_total",
         "vat_total",
         "total",
+        "cancelled_at",
         "paid_at",
     )
 

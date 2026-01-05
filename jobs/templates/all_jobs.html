@@ -92,7 +92,7 @@
             {% for job in job_list %}
             <tr class="test">
               <td data-label="Job Title">
-                <strong>{{ job.job_title}}</strong><br /><small class="text-muted">#JOB-{{ job.id }}</small>
+                <strong>{{ job.job_title}}</strong><br /><small class="text-muted">#JOB ID-{{ job.id }}</small>
               </td>
               <td data-label="Address">{{ job.address }}, {{ job.city }}, {{ job.post_code }}</td>
               <td data-label="Operative">{{ job.assigned_operative.first_name }} {{ job.assigned_operative.last_name }}
@@ -119,13 +119,11 @@
               <td data-label="Payment">
                 <span class="badge badge-rounded
                 {% if job.payment_status == 'paid' %}bg-success
-                {% elif job.payment_status == 'open' %}bg-primary
-                {% elif job.payment_status == 'failed' %}bg-danger
+                {% elif job.payment_status == 'pending' %}bg-secondary
                 {% elif job.payment_status == 'cancelled' %}bg-danger
-                {% else %}bg-secondaryu
+                {% else %}
                 {% endif %}">
                  {{ job.payment_status|capfirst }}
-                   <!-- {{ job.payment_status|default_if_none:"Not Completed"|capfirst }} -->
                 </span>
               </td>
               <td>{{ job.order.id|default:"—" }}</td>

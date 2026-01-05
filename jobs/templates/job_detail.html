@@ -20,7 +20,7 @@
 <div>
   <strong class="fs-2 fw-bold">Job Details</strong>
     <div class="d-flex justify-content-between">
-      <p class="fs-6 text-muted">#JOB-{{ job.id }} • Created: {{ job.created_at }}</p>
+      <p class="fs-6 text-muted">Job ID #: {{ job.id }} • Created: {{ job.created_at }}</p>
       <p class="fw-semibold">Order ID #: {{ transaction.order.id }}</p>
     </div>
 </div>
@@ -54,6 +54,17 @@
       {% elif job.status == 'completed' %}badge-completed
       {% elif job.status == 'cancelled' %}bg-danger
     {% endif %}">{{ job.status }}</span>
+
+    <!-- Order Badge -->
+    <p class="m-0">Order Status:</p>
+    <span class="badge rounded-pill p-2
+    {% if transaction.order.status == 'paid' %}bg-success
+      {% elif transaction.order.status == 'pending' %}bg-secondary
+      {% elif transaction.order.status == 'cancelled' %}bg-danger
+      {% else %}
+      {% endif %}">
+      {{ transaction.order.get_status_display }}
+      </span>
   </div>
 
   <!-- Last Updated -->
@@ -184,6 +195,16 @@
             {% elif job.priority == 'medium' %}badge-medium
             {% elif job.priority == 'low' %}badge-low
           {% endif %}">{{ job.priority }}</span>
+        </div>
+          <div class="d-flex justify-content-between mb-2">
+          <span>Order Status:</span>
+          <span class="badge rounded-pill p-2
+            {% if transaction.order.status == 'paid' %}bg-success
+              {% elif transaction.order.status == 'pending' %}bg-secondary
+              {% elif transaction.order.status == 'cancelled' %}bg-danger
+              {% else %}
+            {% endif %}">{{ transaction.order.get_status_display }}
+          </span>
         </div>
         <hr>
         <div class="d-flex justify-content-between mb-2">

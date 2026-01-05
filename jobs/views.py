@@ -7,6 +7,7 @@ from django.db.models import Q
 from helpers.permission_check import admin_required
 from cart.models import Transaction
 from orders.models import Order
+from django.utils import timezone
 
 # Create your views here.
 
@@ -46,13 +47,21 @@ def all_jobs(request):
         transaction = (
             Transaction.objects
             .filter(job=job)
+            .select_related("order")
             .order_by("-created_at")
             .first()
         )
-        job.payment_status = transaction.status if transaction else None
+        
+        # Get the order payment status - pending is default
+        job.payment_status = (
+            transaction.order.status
+            if transaction and transaction.order
+            else "pending"
+        )
+         
+        # Get the Order ID if any
         job.order = transaction.order if transaction and transaction.order else None
             
-
     # Finally render job list based on above conditions
     return render(request, 'all_jobs.html', {"job_list": job_list, "status_filter": status_filter, "search_query": search_query})
 
@@ -84,8 +93,8 @@ def job_detail(request, job_id):
             job=job,
             order__status__in=[
                 Order.Status.PAID,
-                # Order.Status.PENDING,
-                # Order.Status.CANCELLED,
+                Order.Status.PENDING,
+                Order.Status.CANCELLED,
             ]
         ).exists()
 
@@ -105,12 +114,19 @@ def job_detail(request, job_id):
 
         # Mark job as completed
         job.status = "completed"
-        job.save(update_fields=["status"])
+        job.completed_at = timezone.now()
+        job.save(update_fields=["status", "completed_at"])
+        
+         # Get or create ONE unpaid order for this user
+        order, order_created = Order.objects.get_or_create(
+            user=job.assigned_operative,
+            paid_at__isnull=True,
+        )
 
         # Create OR reuse ONE open transaction
         transaction, created = Transaction.objects.get_or_create(
             job=job,
-            # status="open",
+            order=order,
             defaults={
                 "user": job.assigned_operative
             }
@@ -119,6 +135,7 @@ def job_detail(request, job_id):
         # Re-calculate totals
         transaction.recalculate_totals()
 
+        # Show message
         messages.success(
             request,
             "Job completed and added to basket."

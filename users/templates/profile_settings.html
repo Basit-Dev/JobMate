@@ -9,11 +9,17 @@
         <div class="icon">
             <i class="bi bi-person-lines-fill"></i>
         </div>
-        <div>
+        <div class="w-100">
             <h1 class="section-title">Profile Settings</h1>
-            <p class="section-subtitle m-0">
-                Update your profile information and settings
-            </p>
+
+            <div class="d-flex justify-content-between w-100">
+                <p class="section-subtitle m-0">
+                    Update your profile information and settings
+                </p>
+                <p class="m-0 fw-semibold">
+                    Profile ID #: {{ profile_owner.id }}
+                </p>
+            </div>
         </div>
     </div>
 </div>

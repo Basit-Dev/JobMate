@@ -57,7 +57,7 @@
           <!-- Table Head -->
           <thead class="table-head">
             <tr>
-              <th>Operative #</th>
+              <th>Operative ID #</th>
               <th>Role</th>
               <th>Operative</th>
               <th>Status</th>
@@ -73,7 +73,7 @@
             {% for operative in operative_list %}
             <tr>
               <td data-label="Operative ID">
-                <P class="text-muted m-0">#OPE-{{ operative.id }}</P>
+                <P class="text-muted m-0">{{ operative.id }}</P>
               </td>
               <td data-label="Role">{{ operative.profile.get_role_display }}</td>
               <td data-label="Operative">{{ operative.first_name }} {{ operative.last_name }}</td>

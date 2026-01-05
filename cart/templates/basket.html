@@ -24,8 +24,12 @@ Cart | JobMate {% endblock %}
 <!-- IF THERE ARE ITEMS IN TRANSACTIONS LOOP THROUGH USER, ITEMS AND CRATE SEPERATE BASKET ITEMS FOR EACH USER -->
 {% if user_basket %}
 {% for user, data in user_basket.items %}
+
 <!-- Display opeartive name and how many jobs in teh basket -->
-<p class="fw-bold fs-5">Payments for {{ user.get_full_name }} ({{data.transactions|length }})</p> 
+<div class="d-flex justify-content-between">
+    <p class="fw-bold fs-5">Payments for {{ user.get_full_name }} ({{data.transactions|length }})</p> 
+    <p class="fs-6">Order ID #: {{ data.order.id|default:"—" }} </p>
+</div> 
 
 <!-- CART LIST -->
 <div class="d-flex flex-column flex-lg-row flex-wrap gap-4 mb-4">
@@ -71,7 +75,14 @@ Cart | JobMate {% endblock %}
                                 <strong>£{{ transaction.actual_cost }}</strong>
                             </td>
                             <td>
-                                <span class="badge bg-danger p-2">{{ transaction.get_status_display|upper }}</span>
+                            <span class="badge badge-rounded
+                            {% if data.order.status == 'paid' %}bg-success
+                            {% elif data.order.status == 'pending' %}bg-secondary
+                            {% elif data.order.status == 'cancelled' %}bg-danger
+                            {% else %}
+                            {% endif %} p-2">
+                            {{ data.order.get_status_display }}
+                            </span>
                             </td>
                             <!-- ADJUSTMENT BUTTON -->
                             <td>
@@ -154,8 +165,17 @@ Cart | JobMate {% endblock %}
                         <span class="badge bg-danger p-2 mt-4">{{ transaction.get_status_display|upper }}</span>
                     </p>
                     <div class="d-flex justify-content-between align-items-start mb-2">
-                        <h6 class="mb-0">Job #{{ transaction.job.id }}</h6>
-
+                        <h6 class="mb-0">Job ID #: {{ transaction.job.id }}</h6>
+                     <div>
+                        <span class="badge badge-rounded
+                        {% if data.order.status == 'paid' %}bg-success
+                            {% elif data.order.status == 'pending' %}bg-secondary
+                            {% elif data.order.status == 'cancelled' %}bg-danger
+                            {% else %}
+                            {% endif %}">
+                            {{ data.order.get_status_display }}
+                        </span>
+                    </div> 
                         <!-- DELETE BUTTON -->
                         <form method="POST" class="d-inline">
                             {% csrf_token %}
