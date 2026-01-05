@@ -122,7 +122,7 @@
                 {% elif job.payment_status == 'open' %}bg-primary
                 {% elif job.payment_status == 'failed' %}bg-danger
                 {% elif job.payment_status == 'cancelled' %}bg-danger
-                {% else %}bg-secondary
+                {% else %}bg-secondaryu
                 {% endif %}">
                  {{ job.payment_status|capfirst }}
                    <!-- {{ job.payment_status|default_if_none:"Not Completed"|capfirst }} -->

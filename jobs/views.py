@@ -84,8 +84,8 @@ def job_detail(request, job_id):
             job=job,
             order__status__in=[
                 Order.Status.PAID,
-                Order.Status.PENDING,
-                Order.Status.CANCELLED,
+                # Order.Status.PENDING,
+                # Order.Status.CANCELLED,
             ]
         ).exists()
 
@@ -110,16 +110,12 @@ def job_detail(request, job_id):
         # Create OR reuse ONE open transaction
         transaction, created = Transaction.objects.get_or_create(
             job=job,
-            status="open",
+            # status="open",
             defaults={
                 "user": job.assigned_operative
             }
         )
-        # STOP if this job was already paid
-        if transaction and transaction.order and transaction.order.status == Order.Status.PAID:
-            messages.info(request, "This job has already been paid and cannot be added to the basket.")
-            return redirect("jobs:all_jobs")
-        
+
         # Re-calculate totals
         transaction.recalculate_totals()
 
