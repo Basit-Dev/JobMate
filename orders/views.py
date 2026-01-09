@@ -15,7 +15,6 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 
 # CREATE A ORDER FRIOM BASKET
 @login_required
-@admin_required
 def create_order_from_cart(request, user_id):
     """
     Create an Order from ALL open Transactions for the user
@@ -48,20 +47,20 @@ def create_order_from_cart(request, user_id):
             total=Decimal("0.00"),
         )
 
-    # Will use to save the calculated total at line 47
+    # Create a total variable to hold total
     total = Decimal("0.00")
 
 # Loop through tasactions and get totals
     for totals in transactions:
         
-        # Optional safety check (recommended)
+        # Optional safety check if total less than or equal to zero
         if totals.total <= 0:
             raise ValueError("Invalid transaction total")
 
         # SUM totals correctly
         total += totals.total
         
-        # Link transaction to order
+        # Link transaction to order for admin view
         totals.order = order
         totals.save(update_fields=["order"])
     
@@ -76,12 +75,12 @@ def create_order_from_cart(request, user_id):
 
 # STRIPE CHECKOUT FUNCTION
 @admin_required
-@login_required
 def checkout(request, order_id):
     
     # Get the order id from  create_order_from_cart
     order = get_object_or_404(Order, id=order_id)
     
+    # If order already paid show message and return to basket
     if order.status == Order.Status.PAID:
         messages.warning(request, "This order has already been paid.")
         return redirect("cart:basket")
@@ -104,6 +103,7 @@ def checkout(request, order_id):
             "quantity": 1,
         }
     ],
+    
     # Where Stripe sends the user if success or cancel
     success_url=settings.SITE_URL + reverse("orders:payment_success", kwargs={"order_id": order.id}),
     cancel_url=settings.SITE_URL + reverse("orders:payment_cancel", kwargs={"order_id": order.id}),
@@ -116,7 +116,6 @@ def checkout(request, order_id):
 
 
 # SUCCESS PAYMENT FUNCTION RENDERS SUCCESS PAGE
-@admin_required
 @login_required
 def payment_success(request, order_id):
     
@@ -135,7 +134,6 @@ def payment_success(request, order_id):
 
 
 # CANCEL PAYMENT FUNCTION DRENDERS CANCEL PAGE
-@admin_required
 @login_required
 def payment_cancel(request, order_id):
     

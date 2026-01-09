@@ -655,3 +655,32 @@ python manage.py collectstatic --noinput
 sudo systemctl restart gunicorn
 
 ```
+
+
+### Stripe Results (localhost used as Stripe requies SSL on live servers)
+
+<p align="center">
+  <strong>Stripe Success Payment Cart</strong><br>
+  <img src="documentation/stripe/stripe-success-payment-cart.png" alt="Stripe success payment cart" width="300" />
+</p>
+
+<p align="center">
+  <strong>Stripe Payment Success Page</strong><br>
+  <img src="documentation/stripe/stripe-success-payment-page.png" alt="Stripe payment success page" width="300" />
+</p>
+
+<p align="center">
+  <strong>Stripe Payment Declined Cart</strong><br>
+  <img src="documentation/stripe/stripe-declined-payment-cart.png" alt="Stripe payment declined cart" width="300" />
+</p>
+
+<p align="center">
+  <strong>Stripe Payment Declined Page</strong><br>
+  <img src="documentation/stripe/stripe-declined-payment-page.png" alt="Stripe payment declined page" width="300" />
+</p>
+
+
+<p align="center">
+  <strong>Stripe Cancelled Payment Page</strong><br>
+  <img src="documentation/stripe/stripe-cancelled-page.png" alt="Stripe payment cancelled page" width="300" />
+</p>
