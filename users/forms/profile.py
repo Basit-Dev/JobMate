@@ -10,14 +10,12 @@ class ProfileForm(forms.ModelForm):
         model = Profile
         fields = [
             'phone_number',
-            # 'role',
             'status',
         ]
 
         # Displays the input styles to match bootstrap
         widgets = {
             "phone_number": forms.TextInput(attrs={"class": "form-control input"}),
-            # 'role': forms.TextInput(attrs={'class': 'form-control input',  'readonly': 'readonly'}), 
             'status': forms.Select(attrs={'class': 'form-select input', 'name': 'status_term'}),
         }
    

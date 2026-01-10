@@ -10,10 +10,6 @@
   width: 100%;
 }
 
-/* .mobile-menu-btn {
-  display: none;
-} */
-
 @media screen and (max-width: 768px) {
   .delete-wrapper {
     margin: 30px;

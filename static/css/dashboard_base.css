@@ -4,7 +4,6 @@
   max-width: 1800px;
   margin: 0 auto;
   width: 100%;
-  /* height: calc(100vh - 55px - var(--topbar-h) - var(--footer-h)); */
 }
 
 /* Main Content */
@@ -109,7 +108,6 @@
   padding: 24px 0;
   position: sticky;
   top: 73px;
-  /* height: calc(100vh - 68px - var(--topbar-h) - var(--footer-h)); */
   overflow-y: auto;
 }
 

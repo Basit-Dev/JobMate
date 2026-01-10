@@ -97,15 +97,6 @@ class TransactionLineItem(models.Model):
         related_name="items"
     )
 
-    # Optional link to a job
-    # job = models.ForeignKey(
-    #     Job,
-    #     on_delete=models.SET_NULL,
-    #     null=True,
-    #     blank=True,
-    #     related_name="transaction_line_items"
-    # )
-
     description = models.CharField(
         max_length=255,
         help_text="e.g. Extra labour – 1.5 hours"

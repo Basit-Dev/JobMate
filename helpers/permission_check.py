@@ -18,7 +18,6 @@ def admin_required(view_func):
         # 1. Make sure the user actually has a profile
         #    (prevents app from crashing if profile is missing)
         # 2. Check if the user's role is NOT admin
-        #
         
         # Block anonymous users immediately
         if not user.is_authenticated:

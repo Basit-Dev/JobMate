@@ -55,7 +55,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "django_browser_reload",
     'django.contrib.sites',
-    # Allauth Apps
     'allauth',
     'allauth.account',
     # if you installed social accounts => allauth.socialaccounts
