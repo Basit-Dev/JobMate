@@ -668,3 +668,69 @@ sudo systemctl restart gunicorn
   <strong>Stripe Cancelled Payment Page</strong><br>
   <img src="documentation/stripe/stripe-cancelled-page.png" alt="Stripe payment cancelled page" width="300" />
 </p>
+
+
+## Git Development Timeline
+
+The timeline below outlines regular commits for progress, features, refactoring.
+
+---
+
+### Project Setup & Planning
+- **20/09/2025** – Initial project planning and requirements defined  
+- **27/09/2025** – User stories added  
+- **11/10/2025** – Django project initialised  
+- **11/10/2025** – Figma designs created  
+
+---
+
+### Job Management Core
+- **17/10/2025** – Dashboard layout and search implemented  
+- **23/10/2025** – Jobs dashboard completed  
+- **24/10/2025** – Job creation and editing views implemented  
+- **31/10/2025** – Payments view created  
+
+---
+
+### Authentication & Testing
+- **20/11/2025** – Dashboard and payments views developed  
+- **21/11/2025** – Views protected with authentication and permissions  
+- **22/11/2025** – Login, signup, and account tests completed  
+- **26/11/2025** – Password reset and authentication tests added  
+
+---
+
+### Profiles, Roles & Permissions
+- **20/12/2025** – Job filtering by status and priority  
+- **21/12/2025** – Job CRUD functionality completed and tested  
+- **23/12/2025** – Profile settings and role management implemented  
+- **23/12/2025** – Custom 404 page created  
+
+---
+
+### Transactions, Cart & Orders
+- **25/12/2025** – Job assignment and engineer filtering features added  
+- **26/12/2025** – Engineer terminology refactored to operatives  
+- **30/12/2025** – Cart adjustments and line item logic implemented  
+- **30/12/2025** – Permissions added to cart and payment views  
+- **31/12/2025** – Basket styling and UI refinements  
+
+---
+
+### Payments & Basket Logic
+- **02/01/2026** – Secure environment setup (.env, .gitignore, secrets removed)  
+- **03/01/2026** – Stripe payment integration completed  
+- **04/01/2026** – Payment confirmation pages implemented  
+- **04/01/2026** – Jobs restricted to single basket entry  
+- **04/01/2026** – Payments summary, search, and status pages added  
+
+---
+
+### Finalisation & Deployment Preparation
+- **09/01/2026** – Stripe testing screenshots added  
+- **10/01/2026** – Model relationship diagram added  
+- **10/01/2026** – Updated settings and environment configuration  
+- **10/01/2026** – Removed commented-out code and cleaned production files  
+- **10/01/2026** – Changed Debug to False 
+
+---
