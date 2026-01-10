@@ -145,30 +145,12 @@ This project is structured around **three core model groups**:
 - Cart (Transactions)
 
 ### Model Relationships
-```text
-Job
-├─ id
-├─ job_title
-├─ job_cost
-├─ status
-└─ assigned_operative
 
-Transaction
-├─ id
-├─ job (ForeignKey → Job)
-├─ user
-├─ status
-├─ actual_cost
-└─ adjustment_total
+<p align="center">
+  <strong>Relationships</strong><br>
+  <img src="documentation/ database design/relationship-diagram.jpg" alt="Model relationship" width="300" />
+</p>
 
-TransactionLineItem
-├─ id
-├─ transaction (ForeignKey → Transaction)
-├─ description
-├─ quantity
-├─ unit_price
-└─ line_total
-```
 ---
 
 ### Design Rules
@@ -571,13 +553,15 @@ TransactionLineItem
 
 ## Deployment to AWS (Production)
 
+  - Live address http://13.48.56.234
+
 This section explains how the JobMate project is deployed to an AWS server and how updates are applied. I have created two git branches. Th main branch will hold the production code and the develop branch is for development.
 
 ---
 
 ### Overview
 
-- The project is hosted on an AWS EC2 Ubuntu server
+- The project is hosted on an AWS EC2 Ubuntu server 
 - Django runs using Gunicorn
 - Nginx is used as the web server
 - Code is stored on GitHub
