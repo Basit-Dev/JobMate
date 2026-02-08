@@ -596,9 +596,9 @@ The SQLite database is located at: /var/www/jobmate/JobMate/jobmate/db.sqlite3
 
 ---
 
-### Setup server AWS EC2
+## Connect to the Production AWS EC2 server and pull the latest production code
 ```bash
-ssh -i ~/.ssh/job_mate.pem ubuntu@13.48.56.234/
+ssh -i ~/.ssh/job_mate.pem ubuntu@13.48.56.234
 ```
 
 ## Navigate to the project directory and deploy
@@ -631,25 +631,6 @@ git pull origin main
 git merge develop
 git push origin main
 ```
-
-### Production Server AWS EC2
-
-## Connect to the server and pull the latest production code
-```bash
-ssh -i ~/.ssh/job_mate.pem ubuntu@13.48.56.234
-cd /var/www/jobmate/JobMate
-git pull origin main
-```
-## Apply updates and restart the application
-```bash
-cd jobmate
-pip install -r requirements.txt
-python manage.py migrate
-python manage.py collectstatic --noinput
-sudo systemctl restart gunicorn
-
-```
-
 
 ### Stripe Results (localhost used as Stripe requies SSL on live servers)
 
