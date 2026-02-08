@@ -551,6 +551,16 @@ This project is structured around **three core model groups**:
 
 ---
 
+---
+
+## Local Deployment Mac
+```bash
+cd path/to/your/JobMate
+source .venv/bin/activate
+python manage.py runserver
+Open http://127.0.0.1:8000/
+```
+
 ## Deployment to AWS (Production)
 
   - Live address http://13.48.56.234
