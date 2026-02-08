@@ -263,17 +263,17 @@ This project is structured around **three core model groups**:
 
 <p align="center">
   <strong>Operative Dashboard</strong><br>
-  <img src="documentation/figma/wireframe/Operative-dashboard.png" alt="Operative Dashboard" width="300" />
+  <img src="documentation/figma/wireframe/operatives-dashboard.png" alt="Operative Dashboard" width="300" />
 </p>
 
 <p align="center">
   <strong>Operatives List</strong><br>
-  <img src="documentation/figma/wireframe/Operatives-list.png" alt="Operatives List" width="300" />
+  <img src="documentation/figma/wireframe/operatives-list.png" alt="Operatives List" width="300" />
 </p>
 
 <p align="center">
   <strong>Operative Payments Summary</strong><br>
-  <img src="documentation/figma/wireframe/Operative-payments-summary.png" alt="Operative Payments Summary" width="300" />
+  <img src="documentation/figma/wireframe/operatives-payments-summary.png" alt="Operative Payments Summary" width="300" />
 </p>
 
 <p align="center">
@@ -352,17 +352,17 @@ This project is structured around **three core model groups**:
 
 <p align="center">
   <strong>Operative Dashboard</strong><br>
-  <img src="documentation/figma/hi-fi/Operative-dashboard-hifi.png" alt="Operative Dashboard" width="300" />
+  <img src="documentation/figma/hi-fi/operatives-dashboard-hifi.png" alt="Operative Dashboard" width="300" />
 </p>
 
 <p align="center">
   <strong>Operatives List</strong><br>
-  <img src="documentation/figma/hi-fi/Operatives-list-hifi.png" alt="Operatives List" width="300" />
+  <img src="documentation/figma/hi-fi/operatives-list-hifi.png" alt="Operatives List" width="300" />
 </p>
 
 <p align="center">
   <strong>Operative Payments Summary</strong><br>
-  <img src="documentation/figma/hi-fi/Operative-payments-summary-hifi.png" alt="Operative Payments Summary" width="300" />
+  <img src="documentation/figma/hi-fi/operatives-payments-summary-hifi.png" alt="Operative Payments Summary" width="300" />
 </p>
 
 <p align="center">
