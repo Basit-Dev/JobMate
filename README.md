@@ -583,7 +583,41 @@ I tested the website on different screen sizes using Chrome Developer Tools to c
   <img src="documentation/validation/mobile-small.png" alt="Test small" width="300" />
 </p>
 
-I checked each screen size for any overlapping content, horizontal scrolling or layout problems. I also checked that the navigation, forms and buttons could still be used correctly. All tested screen sizes passed.
+
+### Browser Compatibility Testing
+
+I tested the website on different browsers to check that the pages, navigation, forms and main features worked correctly.
+
+| Browser | Result |
+| --- | --- |
+| `Google Chrome`    | Passed |
+| `Firefox`          | Passed |
+| `Safari`           | Passed |
+| `Opera`            | Passed |
+
+<p align="center">
+  <strong>Chrome</strong><br>
+  <img src="documentation/validation/chrome.png" alt="Test Chrome" width="300" />
+</p>
+
+<p align="center">
+  <strong>Firefox</strong><br>
+  <img src="documentation/validation/firefox.png" alt="Test Firefox" width="300" />
+</p>
+
+<p align="center">
+  <strong>Chrome</strong><br>
+  <img src="documentation/validation/safari.png" alt="Test Safari" width="300" />
+</p>
+
+<p align="center">
+  <strong>Chrome</strong><br>
+  <img src="documentation/validation/opera.png" alt="Test Opera" width="300" />
+</p>
+
+I checked each screen size for any overlapping content, horizontal scrolling or layout problems, the navigation, forms and buttons could still be used correctly. 
+I also compared the final version against my wireframes to check that the layout and design worked as planned across the different screen sizes.
+All tested screen sizes, browesers passed.
 
 ---
 
