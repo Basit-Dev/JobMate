@@ -541,6 +541,50 @@ This project is structured around **three core model groups**:
 
 ---
 
+### Responsive Design Testing
+
+I tested the website on different screen sizes using Chrome Developer Tools to check that the pages worked and displayed correctly on desktop, tablet and mobile.
+
+| `Desktop - 1920 x 1080`   | Passed |
+| `Laptop - 1366 x 768`     | Passed |
+| `Tablet - 768 x 1024`     | Passed |
+| `Mobile - 390 x 844`      | Passed |
+| `Mobile - 375 x 667`      | Passed |
+
+<p align="center">
+  <strong>Desktop</strong><br>
+  <img src="documentation/validation/desktop.png" alt="Test desktop" width="300" />
+</p>
+
+<p align="center">
+  <strong>Laptop</strong><br>
+  <img src="documentation/validation/laptop.png" alt="Test laptop" width="300" />
+</p>
+
+<p align="center">
+  <strong>Tablet</strong><br>
+  <img src="documentation/validation/tablet.png" alt="Test tablet" width="300" />
+</p>
+
+<p align="center">
+  <strong>Mobile</strong><br>
+  <img src="documentation/validation/mobile.png" alt="Test mobile" width="300" />
+</p>
+
+<p align="center">
+  <strong>Mobile Menu</strong><br>
+  <img src="documentation/validation/mobile-menu.png" alt="Test mobile menu" width="300" />
+</p>
+
+<p align="center">
+  <strong>Mobile Small</strong><br>
+  <img src="documentation/validation/mobile-small.png" alt="Test small" width="300" />
+</p>
+
+I checked each screen size for any overlapping content, horizontal scrolling or layout problems. I also checked that the navigation, forms and buttons could still be used correctly. All tested screen sizes passed.
+
+---
+
 ## Credits and Acknowledge
 
 - Design ideas to Dribble amd Mobbin
@@ -548,8 +592,6 @@ This project is structured around **three core model groups**:
 - CSS style for input tags to StackOverflow
 - Testing to NetNinja, Legion Script from YouTube
 - Password reset to https://pypi.org
-
----
 
 ---
 
