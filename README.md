@@ -545,6 +545,8 @@ This project is structured around **three core model groups**:
 
 I tested the website on different screen sizes using Chrome Developer Tools to check that the pages worked and displayed correctly on desktop, tablet and mobile.
 
+| Screen Size | Result |
+| --- | --- |
 | `Desktop - 1920 x 1080`   | Passed |
 | `Laptop - 1366 x 768`     | Passed |
 | `Tablet - 768 x 1024`     | Passed |
