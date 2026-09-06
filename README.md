@@ -606,12 +606,12 @@ I tested the website on different browsers to check that the pages, navigation, 
 </p>
 
 <p align="center">
-  <strong>Chrome</strong><br>
+  <strong>Safari</strong><br>
   <img src="documentation/validation/safari.png" alt="Test Safari" width="300" />
 </p>
 
 <p align="center">
-  <strong>Chrome</strong><br>
+  <strong>Opera</strong><br>
   <img src="documentation/validation/opera.png" alt="Test Opera" width="300" />
 </p>
 
